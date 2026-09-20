@@ -503,6 +503,21 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.damage_severity_score as enum ('minor', 'moderate', 'severe', 'ground_vehicle');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_workflow_status as enum ('new', 'under_review', 'approved', 'scheduled_repair', 'repaired');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.investigation_status as enum ('open', 'pending_driver', 'charged', 'cleared', 'closed');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.vehicle_dvics (
   id uuid primary key default gen_random_uuid(),
   vehicle_id uuid not null references public.vehicles(id),
@@ -540,8 +555,21 @@ create table if not exists public.vehicle_damage_events (
   responsible_driver_id uuid references public.drivers(id),
   prior_driver_id uuid references public.drivers(id),
   next_driver_id uuid references public.drivers(id),
-  maintenance_order_id uuid references public.maintenance_orders(id)
+  maintenance_order_id uuid references public.maintenance_orders(id),
+  route_id uuid references public.routes(id),
+  severity_score public.damage_severity_score not null default 'minor',
+  workflow_status public.damage_workflow_status not null default 'new',
+  investigation_status public.investigation_status not null default 'open',
+  grounding_recommended boolean not null default false,
+  grounding_reason text
 );
+
+alter table public.vehicle_damage_events add column if not exists route_id uuid references public.routes(id);
+alter table public.vehicle_damage_events add column if not exists severity_score public.damage_severity_score not null default 'minor';
+alter table public.vehicle_damage_events add column if not exists workflow_status public.damage_workflow_status not null default 'new';
+alter table public.vehicle_damage_events add column if not exists investigation_status public.investigation_status not null default 'open';
+alter table public.vehicle_damage_events add column if not exists grounding_recommended boolean not null default false;
+alter table public.vehicle_damage_events add column if not exists grounding_reason text;
 
 create table if not exists public.damage_photos (
   id uuid primary key default gen_random_uuid(),
@@ -612,6 +640,8 @@ create index if not exists downtime_vehicle_idx on public.vehicle_downtime (vehi
 create index if not exists vehicle_dvics_vehicle_idx on public.vehicle_dvics (vehicle_id, inspected_at desc);
 create index if not exists damage_events_vehicle_idx on public.vehicle_damage_events (vehicle_id, first_seen_at desc);
 create index if not exists damage_events_status_idx on public.vehicle_damage_events (status, station_id);
+create index if not exists damage_events_workflow_idx on public.vehicle_damage_events (workflow_status, investigation_status);
+create index if not exists damage_events_grounding_idx on public.vehicle_damage_events (grounding_recommended) where grounding_recommended;
 create index if not exists damage_photos_event_idx on public.damage_photos (damage_event_id, captured_at);
 create index if not exists maintenance_repairs_date_idx on public.maintenance_repairs (scheduled_date, station_id);
 

@@ -373,7 +373,10 @@ export type DamageZone =
 
 export type DamageType = "scratch" | "dent" | "crack" | "scrape" | "missing" | "leak" | "chip";
 export type DamageSeverity = "minor" | "moderate" | "major";
+export type DamageSeverityScore = "minor" | "moderate" | "severe" | "ground_vehicle";
 export type DamageEventStatus = "new" | "progressing" | "stable" | "resolved" | "disputed";
+export type DamageWorkflowStatus = "new" | "under_review" | "approved" | "scheduled_repair" | "repaired";
+export type InvestigationStatus = "open" | "pending_driver" | "charged" | "cleared" | "closed";
 export type DamageDetectedVia = "new_vs_prior" | "progression" | "driver_reported" | "shop";
 
 export type PhotoAngle = "front" | "rear" | "left" | "right" | "overhead" | "interior" | "closeup";
@@ -427,6 +430,12 @@ export interface VehicleDamageEvent {
   prior_driver_id: string | null;
   next_driver_id: string | null;
   maintenance_order_id: string | null;
+  severity_score: DamageSeverityScore;
+  workflow_status: DamageWorkflowStatus;
+  investigation_status: InvestigationStatus;
+  route_id: string | null;
+  grounding_recommended: boolean;
+  grounding_reason: string | null;
 }
 
 export interface DamagePhoto {
