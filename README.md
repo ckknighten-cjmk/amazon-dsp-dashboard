@@ -45,7 +45,7 @@ Without Supabase env vars the app runs in **demo mode**: local authentication, r
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor.
 3. Create Auth users that match the seeded `profiles.email` values and set `profiles.auth_user_id`.
 
-Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, import jobs, vehicle DVICs, damage events (severity score, approval workflow, investigation, grounding), damage photos (with embedding placeholders for future AI comparison), damage reviews, maintenance repairs, and row-level security by role/station.
+Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, import jobs, vehicle DVICs, damage events (severity score, approval workflow, investigation, grounding), damage photos (with embedding placeholders for future AI comparison), damage CV pipeline runs, damage reviews, maintenance repairs, and row-level security by role/station.
 
 ## Scripts
 
