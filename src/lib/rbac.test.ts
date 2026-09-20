@@ -23,7 +23,7 @@ describe("rbac", () => {
 
   it("sends drivers to their scorecard home", () => {
     expect(defaultPathFor("driver")).toBe("/drivers");
-    expect(navItemsFor("driver").map((item) => item.to)).toEqual(["/drivers", "/damage", "/damage/report"]);
+    expect(navItemsFor("driver").map((item) => item.to)).toEqual(["/drivers", "/damage", "/damage/report", "/damage/pipeline"]);
   });
 
   it("opens DVIC damage for ops, safety, and finance", () => {
@@ -32,5 +32,6 @@ describe("rbac", () => {
     expect(canAccess("finance", "/damage")).toBe(true);
     expect(canAccess("safety_manager", "/damage/report")).toBe(true);
     expect(canAccess("dispatcher", "/damage/report")).toBe(true);
+    expect(canAccess("safety_manager", "/damage/pipeline")).toBe(true);
   });
 });

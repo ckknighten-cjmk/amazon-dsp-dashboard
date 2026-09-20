@@ -68,9 +68,14 @@ export default function DamageReport() {
         title="New Damage Report"
         description="Vehicle, date damage detected, previous driver, current driver, route, damage type, and open investigation status."
       >
-        <Link to="/damage" className="text-sm font-medium text-brand-blue">
-          Damage board
-        </Link>
+        <div className="flex gap-4">
+          <Link to="/damage" className="text-sm font-medium text-brand-blue">
+            Damage board
+          </Link>
+          <Link to="/damage/pipeline" className="text-sm font-medium text-brand-blue">
+            Photo pipeline
+          </Link>
+        </div>
       </PageHeader>
 
       <div className="card overflow-x-auto">

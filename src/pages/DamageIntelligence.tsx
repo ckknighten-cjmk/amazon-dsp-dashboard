@@ -24,6 +24,8 @@ import { cn } from "../lib/cn";
 import { formatUsd } from "../lib/format";
 import DamagePhotoPair from "../components/DamagePhotoPair";
 import DamageReportTable from "../components/DamageReportTable";
+import CvPipelineStepper from "../components/CvPipelineStepper";
+import { buildCvPipelineBoard } from "../lib/cvPipeline";
 import type { DamageSeverityScore, DamageWorkflowStatus } from "../types/database";
 
 const scoreClass: Record<DamageSeverityScore, string> = {
@@ -44,6 +46,7 @@ const workflowClass: Record<DamageWorkflowStatus, string> = {
 export default function DamageIntelligence() {
   const { filtered } = useData();
   const view = buildDamageIntelligence(filtered);
+  const pipeline = buildCvPipelineBoard(filtered);
   const chart = useChartStyles();
 
   return (
@@ -56,6 +59,9 @@ export default function DamageIntelligence() {
           <Link to="/damage/report" className="text-sm font-medium text-brand-blue">
             Damage report
           </Link>
+          <Link to="/damage/pipeline" className="text-sm font-medium text-brand-blue">
+            Photo pipeline
+          </Link>
           <Link to="/fleet" className="text-sm font-medium text-brand-blue">
             Fleet board
           </Link>
@@ -66,6 +72,30 @@ export default function DamageIntelligence() {
         {view.kpis.map((kpi) => (
           <StatCard key={kpi.label} kpi={kpi} />
         ))}
+      </div>
+
+      <div className="card mt-4 p-5">
+        <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Computer vision pipeline</h3>
+            <p className="text-xs text-slate-500">
+              Photo upload → analysis → location detection → compare to previous photos → potential new damage alert.
+            </p>
+          </div>
+          <Link to="/damage/pipeline" className="text-xs font-medium text-brand-blue">
+            Run a photo
+          </Link>
+        </div>
+        <CvPipelineStepper
+          statuses={["complete", "complete", "complete", "complete", pipeline.alertCount ? "alert" : "complete"]}
+          details={[
+            `${pipeline.uploaded} photos uploaded`,
+            `${pipeline.analyzed} embeddings ready`,
+            `${pipeline.runs.length} zones detected`,
+            `${pipeline.compared} compared to prior DVICs`,
+            `${pipeline.alertCount} potential new damage alerts`,
+          ]}
+        />
       </div>
 
       <div className="card mt-4 overflow-x-auto">

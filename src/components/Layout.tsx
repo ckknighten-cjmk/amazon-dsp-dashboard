@@ -16,6 +16,7 @@ import {
   Wrench,
   ScanSearch,
   FilePlus,
+  ScanEye,
   X,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -41,6 +42,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/imports": Upload,
   "/damage": ScanSearch,
   "/damage/report": FilePlus,
+  "/damage/pipeline": ScanEye,
 };
 
 export default function Layout() {

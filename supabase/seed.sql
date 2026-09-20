@@ -5,6 +5,7 @@ begin;
 
 delete from public.maintenance_repairs;
 delete from public.damage_reviews;
+delete from public.damage_cv_runs;
 delete from public.damage_photos;
 delete from public.vehicle_damage_events;
 delete from public.vehicle_dvics;
@@ -405,6 +406,33 @@ insert into public.damage_photos (
   ('f0000000-0000-4000-8000-000000000001', 'e0000000-0000-4000-8000-000000000103', 'c0000000-0000-4000-8000-000000000001', 'driver_door', '2026-09-20 06:15+00', 'b0000000-0000-4000-8000-000000001042', 'dsp-dvic-photos', 'vehicles/van-01/2026-09-20/driver_door-ph-01b.jpg', 'sha256:ph-01b', 1600, 1200, 'left', false, 'ready', 'damage-clip-v1', 768, 'vec://dsp-dvic-photos/ph-01b', null, 0.7100, 0.9100, 'New linear scrape vs last-night baseline.'),
   ('f0000000-0000-4000-8000-000000000002', 'e0000000-0000-4000-8000-000000000901', 'c0000000-0000-4000-8000-000000000009', 'rear_bumper', '2026-09-17 06:24+00', 'b0000000-0000-4000-8000-000000001224', 'dsp-dvic-photos', 'vehicles/van-09/2026-09-17/rear_bumper-ph-02a.jpg', 'sha256:ph-02a', 1600, 1200, 'rear', true, 'ready', 'damage-clip-v1', 768, 'vec://dsp-dvic-photos/ph-02a', null, null, null, 'Clean bumper baseline.'),
   ('f0000000-0000-4000-8000-000000000004', 'e0000000-0000-4000-8000-000000001502', 'c0000000-0000-4000-8000-000000000015', 'right_quarter', '2026-09-18 06:13+00', 'b0000000-0000-4000-8000-000000001042', 'dsp-dvic-photos', 'vehicles/van-15/2026-09-18/right_quarter-ph-04b.jpg', 'sha256:ph-04b', 1600, 1200, 'right', false, 'ready', 'damage-clip-v1', 768, 'vec://dsp-dvic-photos/ph-04b', null, 0.4100, 0.9700, 'Major contour change.');
+
+insert into public.damage_cv_runs (
+  photo_id, damage_event_id, vehicle_id, current_stage, upload_status, analysis_status, location_status, compare_status, alert_status,
+  detected_zone, compared_to_photo_id, similarity_score, change_confidence, alert_triggered, alert_reason, started_at, completed_at
+)
+select
+  after.id,
+  after.damage_event_id,
+  after.vehicle_id,
+  'new_damage_alert',
+  'complete',
+  'complete',
+  'complete',
+  'complete',
+  'alert',
+  after.zone,
+  prior.id,
+  after.similarity_score,
+  after.change_confidence,
+  true,
+  after.ai_notes,
+  after.captured_at,
+  after.captured_at
+from public.damage_photos after
+left join public.damage_photos prior
+  on prior.storage_path like '%ph-01a%'
+where after.storage_path like '%ph-01b%';
 
 insert into public.damage_reviews (damage_event_id, reviewed_at, reviewer_name, reviewer_role, decision, assigned_driver_id, notes) values
   ('f0000000-0000-4000-8000-000000000001', '2026-09-20 07:05+00', 'Riley Cho', 'safety_manager', 'charge_driver', 'b0000000-0000-4000-8000-000000001088', 'New vs Kwame post-trip.'),
