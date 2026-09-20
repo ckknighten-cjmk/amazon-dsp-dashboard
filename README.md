@@ -11,7 +11,9 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 - **Safety & Compliance** — Vehicle inspections, speeding, seatbelt, incidents
 - **Forecasting** — Route, volume, staffing, and overtime outlook
 - **Fleet** — Inventory, maintenance schedules, DVIC compliance, and downtime
-- **DVIC Damage Intelligence** — New vs historical DVIC comparison, progression, driver possession, photo storage, repair costs
+- **DVIC Damage Intelligence** — Before/after photos, severity scores, repair estimates, driver accountability, approval workflow, grounding recommendations
+- **Damage Report** — New damage report with previous/current driver, route, investigation, charge/clear/ground, and approval steps
+- **Photo Pipeline** — Upload → computer vision analysis → location detection → compare to previous photos → potential new damage alert
 - **Amazon Scorecard** — DCR, POD, CDF, Safety, FICO, and weekly trends
 - **Route Management** — Profitability, completion rates, rescue workflow, variance
 - **AI Insights** — Staffing, overtime, underperforming routes, high-risk drivers, P&L
@@ -43,7 +45,7 @@ Without Supabase env vars the app runs in **demo mode**: local authentication, r
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor.
 3. Create Auth users that match the seeded `profiles.email` values and set `profiles.auth_user_id`.
 
-Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, import jobs, vehicle DVICs, damage events, damage photos (with embedding placeholders for future AI comparison), damage reviews, maintenance repairs, and row-level security by role/station.
+Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, import jobs, vehicle DVICs, damage events (severity score, approval workflow, investigation, grounding), damage photos (with embedding placeholders for future AI comparison), damage CV pipeline runs, damage reviews, maintenance repairs, and row-level security by role/station.
 
 ## Scripts
 

@@ -1,5 +1,5 @@
 import { TODAY, WEEK_START } from "../data/seed";
-import type { Kpi, SeedDatabase } from "../types/database";
+import type { DamageType, Kpi, SeedDatabase } from "../types/database";
 import { addDays, formatNumber, formatUsd, formatUsdCompact, round2, sum } from "./format";
 
 export const ZONE_LABEL: Record<SeedDatabase["damageEvents"][number]["zone"], string> = {
@@ -80,6 +80,14 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       hint: "Photo comparison placeholders",
       favorable: "up",
     },
+    {
+      label: "Grounding recs",
+      value: String(db.damageEvents.filter((row) => row.grounding_recommended && !row.parent_event_id).length),
+      delta: `${db.damageEvents.filter((row) => row.severity_score === "ground_vehicle").length} ground-score`,
+      trend: "down",
+      hint: "Hold before next wave",
+      favorable: "down",
+    },
   ];
 
   const enriched = db.damageEvents
@@ -90,6 +98,11 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       const review = db.damageReviews.find((row) => row.damage_event_id === event.id);
       const repair = db.maintenanceRepairs.find((row) => row.damage_event_id === event.id);
       const workOrder = db.maintenance.find((row) => row.id === event.maintenance_order_id);
+      const route = event.route_id
+        ? db.routes.find((row) => row.id === event.route_id)
+        : db.routes.find((row) => row.vehicle_id === event.vehicle_id);
+      const beforePhoto = photos.find((row) => row.is_baseline) ?? db.damagePhotos.find((row) => row.vehicle_id === event.vehicle_id && row.zone === event.zone && row.is_baseline);
+      const afterPhoto = photos.find((row) => !row.is_baseline) ?? photos[photos.length - 1];
       return {
         ...event,
         vanId: vanId(db, event.vehicle_id),
@@ -99,14 +112,20 @@ export function buildDamageIntelligence(db: SeedDatabase) {
         priorDriverName: driverName(db, event.prior_driver_id),
         nextDriverName: driverName(db, event.next_driver_id),
         foundByName: driverName(db, dvic?.driver_id ?? null),
+        currentDriverName: driverName(db, event.next_driver_id ?? dvic?.driver_id ?? null),
         priorInspectedAt: prior?.inspected_at ?? null,
         foundAt: dvic?.inspected_at ?? event.first_seen_at,
+        detectedDate: event.first_seen_at.slice(0, 10),
         priorShift: prior ? `${prior.shift_type.replace("_", " ")} · ${prior.service_date}` : "No prior DVIC",
         foundShift: dvic ? `${dvic.shift_type.replace("_", " ")} · ${dvic.service_date}` : event.first_seen_at.slice(0, 10),
+        routeCode: route?.route_code ?? "—",
         photos,
+        beforePhoto: beforePhoto ?? null,
+        afterPhoto: afterPhoto ?? null,
         review,
         repair,
         workOrder: workOrder?.work_order ?? null,
+        actualCost: repair?.actual_cost ?? null,
       };
     })
     .sort((a, b) => b.first_seen_at.localeCompare(a.first_seen_at));
@@ -184,6 +203,13 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       };
     });
 
+  const grounding = enriched.filter((event) => event.grounding_recommended && !event.parent_event_id);
+  const reportRows = enriched.filter((event) => !event.parent_event_id);
+  const openInvestigations = reportRows.filter(
+    (row) => row.investigation_status === "open" || row.investigation_status === "pending_driver",
+  );
+  const pairs = reportRows.filter((event) => event.beforePhoto || event.afterPhoto);
+
   return {
     kpis,
     newDamage,
@@ -199,15 +225,74 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       vanId: vanId(db, row.vehicle_id),
       stationCode: stationCode(db, row.station_id),
     })),
+    grounding,
+    reportRows,
+    openInvestigations,
+    pairs,
     totals: {
       newThisWeek: newThisWeek.length,
       unresolved: unresolved.length,
       openCost,
       photoCount: db.damagePhotos.length,
+      grounded: grounding.length,
+      openInvestigations: openInvestigations.length,
     },
     asOf: TODAY,
   };
 }
+
+export const WORKFLOW_NEXT: Record<SeedDatabase["damageEvents"][number]["workflow_status"], SeedDatabase["damageEvents"][number]["workflow_status"] | null> = {
+  new: "under_review",
+  under_review: "approved",
+  approved: "scheduled_repair",
+  scheduled_repair: "repaired",
+  repaired: null,
+};
+
+export const WORKFLOW_LABEL: Record<SeedDatabase["damageEvents"][number]["workflow_status"], string> = {
+  new: "New",
+  under_review: "Under review",
+  approved: "Approved",
+  scheduled_repair: "Scheduled repair",
+  repaired: "Repaired",
+};
+
+export const INVESTIGATION_LABEL: Record<SeedDatabase["damageEvents"][number]["investigation_status"], string> = {
+  open: "Open investigation",
+  pending_driver: "Pending driver",
+  charged: "Charged",
+  cleared: "Cleared",
+  closed: "Closed",
+};
+
+export const SEVERITY_SCORE_LABEL: Record<SeedDatabase["damageEvents"][number]["severity_score"], string> = {
+  minor: "Minor",
+  moderate: "Moderate",
+  severe: "Severe",
+  ground_vehicle: "Ground vehicle",
+};
+
+export const DAMAGE_TYPE_LABEL: Record<DamageType, string> = {
+  scratch: "Scratch",
+  dent: "Dent",
+  crack: "Crack",
+  scrape: "Scrape",
+  missing: "Missing",
+  leak: "Leak",
+  chip: "Chip",
+};
+
+export const DAMAGE_REPORT_COLUMNS = [
+  "Vehicle",
+  "Date damage detected",
+  "Previous driver",
+  "Current driver",
+  "Route",
+  "Damage type",
+  "Open investigation status",
+] as const;
+
+export type DamageReportRow = ReturnType<typeof buildDamageIntelligence>["reportRows"][number];
 
 export function formatDamageCost(value: number): string {
   return formatUsd(value);

@@ -13,93 +13,163 @@ import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
 import ChartCard from "../components/ChartCard";
 import { useData } from "../lib/data";
-import { buildDamageIntelligence, ZONE_LABEL } from "../lib/damage";
+import {
+  buildDamageIntelligence,
+  SEVERITY_SCORE_LABEL,
+  WORKFLOW_LABEL,
+  ZONE_LABEL,
+} from "../lib/damage";
 import { useChartStyles } from "../lib/chart";
 import { cn } from "../lib/cn";
 import { formatUsd } from "../lib/format";
-import type { DamageEventStatus } from "../types/database";
+import DamagePhotoPair from "../components/DamagePhotoPair";
+import DamageReportTable from "../components/DamageReportTable";
+import CvPipelineStepper from "../components/CvPipelineStepper";
+import { buildCvPipelineBoard } from "../lib/cvPipeline";
+import type { DamageSeverityScore, DamageWorkflowStatus } from "../types/database";
 
-const statusClass: Record<DamageEventStatus, string> = {
+const scoreClass: Record<DamageSeverityScore, string> = {
+  minor: "badge-info",
+  moderate: "badge-warning",
+  severe: "badge-danger",
+  ground_vehicle: "badge-danger",
+};
+
+const workflowClass: Record<DamageWorkflowStatus, string> = {
   new: "badge-danger",
-  progressing: "badge-warning",
-  stable: "badge-info",
-  resolved: "badge-success",
-  disputed: "badge-neutral",
+  under_review: "badge-warning",
+  approved: "badge-info",
+  scheduled_repair: "badge-info",
+  repaired: "badge-success",
 };
 
 export default function DamageIntelligence() {
   const { filtered } = useData();
   const view = buildDamageIntelligence(filtered);
+  const pipeline = buildCvPipelineBoard(filtered);
   const chart = useChartStyles();
 
   return (
     <div>
       <PageHeader
         title="DVIC Damage Intelligence"
-        description="Compare current DVICs to historical inspections. New damage, progression, driver possession, photo storage, and repair cost."
+        description="Before/after photos, severity scores, repair estimates, driver accountability, approval workflow, and grounding recommendations."
       >
-        <Link to="/fleet" className="text-sm font-medium text-brand-blue">
-          Fleet board
-        </Link>
+        <div className="flex gap-4">
+          <Link to="/damage/report" className="text-sm font-medium text-brand-blue">
+            Damage report
+          </Link>
+          <Link to="/damage/pipeline" className="text-sm font-medium text-brand-blue">
+            Photo pipeline
+          </Link>
+          <Link to="/fleet" className="text-sm font-medium text-brand-blue">
+            Fleet board
+          </Link>
+        </div>
       </PageHeader>
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
         {view.kpis.map((kpi) => (
           <StatCard key={kpi.label} kpi={kpi} />
         ))}
       </div>
 
+      <div className="card mt-4 p-5">
+        <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Computer vision pipeline</h3>
+            <p className="text-xs text-slate-500">
+              Photo upload → analysis → location detection → compare to previous photos → potential new damage alert.
+            </p>
+          </div>
+          <Link to="/damage/pipeline" className="text-xs font-medium text-brand-blue">
+            Run a photo
+          </Link>
+        </div>
+        <CvPipelineStepper
+          statuses={["complete", "complete", "complete", "complete", pipeline.alertCount ? "alert" : "complete"]}
+          details={[
+            `${pipeline.uploaded} photos uploaded`,
+            `${pipeline.analyzed} embeddings ready`,
+            `${pipeline.runs.length} zones detected`,
+            `${pipeline.compared} compared to prior DVICs`,
+            `${pipeline.alertCount} potential new damage alerts`,
+          ]}
+        />
+      </div>
+
       <div className="card mt-4 overflow-x-auto">
         <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">New damage this week</h3>
-          <p className="text-xs text-slate-500">Detected by comparing the current DVIC to the prior inspection. Shows who had the van before and after.</p>
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Vehicle grounding recommendations</h3>
+          <p className="text-xs text-slate-500">Hold these vans before the next wave. Ground-vehicle severity or progressed structural damage.</p>
         </div>
-        <table className="w-full min-w-[960px] text-left text-sm">
+        <table className="w-full min-w-[720px] text-left text-sm">
           <thead className="text-xs uppercase tracking-wide text-slate-500">
             <tr>
-              <th className="px-5 py-2 font-medium">Van / zone</th>
-              <th className="px-3 py-2 font-medium">Before (prior DVIC)</th>
-              <th className="px-3 py-2 font-medium">After (found on)</th>
-              <th className="px-3 py-2 font-medium">Accountable</th>
+              <th className="px-5 py-2 font-medium">Vehicle</th>
+              <th className="px-3 py-2 font-medium">Severity</th>
+              <th className="px-3 py-2 font-medium">Workflow</th>
               <th className="px-3 py-2 font-medium">Estimate</th>
-              <th className="px-5 py-2 font-medium">Status</th>
+              <th className="px-5 py-2 font-medium">Reason</th>
             </tr>
           </thead>
           <tbody>
-            {view.newDamage.map((row) => (
+            {view.grounding.map((row) => (
               <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
                 <td className="px-5 py-3">
                   <p className="font-medium text-slate-900 dark:text-white">
                     {row.vanId} · {row.zoneLabel}
                   </p>
                   <p className="text-xs text-slate-500">
-                    {row.stationCode} · {row.damage_type} · {row.description}
+                    {row.stationCode} · {row.damage_type}
                   </p>
                 </td>
                 <td className="px-3 py-3">
-                  <p className="font-medium text-slate-800 dark:text-slate-200">{row.priorDriverName}</p>
-                  <p className="text-xs text-slate-500">{row.priorShift}</p>
+                  <span className={cn("badge", scoreClass[row.severity_score])}>{SEVERITY_SCORE_LABEL[row.severity_score]}</span>
                 </td>
                 <td className="px-3 py-3">
-                  <p className="font-medium text-slate-800 dark:text-slate-200">{row.foundByName}</p>
-                  <p className="text-xs text-slate-500">{row.foundShift}</p>
+                  <span className={cn("badge", workflowClass[row.workflow_status])}>{WORKFLOW_LABEL[row.workflow_status]}</span>
                 </td>
-                <td className="px-3 py-3">{row.responsibleName}</td>
                 <td className="px-3 py-3 tabular-nums">{formatUsd(row.estimated_cost)}</td>
-                <td className="px-5 py-3">
-                  <span className={cn("badge capitalize", statusClass[row.status])}>{row.status}</span>
-                </td>
+                <td className="px-5 py-3 text-slate-600 dark:text-slate-300">{row.grounding_reason ?? "Ground before next wave."}</td>
               </tr>
             ))}
-            {view.newDamage.length === 0 && (
+            {view.grounding.length === 0 && (
               <tr>
-                <td className="px-5 py-6 text-sm text-slate-500" colSpan={6}>
-                  No new damage this Amazon week.
+                <td className="px-5 py-6 text-sm text-slate-500" colSpan={5}>
+                  No grounding recommendations.
                 </td>
               </tr>
             )}
           </tbody>
         </table>
+      </div>
+
+      <div className="card mt-4 overflow-x-auto">
+        <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage report</h3>
+          <p className="text-xs text-slate-500">
+            Vehicle, date detected, previous driver, current driver, route, damage type, and open investigation status.
+          </p>
+        </div>
+        <DamageReportTable rows={view.reportRows} empty="No damage events in the current filter." />
+      </div>
+
+      <div className="card mt-4">
+        <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Before and after photos</h3>
+          <p className="text-xs text-slate-500">Baseline prior-DVIC photo vs the finding that opened the event. Placeholders carry embedding refs for later AI comparison.</p>
+        </div>
+        <div className="grid grid-cols-1 gap-4 p-5 md:grid-cols-2 xl:grid-cols-3">
+          {view.pairs.slice(0, 6).map((row) => (
+            <div key={row.id}>
+              <p className="mb-2 text-xs font-medium text-slate-700 dark:text-slate-200">
+                {row.vanId} · {row.zoneLabel} · {formatUsd(row.estimated_cost)}
+              </p>
+              <DamagePhotoPair before={row.beforePhoto} after={row.afterPhoto} zone={row.zoneLabel} />
+            </div>
+          ))}
+        </div>
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
@@ -124,7 +194,7 @@ export default function DamageIntelligence() {
                       {row.vanId} · {row.zoneLabel}
                     </p>
                     <p className="text-xs text-slate-500">
-                      {row.responsibleName} · {row.status}
+                      {row.responsibleName} · {WORKFLOW_LABEL[row.workflow_status]}
                       {row.workOrder ? ` · ${row.workOrder}` : ""}
                     </p>
                   </td>

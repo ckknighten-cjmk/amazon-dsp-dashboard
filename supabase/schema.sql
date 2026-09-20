@@ -503,6 +503,33 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.damage_severity_score as enum ('minor', 'moderate', 'severe', 'ground_vehicle');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_workflow_status as enum ('new', 'under_review', 'approved', 'scheduled_repair', 'repaired');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.investigation_status as enum ('open', 'pending_driver', 'charged', 'cleared', 'closed');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.cv_pipeline_stage as enum (
+    'photo_upload', 'cv_analysis', 'location_detection', 'compare_previous', 'new_damage_alert'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.cv_stage_status as enum ('pending', 'running', 'complete', 'skipped', 'alert');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.vehicle_dvics (
   id uuid primary key default gen_random_uuid(),
   vehicle_id uuid not null references public.vehicles(id),
@@ -540,8 +567,21 @@ create table if not exists public.vehicle_damage_events (
   responsible_driver_id uuid references public.drivers(id),
   prior_driver_id uuid references public.drivers(id),
   next_driver_id uuid references public.drivers(id),
-  maintenance_order_id uuid references public.maintenance_orders(id)
+  maintenance_order_id uuid references public.maintenance_orders(id),
+  route_id uuid references public.routes(id),
+  severity_score public.damage_severity_score not null default 'minor',
+  workflow_status public.damage_workflow_status not null default 'new',
+  investigation_status public.investigation_status not null default 'open',
+  grounding_recommended boolean not null default false,
+  grounding_reason text
 );
+
+alter table public.vehicle_damage_events add column if not exists route_id uuid references public.routes(id);
+alter table public.vehicle_damage_events add column if not exists severity_score public.damage_severity_score not null default 'minor';
+alter table public.vehicle_damage_events add column if not exists workflow_status public.damage_workflow_status not null default 'new';
+alter table public.vehicle_damage_events add column if not exists investigation_status public.investigation_status not null default 'open';
+alter table public.vehicle_damage_events add column if not exists grounding_recommended boolean not null default false;
+alter table public.vehicle_damage_events add column if not exists grounding_reason text;
 
 create table if not exists public.damage_photos (
   id uuid primary key default gen_random_uuid(),
@@ -569,6 +609,30 @@ create table if not exists public.damage_photos (
   ai_notes text,
   unique (storage_bucket, storage_path)
 );
+
+create table if not exists public.damage_cv_runs (
+  id uuid primary key default gen_random_uuid(),
+  photo_id uuid not null references public.damage_photos(id),
+  damage_event_id uuid not null references public.vehicle_damage_events(id),
+  vehicle_id uuid not null references public.vehicles(id),
+  current_stage public.cv_pipeline_stage not null default 'photo_upload',
+  upload_status public.cv_stage_status not null default 'pending',
+  analysis_status public.cv_stage_status not null default 'pending',
+  location_status public.cv_stage_status not null default 'pending',
+  compare_status public.cv_stage_status not null default 'pending',
+  alert_status public.cv_stage_status not null default 'pending',
+  detected_zone public.damage_zone,
+  compared_to_photo_id uuid references public.damage_photos(id),
+  similarity_score numeric(5,4),
+  change_confidence numeric(5,4),
+  alert_triggered boolean not null default false,
+  alert_reason text,
+  started_at timestamptz not null default now(),
+  completed_at timestamptz
+);
+
+create index if not exists damage_cv_runs_photo_idx on public.damage_cv_runs (photo_id, started_at desc);
+create index if not exists damage_cv_runs_alert_idx on public.damage_cv_runs (alert_triggered) where alert_triggered;
 
 create table if not exists public.damage_reviews (
   id uuid primary key default gen_random_uuid(),
@@ -612,6 +676,8 @@ create index if not exists downtime_vehicle_idx on public.vehicle_downtime (vehi
 create index if not exists vehicle_dvics_vehicle_idx on public.vehicle_dvics (vehicle_id, inspected_at desc);
 create index if not exists damage_events_vehicle_idx on public.vehicle_damage_events (vehicle_id, first_seen_at desc);
 create index if not exists damage_events_status_idx on public.vehicle_damage_events (status, station_id);
+create index if not exists damage_events_workflow_idx on public.vehicle_damage_events (workflow_status, investigation_status);
+create index if not exists damage_events_grounding_idx on public.vehicle_damage_events (grounding_recommended) where grounding_recommended;
 create index if not exists damage_photos_event_idx on public.damage_photos (damage_event_id, captured_at);
 create index if not exists maintenance_repairs_date_idx on public.maintenance_repairs (scheduled_date, station_id);
 
@@ -693,6 +759,7 @@ alter table public.import_jobs enable row level security;
 alter table public.vehicle_dvics enable row level security;
 alter table public.vehicle_damage_events enable row level security;
 alter table public.damage_photos enable row level security;
+alter table public.damage_cv_runs enable row level security;
 alter table public.damage_reviews enable row level security;
 alter table public.maintenance_repairs enable row level security;
 
@@ -1045,6 +1112,22 @@ create policy damage_photos_select on public.damage_photos
 
 drop policy if exists damage_photos_write on public.damage_photos;
 create policy damage_photos_write on public.damage_photos
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists damage_cv_runs_select on public.damage_cv_runs;
+create policy damage_cv_runs_select on public.damage_cv_runs
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicle_damage_events e
+      where e.id = damage_event_id and public.can_read_station(e.station_id)
+    )
+  );
+
+drop policy if exists damage_cv_runs_write on public.damage_cv_runs;
+create policy damage_cv_runs_write on public.damage_cv_runs
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
   with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));

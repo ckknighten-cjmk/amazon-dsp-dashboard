@@ -76,6 +76,16 @@ export const NAV_ITEMS: NavItemConfig[] = [
     label: "DVIC Damage",
     roles: ["owner", "operations_manager", "dispatcher", "safety_manager", "finance", "driver"],
   },
+  {
+    to: "/damage/report",
+    label: "Damage Report",
+    roles: ["owner", "operations_manager", "dispatcher", "safety_manager", "finance", "driver"],
+  },
+  {
+    to: "/damage/pipeline",
+    label: "Photo Pipeline",
+    roles: ["owner", "operations_manager", "dispatcher", "safety_manager", "finance", "driver"],
+  },
 ];
 
 export const ROLE_LABELS: Record<AppRole, string> = {

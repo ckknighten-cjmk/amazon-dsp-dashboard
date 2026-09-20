@@ -14,6 +14,8 @@ import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
 import Imports from "./pages/Imports";
 import DamageIntelligence from "./pages/DamageIntelligence";
+import DamageReport from "./pages/DamageReport";
+import DamagePipeline from "./pages/DamagePipeline";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -43,6 +45,8 @@ export default function App() {
         <Route path="insights" element={<Insights />} />
         <Route path="imports" element={<Imports />} />
         <Route path="damage" element={<DamageIntelligence />} />
+        <Route path="damage/report" element={<DamageReport />} />
+        <Route path="damage/pipeline" element={<DamagePipeline />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
