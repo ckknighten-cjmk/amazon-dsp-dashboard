@@ -9,6 +9,10 @@ import Financial from "./pages/Financial";
 import SafetyCompliance from "./pages/SafetyCompliance";
 import Forecasting from "./pages/Forecasting";
 import Fleet from "./pages/Fleet";
+import Scorecard from "./pages/Scorecard";
+import RoutesBoard from "./pages/Routes";
+import Insights from "./pages/Insights";
+import Imports from "./pages/Imports";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -33,6 +37,10 @@ export default function App() {
         <Route path="safety" element={<SafetyCompliance />} />
         <Route path="forecasting" element={<Forecasting />} />
         <Route path="fleet" element={<Fleet />} />
+        <Route path="scorecard" element={<Scorecard />} />
+        <Route path="routes" element={<RoutesBoard />} />
+        <Route path="insights" element={<Insights />} />
+        <Route path="imports" element={<Imports />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

@@ -3,6 +3,13 @@
 
 begin;
 
+delete from public.import_jobs;
+delete from public.vehicle_downtime;
+delete from public.disciplinary_records;
+delete from public.pto_requests;
+delete from public.expenses;
+delete from public.payroll;
+delete from public.maintenance_orders;
 delete from public.route_hourly_stats;
 delete from public.forecasts;
 delete from public.scorecards;
@@ -189,7 +196,7 @@ cross join lateral (
 ) w;
 
 insert into public.scorecards (
-  station_id, week_start, standing, dcr, cdf, pod_compliance, contact_compliance, safety_score, attendance_pct, photo_on_delivery, dnr, dsc, customer_escalations
+  station_id, week_start, standing, dcr, cdf, pod_compliance, contact_compliance, safety_score, attendance_pct, photo_on_delivery, dnr, dsc, customer_escalations, fico_score
 )
 select
   s.id,
@@ -204,7 +211,8 @@ select
   98.0,
   0.22,
   99.3,
-  7
+  7,
+  845
 from public.stations s
 cross join generate_series('2026-07-27'::date, '2026-09-14'::date, interval '7 day') as week
 cross join lateral (
@@ -246,5 +254,108 @@ insert into public.route_hourly_stats (service_date, hour_label, planned, delive
   ('2026-09-20', '14:00', 12800, 12610),
   ('2026-09-20', '16:00', 15600, 15380),
   ('2026-09-20', '18:00', 17900, 17640);
+
+insert into public.maintenance_orders (
+  vehicle_id, station_id, work_order, type, status, scheduled_date, completed_date, odometer_miles, vendor, cost, downtime_hours, description
+) values
+  ('c0000000-0000-4000-8000-000000000015', 'a0000000-0000-4000-8000-000000000001', 'WO-4418', 'body', 'in_progress', '2026-09-18', null, 41220, 'Penske Collision DLA7', 4180, 46, 'Rear quarter panel after cul-de-sac contact'),
+  ('c0000000-0000-4000-8000-000000000014', 'a0000000-0000-4000-8000-000000000005', 'WO-4421', 'corrective', 'in_progress', '2026-09-20', null, 62000, 'Amazon Fleet Shop DCH1', 890, 9, 'Brake warning + inner rear tire wear from DVIC fail'),
+  ('c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'WO-4390', 'preventive', 'scheduled', '2026-09-22', null, 28000, 'Amazon Fleet Shop DAX5', 340, 4, '5k PM'),
+  ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'WO-4382', 'tire', 'overdue', '2026-09-19', null, 42000, 'Discount Tire SODO', 620, 3, 'Inner rear replacement after pre-trip flag'),
+  ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'WO-4311', 'preventive', 'completed', '2026-09-08', '2026-09-08', 14850, 'Amazon Fleet Shop DLA7', 285, 2.5, 'Completed 15k PM'),
+  ('c0000000-0000-4000-8000-000000000007', 'a0000000-0000-4000-8000-000000000003', 'WO-4334', 'recall', 'completed', '2026-09-12', '2026-09-12', 37170, 'Ford Commercial Seattle', 0, 5, 'Camera module recall — warranty'),
+  ('c0000000-0000-4000-8000-000000000012', 'a0000000-0000-4000-8000-000000000005', 'WO-4360', 'corrective', 'completed', '2026-09-15', '2026-09-15', 55770, 'Amazon Fleet Shop DCH1', 475, 6, '12V aux battery replacement'),
+  ('c0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000001', 'WO-4428', 'preventive', 'scheduled', '2026-09-25', null, 22000, 'Amazon Fleet Shop DLA7', 310, 3, 'Upcoming 20k PM');
+
+insert into public.vehicle_downtime (vehicle_id, station_id, started_at, ended_at, reason, hours, notes) values
+  ('c0000000-0000-4000-8000-000000000015', 'a0000000-0000-4000-8000-000000000001', '2026-09-18 07:00+00', null, 'accident', 46, 'OOS pending body shop — EV-224'),
+  ('c0000000-0000-4000-8000-000000000014', 'a0000000-0000-4000-8000-000000000005', '2026-09-20 06:20+00', null, 'inspection_fail', 9, 'Held after DVIC fail — brake warning'),
+  ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', '2026-09-19 16:40+00', '2026-09-20 05:50+00', 'parts', 13, 'Waiting on tire set overnight'),
+  ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', '2026-09-08 06:00+00', '2026-09-08 08:30+00', 'maintenance', 2.5, 'PM completed same morning'),
+  ('c0000000-0000-4000-8000-000000000006', 'a0000000-0000-4000-8000-000000000002', '2026-09-17 18:10+00', '2026-09-17 20:05+00', 'charging', 1.9, 'Returned below reserve SOC');
+
+insert into public.pto_requests (driver_id, pto_type, status, start_date, end_date, hours, notes) values
+  ('b0000000-0000-4000-8000-000000001266', 'vacation', 'taken', '2026-09-14', '2026-09-15', 18, 'Approved vacation — back mid-week'),
+  ('b0000000-0000-4000-8000-000000001266', 'personal', 'approved', '2026-09-20', '2026-09-20', 9, 'Sunday personal day'),
+  ('b0000000-0000-4000-8000-000000001308', 'unpaid', 'pending', '2026-09-21', '2026-09-23', 27, 'Reliability hold — pending ops review'),
+  ('b0000000-0000-4000-8000-000000001201', 'sick', 'taken', '2026-09-15', '2026-09-15', 9, 'Call-out converted to sick'),
+  ('b0000000-0000-4000-8000-000000001103', 'vacation', 'approved', '2026-09-26', '2026-09-28', 27, 'Peak-adjacent PTO — coverage assigned'),
+  ('b0000000-0000-4000-8000-000000001042', 'personal', 'denied', '2026-09-26', '2026-09-26', 9, 'Saturday peak — denied');
+
+insert into public.disciplinary_records (driver_id, occurred_at, type, status, category, description, issued_by) values
+  ('b0000000-0000-4000-8000-000000001308', '2026-09-14 10:30+00', 'final', 'open', 'Safety', 'Seatbelt + distraction after prior written warning.', 'Riley Cho'),
+  ('b0000000-0000-4000-8000-000000001156', '2026-09-18 16:00+00', 'written', 'open', 'Safety', 'Third speeding event in seven days.', 'Riley Cho'),
+  ('b0000000-0000-4000-8000-000000001238', '2026-09-19 07:15+00', 'verbal', 'open', 'Performance', 'Late wave + rescue dependency.', 'Jordan Hale'),
+  ('b0000000-0000-4000-8000-000000001201', '2026-09-10 09:00+00', 'verbal', 'closed', 'Attendance', 'Call-out pattern counseling.', 'Jordan Hale');
+
+insert into public.payroll (
+  driver_id, station_id, period_start, period_end, regular_hours, overtime_hours, regular_pay, overtime_pay, bonuses, deductions, net_pay
+)
+select
+  d.id,
+  d.station_id,
+  '2026-08-31'::date,
+  '2026-09-13'::date,
+  40,
+  case when d.attendance_pct < 95 then 7.5 else 2.4 end,
+  870,
+  case when d.attendance_pct < 95 then 244.73 else 78.31 end,
+  case when d.dcr >= 99.3 then 75 else 0 end,
+  24,
+  870 + (case when d.attendance_pct < 95 then 244.73 else 78.31 end) + (case when d.dcr >= 99.3 then 75 else 0 end) - 24
+from public.drivers d;
+
+insert into public.payroll (
+  driver_id, station_id, period_start, period_end, regular_hours, overtime_hours, regular_pay, overtime_pay, bonuses, deductions, net_pay
+)
+select
+  d.id,
+  d.station_id,
+  '2026-09-14'::date,
+  '2026-09-20'::date,
+  27,
+  case when d.employee_code in ('DRV-1156', 'DRV-1238') then 5.2 else 1.6 end,
+  587.25,
+  case when d.employee_code in ('DRV-1156', 'DRV-1238') then 169.68 else 52.21 end,
+  0,
+  20,
+  587.25 + (case when d.employee_code in ('DRV-1156', 'DRV-1238') then 169.68 else 52.21 end) - 20
+from public.drivers d;
+
+insert into public.expenses (station_id, service_date, category, vendor, amount, source, reference, notes)
+select
+  s.id,
+  d::date,
+  'fuel',
+  'WEX Connect',
+  round((base.amt * case extract(dow from d) when 6 then 1.14 when 0 then 1.06 else 1 end)::numeric, 2),
+  'fuel_card',
+  'WEX-' || to_char(d, 'YYYYMMDD') || '-' || s.code,
+  'Depot charge + mid-day top-up'
+from public.stations s
+join (values
+  ('DLA7', 1840),
+  ('DAX5', 1520),
+  ('DSE2', 1410),
+  ('DAT6', 1280),
+  ('DCH1', 1310)
+) as base(code, amt) on base.code = s.code
+cross join generate_series('2026-09-07'::date, '2026-09-20'::date, interval '1 day') as d;
+
+insert into public.expenses (station_id, service_date, category, vendor, amount, source, reference, notes)
+select station_id, coalesce(completed_date, scheduled_date), 'maintenance', vendor, cost, 'shop', work_order, description
+from public.maintenance_orders
+where cost > 0;
+
+insert into public.expenses (station_id, service_date, category, vendor, amount, source, reference, notes) values
+  ('a0000000-0000-4000-8000-000000000001', '2026-09-11', 'insurance', 'Progressive Commercial', 6420, 'manual', 'INV-PC-9921', 'Monthly fleet liability installment'),
+  ('a0000000-0000-4000-8000-000000000002', '2026-09-16', 'supplies', 'Uline', 318, 'manual', 'PO-8841', 'Tote labels and overflow bags'),
+  ('a0000000-0000-4000-8000-000000000003', '2026-09-14', 'uniforms', 'Amazon DSP Gear', 246, 'manual', 'UNI-2209', 'Replacement vest + rain kit');
+
+insert into public.import_jobs (source, status, last_run_at, next_run_at, records_imported, records_failed, mapping_notes, connector) values
+  ('amazon_scorecard', 'mapped', '2026-09-15 04:10+00', '2026-09-22 04:00+00', 40, 0, 'Weekly Amazon scorecard CSV → DCR, POD, CDF, Safety, FICO, DNR, DSC, CE', 'S3 / Partner Portal export'),
+  ('payroll', 'imported', '2026-09-13 22:15+00', '2026-09-26 22:00+00', 14, 0, 'ADP / Paycom hours, OT, bonuses, and net pay by employee code', 'SFTP payroll register'),
+  ('fuel_card', 'imported', '2026-09-19 03:40+00', '2026-09-21 03:40+00', 70, 2, 'WEX / charge-network transactions → expenses.fuel', 'WEX Connect API'),
+  ('fleet_maintenance', 'ready', '2026-09-17 01:20+00', '2026-09-20 23:30+00', 0, 0, 'Shop work orders, DVIC defects, and downtime from fleet vendor', 'Amazon Fleet / shop CSV');
 
 commit;

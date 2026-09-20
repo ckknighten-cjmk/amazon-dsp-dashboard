@@ -213,6 +213,124 @@ export interface Scorecard {
   dnr: number;
   dsc: number;
   customer_escalations: number;
+  fico_score: number;
+}
+
+export type MaintenanceStatus = "scheduled" | "in_progress" | "completed" | "overdue";
+export type MaintenanceType = "preventive" | "corrective" | "tire" | "body" | "recall";
+
+export interface MaintenanceOrder {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  work_order: string;
+  type: MaintenanceType;
+  status: MaintenanceStatus;
+  scheduled_date: string;
+  completed_date: string | null;
+  odometer_miles: number;
+  vendor: string;
+  cost: number;
+  downtime_hours: number;
+  description: string;
+}
+
+export type PtoStatus = "pending" | "approved" | "denied" | "taken";
+export type PtoType = "vacation" | "sick" | "personal" | "unpaid";
+
+export interface PtoRequest {
+  id: string;
+  driver_id: string;
+  pto_type: PtoType;
+  status: PtoStatus;
+  start_date: string;
+  end_date: string;
+  hours: number;
+  notes: string;
+}
+
+export type DisciplineType = "verbal" | "written" | "final" | "suspension";
+export type DisciplineStatus = "open" | "closed";
+
+export interface DisciplinaryRecord {
+  id: string;
+  driver_id: string;
+  occurred_at: string;
+  type: DisciplineType;
+  status: DisciplineStatus;
+  category: string;
+  description: string;
+  issued_by: string;
+}
+
+export interface PayrollRecord {
+  id: string;
+  driver_id: string;
+  station_id: string;
+  period_start: string;
+  period_end: string;
+  regular_hours: number;
+  overtime_hours: number;
+  regular_pay: number;
+  overtime_pay: number;
+  bonuses: number;
+  deductions: number;
+  net_pay: number;
+}
+
+export type ExpenseCategory = "fuel" | "maintenance" | "insurance" | "supplies" | "uniforms" | "other";
+
+export interface Expense {
+  id: string;
+  station_id: string;
+  service_date: string;
+  category: ExpenseCategory;
+  vendor: string;
+  amount: number;
+  source: "fuel_card" | "shop" | "manual" | "payroll";
+  reference: string;
+  notes: string;
+}
+
+export type DowntimeReason = "maintenance" | "accident" | "inspection_fail" | "charging" | "parts";
+
+export interface VehicleDowntime {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  started_at: string;
+  ended_at: string | null;
+  reason: DowntimeReason;
+  hours: number;
+  notes: string;
+}
+
+export type ImportSource = "amazon_scorecard" | "payroll" | "fuel_card" | "fleet_maintenance";
+export type ImportJobStatus = "idle" | "ready" | "mapped" | "imported" | "failed";
+
+export interface ImportJob {
+  id: string;
+  source: ImportSource;
+  status: ImportJobStatus;
+  last_run_at: string | null;
+  next_run_at: string | null;
+  records_imported: number;
+  records_failed: number;
+  mapping_notes: string;
+  connector: string;
+}
+
+export type InsightSeverity = "critical" | "warning" | "watch";
+export type InsightCategory = "staffing" | "overtime" | "routes" | "safety" | "profitability";
+
+export interface Insight {
+  id: string;
+  category: InsightCategory;
+  severity: InsightSeverity;
+  title: string;
+  recommendation: string;
+  metric: string;
+  stationCode?: string;
 }
 
 export interface Forecast {
@@ -250,6 +368,13 @@ export interface SeedDatabase {
   scorecards: Scorecard[];
   forecasts: Forecast[];
   hourlyProgress: HourlyProgress[];
+  maintenance: MaintenanceOrder[];
+  payroll: PayrollRecord[];
+  expenses: Expense[];
+  pto: PtoRequest[];
+  discipline: DisciplinaryRecord[];
+  downtime: VehicleDowntime[];
+  importJobs: ImportJob[];
 }
 
 export interface DemoUser {

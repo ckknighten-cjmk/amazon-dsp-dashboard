@@ -14,7 +14,15 @@ import { buildDriverPerformance } from "../lib/aggregations";
 import { useChartStyles } from "../lib/chart";
 import { formatPct } from "../lib/format";
 import { cn } from "../lib/cn";
-import { attendanceClass, driverStatusClass, driverStatusLabel, severityClass } from "../lib/statusStyles";
+import {
+  attendanceClass,
+  disciplineClass,
+  disciplineStatusClass,
+  driverStatusClass,
+  driverStatusLabel,
+  ptoClass,
+  severityClass,
+} from "../lib/statusStyles";
 import { useAuth } from "../lib/auth";
 
 export default function DriverPerformance() {
@@ -27,8 +35,8 @@ export default function DriverPerformance() {
   return (
     <div>
       <PageHeader
-        title={selfOnly ? "My scorecard" : "Driver Performance"}
-        description="Scorecards, rankings, coaching recommendations, safety events, and attendance."
+        title={selfOnly ? "My scorecard" : "Driver Management"}
+        description="Attendance, PTO, coaching, disciplinary history, and performance scoring."
       />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
@@ -218,6 +226,82 @@ export default function DriverPerformance() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <div className="card overflow-x-auto">
+          <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">PTO tracking</h3>
+            <p className="text-xs text-slate-500">Vacation, sick, personal, and unpaid requests</p>
+          </div>
+          <table className="w-full min-w-[520px] text-left text-sm">
+            <thead className="text-xs uppercase tracking-wide text-slate-500">
+              <tr>
+                <th className="px-5 py-2 font-medium">Driver</th>
+                <th className="px-3 py-2 font-medium">Type</th>
+                <th className="px-3 py-2 font-medium">Dates</th>
+                <th className="px-5 py-2 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {view.pto.map((row) => {
+                const driver = view.ranked.find((item) => item.id === row.driver_id);
+                return (
+                  <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                    <td className="px-5 py-3">
+                      <p className="font-medium text-slate-900 dark:text-white">{driver?.full_name ?? row.driver_id}</p>
+                      <p className="text-xs text-slate-500">{row.hours}h · {row.notes}</p>
+                    </td>
+                    <td className="px-3 py-3 capitalize">{row.pto_type}</td>
+                    <td className="px-3 py-3 text-xs">
+                      {row.start_date} → {row.end_date}
+                    </td>
+                    <td className="px-5 py-3">
+                      <span className={cn("badge capitalize", ptoClass[row.status])}>{row.status}</span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card overflow-x-auto">
+          <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Disciplinary history</h3>
+            <p className="text-xs text-slate-500">Verbal, written, and final notices</p>
+          </div>
+          <table className="w-full min-w-[520px] text-left text-sm">
+            <thead className="text-xs uppercase tracking-wide text-slate-500">
+              <tr>
+                <th className="px-5 py-2 font-medium">Driver</th>
+                <th className="px-3 py-2 font-medium">Type</th>
+                <th className="px-3 py-2 font-medium">Category</th>
+                <th className="px-5 py-2 font-medium">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {view.discipline.map((row) => {
+                const driver = view.ranked.find((item) => item.id === row.driver_id);
+                return (
+                  <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                    <td className="px-5 py-3">
+                      <p className="font-medium text-slate-900 dark:text-white">{driver?.full_name ?? row.driver_id}</p>
+                      <p className="text-xs text-slate-500">{row.description}</p>
+                    </td>
+                    <td className="px-3 py-3">
+                      <span className={cn("badge capitalize", disciplineClass[row.type])}>{row.type}</span>
+                    </td>
+                    <td className="px-3 py-3">{row.category}</td>
+                    <td className="px-5 py-3">
+                      <span className={cn("badge capitalize", disciplineStatusClass[row.status])}>{row.status}</span>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

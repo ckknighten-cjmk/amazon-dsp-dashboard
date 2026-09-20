@@ -1,8 +1,13 @@
 import type {
   AttendanceStatus,
+  DisciplineStatus,
+  DisciplineType,
   DriverStatus,
+  ImportJobStatus,
   IncidentSeverity,
   InspectionStatus,
+  MaintenanceStatus,
+  PtoStatus,
   RescueStatus,
   RouteStatus,
   ScoreStanding,
@@ -76,4 +81,38 @@ export const standingClass: Record<ScoreStanding, string> = {
   great: "badge-info",
   fair: "badge-warning",
   poor: "badge-danger",
+};
+
+export const maintenanceClass: Record<MaintenanceStatus, string> = {
+  scheduled: "badge-info",
+  in_progress: "badge-warning",
+  completed: "badge-success",
+  overdue: "badge-danger",
+};
+
+export const ptoClass: Record<PtoStatus, string> = {
+  pending: "badge-warning",
+  approved: "badge-info",
+  denied: "badge-neutral",
+  taken: "badge-success",
+};
+
+export const disciplineClass: Record<DisciplineType, string> = {
+  verbal: "badge-info",
+  written: "badge-warning",
+  final: "badge-danger",
+  suspension: "badge-danger",
+};
+
+export const disciplineStatusClass: Record<DisciplineStatus, string> = {
+  open: "badge-danger",
+  closed: "badge-success",
+};
+
+export const importClass: Record<ImportJobStatus, string> = {
+  idle: "badge-neutral",
+  ready: "badge-info",
+  mapped: "badge-warning",
+  imported: "badge-success",
+  failed: "badge-danger",
 };

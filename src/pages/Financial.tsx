@@ -28,8 +28,8 @@ export default function Financial() {
   return (
     <div>
       <PageHeader
-        title="Financial Dashboard"
-        description="Revenue, labor, overtime, fuel, vehicle cost, station P&L, and route profitability."
+        title="Financial Analytics"
+        description="Revenue per route and driver, overtime, fuel, maintenance costs, and net profit."
       />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
@@ -141,6 +141,73 @@ export default function Financial() {
             ))}
           </tbody>
         </table>
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-2">
+        <div className="card overflow-x-auto">
+          <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Revenue per driver</h3>
+            <p className="text-xs text-slate-500">Today's route revenue vs. current-week payroll</p>
+          </div>
+          <table className="w-full min-w-[520px] text-left text-sm">
+            <thead className="text-xs uppercase tracking-wide text-slate-500">
+              <tr>
+                <th className="px-5 py-2 font-medium">Driver</th>
+                <th className="px-3 py-2 font-medium">Revenue</th>
+                <th className="px-3 py-2 font-medium">OT</th>
+                <th className="px-5 py-2 font-medium">Contribution</th>
+              </tr>
+            </thead>
+            <tbody>
+              {view.driverRevenue.map((row) => (
+                <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                  <td className="px-5 py-3">
+                    <p className="font-medium text-slate-900 dark:text-white">{row.name}</p>
+                    <p className="text-xs text-slate-500">{row.stationCode}</p>
+                  </td>
+                  <td className="px-3 py-3 tabular-nums">{formatUsd(row.revenue)}</td>
+                  <td className="px-3 py-3 tabular-nums">{formatUsd(row.overtime)}</td>
+                  <td className={`px-5 py-3 tabular-nums ${row.profit >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-500"}`}>
+                    {formatUsd(row.profit)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="card overflow-x-auto">
+          <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Expense ledger</h3>
+            <p className="text-xs text-slate-500">
+              Fuel {formatUsdCompact(view.fuelExpenses)} · Maintenance {formatUsdCompact(view.maintenanceExpenses)} · OT payroll{" "}
+              {formatUsdCompact(view.overtimePayroll)}
+            </p>
+          </div>
+          <table className="w-full min-w-[520px] text-left text-sm">
+            <thead className="text-xs uppercase tracking-wide text-slate-500">
+              <tr>
+                <th className="px-5 py-2 font-medium">Date</th>
+                <th className="px-3 py-2 font-medium">Category</th>
+                <th className="px-3 py-2 font-medium">Vendor</th>
+                <th className="px-5 py-2 font-medium">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[...view.expenseMtd]
+                .sort((a, b) => b.service_date.localeCompare(a.service_date) || b.amount - a.amount)
+                .slice(0, 14)
+                .map((row) => (
+                  <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                    <td className="px-5 py-3">{row.service_date}</td>
+                    <td className="px-3 py-3 capitalize">{row.category}</td>
+                    <td className="px-3 py-3 text-slate-500">{row.vendor}</td>
+                    <td className="px-5 py-3 tabular-nums">{formatUsd(row.amount)}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
