@@ -46,6 +46,11 @@ export const NAV_ITEMS: NavItemConfig[] = [
     label: "Forecasting",
     roles: ["owner", "operations_manager", "finance"],
   },
+  {
+    to: "/fleet",
+    label: "Fleet",
+    roles: ["owner", "operations_manager", "dispatcher", "safety_manager"],
+  },
 ];
 
 export const ROLE_LABELS: Record<AppRole, string> = {

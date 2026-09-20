@@ -13,6 +13,8 @@ describe("rbac", () => {
     expect(canAccess("finance", "/operations")).toBe(false);
     expect(canAccess("dispatcher", "/financial")).toBe(false);
     expect(canAccess("dispatcher", "/operations")).toBe(true);
+    expect(canAccess("dispatcher", "/fleet")).toBe(true);
+    expect(canAccess("finance", "/fleet")).toBe(false);
   });
 
   it("sends drivers to their scorecard home", () => {

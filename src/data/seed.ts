@@ -57,16 +57,43 @@ export const drivers: Driver[] = [
   { id: "drv-1308", employee_code: "DRV-1308", full_name: "Pablo Romero", station_id: "stn-dch1", hire_date: "2024-03-03", status: "off_duty", fico_score: 748, safety_score: 711, dcr: 96.8, attendance_pct: 91.6, on_time_pct: 90.8, dpmo: 1340, seatbelt_pct: 95.1 },
 ];
 
-export const vehicles: Vehicle[] = drivers.map((driver, index) => ({
-  id: `van-${String(index + 1).padStart(2, "0")}`,
-  van_id: `EV-${210 + index}`,
-  vin: `1FTBW3U60PKA${String(10000 + index)}`,
-  station_id: driver.station_id,
-  year: index % 3 === 0 ? 2022 : 2023,
-  make: "Ford",
-  model: "E-Transit",
-  status: driver.status === "off_duty" && driver.id === "drv-1308" ? "maintenance" : "active",
-}));
+export const vehicles: Vehicle[] = [
+  ...drivers.map((driver, index) => {
+    const odometer = 14850 + index * 3720 + (index % 4) * 410;
+    return {
+      id: `van-${String(index + 1).padStart(2, "0")}`,
+      van_id: `EV-${210 + index}`,
+      vin: `1FTBW3U60PKA${String(10000 + index)}`,
+      station_id: driver.station_id,
+      year: index % 3 === 0 ? 2022 : 2023,
+      make: "Ford",
+      model: "E-Transit",
+      status: (driver.id === "drv-1308" ? "maintenance" : "active") as Vehicle["status"],
+      powertrain: "ev" as const,
+      odometer_miles: odometer,
+      last_service_date: addDays(TODAY, -(12 + index * 4)),
+      next_service_miles: Math.ceil((odometer + 800) / 5000) * 5000,
+      utilization_pct: driver.status === "off_duty" ? 18 : 74 + (index % 9),
+      assigned_driver_id: driver.id === "drv-1308" ? null : driver.id,
+    };
+  }),
+  {
+    id: "van-15",
+    van_id: "EV-224",
+    vin: "1FTBW3U60PKA10015",
+    station_id: "stn-dla7",
+    year: 2023,
+    make: "Ford",
+    model: "E-Transit",
+    status: "oos",
+    powertrain: "ev",
+    odometer_miles: 41220,
+    last_service_date: addDays(TODAY, -2),
+    next_service_miles: 45000,
+    utilization_pct: 0,
+    assigned_driver_id: null,
+  },
+];
 
 const vehicleByDriver = Object.fromEntries(
   drivers.map((driver, index) => [driver.id, vehicles[index].id]),
@@ -190,15 +217,19 @@ export const safetyEvents: SafetyEvent[] = [
 ];
 
 export const inspections: VehicleInspection[] = vehicles.map((vehicle, index) => {
-  const driver = drivers[index];
-  const failed = vehicle.status === "maintenance" || driver.id === "drv-1238";
+  const driver = drivers.find((row) => row.id === vehicle.assigned_driver_id) ?? drivers[Math.min(index, drivers.length - 1)];
+  const failed = vehicle.status === "maintenance" || vehicle.status === "oos" || driver.id === "drv-1238";
   return {
     id: `insp-${vehicle.id}`,
     vehicle_id: vehicle.id,
     driver_id: driver.id,
-    inspected_at: `${TODAY}T06:${String(10 + index).padStart(2, "0")}:00Z`,
-    status: driver.status === "off_duty" && driver.id === "drv-1266" ? "pending" : failed ? "fail" : "pass",
-    defects: failed ? (vehicle.status === "maintenance" ? ["Brake warning light", "Tire wear inner rear"] : ["Headlamp out"]) : [],
+    inspected_at: `${TODAY}T06:${String(10 + (index % 50)).padStart(2, "0")}:00Z`,
+    status: vehicle.status === "oos" ? "fail" : driver.id === "drv-1266" ? "pending" : failed ? "fail" : "pass",
+    defects: failed
+      ? vehicle.status === "maintenance" || vehicle.status === "oos"
+        ? ["Brake warning light", "Tire wear inner rear"]
+        : ["Headlamp out"]
+      : [],
     notes: failed ? "Hold for maintenance before next wave" : "Pre-trip complete",
   };
 });
@@ -282,6 +313,9 @@ export const scorecards: Scorecard[] = Array.from({ length: 8 }, (_, weekIndex) 
       safety_score: safety,
       attendance_pct: round2(96.2 + random() * 3.2),
       photo_on_delivery: round2(97.1 + random() * 2.4),
+      dnr: round2(0.16 + random() * 0.28),
+      dsc: round2(99.05 + random() * 0.7),
+      customer_escalations: Math.round(3 + random() * 10),
     };
   }),
 );

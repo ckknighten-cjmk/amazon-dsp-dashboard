@@ -1,6 +1,6 @@
 import { TODAY, WEEK_START, MONTH_START } from "../data/seed";
 import type { SeedDatabase, Kpi, ScoreStanding, SessionUser } from "../types/database";
-import { addDays, average, dateRange, formatNumber, formatPct, formatUsdCompact, sum, weekdayShort } from "./format";
+import { addDays, average, dateRange, formatNumber, formatPct, formatUsdCompact, round2, sum, weekdayShort } from "./format";
 
 export const STANDING_LABEL: Record<ScoreStanding, string> = {
   fantastic: "Fantastic",
@@ -134,6 +134,9 @@ export function buildExecutive(db: SeedDatabase) {
     { label: "Safety Score", value: formatNumber(safety, 0), target: "≥ 850", status: standingFromValue(safety, 850, 800, 750) },
     { label: "Attendance", value: formatPct(attendance), target: "≥ 98.0%", status: standingFromValue(attendance, 98, 96.5, 94) },
     { label: "Seatbelt", value: formatPct(average(db.drivers.map((d) => d.seatbelt_pct))), target: "≥ 99.0%", status: standingFromValue(average(db.drivers.map((d) => d.seatbelt_pct)), 99, 98, 96) },
+    { label: "DNR", value: formatPct(average(currentSc.map((s) => s.dnr)), 2), target: "≤ 0.30%", status: standingFromValue(0.45 - average(currentSc.map((s) => s.dnr)), 0.15, 0.08, 0) },
+    { label: "DSC", value: formatPct(average(currentSc.map((s) => s.dsc))), target: "≥ 99.2%", status: standingFromValue(average(currentSc.map((s) => s.dsc)), 99.2, 98.8, 98.2) },
+    { label: "CE", value: formatNumber(sum(currentSc.map((s) => s.customer_escalations)), 0), target: "≤ 8 / wk", status: standingFromValue(12 - sum(currentSc.map((s) => s.customer_escalations)), 4, 0, -6) },
   ];
 
   const volumeDays = dateRange(addDays(TODAY, -6), TODAY).map((date) => {
@@ -357,7 +360,72 @@ export function buildFinancial(db: SeedDatabase) {
     return { date, day: weekdayShort(date), ...t };
   });
 
-  return { kpis, monthly, costBreakdown, stationProfit, daily, totals };
+  const routeProfit = db.routes
+    .map((route) => {
+      const econ = routeEconomics(route, db.rescues);
+      const driver = db.drivers.find((d) => d.id === route.driver_id);
+      const station = db.stations.find((s) => s.id === route.station_id);
+      return {
+        id: route.id,
+        routeCode: route.route_code,
+        driverName: driver?.full_name ?? "Unassigned",
+        stationCode: station?.code ?? "",
+        packages: route.packages_delivered,
+        stops: route.stops_completed,
+        failed: route.failed_count,
+        ...econ,
+      };
+    })
+    .sort((a, b) => b.profit - a.profit);
+
+  return { kpis, monthly, costBreakdown, stationProfit, daily, totals, routeProfit };
+}
+
+export function routeEconomics(route: SeedDatabase["routes"][number], rescues: SeedDatabase["rescues"]) {
+  const distressed = rescues.some((row) => row.distressed_route_id === route.id && row.status !== "completed");
+  const helper = rescues.some((row) => row.rescue_route_id === route.id && row.status !== "completed");
+  const revenue = round2(52 + route.packages_delivered * 1.84 + route.stops_completed * 0.28);
+  const baseHours = route.status === "completed" ? 9.1 : 9.7;
+  const otHours = distressed || route.status === "rescue" || route.failed_count >= 4 ? 2.3 : helper ? 1.2 : 0.4;
+  const labor = round2(baseHours * 21.75);
+  const overtime = round2(otHours * 32.63);
+  const fuel = round2(11.5 + route.stops_planned * 0.045);
+  const vehicle = 41.5;
+  const other = round2(route.failed_count * 3.75 + (distressed ? 18 : 0));
+  const costs = round2(labor + overtime + fuel + vehicle + other);
+  const profit = round2(revenue - costs);
+  return { revenue, labor, overtime, fuel, vehicle, other, costs, profit, margin: revenue ? profit / revenue : 0 };
+}
+
+export function buildFleet(db: SeedDatabase) {
+  const dueSoon = db.vehicles.filter((v) => v.odometer_miles >= v.next_service_miles - 750);
+  const latestInspection = (vehicleId: string) => db.inspections.find((row) => row.vehicle_id === vehicleId);
+  const rows = db.vehicles.map((vehicle) => {
+    const driver = db.drivers.find((d) => d.id === vehicle.assigned_driver_id);
+    const station = db.stations.find((s) => s.id === vehicle.station_id);
+    const inspection = latestInspection(vehicle.id);
+    const route = db.routes.find((r) => r.vehicle_id === vehicle.id);
+    return {
+      ...vehicle,
+      driverName: driver?.full_name ?? "Spare / unassigned",
+      stationCode: station?.code ?? "",
+      inspectionStatus: inspection?.status ?? "pending",
+      defects: inspection?.defects ?? [],
+      routeCode: route?.route_code ?? "—",
+      serviceDue: vehicle.odometer_miles >= vehicle.next_service_miles - 750,
+    };
+  });
+
+  return {
+    kpis: [
+      { label: "Active vans", value: String(db.vehicles.filter((v) => v.status === "active").length), delta: `${db.vehicles.length} in fleet`, trend: "up" as const, hint: "Ready for wave", favorable: "up" as const },
+      { label: "Maintenance / OOS", value: String(db.vehicles.filter((v) => v.status !== "active").length), delta: dueSoon.length ? `${dueSoon.length} service due` : "On cadence", trend: dueSoon.length ? "down" as const : "up" as const, hint: "Hold or shop", favorable: "down" as const },
+      { label: "Utilization", value: formatPct(average(db.vehicles.filter((v) => v.status === "active").map((v) => v.utilization_pct))), delta: "Today's wave", trend: "flat" as const, hint: "Assigned vs. parked", favorable: "up" as const },
+      { label: "Pre-trips passed", value: `${db.inspections.filter((i) => i.status === "pass").length}/${db.inspections.length}`, delta: `${db.inspections.filter((i) => i.status === "fail").length} fail`, trend: db.inspections.some((i) => i.status === "fail") ? "down" as const : "up" as const, hint: "This morning", favorable: "up" as const },
+    ],
+    rows,
+    dueSoon,
+  };
 }
 
 function rollup(rows: SeedDatabase["financialDaily"]) {

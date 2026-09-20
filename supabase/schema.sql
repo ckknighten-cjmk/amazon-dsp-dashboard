@@ -113,8 +113,21 @@ create table if not exists public.vehicles (
   year integer,
   make text,
   model text,
-  status text not null default 'active' check (status in ('active', 'maintenance', 'oos'))
+  status text not null default 'active' check (status in ('active', 'maintenance', 'oos')),
+  powertrain text not null default 'ev' check (powertrain in ('ev', 'ice')),
+  odometer_miles integer not null default 0,
+  last_service_date date,
+  next_service_miles integer,
+  utilization_pct numeric(5,1) not null default 0,
+  assigned_driver_id uuid references public.drivers(id)
 );
+
+alter table public.vehicles add column if not exists powertrain text;
+alter table public.vehicles add column if not exists odometer_miles integer;
+alter table public.vehicles add column if not exists last_service_date date;
+alter table public.vehicles add column if not exists next_service_miles integer;
+alter table public.vehicles add column if not exists utilization_pct numeric(5,1);
+alter table public.vehicles add column if not exists assigned_driver_id uuid;
 
 create table if not exists public.routes (
   id uuid primary key default gen_random_uuid(),
@@ -237,8 +250,15 @@ create table if not exists public.scorecards (
   safety_score numeric(6,1) not null,
   attendance_pct numeric(5,2) not null,
   photo_on_delivery numeric(5,2) not null,
+  dnr numeric(5,2) not null default 0.20,
+  dsc numeric(5,2) not null default 99.20,
+  customer_escalations integer not null default 6,
   unique (station_id, week_start)
 );
+
+alter table public.scorecards add column if not exists dnr numeric(5,2);
+alter table public.scorecards add column if not exists dsc numeric(5,2);
+alter table public.scorecards add column if not exists customer_escalations integer;
 
 create table if not exists public.forecasts (
   id uuid primary key default gen_random_uuid(),

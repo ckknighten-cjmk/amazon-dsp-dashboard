@@ -3,6 +3,7 @@ import { seedDb } from "../data/seed";
 import {
   buildExecutive,
   buildFinancial,
+  buildFleet,
   buildForecasting,
   buildLiveOperations,
   buildSafety,
@@ -22,7 +23,19 @@ describe("command center aggregations", () => {
       "Safety Score",
       "Scorecard",
     ]);
-    expect(view.scorecardMetrics.length).toBe(8);
+    expect(view.scorecardMetrics.map((m) => m.label)).toEqual([
+      "DCR",
+      "CDF",
+      "POD",
+      "Contact Compliance",
+      "Photo on Delivery",
+      "Safety Score",
+      "Attendance",
+      "Seatbelt",
+      "DNR",
+      "DSC",
+      "CE",
+    ]);
     expect(view.stationMix.length).toBe(5);
   });
 
@@ -44,6 +57,15 @@ describe("command center aggregations", () => {
     expect(view.totals.profit).toBeGreaterThan(0);
     expect(view.totals.labor).toBeGreaterThan(view.totals.overtime);
     expect(view.costBreakdown.map((row) => row.name)).toEqual(["Labor", "Overtime", "Fuel", "Vehicle", "Other"]);
+    expect(view.routeProfit.length).toBe(seedDb.routes.length);
+    expect(view.routeProfit.every((row) => Number.isFinite(row.profit))).toBe(true);
+  });
+
+  it("builds a fleet board with utilization and service due flags", () => {
+    const view = buildFleet(seedDb);
+    expect(view.rows.length).toBe(seedDb.vehicles.length);
+    expect(view.rows.some((row) => row.status === "oos")).toBe(true);
+    expect(view.kpis[0].label).toBe("Active vans");
   });
 
   it("reports inspections, speeding, and incidents", () => {

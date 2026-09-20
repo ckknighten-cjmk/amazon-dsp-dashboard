@@ -61,6 +61,29 @@ join public.drivers d on d.employee_code = ('DRV-' || (array[
   '1042','1088','1103','1156','1177','1201','1210','1224','1238','1252','1266','1280','1294','1308'
 ])[gs]);
 
+update public.vehicles v
+set
+  powertrain = 'ev',
+  odometer_miles = 14850 + (row_number * 3720),
+  last_service_date = date '2026-09-20' - (12 + row_number),
+  next_service_miles = 20000 + (row_number * 5000),
+  utilization_pct = case when v.status = 'maintenance' then 18 else 76 end,
+  assigned_driver_id = d.id
+from (
+  select id, row_number() over (order by van_id) as row_number
+  from public.vehicles
+) numbered
+join public.drivers d on d.employee_code = ('DRV-' || (array[
+  '1042','1088','1103','1156','1177','1201','1210','1224','1238','1252','1266','1280','1294','1308'
+])[numbered.row_number])
+where v.id = numbered.id;
+
+insert into public.vehicles (id, van_id, vin, station_id, year, make, model, status, powertrain, odometer_miles, last_service_date, next_service_miles, utilization_pct)
+values (
+  'c0000000-0000-4000-8000-000000000015', 'EV-224', '1FTBW3U60PKA10015',
+  'a0000000-0000-4000-8000-000000000001', 2023, 'Ford', 'E-Transit', 'oos', 'ev', 41220, '2026-09-18', 45000, 0
+);
+
 insert into public.profiles (email, full_name, role, station_id, driver_id, avatar_initials) values
   ('owner@dsp.local', 'Alex Rivera', 'owner', null, null, 'AR'),
   ('ops@dsp.local', 'Jordan Hale', 'operations_manager', 'a0000000-0000-4000-8000-000000000001', null, 'JH'),
@@ -166,7 +189,7 @@ cross join lateral (
 ) w;
 
 insert into public.scorecards (
-  station_id, week_start, standing, dcr, cdf, pod_compliance, contact_compliance, safety_score, attendance_pct, photo_on_delivery
+  station_id, week_start, standing, dcr, cdf, pod_compliance, contact_compliance, safety_score, attendance_pct, photo_on_delivery, dnr, dsc, customer_escalations
 )
 select
   s.id,
@@ -178,7 +201,10 @@ select
   97.6,
   860,
   97.8,
-  98.0
+  98.0,
+  0.22,
+  99.3,
+  7
 from public.stations s
 cross join generate_series('2026-07-27'::date, '2026-09-14'::date, interval '7 day') as week
 cross join lateral (

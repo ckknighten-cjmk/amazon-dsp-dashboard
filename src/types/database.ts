@@ -84,6 +84,12 @@ export interface Vehicle {
   make: string;
   model: string;
   status: "active" | "maintenance" | "oos";
+  powertrain: "ev" | "ice";
+  odometer_miles: number;
+  last_service_date: string;
+  next_service_miles: number;
+  utilization_pct: number;
+  assigned_driver_id: string | null;
 }
 
 export interface Route {
@@ -204,6 +210,9 @@ export interface Scorecard {
   safety_score: number;
   attendance_pct: number;
   photo_on_delivery: number;
+  dnr: number;
+  dsc: number;
+  customer_escalations: number;
 }
 
 export interface Forecast {

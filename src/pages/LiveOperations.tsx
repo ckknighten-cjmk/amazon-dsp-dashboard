@@ -1,3 +1,4 @@
+import { useMemo, useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -11,10 +12,12 @@ import PageHeader from "../components/PageHeader";
 import ChartCard from "../components/ChartCard";
 import ProgressBar from "../components/ProgressBar";
 import { useData } from "../lib/data";
+import { useAuth } from "../lib/auth";
 import { buildLiveOperations } from "../lib/aggregations";
 import { useChartStyles } from "../lib/chart";
 import { formatPct } from "../lib/format";
 import { cn } from "../lib/cn";
+import type { RescueStatus } from "../types/database";
 import {
   driverStatusClass,
   driverStatusLabel,
@@ -23,10 +26,37 @@ import {
   routeStatusLabel,
 } from "../lib/statusStyles";
 
+interface RescueOverride {
+  rescue_route_id: string | null;
+  status: RescueStatus;
+}
+
 export default function LiveOperations() {
   const { filtered } = useData();
+  const { user } = useAuth();
   const view = buildLiveOperations(filtered);
   const chart = useChartStyles();
+  const [overrides, setOverrides] = useState<Record<string, RescueOverride>>({});
+  const canManageRescues = user?.role === "owner" || user?.role === "operations_manager" || user?.role === "dispatcher";
+
+  const rescueRows = useMemo(
+    () =>
+      view.rescueRows.map((rescue) => {
+        const override = overrides[rescue.id];
+        if (!override) return rescue;
+        const helper = view.routeRows.find((route) => route.id === override.rescue_route_id);
+        return {
+          ...rescue,
+          status: override.status,
+          rescue_route_id: override.rescue_route_id,
+          rescueRoute: helper?.route_code ?? (override.rescue_route_id ? rescue.rescueRoute : "Unassigned"),
+          rescueDriver: helper?.driverName ?? (override.rescue_route_id ? rescue.rescueDriver : "Pending"),
+        };
+      }),
+    [overrides, view.rescueRows, view.routeRows],
+  );
+
+  const helperOptions = view.routeRows.filter((route) => route.status === "in_progress" && route.completion >= 0.55);
 
   return (
     <div>
@@ -38,7 +68,11 @@ export default function LiveOperations() {
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
         <Kpi label="Active routes" value={String(view.active)} />
         <Kpi label="Completed" value={String(view.completed)} />
-        <Kpi label="Rescues" value={String(view.rescueActive)} warn={view.rescueActive > 0} />
+        <Kpi
+          label="Rescues"
+          value={String(rescueRows.filter((row) => row.status !== "completed").length)}
+          warn={rescueRows.some((row) => row.status !== "completed")}
+        />
         <Kpi label="Failed deliveries" value={String(view.failedCount)} warn={view.failedCount > 0} />
         <Kpi label="Network on-time" value={formatPct(view.networkOnTime)} className="col-span-2 lg:col-span-1" />
       </div>
@@ -59,11 +93,11 @@ export default function LiveOperations() {
 
         <div className="card xl:col-span-2">
           <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
-            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Rescue dashboard</h3>
-            <p className="text-xs text-slate-500">Distressed routes and helper assignments</p>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Rescue management</h3>
+            <p className="text-xs text-slate-500">Assign a helper route and close the rescue</p>
           </div>
           <ul className="divide-y divide-slate-200 dark:divide-white/5">
-            {view.rescueRows.map((rescue) => (
+            {rescueRows.map((rescue) => (
               <li key={rescue.id} className="px-5 py-3">
                 <div className="flex items-start justify-between gap-3">
                   <div>
@@ -74,12 +108,53 @@ export default function LiveOperations() {
                       Helper {rescue.rescueRoute} ({rescue.rescueDriver}) · {rescue.stops_transferred} stops
                     </p>
                     <p className="mt-1 text-xs text-slate-500">{rescue.reason}</p>
+                    {canManageRescues && rescue.status !== "completed" && (
+                      <div className="mt-2 flex flex-wrap items-center gap-2">
+                        <select
+                          className="rounded-md border border-slate-200 bg-white px-2 py-1 text-xs dark:border-white/10 dark:bg-ink-800"
+                          value={rescue.rescue_route_id ?? ""}
+                          onChange={(event) =>
+                            setOverrides((current) => ({
+                              ...current,
+                              [rescue.id]: {
+                                rescue_route_id: event.target.value || null,
+                                status: event.target.value ? "in_progress" : "requested",
+                              },
+                            }))
+                          }
+                        >
+                          <option value="">Unassigned</option>
+                          {helperOptions
+                            .filter((route) => route.id !== rescue.distressed_route_id)
+                            .map((route) => (
+                              <option key={route.id} value={route.id}>
+                                {route.route_code} · {route.driverName}
+                              </option>
+                            ))}
+                        </select>
+                        <button
+                          type="button"
+                          className="rounded-md bg-emerald-600 px-2 py-1 text-xs font-medium text-white"
+                          onClick={() =>
+                            setOverrides((current) => ({
+                              ...current,
+                              [rescue.id]: {
+                                rescue_route_id: rescue.rescue_route_id,
+                                status: "completed",
+                              },
+                            }))
+                          }
+                        >
+                          Complete
+                        </button>
+                      </div>
+                    )}
                   </div>
                   <span className={cn("badge capitalize", rescueStatusClass[rescue.status])}>{rescue.status.replace("_", " ")}</span>
                 </div>
               </li>
             ))}
-            {view.rescueRows.length === 0 && <li className="px-5 py-6 text-sm text-slate-500">No rescues this wave.</li>}
+            {rescueRows.length === 0 && <li className="px-5 py-6 text-sm text-slate-500">No rescues this wave.</li>}
           </ul>
         </div>
       </div>

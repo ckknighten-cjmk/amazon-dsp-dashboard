@@ -4,12 +4,13 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 
 ## Workspaces
 
-- **Executive** — Revenue, profit, DCR, attendance, safety score, Amazon scorecard KPIs
-- **Live Operations** — Active routes, completion tracking, rescue board, failed deliveries, station performance
+- **Executive** — Revenue, profit, DCR, attendance, safety score, Amazon scorecard KPIs (DCR, CDF, POD, DNR, DSC, CE)
+- **Live Operations** — Active routes, completion tracking, rescue assignment, failed deliveries, station performance
 - **Driver Performance** — Scorecards, rankings, coaching, safety events, attendance
-- **Financial** — Revenue, labor, overtime, fuel, vehicle cost, profitability
+- **Financial** — Revenue, labor, overtime, fuel, vehicle cost, station and route profitability
 - **Safety & Compliance** — Vehicle inspections, speeding, seatbelt, incidents
 - **Forecasting** — Route, volume, staffing, and overtime outlook
+- **Fleet** — Van assignments, utilization, service cadence, and pre-trips
 
 ## Quick start
 

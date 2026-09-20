@@ -8,6 +8,7 @@ import DriverPerformance from "./pages/DriverPerformance";
 import Financial from "./pages/Financial";
 import SafetyCompliance from "./pages/SafetyCompliance";
 import Forecasting from "./pages/Forecasting";
+import Fleet from "./pages/Fleet";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="financial" element={<Financial />} />
         <Route path="safety" element={<SafetyCompliance />} />
         <Route path="forecasting" element={<Forecasting />} />
+        <Route path="fleet" element={<Fleet />} />
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

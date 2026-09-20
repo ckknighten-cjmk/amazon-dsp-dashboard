@@ -18,7 +18,7 @@ import { useData } from "../lib/data";
 import { buildFinancial } from "../lib/aggregations";
 import { useChartStyles } from "../lib/chart";
 import { chartPalette } from "../data/seed";
-import { formatPct, formatUsdCompact } from "../lib/format";
+import { formatPct, formatUsd, formatUsdCompact } from "../lib/format";
 
 export default function Financial() {
   const { filtered } = useData();
@@ -29,7 +29,7 @@ export default function Financial() {
     <div>
       <PageHeader
         title="Financial Dashboard"
-        description="Revenue, labor, overtime, fuel, vehicle cost, and station-level profitability."
+        description="Revenue, labor, overtime, fuel, vehicle cost, station P&L, and route profitability."
       />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
@@ -96,6 +96,47 @@ export default function Financial() {
                 <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.fuel)}</td>
                 <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.vehicle)}</td>
                 <td className="px-5 py-3 tabular-nums text-emerald-600 dark:text-emerald-400">{formatPct(row.margin * 100)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="card mt-4 overflow-x-auto">
+        <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Route profitability</h3>
+          <p className="text-xs text-slate-500">
+            Today's wave · Amazon package/stop rate vs. labor, OT, energy, and van cost
+          </p>
+        </div>
+        <table className="w-full min-w-[800px] text-left text-sm">
+          <thead className="text-xs uppercase tracking-wide text-slate-500">
+            <tr>
+              <th className="px-5 py-2 font-medium">Route</th>
+              <th className="px-3 py-2 font-medium">Driver</th>
+              <th className="px-3 py-2 font-medium">Pkgs</th>
+              <th className="px-3 py-2 font-medium">Revenue</th>
+              <th className="px-3 py-2 font-medium">Labor + OT</th>
+              <th className="px-3 py-2 font-medium">Fuel</th>
+              <th className="px-3 py-2 font-medium">Van</th>
+              <th className="px-5 py-2 font-medium">Profit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {view.routeProfit.map((row) => (
+              <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                <td className="px-5 py-3 font-medium text-slate-900 dark:text-white">
+                  {row.routeCode} · {row.stationCode}
+                </td>
+                <td className="px-3 py-3">{row.driverName}</td>
+                <td className="px-3 py-3 tabular-nums">{row.packages}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.revenue)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.labor + row.overtime)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.fuel)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.vehicle)}</td>
+                <td className={`px-5 py-3 tabular-nums ${row.profit >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-500"}`}>
+                  {formatUsd(row.profit)} ({formatPct(row.margin * 100)})
+                </td>
               </tr>
             ))}
           </tbody>

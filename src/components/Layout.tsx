@@ -9,6 +9,7 @@ import {
   Menu,
   TrendingUp,
   Truck,
+  Wrench,
   X,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -27,6 +28,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/financial": DollarSign,
   "/safety": AlertTriangle,
   "/forecasting": TrendingUp,
+  "/fleet": Wrench,
 };
 
 export default function Layout() {
