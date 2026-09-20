@@ -428,6 +428,175 @@ create table if not exists public.import_jobs (
   connector text not null
 );
 
+-- ---------------------------------------------------------------------------
+-- DVIC Damage Intelligence
+-- Future AI photo comparison:
+--   1. Store every inspection photo in object storage (bucket + path + sha256).
+--   2. Compute a 768-d embedding (CLIP / custom damage encoder) offline.
+--   3. Persist embedding_ref + optional pgvector column; compare current photo
+--      to the prior DVIC baseline for the same vehicle + zone + camera_angle.
+--   4. similarity_score (0-1) and change_confidence drive new vs progression.
+--   5. vehicle_dvics.prior_dvic_id is the comparison chain; do not require
+--      embeddings to record a manual / rule-based finding.
+-- Enable later: create extension if not exists vector;
+--   alter table public.damage_photos add column embedding vector(768);
+-- ---------------------------------------------------------------------------
+
+do $$ begin
+  create type public.dvic_shift as enum ('pre_trip', 'post_trip', 'mid_shift');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.dvic_comparison_status as enum ('pending', 'compared', 'skipped');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_zone as enum (
+    'front_bumper', 'rear_bumper', 'driver_door', 'passenger_door', 'hood', 'roof',
+    'left_quarter', 'right_quarter', 'windshield', 'mirror_left', 'mirror_right',
+    'tire_lf', 'tire_lr', 'interior'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_type as enum ('scratch', 'dent', 'crack', 'scrape', 'missing', 'leak', 'chip');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_severity as enum ('minor', 'moderate', 'major');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_event_status as enum ('new', 'progressing', 'stable', 'resolved', 'disputed');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_detected_via as enum ('new_vs_prior', 'progression', 'driver_reported', 'shop');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.photo_angle as enum ('front', 'rear', 'left', 'right', 'overhead', 'interior', 'closeup');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.embedding_status as enum ('pending', 'ready', 'failed', 'skipped');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.damage_review_decision as enum (
+    'confirm_new', 'confirm_progression', 'pre_existing', 'not_damage', 'charge_driver', 'send_to_shop'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.repair_status as enum ('quoted', 'approved', 'in_progress', 'completed', 'cancelled');
+exception when duplicate_object then null;
+end $$;
+
+create table if not exists public.vehicle_dvics (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  driver_id uuid not null references public.drivers(id),
+  station_id uuid not null references public.stations(id),
+  service_date date not null,
+  shift_type public.dvic_shift not null,
+  inspected_at timestamptz not null,
+  status public.inspection_status not null,
+  odometer_miles integer,
+  prior_dvic_id uuid references public.vehicle_dvics(id),
+  notes text,
+  comparison_status public.dvic_comparison_status not null default 'pending',
+  comparison_model text,
+  compared_at timestamptz
+);
+
+create table if not exists public.vehicle_damage_events (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  dvic_id uuid not null references public.vehicle_dvics(id),
+  prior_dvic_id uuid references public.vehicle_dvics(id),
+  parent_event_id uuid references public.vehicle_damage_events(id),
+  zone public.damage_zone not null,
+  damage_type public.damage_type not null,
+  severity public.damage_severity not null,
+  previous_severity public.damage_severity,
+  status public.damage_event_status not null default 'new',
+  detected_via public.damage_detected_via not null,
+  first_seen_at timestamptz not null,
+  last_seen_at timestamptz not null,
+  description text not null,
+  estimated_cost numeric(12,2) not null default 0,
+  responsible_driver_id uuid references public.drivers(id),
+  prior_driver_id uuid references public.drivers(id),
+  next_driver_id uuid references public.drivers(id),
+  maintenance_order_id uuid references public.maintenance_orders(id)
+);
+
+create table if not exists public.damage_photos (
+  id uuid primary key default gen_random_uuid(),
+  damage_event_id uuid not null references public.vehicle_damage_events(id),
+  dvic_id uuid not null references public.vehicle_dvics(id),
+  vehicle_id uuid not null references public.vehicles(id),
+  zone public.damage_zone not null,
+  captured_at timestamptz not null,
+  captured_by_driver_id uuid not null references public.drivers(id),
+  storage_bucket text not null,
+  storage_path text not null,
+  content_type text not null default 'image/jpeg',
+  content_hash text not null,
+  width_px integer,
+  height_px integer,
+  camera_angle public.photo_angle not null,
+  is_baseline boolean not null default false,
+  embedding_status public.embedding_status not null default 'pending',
+  embedding_model text,
+  embedding_dims integer not null default 768,
+  embedding_ref text,
+  compared_to_photo_id uuid references public.damage_photos(id),
+  similarity_score numeric(5,4),
+  change_confidence numeric(5,4),
+  ai_notes text,
+  unique (storage_bucket, storage_path)
+);
+
+create table if not exists public.damage_reviews (
+  id uuid primary key default gen_random_uuid(),
+  damage_event_id uuid not null references public.vehicle_damage_events(id),
+  reviewed_at timestamptz not null default now(),
+  reviewer_name text not null,
+  reviewer_role public.app_role not null,
+  decision public.damage_review_decision not null,
+  assigned_driver_id uuid references public.drivers(id),
+  notes text
+);
+
+create table if not exists public.maintenance_repairs (
+  id uuid primary key default gen_random_uuid(),
+  damage_event_id uuid not null references public.vehicle_damage_events(id),
+  maintenance_order_id uuid references public.maintenance_orders(id),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  vendor text not null,
+  repair_type text not null,
+  status public.repair_status not null default 'quoted',
+  quoted_cost numeric(12,2) not null,
+  actual_cost numeric(12,2),
+  scheduled_date date not null,
+  completed_date date,
+  notes text
+);
+
 create index if not exists routes_service_date_idx on public.routes (service_date, station_id);
 create index if not exists routes_driver_date_idx on public.routes (driver_id, service_date);
 create index if not exists financial_daily_date_idx on public.financial_daily (service_date);
@@ -440,6 +609,11 @@ create index if not exists payroll_period_idx on public.payroll (period_start, s
 create index if not exists expenses_date_idx on public.expenses (service_date, station_id);
 create index if not exists pto_driver_idx on public.pto_requests (driver_id, start_date);
 create index if not exists downtime_vehicle_idx on public.vehicle_downtime (vehicle_id, started_at desc);
+create index if not exists vehicle_dvics_vehicle_idx on public.vehicle_dvics (vehicle_id, inspected_at desc);
+create index if not exists damage_events_vehicle_idx on public.vehicle_damage_events (vehicle_id, first_seen_at desc);
+create index if not exists damage_events_status_idx on public.vehicle_damage_events (status, station_id);
+create index if not exists damage_photos_event_idx on public.damage_photos (damage_event_id, captured_at);
+create index if not exists maintenance_repairs_date_idx on public.maintenance_repairs (scheduled_date, station_id);
 
 create or replace function public.current_profile()
 returns public.profiles
@@ -516,6 +690,11 @@ alter table public.pto_requests enable row level security;
 alter table public.disciplinary_records enable row level security;
 alter table public.vehicle_downtime enable row level security;
 alter table public.import_jobs enable row level security;
+alter table public.vehicle_dvics enable row level security;
+alter table public.vehicle_damage_events enable row level security;
+alter table public.damage_photos enable row level security;
+alter table public.damage_reviews enable row level security;
+alter table public.maintenance_repairs enable row level security;
 
 drop policy if exists stations_select on public.stations;
 create policy stations_select on public.stations
@@ -819,6 +998,83 @@ create policy import_jobs_write on public.import_jobs
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager', 'finance'))
   with check (public.current_app_role() in ('owner', 'operations_manager', 'finance'));
+
+drop policy if exists dvics_select on public.vehicle_dvics;
+create policy dvics_select on public.vehicle_dvics
+  for select to authenticated
+  using (
+    public.can_read_station(station_id)
+    or driver_id = (select driver_id from public.current_profile())
+  );
+
+drop policy if exists dvics_write on public.vehicle_dvics;
+create policy dvics_write on public.vehicle_dvics
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists damage_events_select on public.vehicle_damage_events;
+create policy damage_events_select on public.vehicle_damage_events
+  for select to authenticated
+  using (
+    public.can_read_station(station_id)
+    or responsible_driver_id = (select driver_id from public.current_profile())
+    or prior_driver_id = (select driver_id from public.current_profile())
+    or next_driver_id = (select driver_id from public.current_profile())
+  );
+
+drop policy if exists damage_events_write on public.vehicle_damage_events;
+create policy damage_events_write on public.vehicle_damage_events
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists damage_photos_select on public.damage_photos;
+create policy damage_photos_select on public.damage_photos
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicle_damage_events e
+      where e.id = damage_event_id
+        and (
+          public.can_read_station(e.station_id)
+          or e.responsible_driver_id = (select driver_id from public.current_profile())
+        )
+    )
+  );
+
+drop policy if exists damage_photos_write on public.damage_photos;
+create policy damage_photos_write on public.damage_photos
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists damage_reviews_select on public.damage_reviews;
+create policy damage_reviews_select on public.damage_reviews
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicle_damage_events e
+      where e.id = damage_event_id and public.can_read_station(e.station_id)
+    )
+  );
+
+drop policy if exists damage_reviews_write on public.damage_reviews;
+create policy damage_reviews_write on public.damage_reviews
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists maintenance_repairs_select on public.maintenance_repairs;
+create policy maintenance_repairs_select on public.maintenance_repairs
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists maintenance_repairs_write on public.maintenance_repairs;
+create policy maintenance_repairs_write on public.maintenance_repairs
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'finance'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'finance'));
 
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on all tables in schema public to authenticated;

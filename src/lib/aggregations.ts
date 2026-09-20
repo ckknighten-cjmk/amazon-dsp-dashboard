@@ -65,19 +65,35 @@ export function filterDatabase(db: SeedDatabase, stationId: string | "all", user
       discipline: db.discipline.filter((d) => stationDrivers.has(d.driver_id)),
       downtime: db.downtime.filter((d) => d.station_id === stationId),
       importJobs: db.importJobs,
+      dvics: db.dvics.filter((d) => d.station_id === stationId),
+      damageEvents: db.damageEvents.filter((d) => d.station_id === stationId),
+      damagePhotos: db.damagePhotos.filter((p) => stationVehicles.has(p.vehicle_id)),
+      damageReviews: db.damageReviews.filter((r) => db.damageEvents.some((e) => e.id === r.damage_event_id && e.station_id === stationId)),
+      maintenanceRepairs: db.maintenanceRepairs.filter((r) => r.station_id === stationId),
     };
   }
   if (user?.role === "driver" && user.driverId) {
+    const driverId = user.driverId;
+    const relatedEvents = new Set(
+      next.damageEvents
+        .filter((e) => e.responsible_driver_id === driverId || e.prior_driver_id === driverId || e.next_driver_id === driverId)
+        .map((e) => e.id),
+    );
     next = {
       ...next,
-      drivers: next.drivers.filter((d) => d.id === user.driverId),
-      routes: next.routes.filter((r) => r.driver_id === user.driverId),
-      attendance: next.attendance.filter((a) => a.driver_id === user.driverId),
-      safetyEvents: next.safetyEvents.filter((e) => e.driver_id === user.driverId),
-      coaching: next.coaching.filter((c) => c.driver_id === user.driverId),
-      pto: next.pto.filter((p) => p.driver_id === user.driverId),
-      discipline: next.discipline.filter((d) => d.driver_id === user.driverId),
-      payroll: next.payroll.filter((p) => p.driver_id === user.driverId),
+      drivers: next.drivers.filter((d) => d.id === driverId),
+      routes: next.routes.filter((r) => r.driver_id === driverId),
+      attendance: next.attendance.filter((a) => a.driver_id === driverId),
+      safetyEvents: next.safetyEvents.filter((e) => e.driver_id === driverId),
+      coaching: next.coaching.filter((c) => c.driver_id === driverId),
+      pto: next.pto.filter((p) => p.driver_id === driverId),
+      discipline: next.discipline.filter((d) => d.driver_id === driverId),
+      payroll: next.payroll.filter((p) => p.driver_id === driverId),
+      dvics: next.dvics.filter((d) => d.driver_id === driverId),
+      damageEvents: next.damageEvents.filter((e) => relatedEvents.has(e.id)),
+      damagePhotos: next.damagePhotos.filter((p) => relatedEvents.has(p.damage_event_id)),
+      damageReviews: next.damageReviews.filter((r) => relatedEvents.has(r.damage_event_id)),
+      maintenanceRepairs: next.maintenanceRepairs.filter((r) => relatedEvents.has(r.damage_event_id)),
     };
   }
   return next;

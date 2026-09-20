@@ -1,8 +1,10 @@
+import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
 import ProgressBar from "../components/ProgressBar";
 import { useData } from "../lib/data";
 import { buildFleet } from "../lib/aggregations";
+import { buildDamageIntelligence } from "../lib/damage";
 import { cn } from "../lib/cn";
 import { formatNumber, formatUsd } from "../lib/format";
 import { inspectionClass, maintenanceClass } from "../lib/statusStyles";
@@ -16,6 +18,7 @@ const vehicleStatusClass = {
 export default function Fleet() {
   const { filtered } = useData();
   const view = buildFleet(filtered);
+  const damage = buildDamageIntelligence(filtered);
 
   return (
     <div>
@@ -28,6 +31,20 @@ export default function Fleet() {
         {view.kpis.map((kpi) => (
           <StatCard key={kpi.label} kpi={kpi} />
         ))}
+      </div>
+
+      <div className="card mt-4 p-5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 dark:text-white">DVIC damage intelligence</h3>
+            <p className="text-xs text-slate-500">
+              {damage.totals.newThisWeek} new this week · {damage.totals.unresolved} unresolved · {formatUsd(damage.totals.openCost)} open estimate
+            </p>
+          </div>
+          <Link to="/damage" className="rounded-md bg-brand-blue px-3 py-1.5 text-xs font-medium text-white">
+            Open damage board
+          </Link>
+        </div>
       </div>
 
       <div className="card mt-4 overflow-x-auto">

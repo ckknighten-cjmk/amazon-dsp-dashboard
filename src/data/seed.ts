@@ -31,6 +31,8 @@ export {
   importJobs,
 } from "./operations";
 
+export { dvics, damageEvents, damagePhotos, damageReviews, maintenanceRepairs } from "./damage";
+
 import type { SeedDatabase } from "../types/database";
 import {
   stations,
@@ -50,6 +52,7 @@ import {
   hourlyProgress,
 } from "./seedCore";
 import { discipline, downtime, expenses, importJobs, maintenance, payroll, pto } from "./operations";
+import { damageEvents, damagePhotos, damageReviews, dvics, maintenanceRepairs } from "./damage";
 
 export const seedDb: SeedDatabase = {
   stations,
@@ -74,4 +77,9 @@ export const seedDb: SeedDatabase = {
   discipline,
   downtime,
   importJobs,
+  dvics,
+  damageEvents,
+  damagePhotos,
+  damageReviews,
+  maintenanceRepairs,
 };
