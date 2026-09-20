@@ -236,7 +236,7 @@ const stationVolumeBase: Record<string, number> = {
   "stn-dch1": 3302,
 };
 
-export const financialDaily: FinancialDaily[] = dateRange(addDays(TODAY, -29), TODAY).flatMap((date) =>
+export const financialDaily: FinancialDaily[] = dateRange(addDays(TODAY, -59), TODAY).flatMap((date) =>
   stations.map((station) => {
     const random = mulberry32(hashString(`${station.id}:${date}:fin`));
     const weekday = dayOfWeek(date);

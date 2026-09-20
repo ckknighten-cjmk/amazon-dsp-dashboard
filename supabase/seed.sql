@@ -160,7 +160,7 @@ join (values
   ('DAT6', 62000),
   ('DCH1', 63000)
 ) as base(code, amt) on base.code = s.code
-cross join generate_series('2026-08-22'::date, '2026-09-20'::date, interval '1 day') as d
+cross join generate_series('2026-07-23'::date, '2026-09-20'::date, interval '1 day') as d
 cross join lateral (
   select case extract(dow from d) when 6 then 1.12 when 0 then 1.06 else 1 end as weekend
 ) w;
