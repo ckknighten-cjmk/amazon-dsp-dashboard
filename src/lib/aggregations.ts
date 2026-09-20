@@ -384,7 +384,7 @@ export function buildFinancial(db: SeedDatabase) {
 export function routeEconomics(route: SeedDatabase["routes"][number], rescues: SeedDatabase["rescues"]) {
   const distressed = rescues.some((row) => row.distressed_route_id === route.id && row.status !== "completed");
   const helper = rescues.some((row) => row.rescue_route_id === route.id && row.status !== "completed");
-  const revenue = round2(52 + route.packages_delivered * 1.84 + route.stops_completed * 0.28);
+  const revenue = round2(92 + route.packages_delivered * 0.148 + route.stops_completed * 0.58);
   const baseHours = route.status === "completed" ? 9.1 : 9.7;
   const otHours = distressed || route.status === "rescue" || route.failed_count >= 4 ? 2.3 : helper ? 1.2 : 0.4;
   const labor = round2(baseHours * 21.75);

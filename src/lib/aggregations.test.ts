@@ -59,6 +59,8 @@ describe("command center aggregations", () => {
     expect(view.costBreakdown.map((row) => row.name)).toEqual(["Labor", "Overtime", "Fuel", "Vehicle", "Other"]);
     expect(view.routeProfit.length).toBe(seedDb.routes.length);
     expect(view.routeProfit.every((row) => Number.isFinite(row.profit))).toBe(true);
+    expect(Math.max(...view.routeProfit.map((row) => row.margin))).toBeLessThan(0.45);
+    expect(view.routeProfit.some((row) => row.profit > 0)).toBe(true);
   });
 
   it("builds a fleet board with utilization and service due flags", () => {
