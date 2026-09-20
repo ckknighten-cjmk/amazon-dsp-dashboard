@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { seedDb } from "../data/seed";
 import { filterDatabase } from "./aggregations";
-import { buildDamageIntelligence, WORKFLOW_NEXT } from "./damage";
+import { buildDamageIntelligence, DAMAGE_REPORT_COLUMNS, WORKFLOW_NEXT } from "./damage";
 
 describe("DVIC damage intelligence", () => {
   it("flags new damage this week with prior and next driver possession", () => {
@@ -50,6 +50,29 @@ describe("DVIC damage intelligence", () => {
     expect(crushed?.grounding_recommended).toBe(true);
     expect(WORKFLOW_NEXT.new).toBe("under_review");
     expect(WORKFLOW_NEXT.repaired).toBeNull();
+  });
+
+  it("shows the seven damage report columns for each event", () => {
+    expect([...DAMAGE_REPORT_COLUMNS]).toEqual([
+      "Vehicle",
+      "Date damage detected",
+      "Previous driver",
+      "Current driver",
+      "Route",
+      "Damage type",
+      "Open investigation status",
+    ]);
+    const view = buildDamageIntelligence(seedDb);
+    const door = view.reportRows.find((row) => row.id === "dmg-01");
+    expect(door?.vanId).toBe("EV-210");
+    expect(door?.detectedDate).toBe("2026-09-20");
+    expect(door?.priorDriverName).toContain("Kwame");
+    expect(door?.currentDriverName).toContain("Maya");
+    expect(door?.routeCode).toBe("CX-14");
+    expect(door?.damage_type).toBe("scrape");
+    expect(door?.investigation_status).toBe("open");
+    expect(view.openInvestigations.length).toBe(view.totals.openInvestigations);
+    expect(view.openInvestigations.every((row) => row.investigation_status === "open" || row.investigation_status === "pending_driver")).toBe(true);
   });
 
   it("scopes damage events to a station", () => {

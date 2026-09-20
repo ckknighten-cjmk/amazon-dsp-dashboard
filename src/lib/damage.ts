@@ -1,5 +1,5 @@
 import { TODAY, WEEK_START } from "../data/seed";
-import type { Kpi, SeedDatabase } from "../types/database";
+import type { DamageType, Kpi, SeedDatabase } from "../types/database";
 import { addDays, formatNumber, formatUsd, formatUsdCompact, round2, sum } from "./format";
 
 export const ZONE_LABEL: Record<SeedDatabase["damageEvents"][number]["zone"], string> = {
@@ -205,6 +205,9 @@ export function buildDamageIntelligence(db: SeedDatabase) {
 
   const grounding = enriched.filter((event) => event.grounding_recommended && !event.parent_event_id);
   const reportRows = enriched.filter((event) => !event.parent_event_id);
+  const openInvestigations = reportRows.filter(
+    (row) => row.investigation_status === "open" || row.investigation_status === "pending_driver",
+  );
   const pairs = reportRows.filter((event) => event.beforePhoto || event.afterPhoto);
 
   return {
@@ -224,6 +227,7 @@ export function buildDamageIntelligence(db: SeedDatabase) {
     })),
     grounding,
     reportRows,
+    openInvestigations,
     pairs,
     totals: {
       newThisWeek: newThisWeek.length,
@@ -231,7 +235,7 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       openCost,
       photoCount: db.damagePhotos.length,
       grounded: grounding.length,
-      openInvestigations: reportRows.filter((row) => row.investigation_status === "open" || row.investigation_status === "pending_driver").length,
+      openInvestigations: openInvestigations.length,
     },
     asOf: TODAY,
   };
@@ -267,6 +271,28 @@ export const SEVERITY_SCORE_LABEL: Record<SeedDatabase["damageEvents"][number]["
   severe: "Severe",
   ground_vehicle: "Ground vehicle",
 };
+
+export const DAMAGE_TYPE_LABEL: Record<DamageType, string> = {
+  scratch: "Scratch",
+  dent: "Dent",
+  crack: "Crack",
+  scrape: "Scrape",
+  missing: "Missing",
+  leak: "Leak",
+  chip: "Chip",
+};
+
+export const DAMAGE_REPORT_COLUMNS = [
+  "Vehicle",
+  "Date damage detected",
+  "Previous driver",
+  "Current driver",
+  "Route",
+  "Damage type",
+  "Open investigation status",
+] as const;
+
+export type DamageReportRow = ReturnType<typeof buildDamageIntelligence>["reportRows"][number];
 
 export function formatDamageCost(value: number): string {
   return formatUsd(value);

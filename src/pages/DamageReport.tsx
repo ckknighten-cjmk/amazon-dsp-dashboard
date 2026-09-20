@@ -2,17 +2,19 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import PageHeader from "../components/PageHeader";
 import DamagePhotoPair from "../components/DamagePhotoPair";
+import DamageReportTable from "../components/DamageReportTable";
 import { useAuth } from "../lib/auth";
 import { useData } from "../lib/data";
 import {
   buildDamageIntelligence,
+  DAMAGE_TYPE_LABEL,
   INVESTIGATION_LABEL,
   SEVERITY_SCORE_LABEL,
   WORKFLOW_LABEL,
   WORKFLOW_NEXT,
 } from "../lib/damage";
 import { cn } from "../lib/cn";
-import { formatUsd } from "../lib/format";
+import { formatDate, formatUsd } from "../lib/format";
 import type { DamageSeverityScore, DamageWorkflowStatus, InvestigationStatus } from "../types/database";
 
 const severityClass: Record<DamageSeverityScore, string> = {
@@ -64,14 +66,24 @@ export default function DamageReport() {
     <div>
       <PageHeader
         title="New Damage Report"
-        description="Vehicle, detection date, previous and current drivers, route, damage type, investigation status, before/after photos, and approval workflow."
+        description="Vehicle, date damage detected, previous driver, current driver, route, damage type, and open investigation status."
       >
         <Link to="/damage" className="text-sm font-medium text-brand-blue">
           Damage board
         </Link>
       </PageHeader>
 
-      <div className="space-y-4">
+      <div className="card overflow-x-auto">
+        <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage report</h3>
+          <p className="text-xs text-slate-500">
+            {view.totals.openInvestigations} open investigations · {rows.length} events
+          </p>
+        </div>
+        <DamageReportTable rows={rows} empty="No damage events in the current filter." />
+      </div>
+
+      <div className="mt-4 space-y-4">
         {rows.map((row) => {
           const nextWorkflow = WORKFLOW_NEXT[row.workflow_status];
           return (
@@ -92,15 +104,19 @@ export default function DamageReport() {
                 </div>
               </div>
 
-              <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3 xl:grid-cols-6">
+              <dl className="mt-4 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3 xl:grid-cols-7">
                 <Field label="Vehicle" value={`${row.vanId} · ${row.stationCode}`} />
-                <Field label="Date detected" value={row.detectedDate} />
+                <Field label="Date damage detected" value={`${formatDate(row.detectedDate)} · ${row.detectedDate}`} />
                 <Field label="Previous driver" value={row.priorDriverName} />
                 <Field label="Current driver" value={row.currentDriverName} />
                 <Field label="Route" value={row.routeCode} />
+                <Field label="Damage type" value={DAMAGE_TYPE_LABEL[row.damage_type]} />
+                <Field label="Open investigation status" value={INVESTIGATION_LABEL[row.investigation_status]} />
+              </dl>
+              <dl className="mt-3 grid grid-cols-2 gap-3 text-sm sm:grid-cols-3">
                 <Field label="Estimated repair" value={formatUsd(row.estimated_cost)} />
                 <Field label="Actual repair" value={row.actualCost === null ? "Pending" : formatUsd(row.actualCost)} />
-                <Field label="Investigation" value={INVESTIGATION_LABEL[row.investigation_status]} />
+                <Field label="Approval workflow" value={WORKFLOW_LABEL[row.workflow_status]} />
               </dl>
 
               <div className="mt-4 grid grid-cols-1 gap-4 xl:grid-cols-3">

@@ -15,7 +15,6 @@ import ChartCard from "../components/ChartCard";
 import { useData } from "../lib/data";
 import {
   buildDamageIntelligence,
-  INVESTIGATION_LABEL,
   SEVERITY_SCORE_LABEL,
   WORKFLOW_LABEL,
   ZONE_LABEL,
@@ -24,7 +23,8 @@ import { useChartStyles } from "../lib/chart";
 import { cn } from "../lib/cn";
 import { formatUsd } from "../lib/format";
 import DamagePhotoPair from "../components/DamagePhotoPair";
-import type { DamageSeverityScore, DamageWorkflowStatus, InvestigationStatus } from "../types/database";
+import DamageReportTable from "../components/DamageReportTable";
+import type { DamageSeverityScore, DamageWorkflowStatus } from "../types/database";
 
 const scoreClass: Record<DamageSeverityScore, string> = {
   minor: "badge-info",
@@ -39,14 +39,6 @@ const workflowClass: Record<DamageWorkflowStatus, string> = {
   approved: "badge-info",
   scheduled_repair: "badge-info",
   repaired: "badge-success",
-};
-
-const investigationClass: Record<InvestigationStatus, string> = {
-  open: "badge-danger",
-  pending_driver: "badge-warning",
-  charged: "badge-danger",
-  cleared: "badge-success",
-  closed: "badge-neutral",
 };
 
 export default function DamageIntelligence() {
@@ -125,63 +117,12 @@ export default function DamageIntelligence() {
 
       <div className="card mt-4 overflow-x-auto">
         <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">New damage this week</h3>
-          <p className="text-xs text-slate-500">Detected by comparing the current DVIC to the prior inspection. Shows who had the van before and after, severity, estimate, and approval workflow.</p>
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage report</h3>
+          <p className="text-xs text-slate-500">
+            Vehicle, date detected, previous driver, current driver, route, damage type, and open investigation status.
+          </p>
         </div>
-        <table className="w-full min-w-[1080px] text-left text-sm">
-          <thead className="text-xs uppercase tracking-wide text-slate-500">
-            <tr>
-              <th className="px-5 py-2 font-medium">Van / zone</th>
-              <th className="px-3 py-2 font-medium">Before (prior DVIC)</th>
-              <th className="px-3 py-2 font-medium">After (found on)</th>
-              <th className="px-3 py-2 font-medium">Accountable</th>
-              <th className="px-3 py-2 font-medium">Severity</th>
-              <th className="px-3 py-2 font-medium">Estimate</th>
-              <th className="px-3 py-2 font-medium">Approval</th>
-              <th className="px-5 py-2 font-medium">Investigation</th>
-            </tr>
-          </thead>
-          <tbody>
-            {view.newDamage.map((row) => (
-              <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
-                <td className="px-5 py-3">
-                  <p className="font-medium text-slate-900 dark:text-white">
-                    {row.vanId} · {row.zoneLabel}
-                  </p>
-                  <p className="text-xs text-slate-500">
-                    {row.stationCode} · {row.routeCode} · {row.damage_type}
-                  </p>
-                </td>
-                <td className="px-3 py-3">
-                  <p className="font-medium text-slate-800 dark:text-slate-200">{row.priorDriverName}</p>
-                  <p className="text-xs text-slate-500">{row.priorShift}</p>
-                </td>
-                <td className="px-3 py-3">
-                  <p className="font-medium text-slate-800 dark:text-slate-200">{row.foundByName}</p>
-                  <p className="text-xs text-slate-500">{row.foundShift}</p>
-                </td>
-                <td className="px-3 py-3">{row.responsibleName}</td>
-                <td className="px-3 py-3">
-                  <span className={cn("badge", scoreClass[row.severity_score])}>{SEVERITY_SCORE_LABEL[row.severity_score]}</span>
-                </td>
-                <td className="px-3 py-3 tabular-nums">{formatUsd(row.estimated_cost)}</td>
-                <td className="px-3 py-3">
-                  <span className={cn("badge", workflowClass[row.workflow_status])}>{WORKFLOW_LABEL[row.workflow_status]}</span>
-                </td>
-                <td className="px-5 py-3">
-                  <span className={cn("badge", investigationClass[row.investigation_status])}>{INVESTIGATION_LABEL[row.investigation_status]}</span>
-                </td>
-              </tr>
-            ))}
-            {view.newDamage.length === 0 && (
-              <tr>
-                <td className="px-5 py-6 text-sm text-slate-500" colSpan={8}>
-                  No new damage this Amazon week.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+        <DamageReportTable rows={view.reportRows} empty="No damage events in the current filter." />
       </div>
 
       <div className="card mt-4">
