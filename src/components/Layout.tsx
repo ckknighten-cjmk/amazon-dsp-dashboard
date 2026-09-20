@@ -14,6 +14,7 @@ import {
   Truck,
   Upload,
   Wrench,
+  ScanSearch,
   X,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -37,6 +38,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/routes": Map,
   "/insights": Sparkles,
   "/imports": Upload,
+  "/damage": ScanSearch,
 };
 
 export default function Layout() {

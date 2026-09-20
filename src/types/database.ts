@@ -352,6 +352,136 @@ export interface HourlyProgress {
   delivered: number;
 }
 
+export type DvicShift = "pre_trip" | "post_trip" | "mid_shift";
+export type DvicComparisonStatus = "pending" | "compared" | "skipped";
+
+export type DamageZone =
+  | "front_bumper"
+  | "rear_bumper"
+  | "driver_door"
+  | "passenger_door"
+  | "hood"
+  | "roof"
+  | "left_quarter"
+  | "right_quarter"
+  | "windshield"
+  | "mirror_left"
+  | "mirror_right"
+  | "tire_lf"
+  | "tire_lr"
+  | "interior";
+
+export type DamageType = "scratch" | "dent" | "crack" | "scrape" | "missing" | "leak" | "chip";
+export type DamageSeverity = "minor" | "moderate" | "major";
+export type DamageEventStatus = "new" | "progressing" | "stable" | "resolved" | "disputed";
+export type DamageDetectedVia = "new_vs_prior" | "progression" | "driver_reported" | "shop";
+
+export type PhotoAngle = "front" | "rear" | "left" | "right" | "overhead" | "interior" | "closeup";
+export type EmbeddingStatus = "pending" | "ready" | "failed" | "skipped";
+
+export type DamageReviewDecision =
+  | "confirm_new"
+  | "confirm_progression"
+  | "pre_existing"
+  | "not_damage"
+  | "charge_driver"
+  | "send_to_shop";
+
+export type RepairStatus = "quoted" | "approved" | "in_progress" | "completed" | "cancelled";
+
+export interface VehicleDvic {
+  id: string;
+  vehicle_id: string;
+  driver_id: string;
+  station_id: string;
+  service_date: string;
+  shift_type: DvicShift;
+  inspected_at: string;
+  status: InspectionStatus;
+  odometer_miles: number;
+  prior_dvic_id: string | null;
+  notes: string;
+  comparison_status: DvicComparisonStatus;
+  comparison_model: string | null;
+  compared_at: string | null;
+}
+
+export interface VehicleDamageEvent {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  dvic_id: string;
+  prior_dvic_id: string | null;
+  parent_event_id: string | null;
+  zone: DamageZone;
+  damage_type: DamageType;
+  severity: DamageSeverity;
+  previous_severity: DamageSeverity | null;
+  status: DamageEventStatus;
+  detected_via: DamageDetectedVia;
+  first_seen_at: string;
+  last_seen_at: string;
+  description: string;
+  estimated_cost: number;
+  responsible_driver_id: string | null;
+  prior_driver_id: string | null;
+  next_driver_id: string | null;
+  maintenance_order_id: string | null;
+}
+
+export interface DamagePhoto {
+  id: string;
+  damage_event_id: string;
+  dvic_id: string;
+  vehicle_id: string;
+  zone: DamageZone;
+  captured_at: string;
+  captured_by_driver_id: string;
+  storage_bucket: string;
+  storage_path: string;
+  content_type: string;
+  content_hash: string;
+  width_px: number;
+  height_px: number;
+  camera_angle: PhotoAngle;
+  is_baseline: boolean;
+  embedding_status: EmbeddingStatus;
+  embedding_model: string | null;
+  embedding_dims: number;
+  embedding_ref: string | null;
+  compared_to_photo_id: string | null;
+  similarity_score: number | null;
+  change_confidence: number | null;
+  ai_notes: string | null;
+}
+
+export interface DamageReview {
+  id: string;
+  damage_event_id: string;
+  reviewed_at: string;
+  reviewer_name: string;
+  reviewer_role: AppRole;
+  decision: DamageReviewDecision;
+  assigned_driver_id: string | null;
+  notes: string;
+}
+
+export interface MaintenanceRepair {
+  id: string;
+  damage_event_id: string;
+  maintenance_order_id: string | null;
+  vehicle_id: string;
+  station_id: string;
+  vendor: string;
+  repair_type: string;
+  status: RepairStatus;
+  quoted_cost: number;
+  actual_cost: number | null;
+  scheduled_date: string;
+  completed_date: string | null;
+  notes: string;
+}
+
 export interface SeedDatabase {
   stations: Station[];
   drivers: Driver[];
@@ -375,6 +505,11 @@ export interface SeedDatabase {
   discipline: DisciplinaryRecord[];
   downtime: VehicleDowntime[];
   importJobs: ImportJob[];
+  dvics: VehicleDvic[];
+  damageEvents: VehicleDamageEvent[];
+  damagePhotos: DamagePhoto[];
+  damageReviews: DamageReview[];
+  maintenanceRepairs: MaintenanceRepair[];
 }
 
 export interface DemoUser {
