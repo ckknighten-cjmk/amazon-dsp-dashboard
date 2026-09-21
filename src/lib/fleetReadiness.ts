@@ -208,13 +208,14 @@ export function buildFleetReadiness(db: SeedDatabase) {
     .map((row) => {
       const pmOrder = db.workOrders.find((order) => order.vehicle_id === row.id && order.type === "preventive" && OPEN_WO_STATUSES.includes(order.status));
       const milesRemaining = row.next_service_miles - row.odometer_miles;
-      const dueDate = pmOrder?.due_at ?? addDays(row.last_service_date, 45);
+      const estimatedDue = addDays(TODAY, Math.max(0, Math.ceil(milesRemaining / 108)));
+      const dueDate = pmOrder?.due_at ?? estimatedDue;
       return {
         ...row,
         milesRemaining,
         dueDate,
         pmWorkOrder: pmOrder?.wo_number ?? null,
-        pmOverdue: milesRemaining <= 0 || (pmOrder ? pmOrder.due_at < TODAY : false),
+        pmOverdue: milesRemaining <= 0 || dueDate < TODAY,
       };
     })
     .sort((a, b) => a.milesRemaining - b.milesRemaining || a.dueDate.localeCompare(b.dueDate));

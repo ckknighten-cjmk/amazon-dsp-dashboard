@@ -56,4 +56,11 @@ describe("fleet readiness", () => {
     expect(scoped.repairCosts.every((row) => scoped.vehicles.some((vehicle) => vehicle.id === row.vehicle_id))).toBe(true);
     expect(scoped.maintenanceEvents.length).toBeGreaterThan(0);
   });
+
+  it("keeps cadence PM due dates on or after the operating day", () => {
+    const view = buildFleetReadiness(seedDb);
+    const cadence = view.pmSchedule.filter((row) => !row.pmWorkOrder && row.milesRemaining > 0);
+    expect(cadence.length).toBeGreaterThan(0);
+    expect(cadence.every((row) => row.dueDate >= "2026-09-20")).toBe(true);
+  });
 });
