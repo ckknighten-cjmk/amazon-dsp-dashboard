@@ -81,6 +81,7 @@ describe("DVIC damage intelligence", () => {
     expect(view.severityBoard.map((row) => row.score)).toEqual(["minor", "moderate", "severe", "ground_vehicle"]);
     expect(view.severityBoard.every((row) => row.count >= 0)).toBe(true);
     expect(view.severityBoard.some((row) => row.score === "ground_vehicle" && row.count >= 2)).toBe(true);
+    expect(view.severityBoard.some((row) => row.score === "severe" && row.count >= 1)).toBe(true);
     expect(view.workflowBoard.map((row) => row.label)).toEqual([
       "New",
       "Under review",

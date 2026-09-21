@@ -213,8 +213,15 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       };
     });
 
+  const latestForParent = (event: (typeof reportRows)[number]) => {
+    const chain = enriched
+      .filter((row) => row.id === event.id || row.parent_event_id === event.id)
+      .sort((a, b) => b.last_seen_at.localeCompare(a.last_seen_at));
+    return chain[0] ?? event;
+  };
+
   const severityBoard = (["minor", "moderate", "severe", "ground_vehicle"] as const).map((score) => {
-    const rows = reportRows.filter((row) => row.severity_score === score);
+    const rows = reportRows.map(latestForParent).filter((row) => row.severity_score === score);
     return {
       score,
       label: SEVERITY_SCORE_LABEL[score],
