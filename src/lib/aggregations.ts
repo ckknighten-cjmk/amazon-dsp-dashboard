@@ -70,6 +70,16 @@ export function filterDatabase(db: SeedDatabase, stationId: string | "all", user
       workOrders: db.workOrders.filter((row) => row.station_id === stationId),
       vehicleStatusHistory: db.vehicleStatusHistory.filter((row) => stationVehicles.has(row.vehicle_id)),
       repairCosts: db.repairCosts.filter((row) => stationVehicles.has(row.vehicle_id)),
+      recruiting: db.recruiting.filter((row) => row.station_id === stationId),
+      interviews: db.interviews.filter((row) =>
+        db.recruiting.some((candidate) => candidate.id === row.recruiting_id && candidate.station_id === stationId),
+      ),
+      trainingRecords: db.trainingRecords.filter((row) => {
+        if (row.driver_id && stationDrivers.has(row.driver_id)) return true;
+        return db.recruiting.some(
+          (candidate) => candidate.id === row.recruiting_id && candidate.station_id === stationId,
+        );
+      }),
     };
   }
   if (user?.role === "driver" && user.driverId) {
@@ -83,6 +93,9 @@ export function filterDatabase(db: SeedDatabase, stationId: string | "all", user
       pto: next.pto.filter((p) => p.driver_id === user.driverId),
       discipline: next.discipline.filter((d) => d.driver_id === user.driverId),
       payroll: next.payroll.filter((p) => p.driver_id === user.driverId),
+      recruiting: [],
+      interviews: [],
+      trainingRecords: next.trainingRecords.filter((row) => row.driver_id === user.driverId),
     };
   }
   return next;
@@ -212,7 +225,7 @@ export function buildLiveOperations(db: SeedDatabase) {
   const todayRoutes = db.routes.filter((r) => r.service_date === TODAY);
   const completed = todayRoutes.filter((r) => r.status === "completed").length;
   const delayedDrivers = new Set(db.drivers.filter((d) => d.status === "delayed" || d.status === "rescued").map((d) => d.id));
-  const delayed = todayRoutes.filter((r) => delayedDrivers.has(r.driver_id) || r.status === "rescue").length;
+  const delayed = todayRoutes.filter((r) => (r.driver_id && delayedDrivers.has(r.driver_id)) || r.status === "rescue").length;
   const active = todayRoutes.filter((r) => r.status === "in_progress" || r.status === "rescue" || r.status === "loading").length;
   const packagesDelivered = sum(todayRoutes.map((r) => r.packages_delivered));
   const packagesPlanned = sum(todayRoutes.map((r) => r.packages_planned)) || 1;
@@ -272,7 +285,7 @@ export function buildLiveOperations(db: SeedDatabase) {
       completion: planned ? delivered / planned : 0,
       delivered,
       failed,
-      delayed: stationRoutes.filter((r) => r.status === "rescue" || delayedDrivers.has(r.driver_id)).length,
+      delayed: stationRoutes.filter((r) => r.status === "rescue" || (r.driver_id != null && delayedDrivers.has(r.driver_id))).length,
       onTime: average(stationRoutes.map((r) => db.drivers.find((d) => d.id === r.driver_id)?.on_time_pct ?? 0)),
     };
   });

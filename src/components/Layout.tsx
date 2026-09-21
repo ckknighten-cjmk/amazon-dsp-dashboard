@@ -13,6 +13,7 @@ import {
   TrendingUp,
   Truck,
   Upload,
+  Users,
   Gauge,
   X,
 } from "lucide-react";
@@ -37,6 +38,7 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/routes": Map,
   "/insights": Sparkles,
   "/imports": Upload,
+  "/workforce": Users,
 };
 
 export default function Layout() {

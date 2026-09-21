@@ -24,6 +24,12 @@ import ScorecardForecast from "./pages/scorecard/ScorecardForecast";
 import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
 import Imports from "./pages/Imports";
+import WorkforceLayout from "./pages/workforce/WorkforceLayout";
+import AttendanceDashboard from "./pages/workforce/AttendanceDashboard";
+import PtoCalendar from "./pages/workforce/PtoCalendar";
+import StaffingForecast from "./pages/workforce/StaffingForecast";
+import RecruitingPipeline from "./pages/workforce/RecruitingPipeline";
+import DriverLifecycle from "./pages/workforce/DriverLifecycle";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -65,6 +71,14 @@ export default function App() {
         <Route path="routes" element={<RoutesBoard />} />
         <Route path="insights" element={<Insights />} />
         <Route path="imports" element={<Imports />} />
+        <Route path="workforce" element={<WorkforceLayout />}>
+          <Route index element={<AttendanceDashboard />} />
+          <Route path="attendance" element={<AttendanceDashboard />} />
+          <Route path="pto" element={<PtoCalendar />} />
+          <Route path="staffing" element={<StaffingForecast />} />
+          <Route path="recruiting" element={<RecruitingPipeline />} />
+          <Route path="lifecycle" element={<DriverLifecycle />} />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

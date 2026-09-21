@@ -24,10 +24,16 @@ describe("rbac", () => {
     expect(canAccess("operations_manager", "/scorecard/forecast")).toBe(true);
     expect(canAccess("dispatcher", "/scorecard/forecast")).toBe(false);
     expect(canAccess("operations_manager", "/insights")).toBe(true);
+    expect(canAccess("owner", "/workforce/attendance")).toBe(true);
+    expect(canAccess("finance", "/workforce/staffing")).toBe(true);
+    expect(canAccess("finance", "/workforce/recruiting")).toBe(false);
+    expect(canAccess("dispatcher", "/workforce/recruiting")).toBe(false);
+    expect(canAccess("driver", "/workforce/attendance")).toBe(true);
+    expect(canAccess("driver", "/workforce/staffing")).toBe(false);
   });
 
   it("sends drivers to their scorecard home", () => {
     expect(defaultPathFor("driver")).toBe("/drivers");
-    expect(navItemsFor("driver").map((item) => item.to)).toEqual(["/drivers"]);
+    expect(navItemsFor("driver").map((item) => item.to)).toEqual(["/drivers", "/workforce"]);
   });
 });
