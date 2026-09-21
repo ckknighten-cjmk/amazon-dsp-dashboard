@@ -36,6 +36,13 @@ async function loadFromSupabase(): Promise<SeedDatabase | null> {
     "scorecards",
     "forecasts",
     "route_hourly_stats",
+    "maintenance_orders",
+    "payroll",
+    "expenses",
+    "pto_requests",
+    "disciplinary_records",
+    "vehicle_downtime",
+    "import_jobs",
   ] as const;
   const results = await Promise.all(tables.map((table) => sb.from(table).select("*")));
   if (results.some((result) => result.error)) return null;
@@ -55,6 +62,13 @@ async function loadFromSupabase(): Promise<SeedDatabase | null> {
     scorecards,
     forecasts,
     hourly,
+    maintenance,
+    payroll,
+    expenses,
+    pto,
+    discipline,
+    downtime,
+    importJobs,
   ] = results.map((result) => result.data ?? []);
   if (!stations.length) return null;
   return {
@@ -77,6 +91,13 @@ async function loadFromSupabase(): Promise<SeedDatabase | null> {
       planned: row.planned,
       delivered: row.delivered,
     })),
+    maintenance,
+    payroll,
+    expenses,
+    pto,
+    discipline,
+    downtime,
+    importJobs,
   } as SeedDatabase;
 }
 

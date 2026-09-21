@@ -6,11 +6,15 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 
 - **Executive** — Revenue, profit, DCR, attendance, safety score, Amazon scorecard KPIs (DCR, CDF, POD, DNR, DSC, CE)
 - **Live Operations** — Active routes, completion tracking, rescue assignment, failed deliveries, station performance
-- **Driver Performance** — Scorecards, rankings, coaching, safety events, attendance
-- **Financial** — Revenue, labor, overtime, fuel, vehicle cost, station and route profitability
+- **Driver Management** — Scorecards, rankings, coaching, attendance, PTO, and disciplinary history
+- **Financial Analytics** — Revenue per route/driver, overtime, fuel, maintenance, net profit
 - **Safety & Compliance** — Vehicle inspections, speeding, seatbelt, incidents
 - **Forecasting** — Route, volume, staffing, and overtime outlook
-- **Fleet** — Van assignments, utilization, service cadence, and pre-trips
+- **Fleet** — Inventory, maintenance schedules, DVIC compliance, and downtime
+- **Amazon Scorecard** — DCR, POD, CDF, Safety, FICO, and weekly trends
+- **Route Management** — Profitability, completion rates, rescue workflow, variance
+- **AI Insights** — Staffing, overtime, underperforming routes, high-risk drivers, P&L
+- **Imports** — Placeholders for Amazon scorecard, payroll, fuel card, and fleet maintenance feeds
 
 ## Quick start
 
@@ -38,7 +42,7 @@ Without Supabase env vars the app runs in **demo mode**: local authentication, r
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor.
 3. Create Auth users that match the seeded `profiles.email` values and set `profiles.auth_user_id`.
 
-Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, and row-level security by role/station.
+Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, import jobs, and row-level security by role/station.
 
 ## Scripts
 

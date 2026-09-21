@@ -3,12 +3,16 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   Activity,
   AlertTriangle,
+  ClipboardList,
   DollarSign,
   LayoutDashboard,
   LogOut,
+  Map,
   Menu,
+  Sparkles,
   TrendingUp,
   Truck,
+  Upload,
   Wrench,
   X,
 } from "lucide-react";
@@ -29,6 +33,10 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/safety": AlertTriangle,
   "/forecasting": TrendingUp,
   "/fleet": Wrench,
+  "/scorecard": ClipboardList,
+  "/routes": Map,
+  "/insights": Sparkles,
+  "/imports": Upload,
 };
 
 export default function Layout() {

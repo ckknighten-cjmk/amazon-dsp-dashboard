@@ -5,8 +5,12 @@ import {
   buildFinancial,
   buildFleet,
   buildForecasting,
+  buildInsights,
+  buildImports,
   buildLiveOperations,
+  buildRouteManagement,
   buildSafety,
+  buildScorecard,
   compositeScore,
   filterDatabase,
 } from "./aggregations";
@@ -93,5 +97,55 @@ describe("command center aggregations", () => {
     expect(scoped.stations).toHaveLength(1);
     expect(scoped.drivers.every((d) => d.station_id === "stn-dla7")).toBe(true);
     expect(scoped.financialDaily.every((f) => f.station_id === "stn-dla7")).toBe(true);
+    expect(scoped.maintenance.every((m) => m.station_id === "stn-dla7")).toBe(true);
+    expect(scoped.payroll.every((p) => p.station_id === "stn-dla7")).toBe(true);
+  });
+
+  it("builds the Amazon scorecard with FICO weekly trends", () => {
+    const view = buildScorecard(seedDb);
+    expect(view.kpis.map((k) => k.label)).toEqual(["DCR", "POD", "CDF", "Safety Score", "FICO", "Standing"]);
+    expect(view.weeklyTrend.length).toBe(8);
+    expect(view.stationRows).toHaveLength(5);
+    expect(view.tiles.some((tile) => tile.label === "FICO")).toBe(true);
+  });
+
+  it("analyzes route profitability, completion, and variance", () => {
+    const view = buildRouteManagement(seedDb);
+    expect(view.variance.length).toBe(seedDb.routes.length);
+    expect(view.routeProfit.length).toBe(seedDb.routes.length);
+    expect(view.rescueRows.length).toBe(3);
+    expect(view.underperforming.length).toBeGreaterThan(0);
+  });
+
+  it("tracks fleet maintenance, DVIC, and downtime", () => {
+    const view = buildFleet(seedDb);
+    expect(view.kpis[2].label).toBe("DVIC compliance");
+    expect(view.maintenance.length).toBeGreaterThan(0);
+    expect(view.downtime.some((row) => !row.ended_at)).toBe(true);
+  });
+
+  it("includes driver PTO, discipline, and revenue per driver", () => {
+    const drivers = filterDatabase(seedDb, "all");
+    expect(drivers.pto.length).toBeGreaterThan(0);
+    expect(drivers.discipline.some((row) => row.type === "final")).toBe(true);
+    const finance = buildFinancial(seedDb);
+    expect(finance.driverRevenue.length).toBe(seedDb.drivers.length);
+    expect(finance.fuelExpenses).toBeGreaterThan(0);
+    expect(finance.maintenanceExpenses).toBeGreaterThan(0);
+  });
+
+  it("generates operational AI insights and import connectors", () => {
+    const insights = buildInsights(seedDb);
+    expect(insights.insights.length).toBeGreaterThan(3);
+    expect(insights.insights.some((row) => row.category === "staffing")).toBe(true);
+    expect(insights.insights.some((row) => row.category === "safety")).toBe(true);
+    expect(insights.insights.some((row) => row.category === "profitability")).toBe(true);
+    const imports = buildImports(seedDb);
+    expect(imports.jobs.map((job) => job.source)).toEqual([
+      "amazon_scorecard",
+      "payroll",
+      "fuel_card",
+      "fleet_maintenance",
+    ]);
   });
 });

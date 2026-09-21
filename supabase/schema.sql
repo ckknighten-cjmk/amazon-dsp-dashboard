@@ -61,6 +61,61 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.maintenance_status as enum ('scheduled', 'in_progress', 'completed', 'overdue');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.maintenance_type as enum ('preventive', 'corrective', 'tire', 'body', 'recall');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.pto_status as enum ('pending', 'approved', 'denied', 'taken');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.pto_type as enum ('vacation', 'sick', 'personal', 'unpaid');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.discipline_type as enum ('verbal', 'written', 'final', 'suspension');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.discipline_status as enum ('open', 'closed');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.expense_category as enum ('fuel', 'maintenance', 'insurance', 'supplies', 'uniforms', 'other');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.expense_source as enum ('fuel_card', 'shop', 'manual', 'payroll');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.downtime_reason as enum ('maintenance', 'accident', 'inspection_fail', 'charging', 'parts');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.import_source as enum ('amazon_scorecard', 'payroll', 'fuel_card', 'fleet_maintenance');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.import_job_status as enum ('idle', 'ready', 'mapped', 'imported', 'failed');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.stations (
   id uuid primary key default gen_random_uuid(),
   code text unique not null,
@@ -253,12 +308,14 @@ create table if not exists public.scorecards (
   dnr numeric(5,2) not null default 0.20,
   dsc numeric(5,2) not null default 99.20,
   customer_escalations integer not null default 6,
+  fico_score integer not null default 830,
   unique (station_id, week_start)
 );
 
 alter table public.scorecards add column if not exists dnr numeric(5,2);
 alter table public.scorecards add column if not exists dsc numeric(5,2);
 alter table public.scorecards add column if not exists customer_escalations integer;
+alter table public.scorecards add column if not exists fico_score integer;
 
 create table if not exists public.forecasts (
   id uuid primary key default gen_random_uuid(),
@@ -282,6 +339,95 @@ create table if not exists public.route_hourly_stats (
   delivered integer not null
 );
 
+create table if not exists public.maintenance_orders (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  work_order text unique not null,
+  type public.maintenance_type not null,
+  status public.maintenance_status not null default 'scheduled',
+  scheduled_date date not null,
+  completed_date date,
+  odometer_miles integer,
+  vendor text not null,
+  cost numeric(12,2) not null default 0,
+  downtime_hours numeric(8,1) not null default 0,
+  description text not null
+);
+
+create table if not exists public.payroll (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid not null references public.drivers(id),
+  station_id uuid not null references public.stations(id),
+  period_start date not null,
+  period_end date not null,
+  regular_hours numeric(8,2) not null,
+  overtime_hours numeric(8,2) not null,
+  regular_pay numeric(12,2) not null,
+  overtime_pay numeric(12,2) not null,
+  bonuses numeric(12,2) not null default 0,
+  deductions numeric(12,2) not null default 0,
+  net_pay numeric(12,2) not null,
+  unique (driver_id, period_start, period_end)
+);
+
+create table if not exists public.expenses (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  service_date date not null,
+  category public.expense_category not null,
+  vendor text not null,
+  amount numeric(12,2) not null,
+  source public.expense_source not null,
+  reference text,
+  notes text
+);
+
+create table if not exists public.pto_requests (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid not null references public.drivers(id),
+  pto_type public.pto_type not null,
+  status public.pto_status not null default 'pending',
+  start_date date not null,
+  end_date date not null,
+  hours numeric(8,1) not null,
+  notes text
+);
+
+create table if not exists public.disciplinary_records (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid not null references public.drivers(id),
+  occurred_at timestamptz not null,
+  type public.discipline_type not null,
+  status public.discipline_status not null default 'open',
+  category text not null,
+  description text not null,
+  issued_by text not null
+);
+
+create table if not exists public.vehicle_downtime (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  started_at timestamptz not null,
+  ended_at timestamptz,
+  reason public.downtime_reason not null,
+  hours numeric(8,1) not null,
+  notes text
+);
+
+create table if not exists public.import_jobs (
+  id uuid primary key default gen_random_uuid(),
+  source public.import_source unique not null,
+  status public.import_job_status not null default 'idle',
+  last_run_at timestamptz,
+  next_run_at timestamptz,
+  records_imported integer not null default 0,
+  records_failed integer not null default 0,
+  mapping_notes text,
+  connector text not null
+);
+
 create index if not exists routes_service_date_idx on public.routes (service_date, station_id);
 create index if not exists routes_driver_date_idx on public.routes (driver_id, service_date);
 create index if not exists financial_daily_date_idx on public.financial_daily (service_date);
@@ -289,6 +435,11 @@ create index if not exists safety_events_occurred_idx on public.safety_events (o
 create index if not exists attendance_date_idx on public.attendance (service_date, driver_id);
 create index if not exists forecasts_date_idx on public.forecasts (forecast_date, station_id);
 create index if not exists scorecards_week_idx on public.scorecards (week_start desc);
+create index if not exists maintenance_station_idx on public.maintenance_orders (station_id, scheduled_date);
+create index if not exists payroll_period_idx on public.payroll (period_start, station_id);
+create index if not exists expenses_date_idx on public.expenses (service_date, station_id);
+create index if not exists pto_driver_idx on public.pto_requests (driver_id, start_date);
+create index if not exists downtime_vehicle_idx on public.vehicle_downtime (vehicle_id, started_at desc);
 
 create or replace function public.current_profile()
 returns public.profiles
@@ -358,6 +509,13 @@ alter table public.financial_daily enable row level security;
 alter table public.scorecards enable row level security;
 alter table public.forecasts enable row level security;
 alter table public.route_hourly_stats enable row level security;
+alter table public.maintenance_orders enable row level security;
+alter table public.payroll enable row level security;
+alter table public.expenses enable row level security;
+alter table public.pto_requests enable row level security;
+alter table public.disciplinary_records enable row level security;
+alter table public.vehicle_downtime enable row level security;
+alter table public.import_jobs enable row level security;
 
 drop policy if exists stations_select on public.stations;
 create policy stations_select on public.stations
@@ -566,6 +724,101 @@ drop policy if exists hourly_select on public.route_hourly_stats;
 create policy hourly_select on public.route_hourly_stats
   for select to authenticated
   using (public.current_app_role() is not null);
+
+drop policy if exists maintenance_select on public.maintenance_orders;
+create policy maintenance_select on public.maintenance_orders
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists maintenance_write on public.maintenance_orders;
+create policy maintenance_write on public.maintenance_orders
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists payroll_select on public.payroll;
+create policy payroll_select on public.payroll
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'finance')
+    and public.can_read_station(station_id)
+  );
+
+drop policy if exists payroll_write on public.payroll;
+create policy payroll_write on public.payroll
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'finance'))
+  with check (public.current_app_role() in ('owner', 'finance'));
+
+drop policy if exists expenses_select on public.expenses;
+create policy expenses_select on public.expenses
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'finance')
+    and public.can_read_station(station_id)
+  );
+
+drop policy if exists expenses_write on public.expenses;
+create policy expenses_write on public.expenses
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'finance'))
+  with check (public.current_app_role() in ('owner', 'finance'));
+
+drop policy if exists pto_select on public.pto_requests;
+create policy pto_select on public.pto_requests
+  for select to authenticated
+  using (
+    driver_id = (select driver_id from public.current_profile())
+    or exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+  );
+
+drop policy if exists pto_write on public.pto_requests;
+create policy pto_write on public.pto_requests
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists discipline_select on public.disciplinary_records;
+create policy discipline_select on public.disciplinary_records
+  for select to authenticated
+  using (
+    driver_id = (select driver_id from public.current_profile())
+    or exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+  );
+
+drop policy if exists discipline_write on public.disciplinary_records;
+create policy discipline_write on public.disciplinary_records
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists downtime_select on public.vehicle_downtime;
+create policy downtime_select on public.vehicle_downtime
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists downtime_write on public.vehicle_downtime;
+create policy downtime_write on public.vehicle_downtime
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists import_jobs_select on public.import_jobs;
+create policy import_jobs_select on public.import_jobs
+  for select to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'finance'));
+
+drop policy if exists import_jobs_write on public.import_jobs;
+create policy import_jobs_write on public.import_jobs
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'finance'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'finance'));
 
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on all tables in schema public to authenticated;
