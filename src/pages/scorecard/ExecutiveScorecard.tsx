@@ -13,10 +13,10 @@ import ChartCard from "../../components/ChartCard";
 import PageHeader from "../../components/PageHeader";
 import ScorecardMetricCard from "../../scorecard/components/ScorecardMetricCard";
 import MetricStatusBadge from "../../scorecard/components/MetricStatusBadge";
+import { useChartStyles } from "../../lib/chart";
 import { historyFor, scorecardFor } from "../../scorecard/data";
 import { METRIC_CATALOG, METRIC_KEYS, evaluateStanding, formatMetricValue, qualityIndex } from "../../scorecard/metrics";
 import type { MetricKey, PeriodType } from "../../scorecard/types";
-import { tooltipStyle } from "../../scorecard/ui";
 
 const TREND_COLORS: Record<MetricKey, string> = {
   dcr: "#ff9900",
@@ -30,6 +30,7 @@ const TREND_COLORS: Record<MetricKey, string> = {
 };
 
 export default function ExecutiveScorecard() {
+  const chart = useChartStyles();
   const [period, setPeriod] = useState<PeriodType>("weekly");
   const [visible, setVisible] = useState<MetricKey[]>(["dcr", "pod", "cdf", "safety"]);
 
@@ -71,14 +72,16 @@ export default function ExecutiveScorecard() {
       />
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-lg bg-white/5 p-1">
+        <div className="inline-flex rounded-lg bg-slate-100 p-1 dark:bg-white/5">
           {(["weekly", "monthly"] as PeriodType[]).map((option) => (
             <button
               key={option}
               type="button"
               onClick={() => setPeriod(option)}
               className={`rounded-md px-3 py-1.5 text-sm font-medium capitalize ${
-                period === option ? "bg-brand-blue/30 text-white" : "text-slate-400 hover:text-white"
+                period === option
+                  ? "bg-brand-blue/20 text-slate-900 dark:bg-brand-blue/30 dark:text-white"
+                  : "text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
               }`}
             >
               {option}
@@ -86,8 +89,9 @@ export default function ExecutiveScorecard() {
           ))}
         </div>
         <div className="flex flex-wrap items-center gap-3 text-sm">
-          <span className="text-slate-400">
-            Composite <span className="font-semibold text-white">{scorecard.compositeScore.toFixed(0)}</span>
+          <span className="text-slate-500">
+            Composite{" "}
+            <span className="font-semibold text-slate-900 dark:text-white">{scorecard.compositeScore.toFixed(0)}</span>
           </span>
           <MetricStatusBadge standing={scorecard.standing} />
           <span className="text-slate-500">{scorecard.packagesDelivered.toLocaleString()} packages</span>
@@ -118,7 +122,9 @@ export default function ExecutiveScorecard() {
                   type="button"
                   onClick={() => toggleMetric(key)}
                   className={`rounded px-2 py-1 text-[11px] font-medium ${
-                    visible.includes(key) ? "bg-white/10 text-white" : "text-slate-500 hover:text-slate-300"
+                    visible.includes(key)
+                      ? "bg-slate-200 text-slate-900 dark:bg-white/10 dark:text-white"
+                      : "text-slate-500 hover:text-slate-700 dark:hover:text-slate-300"
                   }`}
                 >
                   {METRIC_CATALOG[key].label}
@@ -129,10 +135,10 @@ export default function ExecutiveScorecard() {
         >
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={trendData} margin={{ top: 8, right: 8, left: -12, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-              <XAxis dataKey="label" stroke="#64748b" fontSize={12} />
-              <YAxis stroke="#64748b" fontSize={12} domain={[40, 100]} />
-              <Tooltip contentStyle={tooltipStyle} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
+              <XAxis dataKey="label" stroke={chart.axis} fontSize={12} />
+              <YAxis stroke={chart.axis} fontSize={12} domain={[40, 100]} />
+              <Tooltip contentStyle={chart.tooltip} />
               <Legend />
               {visible.map((key) => (
                 <Line
@@ -150,23 +156,21 @@ export default function ExecutiveScorecard() {
         </ChartCard>
 
         <div className="card p-5">
-          <h3 className="text-sm font-semibold text-white">Standing mix</h3>
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Standing mix</h3>
           <p className="text-xs text-slate-500">Current {period} scorecard</p>
           <div className="mt-4 space-y-3">
             {(["fantastic", "great", "fair", "poor"] as const).map((standing) => (
               <div key={standing} className="flex items-center justify-between">
                 <MetricStatusBadge standing={standing} />
-                <span className="text-sm text-white">{standingCounts[standing]} metrics</span>
+                <span className="text-sm text-slate-900 dark:text-white">{standingCounts[standing]} metrics</span>
               </div>
             ))}
           </div>
-          <div className="mt-6 space-y-2 border-t border-white/5 pt-4">
+          <div className="mt-6 space-y-2 border-t border-slate-200 pt-4 dark:border-white/5">
             {METRIC_KEYS.map((key) => (
               <div key={key} className="flex items-center justify-between text-sm">
-                <span className="text-slate-400">{METRIC_CATALOG[key].label}</span>
-                <span className="text-white">
-                  {formatMetricValue(key, scorecard.metrics[key])}
-                </span>
+                <span className="text-slate-500">{METRIC_CATALOG[key].label}</span>
+                <span className="text-slate-900 dark:text-white">{formatMetricValue(key, scorecard.metrics[key])}</span>
               </div>
             ))}
           </div>

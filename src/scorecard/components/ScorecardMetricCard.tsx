@@ -29,7 +29,7 @@ export default function ScorecardMetricCard({
         <MetricStatusBadge standing={standing} />
       </div>
       <div className="mt-3 flex items-end justify-between">
-        <span className="text-3xl font-semibold text-white">{formatMetricValue(metricKey, value)}</span>
+        <span className="text-3xl font-semibold text-slate-900 dark:text-white">{formatMetricValue(metricKey, value)}</span>
         <span className={`flex items-center gap-1 text-sm font-medium ${trendClass}`}>
           {flat ? <Minus className="h-4 w-4" /> : improving ? <ArrowUpRight className="h-4 w-4" /> : <ArrowDownRight className="h-4 w-4" />}
           {previous === undefined ? "—" : formatDelta(metricKey, delta)}

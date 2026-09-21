@@ -10,28 +10,59 @@
   }
 
   body {
-    @apply bg-ink-950 text-slate-200 antialiased;
+    @apply bg-slate-50 text-slate-800 antialiased dark:bg-ink-950 dark:text-slate-200;
+    background-image: radial-gradient(circle at top, rgba(20, 110, 180, 0.06), transparent 28%);
+  }
+
+  .dark body {
+    background-image: radial-gradient(circle at top, rgba(255, 153, 0, 0.05), transparent 32%);
   }
 }
 
 @layer components {
   .card {
-    @apply rounded-xl border border-white/5 bg-ink-900/80 shadow-lg shadow-black/20 backdrop-blur;
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm dark:border-white/5 dark:bg-ink-900/80 dark:shadow-lg dark:shadow-black/20;
   }
 
   .stat-label {
-    @apply text-xs font-medium uppercase tracking-wider text-slate-400;
+    @apply text-xs font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400;
+  }
+
+  .badge {
+    @apply inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-medium;
+  }
+
+  .badge-success {
+    @apply bg-emerald-500/15 text-emerald-700 dark:text-emerald-400;
+  }
+
+  .badge-warning {
+    @apply bg-amber-500/15 text-amber-700 dark:text-amber-400;
+  }
+
+  .badge-danger {
+    @apply bg-rose-500/15 text-rose-700 dark:text-rose-400;
+  }
+
+  .badge-info {
+    @apply bg-sky-500/15 text-sky-700 dark:text-sky-400;
+  }
+
+  .badge-neutral {
+    @apply bg-slate-500/15 text-slate-600 dark:text-slate-300;
   }
 }
 
-/* Thin scrollbars for the dark theme */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2a3654;
+  background: #94a3b8;
   border-radius: 9999px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #2a3654;
 }
 ::-webkit-scrollbar-track {
   background: transparent;

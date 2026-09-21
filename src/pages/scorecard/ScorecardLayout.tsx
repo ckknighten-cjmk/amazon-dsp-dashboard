@@ -1,11 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { cn } from "../../lib/cn";
 
 const tabs = [
   { to: "/scorecard", label: "Dashboard", end: true },
-  { to: "/scorecard/drivers", label: "Driver Impact", end: false },
-  { to: "/scorecard/routes", label: "Route Impact", end: false },
-  { to: "/scorecard/recommendations", label: "AI Recommendations", end: false },
-  { to: "/scorecard/forecast", label: "Forecasting", end: false },
+  { to: "/scorecard/stations", label: "Stations" },
+  { to: "/scorecard/drivers", label: "Driver Impact" },
+  { to: "/scorecard/routes", label: "Route Impact" },
+  { to: "/scorecard/recommendations", label: "AI Recommendations" },
+  { to: "/scorecard/forecast", label: "Forecasting" },
 ];
 
 export default function ScorecardLayout() {
@@ -18,11 +20,12 @@ export default function ScorecardLayout() {
             to={tab.to}
             end={tab.end}
             className={({ isActive }) =>
-              `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+              cn(
+                "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
                 isActive
-                  ? "bg-brand-orange/15 text-brand-orange"
-                  : "bg-white/5 text-slate-400 hover:bg-white/10 hover:text-white"
-              }`
+                  ? "bg-brand-blue/15 text-slate-900 dark:bg-brand-blue/25 dark:text-white"
+                  : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-white/5 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-white",
+              )
             }
           >
             {tab.label}

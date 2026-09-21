@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "../lib/cn";
 
 interface ChartCardProps {
   title: string;
@@ -10,10 +11,10 @@ interface ChartCardProps {
 
 export default function ChartCard({ title, subtitle, action, children, className }: ChartCardProps) {
   return (
-    <div className={`card flex flex-col p-5 ${className ?? ""}`}>
-      <div className="mb-4 flex items-start justify-between">
+    <div className={cn("card flex flex-col p-5", className)}>
+      <div className="mb-4 flex items-start justify-between gap-3">
         <div>
-          <h3 className="text-sm font-semibold text-white">{title}</h3>
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">{title}</h3>
           {subtitle && <p className="text-xs text-slate-500">{subtitle}</p>}
         </div>
         {action}

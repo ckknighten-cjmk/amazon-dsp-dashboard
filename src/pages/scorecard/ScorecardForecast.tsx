@@ -13,13 +13,15 @@ import {
 import ChartCard from "../../components/ChartCard";
 import PageHeader from "../../components/PageHeader";
 import MetricStatusBadge from "../../scorecard/components/MetricStatusBadge";
+import { useChartStyles } from "../../lib/chart";
 import { weeklyHistory } from "../../scorecard/data";
 import { forecastMetrics, warningIndicators } from "../../scorecard/engine";
 import { METRIC_CATALOG, METRIC_KEYS, formatMetricValue } from "../../scorecard/metrics";
 import type { MetricKey } from "../../scorecard/types";
-import { severityStyles, tooltipStyle } from "../../scorecard/ui";
+import { severityStyles } from "../../scorecard/ui";
 
 export default function ScorecardForecast() {
+  const chart = useChartStyles();
   const [metric, setMetric] = useState<MetricKey>("pod");
   const forecasts = useMemo(() => forecastMetrics(weeklyHistory, 4), []);
   const warnings = useMemo(() => warningIndicators(forecasts), [forecasts]);
@@ -66,21 +68,21 @@ export default function ScorecardForecast() {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <div className="card p-5">
           <p className="stat-label">Critical warnings</p>
-          <p className="mt-2 text-3xl font-semibold text-rose-400">
+          <p className="mt-2 text-3xl font-semibold text-rose-600 dark:text-rose-400">
             {warnings.filter((item) => item.severity === "critical").length}
           </p>
           <p className="mt-1 text-xs text-slate-500">Standing drops or Poor metrics</p>
         </div>
         <div className="card p-5">
           <p className="stat-label">Watch list</p>
-          <p className="mt-2 text-3xl font-semibold text-amber-400">
+          <p className="mt-2 text-3xl font-semibold text-amber-600 dark:text-amber-400">
             {warnings.filter((item) => item.severity === "watch").length}
           </p>
           <p className="mt-1 text-xs text-slate-500">Trending toward a tier change</p>
         </div>
         <div className="card p-5">
           <p className="stat-label">Selected projection</p>
-          <p className="mt-2 text-3xl font-semibold text-white">
+          <p className="mt-2 text-3xl font-semibold text-slate-900 dark:text-white">
             {formatMetricValue(selected.key, selected.forecast[selected.forecast.length - 1]?.value ?? 0)}
           </p>
           <div className="mt-2">
@@ -96,7 +98,7 @@ export default function ScorecardForecast() {
               <p className="text-sm font-semibold">{warning.title}</p>
               <span className="text-xs uppercase tracking-wide">{warning.severity}</span>
             </div>
-            <p className="mt-1 text-sm text-slate-300">{warning.detail}</p>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{warning.detail}</p>
           </div>
         ))}
       </div>
@@ -110,7 +112,7 @@ export default function ScorecardForecast() {
             <select
               value={metric}
               onChange={(event) => setMetric(event.target.value as MetricKey)}
-              className="rounded-md border border-white/10 bg-ink-800 px-2 py-1 text-xs text-slate-200"
+              className="rounded-md border border-slate-200 bg-white px-2 py-1 text-xs text-slate-700 dark:border-white/10 dark:bg-ink-800 dark:text-slate-200"
             >
               {METRIC_KEYS.map((key) => (
                 <option key={key} value={key}>
@@ -128,10 +130,10 @@ export default function ScorecardForecast() {
                   <stop offset="95%" stopColor="#146eb4" stopOpacity={0.02} />
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-              <XAxis dataKey="label" stroke="#64748b" fontSize={12} />
-              <YAxis stroke="#64748b" fontSize={12} />
-              <Tooltip contentStyle={tooltipStyle} />
+              <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
+              <XAxis dataKey="label" stroke={chart.axis} fontSize={12} />
+              <YAxis stroke={chart.axis} fontSize={12} />
+              <Tooltip contentStyle={chart.tooltip} />
               <Legend />
               <Area type="monotone" dataKey="range" stroke="none" fill="url(#scorecardBand)" name="90% band" />
               <Line type="monotone" dataKey="actual" stroke="#ff9900" strokeWidth={2} dot={{ r: 3 }} name="Actual" />
