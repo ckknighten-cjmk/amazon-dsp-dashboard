@@ -1,0 +1,572 @@
+-- Amazon DSP Operations Command Center
+-- Apply in the Supabase SQL editor (schema first, then seed.sql).
+
+create extension if not exists pgcrypto;
+
+do $$ begin
+  create type public.app_role as enum (
+    'owner',
+    'operations_manager',
+    'dispatcher',
+    'safety_manager',
+    'finance',
+    'driver'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.driver_status as enum (
+    'on_road', 'at_station', 'break', 'delayed', 'rescued', 'off_duty'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.route_status as enum (
+    'planned', 'loading', 'in_progress', 'rescue', 'completed', 'cancelled'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.rescue_status as enum ('requested', 'in_progress', 'completed');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.attendance_status as enum ('present', 'late', 'absent', 'pto', 'call_out');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.safety_event_type as enum (
+    'speeding', 'seatbelt', 'following_distance', 'sign_signal', 'distraction', 'harsh_braking'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.inspection_status as enum ('pass', 'fail', 'pending');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.incident_severity as enum ('low', 'medium', 'high', 'critical');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.score_standing as enum ('fantastic', 'great', 'fair', 'poor');
+exception when duplicate_object then null;
+end $$;
+
+create table if not exists public.stations (
+  id uuid primary key default gen_random_uuid(),
+  code text unique not null,
+  name text not null,
+  city text not null,
+  region text not null,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.profiles (
+  id uuid primary key default gen_random_uuid(),
+  auth_user_id uuid unique references auth.users(id) on delete set null,
+  email text unique not null,
+  full_name text not null,
+  role public.app_role not null default 'driver',
+  station_id uuid references public.stations(id),
+  driver_id uuid,
+  avatar_initials text,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.drivers (
+  id uuid primary key default gen_random_uuid(),
+  employee_code text unique not null,
+  full_name text not null,
+  station_id uuid not null references public.stations(id),
+  hire_date date,
+  status public.driver_status not null default 'off_duty',
+  fico_score integer not null default 800,
+  safety_score numeric(6,1) not null default 800,
+  dcr numeric(5,2) not null default 99.00,
+  attendance_pct numeric(5,2) not null default 98.00,
+  on_time_pct numeric(5,2) not null default 97.00,
+  dpmo integer not null default 300,
+  seatbelt_pct numeric(5,2) not null default 99.00,
+  created_at timestamptz not null default now()
+);
+
+alter table public.profiles
+  drop constraint if exists profiles_driver_id_fkey;
+alter table public.profiles
+  add constraint profiles_driver_id_fkey
+  foreign key (driver_id) references public.drivers(id) on delete set null;
+
+create table if not exists public.vehicles (
+  id uuid primary key default gen_random_uuid(),
+  van_id text unique not null,
+  vin text,
+  station_id uuid not null references public.stations(id),
+  year integer,
+  make text,
+  model text,
+  status text not null default 'active' check (status in ('active', 'maintenance', 'oos')),
+  powertrain text not null default 'ev' check (powertrain in ('ev', 'ice')),
+  odometer_miles integer not null default 0,
+  last_service_date date,
+  next_service_miles integer,
+  utilization_pct numeric(5,1) not null default 0,
+  assigned_driver_id uuid references public.drivers(id)
+);
+
+alter table public.vehicles add column if not exists powertrain text;
+alter table public.vehicles add column if not exists odometer_miles integer;
+alter table public.vehicles add column if not exists last_service_date date;
+alter table public.vehicles add column if not exists next_service_miles integer;
+alter table public.vehicles add column if not exists utilization_pct numeric(5,1);
+alter table public.vehicles add column if not exists assigned_driver_id uuid;
+
+create table if not exists public.routes (
+  id uuid primary key default gen_random_uuid(),
+  route_code text not null,
+  station_id uuid not null references public.stations(id),
+  driver_id uuid references public.drivers(id),
+  vehicle_id uuid references public.vehicles(id),
+  service_date date not null,
+  status public.route_status not null default 'planned',
+  stops_planned integer not null,
+  stops_completed integer not null default 0,
+  packages_planned integer not null,
+  packages_delivered integer not null default 0,
+  failed_count integer not null default 0,
+  started_at timestamptz,
+  completed_at timestamptz,
+  estimated_finish timestamptz,
+  unique (route_code, service_date)
+);
+
+create table if not exists public.rescues (
+  id uuid primary key default gen_random_uuid(),
+  service_date date not null,
+  distressed_route_id uuid not null references public.routes(id),
+  rescue_route_id uuid references public.routes(id),
+  stops_transferred integer not null,
+  status public.rescue_status not null default 'requested',
+  reason text not null,
+  requested_at timestamptz not null default now(),
+  completed_at timestamptz
+);
+
+create table if not exists public.failed_deliveries (
+  id uuid primary key default gen_random_uuid(),
+  route_id uuid not null references public.routes(id),
+  tracking_id text not null,
+  stop_number integer,
+  reason text not null,
+  customer_notified boolean not null default false,
+  created_at timestamptz not null default now()
+);
+
+create table if not exists public.attendance (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid not null references public.drivers(id),
+  service_date date not null,
+  status public.attendance_status not null,
+  scheduled_start time,
+  actual_start time,
+  unique (driver_id, service_date)
+);
+
+create table if not exists public.safety_events (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid not null references public.drivers(id),
+  vehicle_id uuid references public.vehicles(id),
+  event_type public.safety_event_type not null,
+  severity public.incident_severity not null,
+  speed_mph integer,
+  speed_limit_mph integer,
+  occurred_at timestamptz not null,
+  notes text
+);
+
+create table if not exists public.vehicle_inspections (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  driver_id uuid references public.drivers(id),
+  inspected_at timestamptz not null,
+  status public.inspection_status not null,
+  defects text[] not null default '{}',
+  notes text
+);
+
+create table if not exists public.incidents (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid references public.drivers(id),
+  vehicle_id uuid references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  occurred_at timestamptz not null,
+  severity public.incident_severity not null,
+  category text not null,
+  description text not null,
+  status text not null check (status in ('open', 'investigating', 'closed'))
+);
+
+create table if not exists public.coaching_recommendations (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid not null references public.drivers(id),
+  category text not null,
+  priority text not null check (priority in ('high', 'medium', 'low')),
+  recommendation text not null,
+  metric text,
+  created_at timestamptz not null default now(),
+  completed_at timestamptz
+);
+
+create table if not exists public.financial_daily (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  service_date date not null,
+  revenue numeric(12,2) not null,
+  labor_cost numeric(12,2) not null,
+  overtime_cost numeric(12,2) not null,
+  fuel_cost numeric(12,2) not null,
+  vehicle_cost numeric(12,2) not null,
+  other_cost numeric(12,2) not null default 0,
+  unique (station_id, service_date)
+);
+
+create table if not exists public.scorecards (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  week_start date not null,
+  standing public.score_standing not null,
+  dcr numeric(5,2) not null,
+  cdf numeric(5,2) not null,
+  pod_compliance numeric(5,2) not null,
+  contact_compliance numeric(5,2) not null,
+  safety_score numeric(6,1) not null,
+  attendance_pct numeric(5,2) not null,
+  photo_on_delivery numeric(5,2) not null,
+  dnr numeric(5,2) not null default 0.20,
+  dsc numeric(5,2) not null default 99.20,
+  customer_escalations integer not null default 6,
+  unique (station_id, week_start)
+);
+
+alter table public.scorecards add column if not exists dnr numeric(5,2);
+alter table public.scorecards add column if not exists dsc numeric(5,2);
+alter table public.scorecards add column if not exists customer_escalations integer;
+
+create table if not exists public.forecasts (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  forecast_date date not null,
+  volume_forecast integer not null,
+  volume_lower integer not null,
+  volume_upper integer not null,
+  volume_actual integer,
+  routes_forecast integer not null,
+  staffing_forecast integer not null,
+  overtime_hours_forecast numeric(8,1) not null,
+  unique (station_id, forecast_date)
+);
+
+create table if not exists public.route_hourly_stats (
+  id uuid primary key default gen_random_uuid(),
+  service_date date not null,
+  hour_label text not null,
+  planned integer not null,
+  delivered integer not null
+);
+
+create index if not exists routes_service_date_idx on public.routes (service_date, station_id);
+create index if not exists routes_driver_date_idx on public.routes (driver_id, service_date);
+create index if not exists financial_daily_date_idx on public.financial_daily (service_date);
+create index if not exists safety_events_occurred_idx on public.safety_events (occurred_at desc);
+create index if not exists attendance_date_idx on public.attendance (service_date, driver_id);
+create index if not exists forecasts_date_idx on public.forecasts (forecast_date, station_id);
+create index if not exists scorecards_week_idx on public.scorecards (week_start desc);
+
+create or replace function public.current_profile()
+returns public.profiles
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select *
+  from public.profiles
+  where auth_user_id = auth.uid()
+  limit 1
+$$;
+
+create or replace function public.current_app_role()
+returns public.app_role
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select role from public.current_profile()
+$$;
+
+create or replace function public.current_station_id()
+returns uuid
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select station_id from public.current_profile()
+$$;
+
+create or replace function public.is_owner()
+returns boolean
+language sql
+stable
+as $$
+  select public.current_app_role() = 'owner'
+$$;
+
+create or replace function public.can_read_station(target uuid)
+returns boolean
+language sql
+stable
+as $$
+  select
+    public.current_app_role() in ('owner', 'finance', 'safety_manager')
+    or public.current_station_id() is null
+    or public.current_station_id() = target
+$$;
+
+alter table public.stations enable row level security;
+alter table public.profiles enable row level security;
+alter table public.drivers enable row level security;
+alter table public.vehicles enable row level security;
+alter table public.routes enable row level security;
+alter table public.rescues enable row level security;
+alter table public.failed_deliveries enable row level security;
+alter table public.attendance enable row level security;
+alter table public.safety_events enable row level security;
+alter table public.vehicle_inspections enable row level security;
+alter table public.incidents enable row level security;
+alter table public.coaching_recommendations enable row level security;
+alter table public.financial_daily enable row level security;
+alter table public.scorecards enable row level security;
+alter table public.forecasts enable row level security;
+alter table public.route_hourly_stats enable row level security;
+
+drop policy if exists stations_select on public.stations;
+create policy stations_select on public.stations
+  for select to authenticated
+  using (public.can_read_station(id) or public.current_app_role() is not null);
+
+drop policy if exists stations_write on public.stations;
+create policy stations_write on public.stations
+  for all to authenticated
+  using (public.is_owner())
+  with check (public.is_owner());
+
+drop policy if exists profiles_select on public.profiles;
+create policy profiles_select on public.profiles
+  for select to authenticated
+  using (auth_user_id = auth.uid() or public.is_owner() or public.current_app_role() in ('operations_manager', 'safety_manager'));
+
+drop policy if exists profiles_update_self on public.profiles;
+create policy profiles_update_self on public.profiles
+  for update to authenticated
+  using (auth_user_id = auth.uid())
+  with check (auth_user_id = auth.uid());
+
+drop policy if exists drivers_select on public.drivers;
+create policy drivers_select on public.drivers
+  for select to authenticated
+  using (
+    public.can_read_station(station_id)
+    or id = (select driver_id from public.current_profile())
+  );
+
+drop policy if exists drivers_write on public.drivers;
+create policy drivers_write on public.drivers
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists vehicles_select on public.vehicles;
+create policy vehicles_select on public.vehicles
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists vehicles_write on public.vehicles;
+create policy vehicles_write on public.vehicles
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists routes_select on public.routes;
+create policy routes_select on public.routes
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists routes_write on public.routes;
+create policy routes_write on public.routes
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'));
+
+drop policy if exists rescues_select on public.rescues;
+create policy rescues_select on public.rescues
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.routes r
+      where r.id = distressed_route_id and public.can_read_station(r.station_id)
+    )
+  );
+
+drop policy if exists rescues_write on public.rescues;
+create policy rescues_write on public.rescues
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'));
+
+drop policy if exists failed_select on public.failed_deliveries;
+create policy failed_select on public.failed_deliveries
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.routes r
+      where r.id = route_id and public.can_read_station(r.station_id)
+    )
+  );
+
+drop policy if exists failed_write on public.failed_deliveries;
+create policy failed_write on public.failed_deliveries
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'));
+
+drop policy if exists attendance_select on public.attendance;
+create policy attendance_select on public.attendance
+  for select to authenticated
+  using (
+    driver_id = (select driver_id from public.current_profile())
+    or exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+  );
+
+drop policy if exists attendance_write on public.attendance;
+create policy attendance_write on public.attendance
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'));
+
+drop policy if exists safety_select on public.safety_events;
+create policy safety_select on public.safety_events
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+  );
+
+drop policy if exists safety_write on public.safety_events;
+create policy safety_write on public.safety_events
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists inspections_select on public.vehicle_inspections;
+create policy inspections_select on public.vehicle_inspections
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists inspections_write on public.vehicle_inspections;
+create policy inspections_write on public.vehicle_inspections
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists incidents_select on public.incidents;
+create policy incidents_select on public.incidents
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists incidents_write on public.incidents;
+create policy incidents_write on public.incidents
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists coaching_select on public.coaching_recommendations;
+create policy coaching_select on public.coaching_recommendations
+  for select to authenticated
+  using (
+    driver_id = (select driver_id from public.current_profile())
+    or exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+  );
+
+drop policy if exists coaching_write on public.coaching_recommendations;
+create policy coaching_write on public.coaching_recommendations
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists financial_select on public.financial_daily;
+create policy financial_select on public.financial_daily
+  for select to authenticated
+  using (public.current_app_role() in ('owner', 'finance') and public.can_read_station(station_id));
+
+drop policy if exists financial_write on public.financial_daily;
+create policy financial_write on public.financial_daily
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'finance'))
+  with check (public.current_app_role() in ('owner', 'finance'));
+
+drop policy if exists scorecards_select on public.scorecards;
+create policy scorecards_select on public.scorecards
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists scorecards_write on public.scorecards;
+create policy scorecards_write on public.scorecards
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists forecasts_select on public.forecasts;
+create policy forecasts_select on public.forecasts
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'operations_manager', 'finance')
+    and public.can_read_station(station_id)
+  );
+
+drop policy if exists forecasts_write on public.forecasts;
+create policy forecasts_write on public.forecasts
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'finance'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'finance'));
+
+drop policy if exists hourly_select on public.route_hourly_stats;
+create policy hourly_select on public.route_hourly_stats
+  for select to authenticated
+  using (public.current_app_role() is not null);
+
+grant usage on schema public to authenticated;
+grant select, insert, update, delete on all tables in schema public to authenticated;
+grant usage, select on all sequences in schema public to authenticated;

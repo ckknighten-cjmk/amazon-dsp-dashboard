@@ -14,74 +14,133 @@ import {
 import PageHeader from "../components/PageHeader";
 import StatCard from "../components/StatCard";
 import ChartCard from "../components/ChartCard";
-import { chartPalette, costBreakdown, financials } from "../data/mockData";
-import type { Kpi } from "../data/mockData";
-
-const tooltipStyle = {
-  backgroundColor: "#0f1626",
-  border: "1px solid rgba(255,255,255,0.1)",
-  borderRadius: 8,
-  color: "#e2e8f0",
-};
-
-const kpis: Kpi[] = [
-  { label: "MTD Revenue", value: "$2.38M", delta: "+6.3%", trend: "up", hint: "vs. last month" },
-  { label: "MTD Cost", value: "$1.74M", delta: "+2.9%", trend: "down", hint: "vs. last month" },
-  { label: "Operating Margin", value: "26.9%", delta: "+1.8pp", trend: "up" },
-  { label: "Cost / Package", value: "$3.41", delta: "-2.1%", trend: "up" },
-];
+import { useData } from "../lib/data";
+import { buildFinancial } from "../lib/aggregations";
+import { useChartStyles } from "../lib/chart";
+import { chartPalette } from "../data/seed";
+import { formatPct, formatUsd, formatUsdCompact } from "../lib/format";
 
 export default function Financial() {
+  const { filtered } = useData();
+  const view = buildFinancial(filtered);
+  const chart = useChartStyles();
+
   return (
     <div>
       <PageHeader
         title="Financial Dashboard"
-        description="Revenue, cost structure, and margin trends for the operation."
+        description="Revenue, labor, overtime, fuel, vehicle cost, station P&L, and route profitability."
       />
 
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        {kpis.map((kpi) => (
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-6">
+        {view.kpis.map((kpi) => (
           <StatCard key={kpi.label} kpi={kpi} />
         ))}
       </div>
 
       <div className="mt-4 grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <ChartCard
-          title="Revenue vs. Cost"
-          subtitle="$M per month"
-          className="lg:col-span-2 h-80"
-        >
+        <ChartCard title="Revenue vs. cost" subtitle="Monthly ($)" className="h-80 lg:col-span-2">
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={financials} margin={{ top: 8, right: 8, left: -12, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.06)" />
-              <XAxis dataKey="month" stroke="#64748b" fontSize={12} />
-              <YAxis stroke="#64748b" fontSize={12} />
-              <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
+            <BarChart data={view.monthly} margin={{ top: 8, right: 8, left: -12, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" stroke={chart.grid} />
+              <XAxis dataKey="month" stroke={chart.axis} fontSize={12} />
+              <YAxis stroke={chart.axis} fontSize={12} />
+              <Tooltip contentStyle={chart.tooltip} cursor={{ fill: chart.cursor }} />
               <Legend />
-              <Bar dataKey="revenue" fill="#ff9900" radius={[4, 4, 0, 0]} name="Revenue ($M)" />
-              <Bar dataKey="cost" fill="#146eb4" radius={[4, 4, 0, 0]} name="Cost ($M)" />
+              <Bar dataKey="revenue" fill="#ff9900" radius={[4, 4, 0, 0]} name="Revenue" />
+              <Bar dataKey="cost" fill="#146eb4" radius={[4, 4, 0, 0]} name="Cost" />
             </BarChart>
           </ResponsiveContainer>
         </ChartCard>
 
-        <ChartCard title="Cost Breakdown" subtitle="% of total spend" className="h-80">
+        <ChartCard title="Cost breakdown" subtitle="Share of MTD spend" className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
-              <Pie
-                data={costBreakdown}
-                dataKey="value"
-                nameKey="name"
-                outerRadius={95}
-                label={(entry) => `${entry.value}%`}
-              >
-                {costBreakdown.map((_, i) => (
+              <Pie data={view.costBreakdown} dataKey="value" nameKey="name" outerRadius={95} label={(entry) => `${entry.value}%`}>
+                {view.costBreakdown.map((_, i) => (
                   <Cell key={i} fill={chartPalette[i % chartPalette.length]} />
                 ))}
               </Pie>
-              <Tooltip contentStyle={tooltipStyle} />
+              <Tooltip contentStyle={chart.tooltip} />
             </PieChart>
           </ResponsiveContainer>
         </ChartCard>
+      </div>
+
+      <div className="card mt-4 overflow-x-auto">
+        <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Station profitability</h3>
+          <p className="text-xs text-slate-500">Month to date</p>
+        </div>
+        <table className="w-full min-w-[720px] text-left text-sm">
+          <thead className="text-xs uppercase tracking-wide text-slate-500">
+            <tr>
+              <th className="px-5 py-2 font-medium">Station</th>
+              <th className="px-3 py-2 font-medium">Revenue</th>
+              <th className="px-3 py-2 font-medium">Labor</th>
+              <th className="px-3 py-2 font-medium">Overtime</th>
+              <th className="px-3 py-2 font-medium">Fuel</th>
+              <th className="px-3 py-2 font-medium">Vehicle</th>
+              <th className="px-5 py-2 font-medium">Margin</th>
+            </tr>
+          </thead>
+          <tbody>
+            {view.stationProfit.map((row) => (
+              <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                <td className="px-5 py-3 font-medium text-slate-900 dark:text-white">
+                  {row.code} · {row.name}
+                </td>
+                <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.revenue)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.labor)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.overtime)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.fuel)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsdCompact(row.vehicle)}</td>
+                <td className="px-5 py-3 tabular-nums text-emerald-600 dark:text-emerald-400">{formatPct(row.margin * 100)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="card mt-4 overflow-x-auto">
+        <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Route profitability</h3>
+          <p className="text-xs text-slate-500">
+            Today's wave · Amazon package/stop rate vs. labor, OT, energy, and van cost
+          </p>
+        </div>
+        <table className="w-full min-w-[800px] text-left text-sm">
+          <thead className="text-xs uppercase tracking-wide text-slate-500">
+            <tr>
+              <th className="px-5 py-2 font-medium">Route</th>
+              <th className="px-3 py-2 font-medium">Driver</th>
+              <th className="px-3 py-2 font-medium">Pkgs</th>
+              <th className="px-3 py-2 font-medium">Revenue</th>
+              <th className="px-3 py-2 font-medium">Labor + OT</th>
+              <th className="px-3 py-2 font-medium">Fuel</th>
+              <th className="px-3 py-2 font-medium">Van</th>
+              <th className="px-5 py-2 font-medium">Profit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {view.routeProfit.map((row) => (
+              <tr key={row.id} className="border-t border-slate-200 dark:border-white/5">
+                <td className="px-5 py-3 font-medium text-slate-900 dark:text-white">
+                  {row.routeCode} · {row.stationCode}
+                </td>
+                <td className="px-3 py-3">{row.driverName}</td>
+                <td className="px-3 py-3 tabular-nums">{row.packages}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.revenue)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.labor + row.overtime)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.fuel)}</td>
+                <td className="px-3 py-3 tabular-nums">{formatUsd(row.vehicle)}</td>
+                <td className={`px-5 py-3 tabular-nums ${row.profit >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-rose-500"}`}>
+                  {formatUsd(row.profit)} ({formatPct(row.margin * 100)})
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
