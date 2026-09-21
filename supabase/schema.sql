@@ -116,6 +116,33 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.dispatch_event_type as enum (
+    'check_in', 'check_out', 'call_out', 'no_show', 'pto',
+    'assignment', 'van_swap', 'delay', 'damage_alert', 'weather_hold'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.dispatch_status as enum (
+    'planned', 'assigned', 'checked_in', 'staged', 'dispatched', 'delayed', 'unassigned', 'cancelled'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.weather_alert_type as enum (
+    'heat', 'storm', 'wind', 'flood', 'winter', 'air_quality', 'advisory'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.weather_severity as enum ('watch', 'warning', 'critical');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.stations (
   id uuid primary key default gen_random_uuid(),
   code text unique not null,
@@ -428,6 +455,75 @@ create table if not exists public.import_jobs (
   connector text not null
 );
 
+create table if not exists public.dispatch_events (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  driver_id uuid references public.drivers(id),
+  vehicle_id uuid references public.vehicles(id),
+  route_id uuid references public.routes(id),
+  service_date date not null,
+  event_type public.dispatch_event_type not null,
+  occurred_at timestamptz not null default now(),
+  notes text,
+  created_by text not null
+);
+
+create table if not exists public.route_assignments (
+  id uuid primary key default gen_random_uuid(),
+  route_id uuid not null references public.routes(id),
+  station_id uuid not null references public.stations(id),
+  service_date date not null,
+  driver_id uuid references public.drivers(id),
+  vehicle_id uuid references public.vehicles(id),
+  assignment_status public.dispatch_status not null default 'planned',
+  check_in_at timestamptz,
+  dispatched_at timestamptz,
+  notes text,
+  unique (route_id, service_date)
+);
+
+create table if not exists public.daily_readiness_snapshots (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid references public.stations(id),
+  service_date date not null,
+  captured_at timestamptz not null default now(),
+  drivers_scheduled integer not null default 0,
+  drivers_checked_in integer not null default 0,
+  pto_count integer not null default 0,
+  call_outs integer not null default 0,
+  no_shows integer not null default 0,
+  open_routes integer not null default 0,
+  staffing_delta integer not null default 0,
+  vans_available integer not null default 0,
+  vans_grounded integer not null default 0,
+  vans_in_service integer not null default 0,
+  new_dvic_defects integer not null default 0,
+  new_damage_alerts integer not null default 0,
+  fleet_readiness_pct numeric(5,1) not null default 0,
+  routes_assigned integer not null default 0,
+  routes_unassigned integer not null default 0,
+  route_coverage_pct numeric(5,1) not null default 0,
+  rescue_risk numeric(5,1) not null default 0,
+  high_volume_routes integer not null default 0,
+  staffing_readiness_pct numeric(5,1) not null default 0,
+  launch_readiness_score numeric(5,1) not null default 0,
+  weather_risk numeric(5,1) not null default 0,
+  notes text
+);
+
+create table if not exists public.weather_alerts (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  service_date date not null,
+  alert_type public.weather_alert_type not null,
+  severity public.weather_severity not null,
+  title text not null,
+  summary text not null,
+  starts_at timestamptz not null,
+  ends_at timestamptz not null,
+  high_risk boolean not null default false
+);
+
 create index if not exists routes_service_date_idx on public.routes (service_date, station_id);
 create index if not exists routes_driver_date_idx on public.routes (driver_id, service_date);
 create index if not exists financial_daily_date_idx on public.financial_daily (service_date);
@@ -440,6 +536,10 @@ create index if not exists payroll_period_idx on public.payroll (period_start, s
 create index if not exists expenses_date_idx on public.expenses (service_date, station_id);
 create index if not exists pto_driver_idx on public.pto_requests (driver_id, start_date);
 create index if not exists downtime_vehicle_idx on public.vehicle_downtime (vehicle_id, started_at desc);
+create index if not exists dispatch_events_date_idx on public.dispatch_events (service_date, station_id);
+create index if not exists route_assignments_date_idx on public.route_assignments (service_date, station_id);
+create index if not exists readiness_snapshots_date_idx on public.daily_readiness_snapshots (service_date desc, station_id);
+create index if not exists weather_alerts_date_idx on public.weather_alerts (service_date, station_id);
 
 create or replace function public.current_profile()
 returns public.profiles
@@ -516,6 +616,10 @@ alter table public.pto_requests enable row level security;
 alter table public.disciplinary_records enable row level security;
 alter table public.vehicle_downtime enable row level security;
 alter table public.import_jobs enable row level security;
+alter table public.dispatch_events enable row level security;
+alter table public.route_assignments enable row level security;
+alter table public.daily_readiness_snapshots enable row level security;
+alter table public.weather_alerts enable row level security;
 
 drop policy if exists stations_select on public.stations;
 create policy stations_select on public.stations
@@ -819,6 +923,53 @@ create policy import_jobs_write on public.import_jobs
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager', 'finance'))
   with check (public.current_app_role() in ('owner', 'operations_manager', 'finance'));
+
+drop policy if exists dispatch_events_select on public.dispatch_events;
+create policy dispatch_events_select on public.dispatch_events
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists dispatch_events_write on public.dispatch_events;
+create policy dispatch_events_write on public.dispatch_events
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'));
+
+drop policy if exists route_assignments_select on public.route_assignments;
+create policy route_assignments_select on public.route_assignments
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists route_assignments_write on public.route_assignments;
+create policy route_assignments_write on public.route_assignments
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'dispatcher'));
+
+drop policy if exists readiness_snapshots_select on public.daily_readiness_snapshots;
+create policy readiness_snapshots_select on public.daily_readiness_snapshots
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'operations_manager', 'dispatcher')
+    and (station_id is null or public.can_read_station(station_id))
+  );
+
+drop policy if exists readiness_snapshots_write on public.daily_readiness_snapshots;
+create policy readiness_snapshots_write on public.daily_readiness_snapshots
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists weather_alerts_select on public.weather_alerts;
+create policy weather_alerts_select on public.weather_alerts
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists weather_alerts_write on public.weather_alerts;
+create policy weather_alerts_write on public.weather_alerts
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
 
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on all tables in schema public to authenticated;

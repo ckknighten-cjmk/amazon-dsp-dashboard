@@ -96,8 +96,8 @@ export interface Route {
   id: string;
   route_code: string;
   station_id: string;
-  driver_id: string;
-  vehicle_id: string;
+  driver_id: string | null;
+  vehicle_id: string | null;
   service_date: string;
   status: RouteStatus;
   stops_planned: number;
@@ -323,6 +323,111 @@ export interface ImportJob {
 export type InsightSeverity = "critical" | "warning" | "watch";
 export type InsightCategory = "staffing" | "overtime" | "routes" | "safety" | "profitability";
 
+export type DispatchEventType =
+  | "check_in"
+  | "check_out"
+  | "call_out"
+  | "no_show"
+  | "pto"
+  | "assignment"
+  | "van_swap"
+  | "delay"
+  | "damage_alert"
+  | "weather_hold";
+
+export type DispatchStatus =
+  | "planned"
+  | "assigned"
+  | "checked_in"
+  | "staged"
+  | "dispatched"
+  | "delayed"
+  | "unassigned"
+  | "cancelled";
+
+export type WeatherAlertType = "heat" | "storm" | "wind" | "flood" | "winter" | "air_quality" | "advisory";
+export type WeatherSeverity = "watch" | "warning" | "critical";
+export type LaunchGate = "go" | "conditional" | "hold";
+export type ReadinessRecommendationCategory = "staffing" | "fleet" | "routes" | "maintenance" | "weather";
+
+export interface DispatchEvent {
+  id: string;
+  station_id: string;
+  driver_id: string | null;
+  vehicle_id: string | null;
+  route_id: string | null;
+  service_date: string;
+  event_type: DispatchEventType;
+  occurred_at: string;
+  notes: string;
+  created_by: string;
+}
+
+export interface RouteAssignment {
+  id: string;
+  route_id: string;
+  station_id: string;
+  service_date: string;
+  driver_id: string | null;
+  vehicle_id: string | null;
+  assignment_status: DispatchStatus;
+  check_in_at: string | null;
+  dispatched_at: string | null;
+  notes: string;
+}
+
+export interface DailyReadinessSnapshot {
+  id: string;
+  station_id: string | null;
+  service_date: string;
+  captured_at: string;
+  drivers_scheduled: number;
+  drivers_checked_in: number;
+  pto_count: number;
+  call_outs: number;
+  no_shows: number;
+  open_routes: number;
+  staffing_delta: number;
+  vans_available: number;
+  vans_grounded: number;
+  vans_in_service: number;
+  new_dvic_defects: number;
+  new_damage_alerts: number;
+  fleet_readiness_pct: number;
+  routes_assigned: number;
+  routes_unassigned: number;
+  route_coverage_pct: number;
+  rescue_risk: number;
+  high_volume_routes: number;
+  staffing_readiness_pct: number;
+  launch_readiness_score: number;
+  weather_risk: number;
+  notes: string;
+}
+
+export interface WeatherAlert {
+  id: string;
+  station_id: string;
+  service_date: string;
+  alert_type: WeatherAlertType;
+  severity: WeatherSeverity;
+  title: string;
+  summary: string;
+  starts_at: string;
+  ends_at: string;
+  high_risk: boolean;
+}
+
+export interface ReadinessRecommendation {
+  id: string;
+  category: ReadinessRecommendationCategory;
+  severity: InsightSeverity;
+  title: string;
+  action: string;
+  metric: string;
+  stationCode?: string;
+}
+
 export interface Insight {
   id: string;
   category: InsightCategory;
@@ -375,6 +480,10 @@ export interface SeedDatabase {
   discipline: DisciplinaryRecord[];
   downtime: VehicleDowntime[];
   importJobs: ImportJob[];
+  dispatchEvents: DispatchEvent[];
+  routeAssignments: RouteAssignment[];
+  dailyReadinessSnapshots: DailyReadinessSnapshot[];
+  weatherAlerts: WeatherAlert[];
 }
 
 export interface DemoUser {

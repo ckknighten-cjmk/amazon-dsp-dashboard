@@ -14,6 +14,7 @@ import {
   compositeScore,
   filterDatabase,
 } from "./aggregations";
+import { buildMorningDispatch, launchGateFor } from "./readiness";
 
 describe("command center aggregations", () => {
   it("computes executive KPIs from seeded financials and scorecards", () => {
@@ -147,5 +148,51 @@ describe("command center aggregations", () => {
       "fuel_card",
       "fleet_maintenance",
     ]);
+  });
+
+  it("builds morning dispatch readiness with staffing, fleet, routes, and weather", () => {
+    const view = buildMorningDispatch(seedDb);
+    expect(view.kpis.map((kpi) => kpi.label)).toEqual([
+      "Staffing Readiness",
+      "Fleet Readiness",
+      "Route Coverage",
+      "Launch Readiness Score",
+    ]);
+    expect(view.staffing.ptoToday).toBe(1);
+    expect(view.staffing.callOuts).toBe(1);
+    expect(view.staffing.noShows).toBe(1);
+    expect(view.staffing.openRoutes).toBe(2);
+    expect(view.staffing.staffingDelta).toBeLessThan(0);
+    expect(view.fleet.vansGrounded).toBeGreaterThan(0);
+    expect(view.fleet.newDvicDefects).toBeGreaterThan(0);
+    expect(view.fleet.newDamageAlerts).toBeGreaterThan(0);
+    expect(view.routes.unassigned).toBe(2);
+    expect(view.routes.highVolume).toBeGreaterThan(0);
+    expect(view.weather.heatWarnings).toBeGreaterThan(0);
+    expect(view.weather.stormWarnings).toBeGreaterThan(0);
+    expect(view.weather.highRisk).toBeGreaterThan(0);
+    expect(view.commandBoard.length).toBe(seedDb.routes.length);
+    expect(view.commandBoard.some((row) => row.dispatchStatus === "unassigned")).toBe(true);
+    expect(view.recommendations.length).toBeGreaterThan(3);
+    expect(view.recommendations.some((row) => row.category === "staffing")).toBe(true);
+    expect(view.recommendations.some((row) => row.category === "weather")).toBe(true);
+    expect(view.recommendations.some((row) => row.category === "maintenance")).toBe(true);
+    expect(launchGateFor(view.launchReadinessScore)).toBe(view.gate);
+    expect(view.launchReadinessScore).toBeGreaterThan(50);
+    expect(view.launchReadinessScore).toBeLessThan(90);
+    expect(seedDb.dispatchEvents.length).toBeGreaterThan(0);
+    expect(seedDb.routeAssignments.length).toBe(seedDb.routes.length);
+    expect(seedDb.weatherAlerts).toHaveLength(5);
+    expect(seedDb.dailyReadinessSnapshots.length).toBeGreaterThan(1);
+  });
+
+  it("scopes dispatch, weather, and readiness tables to a station", () => {
+    const scoped = filterDatabase(seedDb, "stn-dax5");
+    expect(scoped.weatherAlerts.every((row) => row.station_id === "stn-dax5")).toBe(true);
+    expect(scoped.dispatchEvents.every((row) => row.station_id === "stn-dax5")).toBe(true);
+    expect(scoped.routeAssignments.every((row) => row.station_id === "stn-dax5")).toBe(true);
+    const view = buildMorningDispatch(scoped);
+    expect(view.weather.alerts.every((row) => row.stationCode === "DAX5")).toBe(true);
+    expect(view.commandBoard.every((row) => row.stationCode === "DAX5")).toBe(true);
   });
 });

@@ -13,6 +13,7 @@ import Scorecard from "./pages/Scorecard";
 import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
 import Imports from "./pages/Imports";
+import MorningDispatch from "./pages/MorningDispatch";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -31,6 +32,7 @@ export default function App() {
         }
       >
         <Route index element={<ExecutiveDashboard />} />
+        <Route path="dispatch" element={<MorningDispatch />} />
         <Route path="operations" element={<LiveOperations />} />
         <Route path="drivers" element={<DriverPerformance />} />
         <Route path="financial" element={<Financial />} />

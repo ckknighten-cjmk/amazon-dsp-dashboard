@@ -22,6 +22,11 @@ export const NAV_ITEMS: NavItemConfig[] = [
     roles: ["owner", "operations_manager", "safety_manager", "finance"],
   },
   {
+    to: "/dispatch",
+    label: "Morning Dispatch",
+    roles: ["owner", "operations_manager", "dispatcher"],
+  },
+  {
     to: "/operations",
     label: "Live Operations",
     roles: ["owner", "operations_manager", "dispatcher"],

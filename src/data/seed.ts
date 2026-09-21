@@ -31,6 +31,8 @@ export {
   importJobs,
 } from "./operations";
 
+export { dispatchEvents, routeAssignments, dailyReadinessSnapshots, weatherAlerts } from "./dispatch";
+
 import type { SeedDatabase } from "../types/database";
 import {
   stations,
@@ -50,6 +52,7 @@ import {
   hourlyProgress,
 } from "./seedCore";
 import { discipline, downtime, expenses, importJobs, maintenance, payroll, pto } from "./operations";
+import { dailyReadinessSnapshots, dispatchEvents, routeAssignments, weatherAlerts } from "./dispatch";
 
 export const seedDb: SeedDatabase = {
   stations,
@@ -74,4 +77,8 @@ export const seedDb: SeedDatabase = {
   discipline,
   downtime,
   importJobs,
+  dispatchEvents,
+  routeAssignments,
+  dailyReadinessSnapshots,
+  weatherAlerts,
 };
