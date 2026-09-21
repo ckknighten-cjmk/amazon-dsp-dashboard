@@ -305,6 +305,69 @@ export interface VehicleDowntime {
   notes: string;
 }
 
+export type MaintenanceEventType = "preventive" | "repair" | "inspection" | "damage" | "dvic";
+
+export interface MaintenanceEvent {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  work_order_id: string | null;
+  event_type: MaintenanceEventType;
+  occurred_at: string;
+  odometer_miles: number;
+  title: string;
+  description: string;
+  downtime_hours: number;
+  technician: string;
+}
+
+export type WorkOrderStatus = "open" | "in_progress" | "completed" | "cancelled";
+export type WorkOrderPriority = "low" | "medium" | "high" | "critical";
+export type WorkOrderType = "preventive" | "repair" | "body" | "tire" | "recall" | "dvic";
+
+export interface WorkOrder {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  wo_number: string;
+  title: string;
+  description: string;
+  type: WorkOrderType;
+  status: WorkOrderStatus;
+  priority: WorkOrderPriority;
+  opened_at: string;
+  due_at: string;
+  completed_at: string | null;
+  shop: string;
+  estimated_hours: number;
+  actual_hours: number | null;
+}
+
+export type VehicleStatusCode = Vehicle["status"] | "new";
+
+export interface VehicleStatusHistory {
+  id: string;
+  vehicle_id: string;
+  from_status: VehicleStatusCode;
+  to_status: Vehicle["status"];
+  changed_at: string;
+  reason: string;
+  changed_by: string;
+}
+
+export type RepairCostCategory = "parts" | "labor" | "body" | "tires" | "glass" | "other";
+
+export interface RepairCost {
+  id: string;
+  vehicle_id: string;
+  work_order_id: string;
+  category: RepairCostCategory;
+  amount: number;
+  incurred_at: string;
+  vendor: string;
+  description: string;
+}
+
 export type ImportSource = "amazon_scorecard" | "payroll" | "fuel_card" | "fleet_maintenance";
 export type ImportJobStatus = "idle" | "ready" | "mapped" | "imported" | "failed";
 
@@ -375,6 +438,10 @@ export interface SeedDatabase {
   discipline: DisciplinaryRecord[];
   downtime: VehicleDowntime[];
   importJobs: ImportJob[];
+  maintenanceEvents: MaintenanceEvent[];
+  workOrders: WorkOrder[];
+  vehicleStatusHistory: VehicleStatusHistory[];
+  repairCosts: RepairCost[];
 }
 
 export interface DemoUser {

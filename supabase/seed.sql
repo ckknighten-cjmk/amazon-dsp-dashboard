@@ -4,6 +4,10 @@
 begin;
 
 delete from public.import_jobs;
+delete from public.repair_costs;
+delete from public.maintenance_events;
+delete from public.vehicle_status_history;
+delete from public.work_orders;
 delete from public.vehicle_downtime;
 delete from public.disciplinary_records;
 delete from public.pto_requests;
@@ -273,6 +277,61 @@ insert into public.vehicle_downtime (vehicle_id, station_id, started_at, ended_a
   ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', '2026-09-19 16:40+00', '2026-09-20 05:50+00', 'parts', 13, 'Waiting on tire set overnight'),
   ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', '2026-09-08 06:00+00', '2026-09-08 08:30+00', 'maintenance', 2.5, 'PM completed same morning'),
   ('c0000000-0000-4000-8000-000000000006', 'a0000000-0000-4000-8000-000000000002', '2026-09-17 18:10+00', '2026-09-17 20:05+00', 'charging', 1.9, 'Returned below reserve SOC');
+
+insert into public.work_orders (
+  id, vehicle_id, station_id, wo_number, title, description, type, status, priority,
+  opened_at, due_at, completed_at, shop, estimated_hours, actual_hours
+) values
+  ('e1000000-0000-4000-8000-000000004418', 'c0000000-0000-4000-8000-000000000015', 'a0000000-0000-4000-8000-000000000001', 'WO-4418', 'Body shop — rear quarter panel', 'Rear quarter panel and sensor cluster after cul-de-sac contact.', 'body', 'in_progress', 'critical', '2026-09-18', '2026-09-23', null, 'Penske Collision DLA7', 48, 46),
+  ('e1000000-0000-4000-8000-000000004421', 'c0000000-0000-4000-8000-000000000014', 'a0000000-0000-4000-8000-000000000005', 'WO-4421', 'Brake warning + inner rear tire', 'DVIC fail: brake warning light and inner rear tire wear.', 'repair', 'in_progress', 'critical', '2026-09-20', '2026-09-20', null, 'Amazon Fleet Shop DCH1', 10, 9),
+  ('e1000000-0000-4000-8000-000000004382', 'c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'WO-4382', 'Overdue inner rear tire', 'Pre-trip headlamp and inner rear wear. Tire set staged overnight.', 'tire', 'open', 'high', '2026-09-19', '2026-09-19', null, 'Discount Tire SODO', 3, null),
+  ('e1000000-0000-4000-8000-000000004430', 'c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'WO-4430', 'Open DVIC — headlamp out', 'Left headlamp failed pre-trip. Blocks tomorrow launch.', 'dvic', 'open', 'high', '2026-09-20', '2026-09-20', null, 'Amazon Fleet Shop DSE2', 1.5, null),
+  ('e1000000-0000-4000-8000-000000004390', 'c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'WO-4390', '5k preventive maintenance', 'Cabin filter, torque, and software recall check.', 'preventive', 'open', 'medium', '2026-09-17', '2026-09-22', null, 'Amazon Fleet Shop DAX5', 4, null),
+  ('e1000000-0000-4000-8000-000000004428', 'c0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000001', 'WO-4428', 'Upcoming 20k PM', 'Scheduled 20k preventive service. Van remains available tomorrow.', 'preventive', 'open', 'low', '2026-09-19', '2026-09-25', null, 'Amazon Fleet Shop DLA7', 3, null),
+  ('e1000000-0000-4000-8000-000000004311', 'c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'WO-4311', 'Completed 15k PM', '15k PM closed same morning.', 'preventive', 'completed', 'medium', '2026-09-06', '2026-09-08', '2026-09-08', 'Amazon Fleet Shop DLA7', 3, 2.5),
+  ('e1000000-0000-4000-8000-000000004334', 'c0000000-0000-4000-8000-000000000007', 'a0000000-0000-4000-8000-000000000003', 'WO-4334', 'Camera module recall', 'Ford commercial camera module recall — warranty.', 'recall', 'completed', 'medium', '2026-09-10', '2026-09-12', '2026-09-12', 'Ford Commercial Seattle', 5, 5),
+  ('e1000000-0000-4000-8000-000000004360', 'c0000000-0000-4000-8000-000000000012', 'a0000000-0000-4000-8000-000000000005', 'WO-4360', '12V aux battery replacement', 'No-start after overnight sit.', 'repair', 'completed', 'high', '2026-09-14', '2026-09-15', '2026-09-15', 'Amazon Fleet Shop DCH1', 6, 6),
+  ('e1000000-0000-4000-8000-000000004298', 'c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'WO-4298', 'Passenger mirror assembly', 'HOA gate-arm contact. Mirror housing and glass replaced.', 'body', 'completed', 'medium', '2026-09-17', '2026-09-18', '2026-09-18', 'Penske Collision DAX5', 6, 5.5);
+
+insert into public.maintenance_events (
+  vehicle_id, station_id, work_order_id, event_type, occurred_at, odometer_miles, title, description, downtime_hours, technician
+) values
+  ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004311', 'preventive', '2026-09-08 08:10+00', 14850, '15k PM completed', 'Filter, torque, and software cadence closed same morning.', 2.5, 'Shop lead DLA7'),
+  ('c0000000-0000-4000-8000-000000000007', 'a0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004334', 'repair', '2026-09-12 11:40+00', 37170, 'Camera recall closed', 'Warranty camera module swap and aim calibration.', 5, 'Ford Commercial Seattle'),
+  ('c0000000-0000-4000-8000-000000000012', 'a0000000-0000-4000-8000-000000000005', 'e1000000-0000-4000-8000-000000004360', 'repair', '2026-09-15 09:20+00', 55770, 'Aux battery replaced', '12V aux battery and load test after no-start.', 6, 'Shop lead DCH1'),
+  ('c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'e1000000-0000-4000-8000-000000004298', 'damage', '2026-09-18 15:40+00', 28000, 'New damage — passenger mirror', 'HOA gate-arm contact. Mirror assembly replaced.', 5.5, 'Penske Collision DAX5'),
+  ('c0000000-0000-4000-8000-000000000015', 'a0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004418', 'damage', '2026-09-18 11:10+00', 41220, 'New damage — rear quarter panel', 'Low-speed cul-de-sac contact. Van OOS pending body work.', 46, 'Penske Collision DLA7'),
+  ('c0000000-0000-4000-8000-000000000014', 'a0000000-0000-4000-8000-000000000005', 'e1000000-0000-4000-8000-000000004421', 'dvic', '2026-09-20 06:24+00', 62000, 'DVIC fail — brake warning', 'Pre-trip fail: brake warning light and inner rear tire wear.', 9, 'Wave inspector DCH1'),
+  ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004430', 'dvic', '2026-09-20 06:18+00', 42000, 'Open DVIC — headlamp out', 'Left headlamp out on pre-trip. Not cleared for tomorrow.', 0, 'Wave inspector DSE2'),
+  ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004382', 'repair', '2026-09-19 16:50+00', 42000, 'Tire wear flagged at return', 'Inner rear wear beyond spec. Tire set staged overnight.', 13, 'Discount Tire SODO'),
+  ('c0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004428', 'inspection', '2026-09-20 06:12+00', 22000, 'Pre-trip pass', 'DVIC pass. 20k PM remains scheduled later this week.', 0, 'Wave inspector DLA7'),
+  ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', null, 'inspection', '2026-09-20 06:10+00', 14850, 'Pre-trip pass', 'Cleared for wave. No open defects.', 0, 'Wave inspector DLA7');
+
+insert into public.vehicle_status_history (vehicle_id, from_status, to_status, changed_at, reason, changed_by) values
+  ('c0000000-0000-4000-8000-000000000015', 'active', 'oos', '2026-09-18 11:20+00', 'Cul-de-sac contact — grounded pending body shop', 'Riley Cho'),
+  ('c0000000-0000-4000-8000-000000000014', 'active', 'maintenance', '2026-09-20 06:28+00', 'DVIC fail — brake warning / tire wear', 'Jordan Hale'),
+  ('c0000000-0000-4000-8000-000000000009', 'active', 'maintenance', '2026-09-19 16:45+00', 'Held overnight for tire set', 'Sam Okonkwo'),
+  ('c0000000-0000-4000-8000-000000000009', 'maintenance', 'active', '2026-09-20 05:50+00', 'Returned to yard; DVIC headlamp still open', 'Sam Okonkwo'),
+  ('c0000000-0000-4000-8000-000000000004', 'maintenance', 'active', '2026-09-18 20:10+00', 'Mirror assembly replaced; released for service', 'Jordan Hale'),
+  ('c0000000-0000-4000-8000-000000000004', 'active', 'maintenance', '2026-09-17 16:00+00', 'Gate-arm damage — shop overnight', 'Riley Cho'),
+  ('c0000000-0000-4000-8000-000000000001', 'maintenance', 'active', '2026-09-08 08:35+00', '15k PM complete', 'Shop lead DLA7'),
+  ('c0000000-0000-4000-8000-000000000012', 'maintenance', 'active', '2026-09-15 12:05+00', 'Aux battery replaced', 'Shop lead DCH1');
+
+insert into public.repair_costs (vehicle_id, work_order_id, category, amount, incurred_at, vendor, description) values
+  ('c0000000-0000-4000-8000-000000000015', 'e1000000-0000-4000-8000-000000004418', 'body', 2180, '2026-09-19', 'Penske Collision DLA7', 'Quarter panel and blend'),
+  ('c0000000-0000-4000-8000-000000000015', 'e1000000-0000-4000-8000-000000004418', 'parts', 1260, '2026-09-19', 'Penske Collision DLA7', 'Sensor cluster + clips'),
+  ('c0000000-0000-4000-8000-000000000015', 'e1000000-0000-4000-8000-000000004418', 'labor', 740, '2026-09-20', 'Penske Collision DLA7', 'Body labor in progress'),
+  ('c0000000-0000-4000-8000-000000000014', 'e1000000-0000-4000-8000-000000004421', 'parts', 420, '2026-09-20', 'Amazon Fleet Shop DCH1', 'Brake sensor + hardware'),
+  ('c0000000-0000-4000-8000-000000000014', 'e1000000-0000-4000-8000-000000004421', 'labor', 470, '2026-09-20', 'Amazon Fleet Shop DCH1', 'Diagnosis and tire inspect'),
+  ('c0000000-0000-4000-8000-000000000009', 'e1000000-0000-4000-8000-000000004382', 'tires', 620, '2026-09-20', 'Discount Tire SODO', 'Inner rear tire set'),
+  ('c0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004311', 'labor', 185, '2026-09-08', 'Amazon Fleet Shop DLA7', '15k PM labor'),
+  ('c0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004311', 'parts', 100, '2026-09-08', 'Amazon Fleet Shop DLA7', 'Cabin filter kit'),
+  ('c0000000-0000-4000-8000-000000000012', 'e1000000-0000-4000-8000-000000004360', 'parts', 310, '2026-09-15', 'Amazon Fleet Shop DCH1', '12V aux battery'),
+  ('c0000000-0000-4000-8000-000000000012', 'e1000000-0000-4000-8000-000000004360', 'labor', 165, '2026-09-15', 'Amazon Fleet Shop DCH1', 'Battery R&R / load test'),
+  ('c0000000-0000-4000-8000-000000000004', 'e1000000-0000-4000-8000-000000004298', 'glass', 240, '2026-09-18', 'Penske Collision DAX5', 'Mirror glass'),
+  ('c0000000-0000-4000-8000-000000000004', 'e1000000-0000-4000-8000-000000004298', 'body', 410, '2026-09-18', 'Penske Collision DAX5', 'Housing and paint blend'),
+  ('c0000000-0000-4000-8000-000000000004', 'e1000000-0000-4000-8000-000000004298', 'labor', 240, '2026-09-18', 'Penske Collision DAX5', 'Mirror R&R'),
+  ('c0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004428', 'parts', 95, '2026-09-20', 'Amazon Fleet Shop DLA7', 'PM kit staged');
 
 insert into public.pto_requests (driver_id, pto_type, status, start_date, end_date, hours, notes) values
   ('b0000000-0000-4000-8000-000000001266', 'vacation', 'taken', '2026-09-14', '2026-09-15', 18, 'Approved vacation — back mid-week'),

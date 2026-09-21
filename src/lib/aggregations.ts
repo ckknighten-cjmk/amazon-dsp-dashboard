@@ -1,6 +1,7 @@
 import { TODAY, WEEK_START, MONTH_START } from "../data/seed";
 import type { Insight, Kpi, ScoreStanding, SeedDatabase, SessionUser } from "../types/database";
 import { addDays, average, dateRange, formatNumber, formatPct, formatUsd, formatUsdCompact, round2, sum, weekdayShort } from "./format";
+import { buildFleetReadiness } from "./fleetReadiness";
 
 export const STANDING_LABEL: Record<ScoreStanding, string> = {
   fantastic: "Fantastic",
@@ -65,6 +66,10 @@ export function filterDatabase(db: SeedDatabase, stationId: string | "all", user
       discipline: db.discipline.filter((d) => stationDrivers.has(d.driver_id)),
       downtime: db.downtime.filter((d) => d.station_id === stationId),
       importJobs: db.importJobs,
+      maintenanceEvents: db.maintenanceEvents.filter((row) => stationVehicles.has(row.vehicle_id)),
+      workOrders: db.workOrders.filter((row) => row.station_id === stationId),
+      vehicleStatusHistory: db.vehicleStatusHistory.filter((row) => stationVehicles.has(row.vehicle_id)),
+      repairCosts: db.repairCosts.filter((row) => stationVehicles.has(row.vehicle_id)),
     };
   }
   if (user?.role === "driver" && user.driverId) {
@@ -457,43 +462,7 @@ export function routeEconomics(route: SeedDatabase["routes"][number], rescues: S
 }
 
 export function buildFleet(db: SeedDatabase) {
-  const dueSoon = db.vehicles.filter((v) => v.odometer_miles >= v.next_service_miles - 750);
-  const latestInspection = (vehicleId: string) => db.inspections.find((row) => row.vehicle_id === vehicleId);
-  const rows = db.vehicles.map((vehicle) => {
-    const driver = db.drivers.find((d) => d.id === vehicle.assigned_driver_id);
-    const station = db.stations.find((s) => s.id === vehicle.station_id);
-    const inspection = latestInspection(vehicle.id);
-    const route = db.routes.find((r) => r.vehicle_id === vehicle.id);
-    return {
-      ...vehicle,
-      driverName: driver?.full_name ?? "Spare / unassigned",
-      stationCode: station?.code ?? "",
-      inspectionStatus: inspection?.status ?? "pending",
-      defects: inspection?.defects ?? [],
-      routeCode: route?.route_code ?? "—",
-      serviceDue: vehicle.odometer_miles >= vehicle.next_service_miles - 750,
-    };
-  });
-
-  const dvicPass = db.inspections.filter((i) => i.status === "pass").length;
-  const openDowntime = db.downtime.filter((row) => !row.ended_at);
-  const openMaintenance = db.maintenance.filter((row) => row.status !== "completed");
-  const downtimeHours = sum(db.downtime.map((row) => row.hours));
-
-  return {
-    kpis: [
-      { label: "Active vans", value: String(db.vehicles.filter((v) => v.status === "active").length), delta: `${db.vehicles.length} in fleet`, trend: "up" as const, hint: "Ready for wave", favorable: "up" as const },
-      { label: "Maintenance / OOS", value: String(db.vehicles.filter((v) => v.status !== "active").length), delta: dueSoon.length ? `${dueSoon.length} service due` : "On cadence", trend: dueSoon.length ? "down" as const : "up" as const, hint: "Hold or shop", favorable: "down" as const },
-      { label: "DVIC compliance", value: formatPct((dvicPass / Math.max(db.inspections.length, 1)) * 100), delta: `${db.inspections.filter((i) => i.status === "fail").length} fail`, trend: db.inspections.some((i) => i.status === "fail") ? "down" as const : "up" as const, hint: "Daily vehicle inspection", favorable: "up" as const },
-      { label: "Open downtime", value: `${formatNumber(downtimeHours, 1)}h`, delta: `${openDowntime.length} vans held`, trend: openDowntime.length ? "down" as const : "up" as const, hint: "Accident / shop / parts", favorable: "down" as const },
-    ],
-    rows,
-    dueSoon,
-    maintenance: db.maintenance,
-    downtime: db.downtime,
-    openMaintenance,
-    openDowntime,
-  };
+  return buildFleetReadiness(db);
 }
 
 function rollup(rows: SeedDatabase["financialDaily"]) {

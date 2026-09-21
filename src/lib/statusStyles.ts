@@ -11,6 +11,8 @@ import type {
   RescueStatus,
   RouteStatus,
   ScoreStanding,
+  WorkOrderPriority,
+  WorkOrderStatus,
 } from "../types/database";
 
 export const driverStatusLabel: Record<DriverStatus, string> = {
@@ -115,4 +117,30 @@ export const importClass: Record<ImportJobStatus, string> = {
   mapped: "badge-warning",
   imported: "badge-success",
   failed: "badge-danger",
+};
+
+export const workOrderStatusClass: Record<WorkOrderStatus, string> = {
+  open: "badge-info",
+  in_progress: "badge-warning",
+  completed: "badge-success",
+  cancelled: "badge-neutral",
+};
+
+export const workOrderPriorityClass: Record<WorkOrderPriority, string> = {
+  low: "badge-neutral",
+  medium: "badge-info",
+  high: "badge-warning",
+  critical: "badge-danger",
+};
+
+export const fleetBoardClass: Record<"available" | "grounded" | "needs_service", string> = {
+  available: "badge-success",
+  grounded: "badge-danger",
+  needs_service: "badge-warning",
+};
+
+export const fleetBoardLabel: Record<"available" | "grounded" | "needs_service", string> = {
+  available: "Available",
+  grounded: "Grounded",
+  needs_service: "Needs service",
 };

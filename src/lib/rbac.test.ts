@@ -14,7 +14,9 @@ describe("rbac", () => {
     expect(canAccess("dispatcher", "/financial")).toBe(false);
     expect(canAccess("dispatcher", "/operations")).toBe(true);
     expect(canAccess("dispatcher", "/fleet")).toBe(true);
-    expect(canAccess("finance", "/fleet")).toBe(false);
+    expect(canAccess("dispatcher", "/fleet/dispatch")).toBe(true);
+    expect(canAccess("finance", "/fleet")).toBe(true);
+    expect(canAccess("finance", "/fleet/kpis")).toBe(true);
     expect(canAccess("finance", "/routes")).toBe(true);
     expect(canAccess("finance", "/imports")).toBe(true);
     expect(canAccess("dispatcher", "/scorecard")).toBe(false);

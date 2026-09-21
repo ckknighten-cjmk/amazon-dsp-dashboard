@@ -48,8 +48,8 @@ export const NAV_ITEMS: NavItemConfig[] = [
   },
   {
     to: "/fleet",
-    label: "Fleet",
-    roles: ["owner", "operations_manager", "dispatcher", "safety_manager"],
+    label: "Fleet Readiness",
+    roles: ["owner", "operations_manager", "dispatcher", "safety_manager", "finance"],
   },
   {
     to: "/scorecard",
