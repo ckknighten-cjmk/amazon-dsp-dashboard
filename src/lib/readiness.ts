@@ -159,6 +159,7 @@ export function buildMorningDispatch(db: SeedDatabase) {
     noShows,
     staffingDelta,
     vansGrounded,
+    vansAvailable: vansAvailable.length,
     failedInspections,
     weatherToday,
     rescueOpen,
@@ -388,6 +389,7 @@ function buildRecommendations(input: {
   noShows: number;
   staffingDelta: number;
   vansGrounded: SeedDatabase["vehicles"];
+  vansAvailable: number;
   failedInspections: SeedDatabase["inspections"];
   weatherToday: WeatherAlert[];
   rescueOpen: SeedDatabase["rescues"];
@@ -442,8 +444,8 @@ function buildRecommendations(input: {
       id: "rec-fleet-grounded",
       category: "fleet",
       severity: input.vansGrounded.length >= 2 ? "warning" : "watch",
-      title: `${input.vansGrounded.length} vans grounded`,
-      action: `${input.vansGrounded.map((van) => van.van_id).join(", ")} are OOS or in shop. Confirm 13 active E-Transits before assigning any leftover route.`,
+      title: `${input.vansGrounded.length} van${input.vansGrounded.length === 1 ? "" : "s"} grounded`,
+      action: `${input.vansGrounded.map((van) => van.van_id).join(", ")} ${input.vansGrounded.length === 1 ? "is" : "are"} OOS or in shop. Confirm ${input.vansAvailable} active E-Transit${input.vansAvailable === 1 ? "" : "s"} before assigning any leftover route.`,
       metric: `${input.vansGrounded.length} grounded`,
     });
   }
@@ -498,12 +500,16 @@ function buildRecommendations(input: {
     });
 
   if (input.rescueOpen.length) {
+    const distressed = input.rescueOpen
+      .map((row) => input.todayRoutes.find((route) => route.id === row.distressed_route_id)?.route_code)
+      .filter(Boolean)
+      .join(" / ");
     recs.push({
       id: "rec-rescue",
       category: "routes",
       severity: "warning",
       title: `${input.rescueOpen.length} rescue${input.rescueOpen.length === 1 ? "" : "s"} already open`,
-      action: "Lock helper assignments on CX-27 / CX-31 before 08:00. Do not launch additional high-volume routes without a named rescue DA.",
+      action: `Lock helper assignments${distressed ? ` on ${distressed}` : ""} before 08:00. Do not launch additional high-volume routes without a named rescue DA.`,
       metric: `${input.behindRoutes.length} routes at risk`,
     });
   }
@@ -515,7 +521,7 @@ function buildRecommendations(input: {
       category: "routes",
       severity: "watch",
       title: `${liveHighVolume.length} high-volume routes still live`,
-      action: "Keep a dedicated rescue DA at DLA7 and DSE2. CX-14, CX-27, CX-31, and CX-21 are all above 1,200 packages.",
+      action: `Keep a dedicated rescue DA for ${liveHighVolume.map((route) => route.route_code).join(", ")}. Each is above 1,200 packages.`,
       metric: liveHighVolume.map((route) => route.route_code).join(", "),
     });
   }
