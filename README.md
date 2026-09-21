@@ -11,10 +11,23 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 - **Safety & Compliance** — Vehicle inspections, speeding, seatbelt, incidents
 - **Forecasting** — Route, volume, staffing, and overtime outlook
 - **Fleet Readiness** — Tomorrow's launch board: available / grounded vans, open DVIC defects, PM, work orders, repair cost, and vehicle dossiers
-- **Amazon Scorecard** — DCR, POD, CDF, Safety, FICO, and weekly trends
+- **Scorecard Intelligence** — Weekly/monthly DCR, POD, CDF, FICO, Safety, DNR, DSC, and CE; driver and route impact; AI recommendations; forecasting
 - **Route Management** — Profitability, completion rates, rescue workflow, variance
 - **AI Insights** — Staffing, overtime, underperforming routes, high-risk drivers, P&L
 - **Imports** — Placeholders for Amazon scorecard, payroll, fuel card, and fleet maintenance feeds
+
+## Scorecard Intelligence
+
+The `/scorecard` module tracks Amazon DSP scorecard health and includes:
+
+1. Executive weekly/monthly scorecard and trend analysis
+2. Station scorecards from the live command-center seed
+3. Driver impact, top performers, and at-risk drivers
+4. Route-level performance and high-risk routes
+5. AI recommendations for DCR, POD, CDF, and Safety
+6. Four-week forecasting with warning indicators
+
+Schema for `scorecard_history`, `scorecard_targets`, `driver_scorecard_metrics`, and `route_scorecard_metrics` lives in `supabase/schema.sql` (and a standalone copy in `db/schema.sql`).
 
 ## Quick start
 
@@ -42,7 +55,7 @@ Without Supabase env vars the app runs in **demo mode**: local authentication, r
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor.
 3. Create Auth users that match the seeded `profiles.email` values and set `profiles.auth_user_id`.
 
-Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, work orders, maintenance events, vehicle status history, repair costs, import jobs, and row-level security by role/station.
+Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, scorecard intelligence tables, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, work orders, maintenance events, vehicle status history, repair costs, import jobs, and row-level security by role/station.
 
 ## Scripts
 

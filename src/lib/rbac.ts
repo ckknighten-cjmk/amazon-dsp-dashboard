@@ -53,7 +53,7 @@ export const NAV_ITEMS: NavItemConfig[] = [
   },
   {
     to: "/scorecard",
-    label: "Scorecard",
+    label: "Scorecard Intelligence",
     roles: ["owner", "operations_manager", "safety_manager"],
   },
   {

@@ -15,6 +15,12 @@ import FleetMaintenance from "./pages/FleetMaintenance";
 import FleetKpis from "./pages/FleetKpis";
 import VehicleDetail from "./pages/VehicleDetail";
 import Scorecard from "./pages/Scorecard";
+import ScorecardLayout from "./pages/scorecard/ScorecardLayout";
+import ExecutiveScorecard from "./pages/scorecard/ExecutiveScorecard";
+import DriverImpact from "./pages/scorecard/DriverImpact";
+import RouteImpact from "./pages/scorecard/RouteImpact";
+import Recommendations from "./pages/scorecard/Recommendations";
+import ScorecardForecast from "./pages/scorecard/ScorecardForecast";
 import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
 import Imports from "./pages/Imports";
@@ -48,7 +54,14 @@ export default function App() {
           <Route path="kpis" element={<FleetKpis />} />
           <Route path="vehicles/:vehicleId" element={<VehicleDetail />} />
         </Route>
-        <Route path="scorecard" element={<Scorecard />} />
+        <Route path="scorecard" element={<ScorecardLayout />}>
+          <Route index element={<ExecutiveScorecard />} />
+          <Route path="stations" element={<Scorecard />} />
+          <Route path="drivers" element={<DriverImpact />} />
+          <Route path="routes" element={<RouteImpact />} />
+          <Route path="recommendations" element={<Recommendations />} />
+          <Route path="forecast" element={<ScorecardForecast />} />
+        </Route>
         <Route path="routes" element={<RoutesBoard />} />
         <Route path="insights" element={<Insights />} />
         <Route path="imports" element={<Imports />} />

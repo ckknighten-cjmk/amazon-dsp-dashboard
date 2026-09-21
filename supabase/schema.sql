@@ -62,6 +62,21 @@ exception when duplicate_object then null;
 end $$;
 
 do $$ begin
+  create type public.scorecard_period_type as enum ('weekly', 'monthly');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.metric_polarity as enum ('higher_better', 'lower_better');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.metric_key as enum ('dcr', 'pod', 'cdf', 'fico', 'safety', 'dnr', 'dsc', 'ce');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
   create type public.maintenance_status as enum ('scheduled', 'in_progress', 'completed', 'overdue');
 exception when duplicate_object then null;
 end $$;
@@ -347,6 +362,96 @@ alter table public.scorecards add column if not exists dsc numeric(5,2);
 alter table public.scorecards add column if not exists customer_escalations integer;
 alter table public.scorecards add column if not exists fico_score integer;
 
+create table if not exists public.scorecard_history (
+  id uuid primary key default gen_random_uuid(),
+  scorecard_id uuid references public.scorecards (id) on delete set null,
+  station_id uuid not null references public.stations (id),
+  period_type public.scorecard_period_type not null,
+  period_start date not null,
+  period_end date not null,
+  metric_key public.metric_key not null,
+  metric_value numeric(8,3) not null,
+  standing public.score_standing not null,
+  recorded_at timestamptz not null default now(),
+  unique (station_id, period_type, period_start, metric_key)
+);
+
+create table if not exists public.scorecard_targets (
+  id uuid primary key default gen_random_uuid(),
+  metric_key public.metric_key not null unique,
+  display_name text not null,
+  full_name text not null,
+  unit text not null,
+  polarity public.metric_polarity not null,
+  fantastic_threshold numeric(8,3) not null,
+  great_threshold numeric(8,3) not null,
+  fair_threshold numeric(8,3) not null,
+  effective_from date not null default current_date,
+  notes text
+);
+
+create table if not exists public.driver_scorecard_metrics (
+  id uuid primary key default gen_random_uuid(),
+  scorecard_id uuid not null references public.scorecards (id) on delete cascade,
+  driver_id uuid not null references public.drivers (id),
+  driver_name text not null,
+  primary_route text not null,
+  period_type public.scorecard_period_type not null,
+  period_start date not null,
+  dcr numeric(6,3) not null,
+  pod numeric(6,3) not null,
+  cdf numeric(6,3) not null,
+  fico numeric(6,2) not null,
+  safety_score numeric(6,2) not null,
+  dnr numeric(6,3) not null,
+  dsc numeric(6,3) not null,
+  ce numeric(6,3) not null,
+  packages_delivered integer not null check (packages_delivered >= 0),
+  stops_completed integer not null check (stops_completed >= 0),
+  composite_score numeric(6,2) not null,
+  standing public.score_standing not null,
+  at_risk boolean not null default false,
+  unique (scorecard_id, driver_id)
+);
+
+create table if not exists public.route_scorecard_metrics (
+  id uuid primary key default gen_random_uuid(),
+  scorecard_id uuid not null references public.scorecards (id) on delete cascade,
+  route_code text not null,
+  station_id uuid not null references public.stations (id),
+  period_type public.scorecard_period_type not null,
+  period_start date not null,
+  dcr numeric(6,3) not null,
+  pod numeric(6,3) not null,
+  cdf numeric(6,3) not null,
+  fico numeric(6,2) not null,
+  safety_score numeric(6,2) not null,
+  dnr numeric(6,3) not null,
+  dsc numeric(6,3) not null,
+  ce numeric(6,3) not null,
+  packages_delivered integer not null check (packages_delivered >= 0),
+  stops_completed integer not null check (stops_completed >= 0),
+  composite_score numeric(6,2) not null,
+  standing public.score_standing not null,
+  high_risk boolean not null default false,
+  risk_factors text[] not null default '{}',
+  unique (scorecard_id, route_code)
+);
+
+insert into public.scorecard_targets (
+  metric_key, display_name, full_name, unit, polarity,
+  fantastic_threshold, great_threshold, fair_threshold, notes
+) values
+  ('dcr', 'DCR', 'Delivery Completion Rate', '%', 'higher_better', 99.5, 99.0, 98.2, 'First-attempt completion'),
+  ('pod', 'POD', 'Photo on Delivery', '%', 'higher_better', 98.0, 96.0, 93.0, 'Valid in-policy photos'),
+  ('cdf', 'CDF', 'Customer Delivery Feedback', '%', 'higher_better', 92.0, 88.0, 82.0, 'Positive customer feedback'),
+  ('fico', 'FICO', 'FICO Safe Driving Score', 'pts', 'higher_better', 850, 800, 740, 'Mentor FICO score'),
+  ('safety', 'Safety', 'Safety Score', 'pts', 'higher_better', 90, 82, 74, 'Composite safety standing'),
+  ('dnr', 'DNR', 'Delivered-Not-Received', '%', 'lower_better', 0.12, 0.25, 0.40, 'Lower is better'),
+  ('dsc', 'DSC', 'Delivery Success Compliance', '%', 'higher_better', 99.0, 97.5, 95.5, 'Contact and exception workflow'),
+  ('ce', 'CE', 'Customer Experience', '%', 'higher_better', 95.0, 92.0, 88.0, 'Composite CX score')
+on conflict (metric_key) do nothing;
+
 create table if not exists public.forecasts (
   id uuid primary key default gen_random_uuid(),
   station_id uuid not null references public.stations(id),
@@ -518,6 +623,12 @@ create index if not exists safety_events_occurred_idx on public.safety_events (o
 create index if not exists attendance_date_idx on public.attendance (service_date, driver_id);
 create index if not exists forecasts_date_idx on public.forecasts (forecast_date, station_id);
 create index if not exists scorecards_week_idx on public.scorecards (week_start desc);
+create index if not exists scorecard_history_lookup_idx
+  on public.scorecard_history (station_id, period_type, metric_key, period_start);
+create index if not exists driver_scorecard_risk_idx
+  on public.driver_scorecard_metrics (scorecard_id, at_risk, composite_score desc);
+create index if not exists route_scorecard_risk_idx
+  on public.route_scorecard_metrics (scorecard_id, high_risk, composite_score);
 create index if not exists maintenance_station_idx on public.maintenance_orders (station_id, scheduled_date);
 create index if not exists payroll_period_idx on public.payroll (period_start, station_id);
 create index if not exists expenses_date_idx on public.expenses (service_date, station_id);
@@ -594,6 +705,10 @@ alter table public.incidents enable row level security;
 alter table public.coaching_recommendations enable row level security;
 alter table public.financial_daily enable row level security;
 alter table public.scorecards enable row level security;
+alter table public.scorecard_history enable row level security;
+alter table public.scorecard_targets enable row level security;
+alter table public.driver_scorecard_metrics enable row level security;
+alter table public.route_scorecard_metrics enable row level security;
 alter table public.forecasts enable row level security;
 alter table public.route_hourly_stats enable row level security;
 alter table public.maintenance_orders enable row level security;
@@ -793,6 +908,56 @@ create policy scorecards_select on public.scorecards
 
 drop policy if exists scorecards_write on public.scorecards;
 create policy scorecards_write on public.scorecards
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists scorecard_history_select on public.scorecard_history;
+create policy scorecard_history_select on public.scorecard_history
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists scorecard_history_write on public.scorecard_history;
+create policy scorecard_history_write on public.scorecard_history
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists scorecard_targets_select on public.scorecard_targets;
+create policy scorecard_targets_select on public.scorecard_targets
+  for select to authenticated
+  using (public.current_app_role() is not null);
+
+drop policy if exists scorecard_targets_write on public.scorecard_targets;
+create policy scorecard_targets_write on public.scorecard_targets
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists driver_scorecard_select on public.driver_scorecard_metrics;
+create policy driver_scorecard_select on public.driver_scorecard_metrics
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'operations_manager', 'safety_manager')
+    or (
+      public.current_app_role() = 'driver'
+      and driver_id = (select driver_id from public.current_profile())
+    )
+  );
+
+drop policy if exists driver_scorecard_write on public.driver_scorecard_metrics;
+create policy driver_scorecard_write on public.driver_scorecard_metrics
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists route_scorecard_select on public.route_scorecard_metrics;
+create policy route_scorecard_select on public.route_scorecard_metrics
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists route_scorecard_write on public.route_scorecard_metrics;
+create policy route_scorecard_write on public.route_scorecard_metrics
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager'))
   with check (public.current_app_role() in ('owner', 'operations_manager'));

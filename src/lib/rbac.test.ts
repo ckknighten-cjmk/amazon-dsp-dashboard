@@ -20,6 +20,9 @@ describe("rbac", () => {
     expect(canAccess("finance", "/routes")).toBe(true);
     expect(canAccess("finance", "/imports")).toBe(true);
     expect(canAccess("dispatcher", "/scorecard")).toBe(false);
+    expect(canAccess("operations_manager", "/scorecard/drivers")).toBe(true);
+    expect(canAccess("operations_manager", "/scorecard/forecast")).toBe(true);
+    expect(canAccess("dispatcher", "/scorecard/forecast")).toBe(false);
     expect(canAccess("operations_manager", "/insights")).toBe(true);
   });
 
