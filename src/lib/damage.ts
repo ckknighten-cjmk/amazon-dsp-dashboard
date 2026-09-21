@@ -65,11 +65,11 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       favorable: "down",
     },
     {
-      label: "Repair quotes",
+      label: "Estimated repair cost",
       value: formatUsdCompact(sum(db.maintenanceRepairs.filter((row) => row.status !== "cancelled").map((row) => row.quoted_cost))),
-      delta: `${db.maintenanceRepairs.filter((row) => row.status === "in_progress" || row.status === "approved").length} in shop`,
+      delta: `${formatUsdCompact(sum(db.maintenanceRepairs.filter((row) => row.actual_cost !== null).map((row) => row.actual_cost ?? 0)))} actual`,
       trend: "down",
-      hint: "Quoted pipeline",
+      hint: "Quoted vs actual",
       favorable: "down",
     },
     {
@@ -136,14 +136,15 @@ export function buildDamageIntelligence(db: SeedDatabase) {
   const byDriver = Object.values(
     enriched
       .filter((event) => !event.parent_event_id)
-      .reduce<Record<string, { id: string; name: string; events: number; newThisWeek: number; estimated: number; unresolved: number }>>(
+      .reduce<Record<string, { id: string; name: string; events: number; newThisWeek: number; estimated: number; actual: number; unresolved: number }>>(
         (acc, event) => {
           const key = event.responsible_driver_id ?? "unassigned";
           if (!acc[key]) {
-            acc[key] = { id: key, name: event.responsibleName, events: 0, newThisWeek: 0, estimated: 0, unresolved: 0 };
+            acc[key] = { id: key, name: event.responsibleName, events: 0, newThisWeek: 0, estimated: 0, actual: 0, unresolved: 0 };
           }
           acc[key].events += 1;
           acc[key].estimated += event.estimated_cost;
+          acc[key].actual += event.actualCost ?? 0;
           if (event.status !== "resolved") acc[key].unresolved += 1;
           if (newThisWeek.some((row) => row.id === event.id)) acc[key].newThisWeek += 1;
           return acc;
@@ -155,7 +156,7 @@ export function buildDamageIntelligence(db: SeedDatabase) {
   const byVehicle = Object.values(
     enriched
       .filter((event) => !event.parent_event_id)
-      .reduce<Record<string, { id: string; vanId: string; stationCode: string; events: number; unresolved: number; estimated: number; latest: string }>>(
+      .reduce<Record<string, { id: string; vanId: string; stationCode: string; events: number; unresolved: number; estimated: number; actual: number; latest: string }>>(
         (acc, event) => {
           if (!acc[event.vehicle_id]) {
             acc[event.vehicle_id] = {
@@ -165,11 +166,13 @@ export function buildDamageIntelligence(db: SeedDatabase) {
               events: 0,
               unresolved: 0,
               estimated: 0,
+              actual: 0,
               latest: event.last_seen_at,
             };
           }
           acc[event.vehicle_id].events += 1;
           acc[event.vehicle_id].estimated += event.estimated_cost;
+          acc[event.vehicle_id].actual += event.actualCost ?? 0;
           if (event.status !== "resolved") acc[event.vehicle_id].unresolved += 1;
           if (event.last_seen_at > acc[event.vehicle_id].latest) acc[event.vehicle_id].latest = event.last_seen_at;
           return acc;
@@ -190,6 +193,13 @@ export function buildDamageIntelligence(db: SeedDatabase) {
     };
   });
 
+  const grounding = enriched.filter((event) => event.grounding_recommended && !event.parent_event_id);
+  const reportRows = enriched.filter((event) => !event.parent_event_id);
+  const openInvestigations = reportRows.filter(
+    (row) => row.investigation_status === "open" || row.investigation_status === "pending_driver",
+  );
+  const pairs = reportRows.filter((event) => event.beforePhoto || event.afterPhoto);
+
   const timeline = [...db.dvics]
     .sort((a, b) => b.inspected_at.localeCompare(a.inspected_at))
     .map((dvic) => {
@@ -203,12 +213,76 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       };
     });
 
-  const grounding = enriched.filter((event) => event.grounding_recommended && !event.parent_event_id);
-  const reportRows = enriched.filter((event) => !event.parent_event_id);
-  const openInvestigations = reportRows.filter(
-    (row) => row.investigation_status === "open" || row.investigation_status === "pending_driver",
-  );
-  const pairs = reportRows.filter((event) => event.beforePhoto || event.afterPhoto);
+  const latestForParent = (event: (typeof reportRows)[number]) => {
+    const chain = enriched
+      .filter((row) => row.id === event.id || row.parent_event_id === event.id)
+      .sort((a, b) => b.last_seen_at.localeCompare(a.last_seen_at));
+    return chain[0] ?? event;
+  };
+
+  const severityBoard = (["minor", "moderate", "severe", "ground_vehicle"] as const).map((score) => {
+    const rows = reportRows.map(latestForParent).filter((row) => row.severity_score === score);
+    return {
+      score,
+      label: SEVERITY_SCORE_LABEL[score],
+      count: rows.length,
+      estimated: sum(rows.map((row) => row.estimated_cost)),
+    };
+  });
+
+  const workflowBoard = (["new", "under_review", "approved", "scheduled_repair", "repaired"] as const).map((status) => ({
+    status,
+    label: WORKFLOW_LABEL[status],
+    rows: reportRows.filter((row) => row.workflow_status === status),
+  }));
+
+  const vehicleIds = new Set([
+    ...db.dvics.map((row) => row.vehicle_id),
+    ...db.damageEvents.map((row) => row.vehicle_id),
+    ...db.maintenanceRepairs.map((row) => row.vehicle_id),
+  ]);
+  const vehicleTimelines = [...vehicleIds]
+    .map((id) => {
+      const dvicHistory = db.dvics
+        .filter((row) => row.vehicle_id === id)
+        .map((row) => ({
+          id: row.id,
+          kind: "dvic" as const,
+          at: row.inspected_at,
+          title: `${row.shift_type.replace("_", " ")} DVIC · ${row.status}`,
+          detail: `${driverName(db, row.driver_id)} · ${row.comparison_status}${row.notes ? ` · ${row.notes}` : ""}`,
+        }));
+      const damageHistory = enriched
+        .filter((row) => row.vehicle_id === id)
+        .map((row) => ({
+          id: row.id,
+          kind: "damage" as const,
+          at: row.first_seen_at,
+          title: `${row.zoneLabel} · ${row.damage_type}`,
+          detail: `${SEVERITY_SCORE_LABEL[row.severity_score]} · ${WORKFLOW_LABEL[row.workflow_status]} · prev ${row.priorDriverName} · current ${row.currentDriverName}`,
+        }));
+      const repairHistory = db.maintenanceRepairs
+        .filter((row) => row.vehicle_id === id)
+        .map((row) => ({
+          id: row.id,
+          kind: "repair" as const,
+          at: `${row.completed_date ?? row.scheduled_date}T12:00:00Z`,
+          title: `${row.vendor} · ${row.status.replace("_", " ")}`,
+          detail: `Est. ${formatUsd(row.quoted_cost)}${row.actual_cost !== null ? ` · actual ${formatUsd(row.actual_cost)}` : ""}`,
+        }));
+      const entries = [...dvicHistory, ...damageHistory, ...repairHistory].sort((a, b) => b.at.localeCompare(a.at));
+      return {
+        vehicleId: id,
+        vanId: vanId(db, id),
+        stationCode: stationCode(db, db.vehicles.find((row) => row.id === id)?.station_id ?? ""),
+        dvicCount: dvicHistory.length,
+        damageCount: damageHistory.length,
+        repairCount: repairHistory.length,
+        entries,
+      };
+    })
+    .filter((row) => row.entries.length > 0)
+    .sort((a, b) => (b.entries[0]?.at ?? "").localeCompare(a.entries[0]?.at ?? ""));
 
   return {
     kpis,
@@ -218,6 +292,9 @@ export function buildDamageIntelligence(db: SeedDatabase) {
     byVehicle,
     repairTrend,
     timeline,
+    severityBoard,
+    workflowBoard,
+    vehicleTimelines,
     photos: db.damagePhotos,
     reviews: db.damageReviews,
     repairs: db.maintenanceRepairs.map((row) => ({
@@ -236,6 +313,8 @@ export function buildDamageIntelligence(db: SeedDatabase) {
       photoCount: db.damagePhotos.length,
       grounded: grounding.length,
       openInvestigations: openInvestigations.length,
+      estimated: sum(reportRows.map((row) => row.estimated_cost)),
+      actual: sum(reportRows.map((row) => row.actualCost ?? 0)),
     },
     asOf: TODAY,
   };

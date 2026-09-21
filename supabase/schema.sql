@@ -607,8 +607,31 @@ create table if not exists public.damage_photos (
   similarity_score numeric(5,4),
   change_confidence numeric(5,4),
   ai_notes text,
+  bbox_json jsonb,
+  mask_storage_path text,
   unique (storage_bucket, storage_path)
 );
+
+alter table public.damage_photos add column if not exists bbox_json jsonb;
+alter table public.damage_photos add column if not exists mask_storage_path text;
+
+create or replace view public.damage_photo_comparisons as
+select
+  curr.id as current_photo_id,
+  prior.id as prior_photo_id,
+  curr.vehicle_id,
+  curr.zone,
+  curr.camera_angle,
+  curr.embedding_ref as current_embedding_ref,
+  prior.embedding_ref as prior_embedding_ref,
+  curr.embedding_dims,
+  curr.similarity_score,
+  curr.change_confidence,
+  curr.bbox_json,
+  curr.mask_storage_path,
+  curr.ai_notes
+from public.damage_photos curr
+left join public.damage_photos prior on prior.id = curr.compared_to_photo_id;
 
 create table if not exists public.damage_cv_runs (
   id uuid primary key default gen_random_uuid(),
@@ -1162,3 +1185,4 @@ create policy maintenance_repairs_write on public.maintenance_repairs
 grant usage on schema public to authenticated;
 grant select, insert, update, delete on all tables in schema public to authenticated;
 grant usage, select on all sequences in schema public to authenticated;
+grant select on public.damage_photo_comparisons to authenticated;

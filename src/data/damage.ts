@@ -48,6 +48,8 @@ function photo(
     similarity_score: extra.similarity_score ?? null,
     change_confidence: extra.change_confidence ?? null,
     ai_notes: extra.ai_notes ?? null,
+    bbox_json: extra.bbox_json ?? null,
+    mask_storage_path: extra.mask_storage_path ?? null,
   };
 }
 
@@ -607,6 +609,8 @@ export const damagePhotos: DamagePhoto[] = [
     similarity_score: 0.71,
     change_confidence: 0.91,
     ai_notes: "New linear scrape below handle vs last-night baseline.",
+    bbox_json: { x: 0.18, y: 0.42, w: 0.36, h: 0.12 },
+    mask_storage_path: "vehicles/van-01/2026-09-20/driver_door-ph-01b.mask.png",
   }),
   photo("ph-02a", "dmg-02", "dvic-218-17p", "van-09", "rear_bumper", `${addDays(TODAY, -3)}T06:24:00Z`, "drv-1224", "rear", true, {
     ai_notes: "Clean bumper baseline.",
@@ -640,6 +644,8 @@ export const damagePhotos: DamagePhoto[] = [
     similarity_score: 0.41,
     change_confidence: 0.97,
     ai_notes: "Major contour change. Sensor cluster likely compromised.",
+    bbox_json: { x: 0.52, y: 0.28, w: 0.4, h: 0.46 },
+    mask_storage_path: "vehicles/van-15/2026-09-18/right_quarter-ph-04b.mask.png",
   }),
   photo("ph-05a", "dmg-05", "dvic-223-11p", "van-14", "left_quarter", `${addDays(TODAY, -9)}T06:16:00Z`, "drv-1294", "left", true, {
     ai_notes: "Last clean quarter panel.",

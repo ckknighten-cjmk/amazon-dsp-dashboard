@@ -75,6 +75,33 @@ describe("DVIC damage intelligence", () => {
     expect(view.openInvestigations.every((row) => row.investigation_status === "open" || row.investigation_status === "pending_driver")).toBe(true);
   });
 
+  it("tracks severity, workflow, cost actuals, and mixed vehicle timelines", () => {
+    const view = buildDamageIntelligence(seedDb);
+    expect(view.kpis[2].label).toBe("Estimated repair cost");
+    expect(view.severityBoard.map((row) => row.score)).toEqual(["minor", "moderate", "severe", "ground_vehicle"]);
+    expect(view.severityBoard.every((row) => row.count >= 0)).toBe(true);
+    expect(view.severityBoard.some((row) => row.score === "ground_vehicle" && row.count >= 2)).toBe(true);
+    expect(view.severityBoard.some((row) => row.score === "severe" && row.count >= 1)).toBe(true);
+    expect(view.workflowBoard.map((row) => row.label)).toEqual([
+      "New",
+      "Under review",
+      "Approved",
+      "Scheduled repair",
+      "Repaired",
+    ]);
+    expect(view.workflowBoard.some((row) => row.status === "new" && row.rows.length > 0)).toBe(true);
+    expect(view.byDriver.some((row) => typeof row.actual === "number")).toBe(true);
+    expect(view.byVehicle.some((row) => row.vanId === "EV-224" && row.estimated >= 4180)).toBe(true);
+    const ev210 = view.vehicleTimelines.find((row) => row.vanId === "EV-210");
+    expect(ev210?.dvicCount).toBeGreaterThan(0);
+    expect(ev210?.damageCount).toBeGreaterThan(0);
+    expect(ev210?.entries.some((entry) => entry.kind === "dvic")).toBe(true);
+    expect(ev210?.entries.some((entry) => entry.kind === "damage")).toBe(true);
+    const ev216 = view.vehicleTimelines.find((row) => row.vanId === "EV-216");
+    expect(ev216?.entries.some((entry) => entry.kind === "repair")).toBe(true);
+    expect(seedDb.damagePhotos.some((row) => row.id === "ph-01b" && row.bbox_json?.w && row.mask_storage_path)).toBe(true);
+  });
+
   it("scopes damage events to a station", () => {
     const scoped = filterDatabase(seedDb, "stn-dla7");
     expect(scoped.damageEvents.every((row) => row.station_id === "stn-dla7")).toBe(true);
