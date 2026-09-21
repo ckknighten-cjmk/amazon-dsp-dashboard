@@ -35,8 +35,13 @@ exception when duplicate_object then null;
 end $$;
 
 do $$ begin
-  create type public.attendance_status as enum ('present', 'late', 'absent', 'pto', 'call_out');
+  create type public.attendance_status as enum ('present', 'late', 'absent', 'pto', 'call_out', 'no_show');
 exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  alter type public.attendance_status add value if not exists 'no_show';
+exception when others then null;
 end $$;
 
 do $$ begin
@@ -161,6 +166,45 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.employment_status as enum ('onboarding', 'active', 'offboarding', 'terminated');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.recruiting_stage as enum (
+    'applied', 'phone_screen', 'interview', 'ride_along', 'offer', 'hired', 'rejected', 'withdrawn'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.recruiting_status as enum ('open', 'hired', 'rejected', 'withdrawn');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.interview_stage as enum (
+    'phone_screen', 'ops_interview', 'ride_along', 'background', 'offer_review'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.interview_result as enum ('scheduled', 'passed', 'failed', 'no_show', 'cancelled');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.training_category as enum ('onboarding', 'compliance', 'safety', 'offboarding');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.training_status as enum ('not_started', 'in_progress', 'completed', 'overdue', 'waived');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.stations (
   id uuid primary key default gen_random_uuid(),
   code text unique not null,
@@ -199,7 +243,8 @@ create table if not exists public.drivers (
   created_at timestamptz not null default now()
 );
 
-alter table public.profiles
+alter table public.drivers add column if not exists employment_status public.employment_status not null default 'active';
+alter table public.drivers add column if not exists termination_date date;
   drop constraint if exists profiles_driver_id_fkey;
 alter table public.profiles
   add constraint profiles_driver_id_fkey
@@ -604,6 +649,47 @@ create table if not exists public.repair_costs (
   description text not null
 );
 
+create table if not exists public.recruiting (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  driver_id uuid references public.drivers(id) on delete set null,
+  full_name text not null,
+  email text not null,
+  phone text,
+  source text not null,
+  role text not null default 'driver_associate',
+  stage public.recruiting_stage not null default 'applied',
+  status public.recruiting_status not null default 'open',
+  applied_at date not null,
+  recruiter text not null,
+  notes text
+);
+
+create table if not exists public.interviews (
+  id uuid primary key default gen_random_uuid(),
+  recruiting_id uuid not null references public.recruiting(id) on delete cascade,
+  stage public.interview_stage not null,
+  scheduled_at timestamptz not null,
+  interviewer text not null,
+  result public.interview_result not null default 'scheduled',
+  score numeric(5,1),
+  notes text
+);
+
+create table if not exists public.training_records (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid references public.drivers(id) on delete set null,
+  recruiting_id uuid references public.recruiting(id) on delete set null,
+  course text not null,
+  category public.training_category not null,
+  status public.training_status not null default 'not_started',
+  started_at date,
+  completed_at date,
+  due_date date not null,
+  score numeric(5,1),
+  required boolean not null default true
+);
+
 create table if not exists public.import_jobs (
   id uuid primary key default gen_random_uuid(),
   source public.import_source unique not null,
@@ -638,6 +724,9 @@ create index if not exists work_orders_station_idx on public.work_orders (statio
 create index if not exists maintenance_events_vehicle_idx on public.maintenance_events (vehicle_id, occurred_at desc);
 create index if not exists vehicle_status_history_idx on public.vehicle_status_history (vehicle_id, changed_at desc);
 create index if not exists repair_costs_vehicle_idx on public.repair_costs (vehicle_id, incurred_at desc);
+create index if not exists recruiting_station_idx on public.recruiting (station_id, stage, status);
+create index if not exists interviews_recruiting_idx on public.interviews (recruiting_id, scheduled_at);
+create index if not exists training_driver_idx on public.training_records (driver_id, category, status);
 
 create or replace function public.current_profile()
 returns public.profiles
@@ -722,6 +811,9 @@ alter table public.work_orders enable row level security;
 alter table public.maintenance_events enable row level security;
 alter table public.vehicle_status_history enable row level security;
 alter table public.repair_costs enable row level security;
+alter table public.recruiting enable row level security;
+alter table public.interviews enable row level security;
+alter table public.training_records enable row level security;
 
 drop policy if exists stations_select on public.stations;
 create policy stations_select on public.stations
@@ -1123,6 +1215,59 @@ create policy repair_costs_write on public.repair_costs
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager', 'finance', 'safety_manager'))
   with check (public.current_app_role() in ('owner', 'operations_manager', 'finance', 'safety_manager'));
+
+drop policy if exists recruiting_select on public.recruiting;
+create policy recruiting_select on public.recruiting
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'operations_manager', 'dispatcher')
+    and public.can_read_station(station_id)
+  );
+
+drop policy if exists recruiting_write on public.recruiting;
+create policy recruiting_write on public.recruiting
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists interviews_select on public.interviews;
+create policy interviews_select on public.interviews
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.recruiting r
+      where r.id = recruiting_id
+        and public.current_app_role() in ('owner', 'operations_manager', 'dispatcher')
+        and public.can_read_station(r.station_id)
+    )
+  );
+
+drop policy if exists interviews_write on public.interviews;
+create policy interviews_write on public.interviews
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists training_select on public.training_records;
+create policy training_select on public.training_records
+  for select to authenticated
+  using (
+    driver_id = (select driver_id from public.current_profile())
+    or exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+    or exists (
+      select 1 from public.recruiting r
+      where r.id = recruiting_id and public.can_read_station(r.station_id)
+    )
+  );
+
+drop policy if exists training_write on public.training_records;
+create policy training_write on public.training_records
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
 
 drop policy if exists import_jobs_select on public.import_jobs;
 create policy import_jobs_select on public.import_jobs

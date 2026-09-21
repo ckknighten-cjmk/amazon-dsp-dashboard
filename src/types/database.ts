@@ -24,7 +24,68 @@ export type RouteStatus =
 
 export type RescueStatus = "requested" | "in_progress" | "completed";
 
-export type AttendanceStatus = "present" | "late" | "absent" | "pto" | "call_out";
+export type AttendanceStatus = "present" | "late" | "absent" | "pto" | "call_out" | "no_show";
+
+export type EmploymentStatus = "onboarding" | "active" | "offboarding" | "terminated";
+
+export type RecruitingStage =
+  | "applied"
+  | "phone_screen"
+  | "interview"
+  | "ride_along"
+  | "offer"
+  | "hired"
+  | "rejected"
+  | "withdrawn";
+
+export type RecruitingStatus = "open" | "hired" | "rejected" | "withdrawn";
+
+export interface RecruitingCandidate {
+  id: string;
+  station_id: string;
+  driver_id: string | null;
+  full_name: string;
+  email: string;
+  phone: string;
+  source: string;
+  role: string;
+  stage: RecruitingStage;
+  status: RecruitingStatus;
+  applied_at: string;
+  recruiter: string;
+  notes: string;
+}
+
+export type InterviewStage = "phone_screen" | "ops_interview" | "ride_along" | "background" | "offer_review";
+export type InterviewResult = "scheduled" | "passed" | "failed" | "no_show" | "cancelled";
+
+export interface Interview {
+  id: string;
+  recruiting_id: string;
+  stage: InterviewStage;
+  scheduled_at: string;
+  interviewer: string;
+  result: InterviewResult;
+  score: number | null;
+  notes: string;
+}
+
+export type TrainingCategory = "onboarding" | "compliance" | "safety" | "offboarding";
+export type TrainingStatus = "not_started" | "in_progress" | "completed" | "overdue" | "waived";
+
+export interface TrainingRecord {
+  id: string;
+  driver_id: string | null;
+  recruiting_id: string | null;
+  course: string;
+  category: TrainingCategory;
+  status: TrainingStatus;
+  started_at: string | null;
+  completed_at: string | null;
+  due_date: string;
+  score: number | null;
+  required: boolean;
+}
 
 export type SafetyEventType =
   | "speeding"
@@ -66,6 +127,8 @@ export interface Driver {
   station_id: string;
   hire_date: string;
   status: DriverStatus;
+  employment_status: EmploymentStatus;
+  termination_date: string | null;
   fico_score: number;
   safety_score: number;
   dcr: number;
@@ -96,8 +159,8 @@ export interface Route {
   id: string;
   route_code: string;
   station_id: string;
-  driver_id: string;
-  vehicle_id: string;
+  driver_id: string | null;
+  vehicle_id: string | null;
   service_date: string;
   status: RouteStatus;
   stops_planned: number;
@@ -442,6 +505,9 @@ export interface SeedDatabase {
   workOrders: WorkOrder[];
   vehicleStatusHistory: VehicleStatusHistory[];
   repairCosts: RepairCost[];
+  recruiting: RecruitingCandidate[];
+  interviews: Interview[];
+  trainingRecords: TrainingRecord[];
 }
 
 export interface DemoUser {

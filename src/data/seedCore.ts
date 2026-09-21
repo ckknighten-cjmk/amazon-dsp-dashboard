@@ -12,6 +12,8 @@ import type {
   CoachingRecommendation,
   DemoUser,
   Driver,
+  DriverStatus,
+  EmploymentStatus,
   FailedDelivery,
   FinancialDaily,
   Forecast,
@@ -40,7 +42,7 @@ export const stations: Station[] = [
   { id: "stn-dch1", code: "DCH1", name: "Chicago", city: "Chicago", region: "US-Central" },
 ];
 
-export const drivers: Driver[] = [
+const roster = [
   { id: "drv-1042", employee_code: "DRV-1042", full_name: "Maya Alvarez", station_id: "stn-dla7", hire_date: "2023-03-12", status: "on_road", fico_score: 872, safety_score: 918, dcr: 99.4, attendance_pct: 99.1, on_time_pct: 98.4, dpmo: 210, seatbelt_pct: 99.8 },
   { id: "drv-1088", employee_code: "DRV-1088", full_name: "Kwame Osei", station_id: "stn-dla7", hire_date: "2022-11-04", status: "on_road", fico_score: 841, safety_score: 874, dcr: 98.9, attendance_pct: 97.4, on_time_pct: 96.1, dpmo: 480, seatbelt_pct: 98.6 },
   { id: "drv-1103", employee_code: "DRV-1103", full_name: "Jiro Nakamura", station_id: "stn-dla7", hire_date: "2021-06-18", status: "at_station", fico_score: 901, safety_score: 946, dcr: 99.7, attendance_pct: 99.6, on_time_pct: 99.2, dpmo: 90, seatbelt_pct: 100 },
@@ -57,8 +59,72 @@ export const drivers: Driver[] = [
   { id: "drv-1308", employee_code: "DRV-1308", full_name: "Pablo Romero", station_id: "stn-dch1", hire_date: "2024-03-03", status: "off_duty", fico_score: 748, safety_score: 711, dcr: 96.8, attendance_pct: 91.6, on_time_pct: 90.8, dpmo: 1340, seatbelt_pct: 95.1 },
 ];
 
+export const drivers: Driver[] = [
+  ...roster.map((driver) => ({
+    ...driver,
+    status: driver.status as DriverStatus,
+    employment_status: (driver.id === "drv-1308" ? "offboarding" : "active") as EmploymentStatus,
+    termination_date: null,
+  })),
+  {
+    id: "drv-1322",
+    employee_code: "DRV-1322",
+    full_name: "Priya Desai",
+    station_id: "stn-dla7",
+    hire_date: "2026-09-08",
+    status: "off_duty" as DriverStatus,
+    employment_status: "onboarding",
+    termination_date: null,
+    fico_score: 800,
+    safety_score: 810,
+    dcr: 98.0,
+    attendance_pct: 100,
+    on_time_pct: 96.0,
+    dpmo: 420,
+    seatbelt_pct: 99.2,
+  },
+  {
+    id: "drv-1336",
+    employee_code: "DRV-1336",
+    full_name: "Marcus Webb",
+    station_id: "stn-dse2",
+    hire_date: "2026-09-15",
+    status: "off_duty" as DriverStatus,
+    employment_status: "onboarding",
+    termination_date: null,
+    fico_score: 790,
+    safety_score: 798,
+    dcr: 97.6,
+    attendance_pct: 100,
+    on_time_pct: 95.4,
+    dpmo: 510,
+    seatbelt_pct: 98.8,
+  },
+  {
+    id: "drv-1350",
+    employee_code: "DRV-1350",
+    full_name: "Elena Rossi",
+    station_id: "stn-dat6",
+    hire_date: "2023-05-01",
+    status: "off_duty" as DriverStatus,
+    employment_status: "terminated",
+    termination_date: "2026-09-12",
+    fico_score: 834,
+    safety_score: 848,
+    dcr: 98.6,
+    attendance_pct: 97.2,
+    on_time_pct: 96.9,
+    dpmo: 360,
+    seatbelt_pct: 99.0,
+  },
+];
+
+const fleetDrivers = drivers.filter(
+  (driver) => driver.employment_status === "active" || driver.employment_status === "offboarding",
+);
+
 export const vehicles: Vehicle[] = [
-  ...drivers.map((driver, index) => {
+  ...fleetDrivers.map((driver, index) => {
     const odometer = 14850 + index * 3720 + (index % 4) * 410;
     return {
       id: `van-${String(index + 1).padStart(2, "0")}`,
@@ -96,7 +162,7 @@ export const vehicles: Vehicle[] = [
 ];
 
 const vehicleByDriver = Object.fromEntries(
-  drivers.map((driver, index) => [driver.id, vehicles[index].id]),
+  fleetDrivers.map((driver, index) => [driver.id, vehicles[index].id]),
 );
 
 export const routes: Route[] = [
@@ -112,6 +178,9 @@ export const routes: Route[] = [
   { id: "rte-cx03", route_code: "CX-03", station_id: "stn-dat6", driver_id: "drv-1252", vehicle_id: vehicleByDriver["drv-1252"], service_date: TODAY, status: "in_progress", stops_planned: 170, stops_completed: 138, packages_planned: 1104, packages_delivered: 896, failed_count: 2, started_at: `${TODAY}T07:16:00Z`, completed_at: null, estimated_finish: `${TODAY}T18:35:00Z` },
   { id: "rte-cx16", route_code: "CX-16", station_id: "stn-dch1", driver_id: "drv-1280", vehicle_id: vehicleByDriver["drv-1280"], service_date: TODAY, status: "in_progress", stops_planned: 174, stops_completed: 141, packages_planned: 1135, packages_delivered: 918, failed_count: 3, started_at: `${TODAY}T07:09:00Z`, completed_at: null, estimated_finish: `${TODAY}T18:50:00Z` },
   { id: "rte-cx21", route_code: "CX-21", station_id: "stn-dch1", driver_id: "drv-1294", vehicle_id: vehicleByDriver["drv-1294"], service_date: TODAY, status: "in_progress", stops_planned: 188, stops_completed: 157, packages_planned: 1220, packages_delivered: 1014, failed_count: 1, started_at: `${TODAY}T07:04:00Z`, completed_at: null, estimated_finish: `${TODAY}T18:25:00Z` },
+  { id: "rte-cx40", route_code: "CX-40", station_id: "stn-dla7", driver_id: null, vehicle_id: null, service_date: TODAY, status: "planned", stops_planned: 176, stops_completed: 0, packages_planned: 1150, packages_delivered: 0, failed_count: 0, started_at: null, completed_at: null, estimated_finish: `${TODAY}T18:30:00Z` },
+  { id: "rte-cx41", route_code: "CX-41", station_id: "stn-dax5", driver_id: null, vehicle_id: null, service_date: TODAY, status: "planned", stops_planned: 162, stops_completed: 0, packages_planned: 1048, packages_delivered: 0, failed_count: 0, started_at: null, completed_at: null, estimated_finish: `${TODAY}T18:45:00Z` },
+  { id: "rte-cx42", route_code: "CX-42", station_id: "stn-dch1", driver_id: null, vehicle_id: null, service_date: TODAY, status: "planned", stops_planned: 170, stops_completed: 0, packages_planned: 1102, packages_delivered: 0, failed_count: 0, started_at: null, completed_at: null, estimated_finish: `${TODAY}T18:55:00Z` },
 ];
 
 export const rescues: Rescue[] = [
@@ -177,14 +246,16 @@ const attendanceCycle: AttendanceStatus[][] = [
   ["pto", "pto", "present", "present", "present", "present", "pto"],
   ["present", "present", "late", "present", "present", "present", "present"],
   ["present", "present", "present", "present", "present", "present", "present"],
-  ["call_out", "present", "late", "present", "absent", "present", "call_out"],
+  ["call_out", "present", "late", "present", "no_show", "present", "no_show"],
 ];
 
 const weekDates = dateRange(WEEK_START, TODAY);
 
-export const attendance: Attendance[] = drivers.flatMap((driver, driverIndex) =>
-  weekDates.map((date, dayIndex) => {
-    const status = attendanceCycle[driverIndex][dayIndex];
+export const attendance: Attendance[] = drivers.flatMap((driver, driverIndex) => {
+  if (driver.employment_status === "terminated") return [];
+  const cycle = attendanceCycle[driverIndex] ?? weekDates.map(() => "present" as AttendanceStatus);
+  return weekDates.map((date, dayIndex) => {
+    const status = cycle[dayIndex];
     const scheduled = "07:00";
     const actual =
       status === "present" ? "06:52" :
@@ -198,8 +269,8 @@ export const attendance: Attendance[] = drivers.flatMap((driver, driverIndex) =>
       scheduled_start: scheduled,
       actual_start: actual,
     };
-  }),
-);
+  });
+});
 
 export const safetyEvents: SafetyEvent[] = [
   { id: "sev-01", driver_id: "drv-1156", vehicle_id: vehicleByDriver["drv-1156"], event_type: "speeding", severity: "high", speed_mph: 48, speed_limit_mph: 35, occurred_at: `${TODAY}T10:22:00Z`, notes: "Residential zone, 13 over" },

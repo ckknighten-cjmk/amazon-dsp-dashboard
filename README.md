@@ -14,6 +14,7 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 - **Scorecard Intelligence** — Weekly/monthly DCR, POD, CDF, FICO, Safety, DNR, DSC, and CE; driver and route impact; AI recommendations; forecasting
 - **Route Management** — Profitability, completion rates, rescue workflow, variance
 - **AI Insights** — Staffing, overtime, underperforming routes, high-risk drivers, P&L
+- **Workforce Management** — Attendance, PTO calendar, staffing forecast, recruiting pipeline, and driver lifecycle (onboarding / offboarding / training)
 - **Imports** — Placeholders for Amazon scorecard, payroll, fuel card, and fleet maintenance feeds
 
 ## Scorecard Intelligence
@@ -28,6 +29,18 @@ The `/scorecard` module tracks Amazon DSP scorecard health and includes:
 6. Four-week forecasting with warning indicators
 
 Schema for `scorecard_history`, `scorecard_targets`, `driver_scorecard_metrics`, and `route_scorecard_metrics` lives in `supabase/schema.sql` (and a standalone copy in `db/schema.sql`).
+
+## Workforce Management Center
+
+The `/workforce` module tracks people operations across the DSP:
+
+1. Attendance dashboard — present, late, call-outs, no-shows, and weekly reliability
+2. PTO calendar — vacation / sick / personal requests and coverage-risk days
+3. Staffing forecast — open routes, DA availability, and station shortages
+4. Recruiting pipeline — candidates, interview stages, and offer status
+5. Driver lifecycle — onboarding checklists, offboarding, and training completion
+
+Schema for `attendance`, `pto_requests`, `recruiting`, `interviews`, and `training_records` lives in `supabase/schema.sql`.
 
 ## Quick start
 
@@ -55,7 +68,7 @@ Without Supabase env vars the app runs in **demo mode**: local authentication, r
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor.
 3. Create Auth users that match the seeded `profiles.email` values and set `profiles.auth_user_id`.
 
-Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, scorecard intelligence tables, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, work orders, maintenance events, vehicle status history, repair costs, import jobs, and row-level security by role/station.
+Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, scorecard intelligence tables, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, work orders, maintenance events, vehicle status history, repair costs, recruiting, interviews, training records, import jobs, and row-level security by role/station.
 
 ## Scripts
 

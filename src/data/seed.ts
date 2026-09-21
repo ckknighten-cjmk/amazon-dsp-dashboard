@@ -33,6 +33,7 @@ export {
 } from "./operations";
 
 export { maintenanceEvents, workOrders, vehicleStatusHistory, repairCosts } from "./fleetReadinessSeed";
+export { recruiting, interviews, trainingRecords } from "./workforceSeed";
 
 import type { SeedDatabase } from "../types/database";
 import {
@@ -54,6 +55,7 @@ import {
 } from "./seedCore";
 import { discipline, downtime, expenses, importJobs, maintenance, payroll, pto } from "./operations";
 import { maintenanceEvents, repairCosts, vehicleStatusHistory, workOrders } from "./fleetReadinessSeed";
+import { interviews, recruiting, trainingRecords } from "./workforceSeed";
 
 export const seedDb: SeedDatabase = {
   stations,
@@ -82,4 +84,7 @@ export const seedDb: SeedDatabase = {
   workOrders,
   vehicleStatusHistory,
   repairCosts,
+  recruiting,
+  interviews,
+  trainingRecords,
 };
