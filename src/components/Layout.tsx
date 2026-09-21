@@ -2,6 +2,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import {
   Activity,
   AlertTriangle,
+  ClipboardCheck,
   DollarSign,
   LayoutDashboard,
   TrendingUp,
@@ -19,6 +20,7 @@ const navItems: NavItem[] = [
   { to: "/", label: "Executive Dashboard", icon: LayoutDashboard },
   { to: "/operations", label: "Live Operations", icon: Activity },
   { to: "/drivers", label: "Driver Performance", icon: Truck },
+  { to: "/scorecard", label: "Scorecard Intelligence", icon: ClipboardCheck },
   { to: "/financial", label: "Financial", icon: DollarSign },
   { to: "/safety", label: "Safety & Compliance", icon: AlertTriangle },
   { to: "/forecasting", label: "Forecasting", icon: TrendingUp },
