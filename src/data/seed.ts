@@ -1,5 +1,6 @@
 export {
   TODAY,
+  TOMORROW,
   WEEK_START,
   MONTH_START,
   stations,
@@ -32,6 +33,8 @@ export {
 } from "./operations";
 
 export { dispatchEvents, routeAssignments, dailyReadinessSnapshots, weatherAlerts } from "./dispatch";
+export { maintenanceEvents, workOrders, vehicleStatusHistory, repairCosts } from "./fleetReadinessSeed";
+export { recruiting, interviews, trainingRecords } from "./workforceSeed";
 
 import type { SeedDatabase } from "../types/database";
 import {
@@ -53,6 +56,8 @@ import {
 } from "./seedCore";
 import { discipline, downtime, expenses, importJobs, maintenance, payroll, pto } from "./operations";
 import { dailyReadinessSnapshots, dispatchEvents, routeAssignments, weatherAlerts } from "./dispatch";
+import { maintenanceEvents, repairCosts, vehicleStatusHistory, workOrders } from "./fleetReadinessSeed";
+import { interviews, recruiting, trainingRecords } from "./workforceSeed";
 
 export const seedDb: SeedDatabase = {
   stations,
@@ -81,4 +86,11 @@ export const seedDb: SeedDatabase = {
   routeAssignments,
   dailyReadinessSnapshots,
   weatherAlerts,
+  maintenanceEvents,
+  workOrders,
+  vehicleStatusHistory,
+  repairCosts,
+  recruiting,
+  interviews,
+  trainingRecords,
 };

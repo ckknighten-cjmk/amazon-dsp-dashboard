@@ -24,7 +24,68 @@ export type RouteStatus =
 
 export type RescueStatus = "requested" | "in_progress" | "completed";
 
-export type AttendanceStatus = "present" | "late" | "absent" | "pto" | "call_out";
+export type AttendanceStatus = "present" | "late" | "absent" | "pto" | "call_out" | "no_show";
+
+export type EmploymentStatus = "onboarding" | "active" | "offboarding" | "terminated";
+
+export type RecruitingStage =
+  | "applied"
+  | "phone_screen"
+  | "interview"
+  | "ride_along"
+  | "offer"
+  | "hired"
+  | "rejected"
+  | "withdrawn";
+
+export type RecruitingStatus = "open" | "hired" | "rejected" | "withdrawn";
+
+export interface RecruitingCandidate {
+  id: string;
+  station_id: string;
+  driver_id: string | null;
+  full_name: string;
+  email: string;
+  phone: string;
+  source: string;
+  role: string;
+  stage: RecruitingStage;
+  status: RecruitingStatus;
+  applied_at: string;
+  recruiter: string;
+  notes: string;
+}
+
+export type InterviewStage = "phone_screen" | "ops_interview" | "ride_along" | "background" | "offer_review";
+export type InterviewResult = "scheduled" | "passed" | "failed" | "no_show" | "cancelled";
+
+export interface Interview {
+  id: string;
+  recruiting_id: string;
+  stage: InterviewStage;
+  scheduled_at: string;
+  interviewer: string;
+  result: InterviewResult;
+  score: number | null;
+  notes: string;
+}
+
+export type TrainingCategory = "onboarding" | "compliance" | "safety" | "offboarding";
+export type TrainingStatus = "not_started" | "in_progress" | "completed" | "overdue" | "waived";
+
+export interface TrainingRecord {
+  id: string;
+  driver_id: string | null;
+  recruiting_id: string | null;
+  course: string;
+  category: TrainingCategory;
+  status: TrainingStatus;
+  started_at: string | null;
+  completed_at: string | null;
+  due_date: string;
+  score: number | null;
+  required: boolean;
+}
 
 export type SafetyEventType =
   | "speeding"
@@ -66,6 +127,8 @@ export interface Driver {
   station_id: string;
   hire_date: string;
   status: DriverStatus;
+  employment_status: EmploymentStatus;
+  termination_date: string | null;
   fico_score: number;
   safety_score: number;
   dcr: number;
@@ -305,6 +368,69 @@ export interface VehicleDowntime {
   notes: string;
 }
 
+export type MaintenanceEventType = "preventive" | "repair" | "inspection" | "damage" | "dvic";
+
+export interface MaintenanceEvent {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  work_order_id: string | null;
+  event_type: MaintenanceEventType;
+  occurred_at: string;
+  odometer_miles: number;
+  title: string;
+  description: string;
+  downtime_hours: number;
+  technician: string;
+}
+
+export type WorkOrderStatus = "open" | "in_progress" | "completed" | "cancelled";
+export type WorkOrderPriority = "low" | "medium" | "high" | "critical";
+export type WorkOrderType = "preventive" | "repair" | "body" | "tire" | "recall" | "dvic";
+
+export interface WorkOrder {
+  id: string;
+  vehicle_id: string;
+  station_id: string;
+  wo_number: string;
+  title: string;
+  description: string;
+  type: WorkOrderType;
+  status: WorkOrderStatus;
+  priority: WorkOrderPriority;
+  opened_at: string;
+  due_at: string;
+  completed_at: string | null;
+  shop: string;
+  estimated_hours: number;
+  actual_hours: number | null;
+}
+
+export type VehicleStatusCode = Vehicle["status"] | "new";
+
+export interface VehicleStatusHistory {
+  id: string;
+  vehicle_id: string;
+  from_status: VehicleStatusCode;
+  to_status: Vehicle["status"];
+  changed_at: string;
+  reason: string;
+  changed_by: string;
+}
+
+export type RepairCostCategory = "parts" | "labor" | "body" | "tires" | "glass" | "other";
+
+export interface RepairCost {
+  id: string;
+  vehicle_id: string;
+  work_order_id: string;
+  category: RepairCostCategory;
+  amount: number;
+  incurred_at: string;
+  vendor: string;
+  description: string;
+}
+
 export type ImportSource = "amazon_scorecard" | "payroll" | "fuel_card" | "fleet_maintenance";
 export type ImportJobStatus = "idle" | "ready" | "mapped" | "imported" | "failed";
 
@@ -484,6 +610,13 @@ export interface SeedDatabase {
   routeAssignments: RouteAssignment[];
   dailyReadinessSnapshots: DailyReadinessSnapshot[];
   weatherAlerts: WeatherAlert[];
+  maintenanceEvents: MaintenanceEvent[];
+  workOrders: WorkOrder[];
+  vehicleStatusHistory: VehicleStatusHistory[];
+  repairCosts: RepairCost[];
+  recruiting: RecruitingCandidate[];
+  interviews: Interview[];
+  trainingRecords: TrainingRecord[];
 }
 
 export interface DemoUser {

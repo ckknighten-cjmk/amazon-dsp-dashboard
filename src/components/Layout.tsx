@@ -14,7 +14,8 @@ import {
   TrendingUp,
   Truck,
   Upload,
-  Wrench,
+  Users,
+  Gauge,
   X,
 } from "lucide-react";
 import type { ComponentType } from "react";
@@ -34,11 +35,12 @@ const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/financial": DollarSign,
   "/safety": AlertTriangle,
   "/forecasting": TrendingUp,
-  "/fleet": Wrench,
+  "/fleet": Gauge,
   "/scorecard": ClipboardList,
   "/routes": Map,
   "/insights": Sparkles,
   "/imports": Upload,
+  "/workforce": Users,
 };
 
 export default function Layout() {

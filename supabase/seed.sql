@@ -8,6 +8,13 @@ delete from public.daily_readiness_snapshots;
 delete from public.weather_alerts;
 delete from public.dispatch_events;
 delete from public.route_assignments;
+delete from public.training_records;
+delete from public.interviews;
+delete from public.recruiting;
+delete from public.repair_costs;
+delete from public.maintenance_events;
+delete from public.vehicle_status_history;
+delete from public.work_orders;
 delete from public.vehicle_downtime;
 delete from public.disciplinary_records;
 delete from public.pto_requests;
@@ -55,7 +62,15 @@ insert into public.drivers (
   ('b0000000-0000-4000-8000-000000001266', 'DRV-1266', 'Harsh Patel', 'a0000000-0000-4000-8000-000000000004', '2021-12-02', 'off_duty', 890, 921, 99.5, 96.4, 98.6, 150, 99.7),
   ('b0000000-0000-4000-8000-000000001280', 'DRV-1280', 'Eva Kowalski', 'a0000000-0000-4000-8000-000000000005', '2022-02-28', 'on_road', 837, 852, 98.7, 97.1, 96.4, 390, 98.8),
   ('b0000000-0000-4000-8000-000000001294', 'DRV-1294', 'Chris Nguyen', 'a0000000-0000-4000-8000-000000000005', '2023-10-11', 'on_road', 861, 894, 99.2, 98.5, 97.9, 220, 99.4),
-  ('b0000000-0000-4000-8000-000000001308', 'DRV-1308', 'Pablo Romero', 'a0000000-0000-4000-8000-000000000005', '2024-03-03', 'off_duty', 748, 711, 96.8, 91.6, 90.8, 1340, 95.1);
+  ('b0000000-0000-4000-8000-000000001308', 'DRV-1308', 'Pablo Romero', 'a0000000-0000-4000-8000-000000000005', '2024-03-03', 'off_duty', 748, 711, 96.8, 91.6, 90.8, 1340, 95.1),
+  ('b0000000-0000-4000-8000-000000001322', 'DRV-1322', 'Priya Desai', 'a0000000-0000-4000-8000-000000000001', '2026-09-08', 'off_duty', 800, 810, 98.0, 100, 96.0, 420, 99.2),
+  ('b0000000-0000-4000-8000-000000001336', 'DRV-1336', 'Marcus Webb', 'a0000000-0000-4000-8000-000000000003', '2026-09-15', 'off_duty', 790, 798, 97.6, 100, 95.4, 510, 98.8),
+  ('b0000000-0000-4000-8000-000000001350', 'DRV-1350', 'Elena Rossi', 'a0000000-0000-4000-8000-000000000004', '2023-05-01', 'off_duty', 834, 848, 98.6, 97.2, 96.9, 360, 99.0);
+
+update public.drivers set employment_status = 'active';
+update public.drivers set employment_status = 'offboarding' where employee_code = 'DRV-1308';
+update public.drivers set employment_status = 'onboarding' where employee_code in ('DRV-1322', 'DRV-1336');
+update public.drivers set employment_status = 'terminated', termination_date = '2026-09-12' where employee_code = 'DRV-1350';
 
 insert into public.vehicles (id, van_id, vin, station_id, year, make, model, status)
 select
@@ -120,7 +135,9 @@ insert into public.routes (
   ('d0000000-0000-4000-8000-000000000016', 'CX-16', 'a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001280', 'c0000000-0000-4000-8000-000000000012', '2026-09-20', 'in_progress', 174, 141, 1135, 918, 3, '2026-09-20 07:09+00', null, '2026-09-20 18:50+00'),
   ('d0000000-0000-4000-8000-000000000021', 'CX-21', 'a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001294', 'c0000000-0000-4000-8000-000000000013', '2026-09-20', 'in_progress', 188, 157, 1220, 1014, 1, '2026-09-20 07:04+00', null, '2026-09-20 18:25+00'),
   ('d0000000-0000-4000-8000-000000000033', 'CX-33', 'a0000000-0000-4000-8000-000000000004', null, null, '2026-09-20', 'planned', 172, 0, 1118, 0, 0, null, null, '2026-09-20 19:10+00'),
-  ('d0000000-0000-4000-8000-000000000042', 'CX-42', 'a0000000-0000-4000-8000-000000000001', null, null, '2026-09-20', 'planned', 164, 0, 1088, 0, 0, null, null, '2026-09-20 19:20+00');
+  ('d0000000-0000-4000-8000-000000000040', 'CX-40', 'a0000000-0000-4000-8000-000000000001', null, null, '2026-09-20', 'planned', 176, 0, 1150, 0, 0, null, null, '2026-09-20 18:30+00'),
+  ('d0000000-0000-4000-8000-000000000041', 'CX-41', 'a0000000-0000-4000-8000-000000000002', null, null, '2026-09-20', 'planned', 162, 0, 1048, 0, 0, null, null, '2026-09-20 18:45+00'),
+  ('d0000000-0000-4000-8000-000000000042', 'CX-42', 'a0000000-0000-4000-8000-000000000005', null, null, '2026-09-20', 'planned', 170, 0, 1102, 0, 0, null, null, '2026-09-20 18:55+00');
 
 insert into public.rescues (service_date, distressed_route_id, rescue_route_id, stops_transferred, status, reason, requested_at, completed_at) values
   ('2026-09-20', 'd0000000-0000-4000-8000-000000000027', 'd0000000-0000-4000-8000-000000000009', 28, 'in_progress', 'Behind pace after delayed wave departure', '2026-09-20 14:18+00', null),
@@ -145,7 +162,13 @@ select d.id, day::date,
   '07:00',
   case when extract(dow from day) = 3 then '07:18' else '06:52' end
 from public.drivers d
-cross join generate_series('2026-09-14'::date, '2026-09-20'::date, interval '1 day') day;
+cross join generate_series('2026-09-14'::date, '2026-09-20'::date, interval '1 day') day
+where d.employment_status <> 'terminated';
+
+update public.attendance
+set status = 'no_show', actual_start = null
+where driver_id = 'b0000000-0000-4000-8000-000000001308'
+  and service_date in ('2026-09-18', '2026-09-20');
 
 insert into public.safety_events (driver_id, vehicle_id, event_type, severity, speed_mph, speed_limit_mph, occurred_at, notes)
 select 'b0000000-0000-4000-8000-000000001156', 'c0000000-0000-4000-8000-000000000004', 'speeding', 'high', 48, 35, '2026-09-20 10:22+00', 'Residential zone, 13 over'
@@ -280,13 +303,74 @@ insert into public.vehicle_downtime (vehicle_id, station_id, started_at, ended_a
   ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', '2026-09-08 06:00+00', '2026-09-08 08:30+00', 'maintenance', 2.5, 'PM completed same morning'),
   ('c0000000-0000-4000-8000-000000000006', 'a0000000-0000-4000-8000-000000000002', '2026-09-17 18:10+00', '2026-09-17 20:05+00', 'charging', 1.9, 'Returned below reserve SOC');
 
+insert into public.work_orders (
+  id, vehicle_id, station_id, wo_number, title, description, type, status, priority,
+  opened_at, due_at, completed_at, shop, estimated_hours, actual_hours
+) values
+  ('e1000000-0000-4000-8000-000000004418', 'c0000000-0000-4000-8000-000000000015', 'a0000000-0000-4000-8000-000000000001', 'WO-4418', 'Body shop — rear quarter panel', 'Rear quarter panel and sensor cluster after cul-de-sac contact.', 'body', 'in_progress', 'critical', '2026-09-18', '2026-09-23', null, 'Penske Collision DLA7', 48, 46),
+  ('e1000000-0000-4000-8000-000000004421', 'c0000000-0000-4000-8000-000000000014', 'a0000000-0000-4000-8000-000000000005', 'WO-4421', 'Brake warning + inner rear tire', 'DVIC fail: brake warning light and inner rear tire wear.', 'repair', 'in_progress', 'critical', '2026-09-20', '2026-09-20', null, 'Amazon Fleet Shop DCH1', 10, 9),
+  ('e1000000-0000-4000-8000-000000004382', 'c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'WO-4382', 'Overdue inner rear tire', 'Pre-trip headlamp and inner rear wear. Tire set staged overnight.', 'tire', 'open', 'high', '2026-09-19', '2026-09-19', null, 'Discount Tire SODO', 3, null),
+  ('e1000000-0000-4000-8000-000000004430', 'c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'WO-4430', 'Open DVIC — headlamp out', 'Left headlamp failed pre-trip. Blocks tomorrow launch.', 'dvic', 'open', 'high', '2026-09-20', '2026-09-20', null, 'Amazon Fleet Shop DSE2', 1.5, null),
+  ('e1000000-0000-4000-8000-000000004390', 'c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'WO-4390', '5k preventive maintenance', 'Cabin filter, torque, and software recall check.', 'preventive', 'open', 'medium', '2026-09-17', '2026-09-22', null, 'Amazon Fleet Shop DAX5', 4, null),
+  ('e1000000-0000-4000-8000-000000004428', 'c0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000001', 'WO-4428', 'Upcoming 20k PM', 'Scheduled 20k preventive service. Van remains available tomorrow.', 'preventive', 'open', 'low', '2026-09-19', '2026-09-25', null, 'Amazon Fleet Shop DLA7', 3, null),
+  ('e1000000-0000-4000-8000-000000004311', 'c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'WO-4311', 'Completed 15k PM', '15k PM closed same morning.', 'preventive', 'completed', 'medium', '2026-09-06', '2026-09-08', '2026-09-08', 'Amazon Fleet Shop DLA7', 3, 2.5),
+  ('e1000000-0000-4000-8000-000000004334', 'c0000000-0000-4000-8000-000000000007', 'a0000000-0000-4000-8000-000000000003', 'WO-4334', 'Camera module recall', 'Ford commercial camera module recall — warranty.', 'recall', 'completed', 'medium', '2026-09-10', '2026-09-12', '2026-09-12', 'Ford Commercial Seattle', 5, 5),
+  ('e1000000-0000-4000-8000-000000004360', 'c0000000-0000-4000-8000-000000000012', 'a0000000-0000-4000-8000-000000000005', 'WO-4360', '12V aux battery replacement', 'No-start after overnight sit.', 'repair', 'completed', 'high', '2026-09-14', '2026-09-15', '2026-09-15', 'Amazon Fleet Shop DCH1', 6, 6),
+  ('e1000000-0000-4000-8000-000000004298', 'c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'WO-4298', 'Passenger mirror assembly', 'HOA gate-arm contact. Mirror housing and glass replaced.', 'body', 'completed', 'medium', '2026-09-17', '2026-09-18', '2026-09-18', 'Penske Collision DAX5', 6, 5.5);
+
+insert into public.maintenance_events (
+  vehicle_id, station_id, work_order_id, event_type, occurred_at, odometer_miles, title, description, downtime_hours, technician
+) values
+  ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004311', 'preventive', '2026-09-08 08:10+00', 14850, '15k PM completed', 'Filter, torque, and software cadence closed same morning.', 2.5, 'Shop lead DLA7'),
+  ('c0000000-0000-4000-8000-000000000007', 'a0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004334', 'repair', '2026-09-12 11:40+00', 37170, 'Camera recall closed', 'Warranty camera module swap and aim calibration.', 5, 'Ford Commercial Seattle'),
+  ('c0000000-0000-4000-8000-000000000012', 'a0000000-0000-4000-8000-000000000005', 'e1000000-0000-4000-8000-000000004360', 'repair', '2026-09-15 09:20+00', 55770, 'Aux battery replaced', '12V aux battery and load test after no-start.', 6, 'Shop lead DCH1'),
+  ('c0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000002', 'e1000000-0000-4000-8000-000000004298', 'damage', '2026-09-18 15:40+00', 28000, 'New damage — passenger mirror', 'HOA gate-arm contact. Mirror assembly replaced.', 5.5, 'Penske Collision DAX5'),
+  ('c0000000-0000-4000-8000-000000000015', 'a0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004418', 'damage', '2026-09-18 11:10+00', 41220, 'New damage — rear quarter panel', 'Low-speed cul-de-sac contact. Van OOS pending body work.', 46, 'Penske Collision DLA7'),
+  ('c0000000-0000-4000-8000-000000000014', 'a0000000-0000-4000-8000-000000000005', 'e1000000-0000-4000-8000-000000004421', 'dvic', '2026-09-20 06:24+00', 62000, 'DVIC fail — brake warning', 'Pre-trip fail: brake warning light and inner rear tire wear.', 9, 'Wave inspector DCH1'),
+  ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004430', 'dvic', '2026-09-20 06:18+00', 42000, 'Open DVIC — headlamp out', 'Left headlamp out on pre-trip. Not cleared for tomorrow.', 0, 'Wave inspector DSE2'),
+  ('c0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004382', 'repair', '2026-09-19 16:50+00', 42000, 'Tire wear flagged at return', 'Inner rear wear beyond spec. Tire set staged overnight.', 13, 'Discount Tire SODO'),
+  ('c0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004428', 'inspection', '2026-09-20 06:12+00', 22000, 'Pre-trip pass', 'DVIC pass. 20k PM remains scheduled later this week.', 0, 'Wave inspector DLA7'),
+  ('c0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', null, 'inspection', '2026-09-20 06:10+00', 14850, 'Pre-trip pass', 'Cleared for wave. No open defects.', 0, 'Wave inspector DLA7');
+
+insert into public.vehicle_status_history (vehicle_id, from_status, to_status, changed_at, reason, changed_by) values
+  ('c0000000-0000-4000-8000-000000000015', 'active', 'oos', '2026-09-18 11:20+00', 'Cul-de-sac contact — grounded pending body shop', 'Riley Cho'),
+  ('c0000000-0000-4000-8000-000000000014', 'active', 'maintenance', '2026-09-20 06:28+00', 'DVIC fail — brake warning / tire wear', 'Jordan Hale'),
+  ('c0000000-0000-4000-8000-000000000009', 'active', 'maintenance', '2026-09-19 16:45+00', 'Held overnight for tire set', 'Sam Okonkwo'),
+  ('c0000000-0000-4000-8000-000000000009', 'maintenance', 'active', '2026-09-20 05:50+00', 'Returned to yard; DVIC headlamp still open', 'Sam Okonkwo'),
+  ('c0000000-0000-4000-8000-000000000004', 'maintenance', 'active', '2026-09-18 20:10+00', 'Mirror assembly replaced; released for service', 'Jordan Hale'),
+  ('c0000000-0000-4000-8000-000000000004', 'active', 'maintenance', '2026-09-17 16:00+00', 'Gate-arm damage — shop overnight', 'Riley Cho'),
+  ('c0000000-0000-4000-8000-000000000001', 'maintenance', 'active', '2026-09-08 08:35+00', '15k PM complete', 'Shop lead DLA7'),
+  ('c0000000-0000-4000-8000-000000000012', 'maintenance', 'active', '2026-09-15 12:05+00', 'Aux battery replaced', 'Shop lead DCH1');
+
+insert into public.repair_costs (vehicle_id, work_order_id, category, amount, incurred_at, vendor, description) values
+  ('c0000000-0000-4000-8000-000000000015', 'e1000000-0000-4000-8000-000000004418', 'body', 2180, '2026-09-19', 'Penske Collision DLA7', 'Quarter panel and blend'),
+  ('c0000000-0000-4000-8000-000000000015', 'e1000000-0000-4000-8000-000000004418', 'parts', 1260, '2026-09-19', 'Penske Collision DLA7', 'Sensor cluster + clips'),
+  ('c0000000-0000-4000-8000-000000000015', 'e1000000-0000-4000-8000-000000004418', 'labor', 740, '2026-09-20', 'Penske Collision DLA7', 'Body labor in progress'),
+  ('c0000000-0000-4000-8000-000000000014', 'e1000000-0000-4000-8000-000000004421', 'parts', 420, '2026-09-20', 'Amazon Fleet Shop DCH1', 'Brake sensor + hardware'),
+  ('c0000000-0000-4000-8000-000000000014', 'e1000000-0000-4000-8000-000000004421', 'labor', 470, '2026-09-20', 'Amazon Fleet Shop DCH1', 'Diagnosis and tire inspect'),
+  ('c0000000-0000-4000-8000-000000000009', 'e1000000-0000-4000-8000-000000004382', 'tires', 620, '2026-09-20', 'Discount Tire SODO', 'Inner rear tire set'),
+  ('c0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004311', 'labor', 185, '2026-09-08', 'Amazon Fleet Shop DLA7', '15k PM labor'),
+  ('c0000000-0000-4000-8000-000000000001', 'e1000000-0000-4000-8000-000000004311', 'parts', 100, '2026-09-08', 'Amazon Fleet Shop DLA7', 'Cabin filter kit'),
+  ('c0000000-0000-4000-8000-000000000012', 'e1000000-0000-4000-8000-000000004360', 'parts', 310, '2026-09-15', 'Amazon Fleet Shop DCH1', '12V aux battery'),
+  ('c0000000-0000-4000-8000-000000000012', 'e1000000-0000-4000-8000-000000004360', 'labor', 165, '2026-09-15', 'Amazon Fleet Shop DCH1', 'Battery R&R / load test'),
+  ('c0000000-0000-4000-8000-000000000004', 'e1000000-0000-4000-8000-000000004298', 'glass', 240, '2026-09-18', 'Penske Collision DAX5', 'Mirror glass'),
+  ('c0000000-0000-4000-8000-000000000004', 'e1000000-0000-4000-8000-000000004298', 'body', 410, '2026-09-18', 'Penske Collision DAX5', 'Housing and paint blend'),
+  ('c0000000-0000-4000-8000-000000000004', 'e1000000-0000-4000-8000-000000004298', 'labor', 240, '2026-09-18', 'Penske Collision DAX5', 'Mirror R&R'),
+  ('c0000000-0000-4000-8000-000000000003', 'e1000000-0000-4000-8000-000000004428', 'parts', 95, '2026-09-20', 'Amazon Fleet Shop DLA7', 'PM kit staged');
+
 insert into public.pto_requests (driver_id, pto_type, status, start_date, end_date, hours, notes) values
   ('b0000000-0000-4000-8000-000000001266', 'vacation', 'taken', '2026-09-14', '2026-09-15', 18, 'Approved vacation — back mid-week'),
   ('b0000000-0000-4000-8000-000000001266', 'personal', 'approved', '2026-09-20', '2026-09-20', 9, 'Sunday personal day'),
   ('b0000000-0000-4000-8000-000000001308', 'unpaid', 'pending', '2026-09-21', '2026-09-23', 27, 'Reliability hold — pending ops review'),
   ('b0000000-0000-4000-8000-000000001201', 'sick', 'taken', '2026-09-15', '2026-09-15', 9, 'Call-out converted to sick'),
   ('b0000000-0000-4000-8000-000000001103', 'vacation', 'approved', '2026-09-26', '2026-09-28', 27, 'Peak-adjacent PTO — coverage assigned'),
-  ('b0000000-0000-4000-8000-000000001042', 'personal', 'denied', '2026-09-26', '2026-09-26', 9, 'Saturday peak — denied');
+  ('b0000000-0000-4000-8000-000000001042', 'personal', 'denied', '2026-09-26', '2026-09-26', 9, 'Saturday peak — denied'),
+  ('b0000000-0000-4000-8000-000000001210', 'vacation', 'approved', '2026-09-24', '2026-09-25', 18, 'Mid-week vacation — extra DA covering DSE2'),
+  ('b0000000-0000-4000-8000-000000001224', 'personal', 'pending', '2026-09-22', '2026-09-22', 9, 'School appointment'),
+  ('b0000000-0000-4000-8000-000000001294', 'sick', 'taken', '2026-09-16', '2026-09-16', 9, 'Same-day sick'),
+  ('b0000000-0000-4000-8000-000000001280', 'vacation', 'approved', '2026-09-28', '2026-09-30', 27, 'Blackout adjacent'),
+  ('b0000000-0000-4000-8000-000000001252', 'personal', 'approved', '2026-09-21', '2026-09-21', 9, 'Monday personal'),
+  ('b0000000-0000-4000-8000-000000001177', 'sick', 'pending', '2026-09-23', '2026-09-23', 9, 'Follow-up appointment');
 
 insert into public.disciplinary_records (driver_id, occurred_at, type, status, category, description, issued_by) values
   ('b0000000-0000-4000-8000-000000001308', '2026-09-14 10:30+00', 'final', 'open', 'Safety', 'Seatbelt + distraction after prior written warning.', 'Riley Cho'),
@@ -368,10 +452,6 @@ update public.attendance
 set status = 'pto', actual_start = null
 where driver_id = 'b0000000-0000-4000-8000-000000001266' and service_date = '2026-09-20';
 
-update public.attendance
-set status = 'call_out', actual_start = null
-where driver_id = 'b0000000-0000-4000-8000-000000001308' and service_date = '2026-09-20';
-
 insert into public.route_assignments (
   id, route_id, station_id, service_date, driver_id, vehicle_id, assignment_status, check_in_at, dispatched_at, notes
 )
@@ -393,7 +473,9 @@ select
   r.started_at,
   case
     when r.route_code = 'CX-33' then 'Open after Patel PTO — needs extra DA or split onto CX-03.'
-    when r.route_code = 'CX-42' then 'Open after agency no-show — DLA7 Sunday overflow.'
+    when r.route_code = 'CX-40' then 'Open after agency no-show — DLA7 Sunday overflow.'
+    when r.route_code = 'CX-41' then 'Open extra at DAX5 — staff before heat wave lock.'
+    when r.route_code = 'CX-42' then 'Open after Romero no-show — DCH1 Sunday coverage.'
     else 'Assigned and on the board.'
   end
 from public.routes r
@@ -420,9 +502,9 @@ where a.status in ('present', 'late');
 insert into public.dispatch_events (
   station_id, driver_id, vehicle_id, route_id, service_date, event_type, occurred_at, notes, created_by
 ) values
-  ('a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001308', 'c0000000-0000-4000-8000-000000000014', null, '2026-09-20', 'call_out', '2026-09-20 05:41+00', 'Pablo Romero called out at 05:41. EV-223 remains in shop from DVIC fail.', 'Sam Okonkwo'),
+  ('a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001308', 'c0000000-0000-4000-8000-000000000014', 'd0000000-0000-4000-8000-000000000042', '2026-09-20', 'no_show', '2026-09-20 05:41+00', 'Pablo Romero no-showed. EV-223 remains in shop from DVIC fail. CX-42 at DCH1 is still open.', 'Sam Okonkwo'),
   ('a0000000-0000-4000-8000-000000000004', 'b0000000-0000-4000-8000-000000001266', null, 'd0000000-0000-4000-8000-000000000033', '2026-09-20', 'pto', '2026-09-17 16:00+00', 'Harsh Patel personal day — CX-33 still open at DAT6.', 'Jordan Hale'),
-  ('a0000000-0000-4000-8000-000000000001', null, null, 'd0000000-0000-4000-8000-000000000042', '2026-09-20', 'no_show', '2026-09-20 07:10+00', 'Agency flex DA did not report for CX-42 extra Sunday volume at DLA7.', 'Sam Okonkwo'),
+  ('a0000000-0000-4000-8000-000000000001', null, null, 'd0000000-0000-4000-8000-000000000040', '2026-09-20', 'no_show', '2026-09-20 07:10+00', 'Agency flex DA did not report for CX-40 extra Sunday volume at DLA7.', 'Sam Okonkwo'),
   ('a0000000-0000-4000-8000-000000000002', 'b0000000-0000-4000-8000-000000001156', 'c0000000-0000-4000-8000-000000000004', 'd0000000-0000-4000-8000-000000000031', '2026-09-20', 'delay', '2026-09-20 07:18+00', 'Sofia Petrova late to wave. CX-31 departed 18 minutes after staged time.', 'Sam Okonkwo'),
   ('a0000000-0000-4000-8000-000000000001', null, 'c0000000-0000-4000-8000-000000000015', null, '2026-09-20', 'damage_alert', '2026-09-20 06:05+00', 'EV-224 still OOS — rear quarter panel and sensor cluster from cul-de-sac contact.', 'Riley Cho'),
   ('a0000000-0000-4000-8000-000000000003', 'b0000000-0000-4000-8000-000000001238', 'c0000000-0000-4000-8000-000000000009', 'd0000000-0000-4000-8000-000000000027', '2026-09-20', 'damage_alert', '2026-09-20 06:22+00', 'New DVIC: headlamp out plus bumper scuff on EV-218. Still rolled on CX-27.', 'Riley Cho'),
@@ -431,10 +513,10 @@ insert into public.dispatch_events (
 insert into public.weather_alerts (
   id, station_id, service_date, alert_type, severity, title, summary, starts_at, ends_at, high_risk
 ) values
-  ('a2000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000002', '2026-09-20', 'heat', 'critical', 'Excessive Heat Warning — Phoenix', 'DAX5 heat index 108–112°F through 19:00. High-risk operating conditions for CX-31 / CX-05 / CX-18.', '2026-09-20 15:00+00', '2026-09-21 02:00+00', true),
+  ('a2000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000002', '2026-09-20', 'heat', 'critical', 'Excessive Heat Warning — Phoenix', 'DAX5 heat index 108–112°F through 19:00. High-risk operating conditions for CX-31 / CX-05 / CX-18. CX-41 is still unassigned.', '2026-09-20 15:00+00', '2026-09-21 02:00+00', true),
   ('a2000000-0000-4000-8000-000000000002', 'a0000000-0000-4000-8000-000000000003', '2026-09-20', 'storm', 'warning', 'Storm Warning — Puget Sound', 'Atmospheric river over DSE2 with 0.6–1.1" rain and gusts 35–45 mph. Elevated rescue risk on CX-27.', '2026-09-20 13:00+00', '2026-09-20 23:00+00', true),
-  ('a2000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000005', '2026-09-20', 'wind', 'watch', 'Wind Advisory — Chicago', 'Sustained 20–25 mph with gusts to 40 mph at DCH1. Secure totes and watch door-prop incidents.', '2026-09-20 12:00+00', '2026-09-20 22:00+00', false),
-  ('a2000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000001', '2026-09-20', 'air_quality', 'watch', 'Air Quality Advisory — Los Angeles', 'Smoke-influenced AQI 118 at DLA7. Issue N95s at stand-up and keep CX-42 unassigned until staffing recovers.', '2026-09-20 06:00+00', '2026-09-20 20:00+00', false),
+  ('a2000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000005', '2026-09-20', 'wind', 'watch', 'Wind Advisory — Chicago', 'Sustained 20–25 mph with gusts to 40 mph at DCH1. Secure totes and watch door-prop incidents. CX-42 is still open after Romero no-show.', '2026-09-20 12:00+00', '2026-09-20 22:00+00', false),
+  ('a2000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000001', '2026-09-20', 'air_quality', 'watch', 'Air Quality Advisory — Los Angeles', 'Smoke-influenced AQI 118 at DLA7. Issue N95s at stand-up and keep CX-40 unassigned until staffing recovers.', '2026-09-20 06:00+00', '2026-09-20 20:00+00', false),
   ('a2000000-0000-4000-8000-000000000005', 'a0000000-0000-4000-8000-000000000004', '2026-09-20', 'heat', 'warning', 'Heat Advisory — Atlanta', 'DAT6 afternoon heat index 98°F. CX-33 is still open after Patel PTO.', '2026-09-20 16:00+00', '2026-09-21 00:00+00', true);
 
 insert into public.daily_readiness_snapshots (
@@ -445,6 +527,55 @@ insert into public.daily_readiness_snapshots (
   staffing_readiness_pct, launch_readiness_score, weather_risk, notes
 ) values
   ('a1000000-0000-4000-8000-000000000001', null, '2026-09-19', '2026-09-19 05:30+00', 14, 13, 0, 1, 0, 0, 1, 14, 1, 13, 1, 1, 93.3, 13, 0, 100, 18, 4, 92.9, 91.4, 12, 'Saturday peak cleared with one call-out covered by a flex DA.'),
-  ('a1000000-0000-4000-8000-000000000002', null, '2026-09-20', '2026-09-20 05:30+00', 14, 8, 1, 1, 1, 2, -2, 13, 2, 0, 3, 2, 86.7, 12, 2, 85.7, 42, 5, 85.7, 78.2, 40, 'Pre-wave snapshot: two open routes, Phoenix heat, Seattle storm.');
+  ('a1000000-0000-4000-8000-000000000002', null, '2026-09-20', '2026-09-20 05:30+00', 16, 14, 1, 0, 2, 4, -2, 13, 2, 0, 3, 2, 86.7, 12, 4, 75.0, 42, 5, 75.0, 68.4, 40, 'Pre-wave snapshot: four open routes, Romero no-show, Phoenix heat, Seattle storm.');
+
+insert into public.recruiting (
+  id, station_id, driver_id, full_name, email, phone, source, role, stage, status, applied_at, recruiter, notes
+) values
+  ('e0000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000001', null, 'Jordan Blake', 'jordan.blake@mail.local', '323-555-0142', 'Indeed', 'driver_associate', 'applied', 'open', '2026-09-17', 'Jordan Hale', 'Evening availability'),
+  ('e0000000-0000-4000-8000-000000000002', 'a0000000-0000-4000-8000-000000000002', null, 'Camila Ortiz', 'camila.ortiz@mail.local', '602-555-0194', 'Referral', 'driver_associate', 'phone_screen', 'open', '2026-09-12', 'Jordan Hale', 'Referred by David Okafor'),
+  ('e0000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000003', null, 'Andre Walsh', 'andre.walsh@mail.local', '206-555-0177', 'Career fair', 'driver_associate', 'interview', 'open', '2026-09-08', 'Sam Okonkwo', 'Ops interview scheduled'),
+  ('e0000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000001', 'b0000000-0000-4000-8000-000000001322', 'Priya Desai', 'priya.desai@mail.local', '310-555-0118', 'Indeed', 'driver_associate', 'hired', 'hired', '2026-08-23', 'Jordan Hale', 'Started 8 Sep'),
+  ('e0000000-0000-4000-8000-000000000005', 'a0000000-0000-4000-8000-000000000003', 'b0000000-0000-4000-8000-000000001336', 'Marcus Webb', 'marcus.webb@mail.local', '425-555-0160', 'Amazon jobs', 'driver_associate', 'hired', 'hired', '2026-08-30', 'Sam Okonkwo', 'Day-5 of onboarding'),
+  ('e0000000-0000-4000-8000-000000000006', 'a0000000-0000-4000-8000-000000000004', null, 'Naomi Okada', 'naomi.okada@mail.local', '404-555-0133', 'LinkedIn', 'driver_associate', 'offer', 'open', '2026-09-04', 'Jordan Hale', 'Verbal offer out'),
+  ('e0000000-0000-4000-8000-000000000007', 'a0000000-0000-4000-8000-000000000005', null, 'Luis Ferreira', 'luis.ferreira@mail.local', '312-555-0188', 'Indeed', 'driver_associate', 'ride_along', 'open', '2026-09-10', 'Riley Cho', 'Ride-along tomorrow'),
+  ('e0000000-0000-4000-8000-000000000008', 'a0000000-0000-4000-8000-000000000001', null, 'Hannah Cole', 'hannah.cole@mail.local', '213-555-0104', 'Indeed', 'driver_associate', 'rejected', 'rejected', '2026-09-02', 'Jordan Hale', 'Failed MVR'),
+  ('e0000000-0000-4000-8000-000000000009', 'a0000000-0000-4000-8000-000000000002', null, 'Kenji Sato', 'kenji.sato@mail.local', '480-555-0129', 'Referral', 'driver_associate', 'withdrawn', 'withdrawn', '2026-09-06', 'Jordan Hale', 'Accepted a Flex offer'),
+  ('e0000000-0000-4000-8000-000000000010', 'a0000000-0000-4000-8000-000000000001', null, 'Aisha Rahman', 'aisha.rahman@mail.local', '562-555-0155', 'Amazon jobs', 'driver_associate', 'interview', 'open', '2026-09-14', 'Jordan Hale', 'Ops interview this week'),
+  ('e0000000-0000-4000-8000-000000000011', 'a0000000-0000-4000-8000-000000000005', null, 'Ben Travers', 'ben.travers@mail.local', '773-555-0171', 'Indeed', 'driver_associate', 'applied', 'open', '2026-09-19', 'Sam Okonkwo', 'Weekend availability'),
+  ('e0000000-0000-4000-8000-000000000012', 'a0000000-0000-4000-8000-000000000004', 'b0000000-0000-4000-8000-000000001350', 'Elena Rossi', 'elena.rossi@mail.local', '678-555-0140', 'Referral', 'driver_associate', 'hired', 'hired', '2023-04-12', 'Jordan Hale', 'Separated 12 Sep');
+
+insert into public.interviews (id, recruiting_id, stage, scheduled_at, interviewer, result, score, notes) values
+  ('e1000000-0000-4000-8000-000000000001', 'e0000000-0000-4000-8000-000000000002', 'phone_screen', '2026-09-21 16:00+00', 'Jordan Hale', 'scheduled', null, 'Availability screen'),
+  ('e1000000-0000-4000-8000-000000000002', 'e0000000-0000-4000-8000-000000000003', 'phone_screen', '2026-09-13 17:30+00', 'Sam Okonkwo', 'passed', 4.2, 'Advance to ops'),
+  ('e1000000-0000-4000-8000-000000000003', 'e0000000-0000-4000-8000-000000000003', 'ops_interview', '2026-09-21 14:00+00', 'Riley Cho', 'scheduled', null, 'Safety scenario'),
+  ('e1000000-0000-4000-8000-000000000004', 'e0000000-0000-4000-8000-000000000004', 'ops_interview', '2026-08-29 13:30+00', 'Alex Rivera', 'passed', 4.4, 'Hired'),
+  ('e1000000-0000-4000-8000-000000000005', 'e0000000-0000-4000-8000-000000000005', 'ride_along', '2026-09-04 07:00+00', 'Ravi Singh', 'passed', 4.0, 'Comfortable in van'),
+  ('e1000000-0000-4000-8000-000000000006', 'e0000000-0000-4000-8000-000000000006', 'offer_review', '2026-09-22 18:00+00', 'Alex Rivera', 'scheduled', null, 'Verbal offer follow-up'),
+  ('e1000000-0000-4000-8000-000000000007', 'e0000000-0000-4000-8000-000000000007', 'ride_along', '2026-09-21 07:10+00', 'Chris Nguyen', 'scheduled', null, 'Shadow CX-21'),
+  ('e1000000-0000-4000-8000-000000000008', 'e0000000-0000-4000-8000-000000000008', 'background', '2026-09-05 10:00+00', 'Sterling', 'failed', 1.0, 'MVR fail'),
+  ('e1000000-0000-4000-8000-000000000009', 'e0000000-0000-4000-8000-000000000010', 'ops_interview', '2026-09-22 15:30+00', 'Riley Cho', 'scheduled', null, 'Safety scenario');
+
+insert into public.training_records (
+  driver_id, recruiting_id, course, category, status, started_at, completed_at, due_date, score, required
+) values
+  ('b0000000-0000-4000-8000-000000001322', 'e0000000-0000-4000-8000-000000000004', 'DSP New Hire Orientation', 'onboarding', 'completed', '2026-09-08', '2026-09-09', '2026-09-30', 94, true),
+  ('b0000000-0000-4000-8000-000000001322', 'e0000000-0000-4000-8000-000000000004', 'Mentor / FICO', 'onboarding', 'completed', '2026-09-09', '2026-09-10', '2026-09-30', 92, true),
+  ('b0000000-0000-4000-8000-000000001322', 'e0000000-0000-4000-8000-000000000004', 'DVIC / Pre-trip', 'onboarding', 'completed', '2026-09-10', '2026-09-11', '2026-09-30', 91, true),
+  ('b0000000-0000-4000-8000-000000001322', 'e0000000-0000-4000-8000-000000000004', 'Nursery Route', 'onboarding', 'completed', '2026-09-11', '2026-09-12', '2026-09-30', 90, true),
+  ('b0000000-0000-4000-8000-000000001322', 'e0000000-0000-4000-8000-000000000004', 'Drug Screen & Background', 'onboarding', 'in_progress', '2026-09-12', null, '2026-09-25', null, true),
+  ('b0000000-0000-4000-8000-000000001322', 'e0000000-0000-4000-8000-000000000004', 'Uniform & Badge', 'onboarding', 'not_started', null, null, '2026-09-30', null, true),
+  ('b0000000-0000-4000-8000-000000001336', 'e0000000-0000-4000-8000-000000000005', 'DSP New Hire Orientation', 'onboarding', 'completed', '2026-09-15', '2026-09-16', '2026-09-30', 90, true),
+  ('b0000000-0000-4000-8000-000000001336', 'e0000000-0000-4000-8000-000000000005', 'Mentor / FICO', 'onboarding', 'completed', '2026-09-16', '2026-09-17', '2026-09-30', 88, true),
+  ('b0000000-0000-4000-8000-000000001336', 'e0000000-0000-4000-8000-000000000005', 'DVIC / Pre-trip', 'onboarding', 'in_progress', '2026-09-17', null, '2026-09-25', null, true),
+  ('b0000000-0000-4000-8000-000000001336', 'e0000000-0000-4000-8000-000000000005', 'Nursery Route', 'onboarding', 'not_started', null, null, '2026-09-30', null, true),
+  ('b0000000-0000-4000-8000-000000001308', null, 'Badge & fob return', 'offboarding', 'not_started', null, null, '2026-09-23', null, true),
+  ('b0000000-0000-4000-8000-000000001308', null, 'Van turn-in / DVIC', 'offboarding', 'in_progress', '2026-09-18', null, '2026-09-23', null, true),
+  ('b0000000-0000-4000-8000-000000001308', null, 'Exit interview', 'offboarding', 'not_started', null, null, '2026-09-23', null, true),
+  ('b0000000-0000-4000-8000-000000001350', 'e0000000-0000-4000-8000-000000000012', 'Badge & fob return', 'offboarding', 'completed', '2026-09-10', '2026-09-11', '2026-09-12', null, true),
+  ('b0000000-0000-4000-8000-000000001350', 'e0000000-0000-4000-8000-000000000012', 'Final pay / ADP', 'offboarding', 'completed', '2026-09-11', '2026-09-12', '2026-09-12', null, true),
+  ('b0000000-0000-4000-8000-000000001156', null, 'Annual Safety Refresh', 'safety', 'overdue', '2026-08-11', null, '2026-09-16', null, true),
+  ('b0000000-0000-4000-8000-000000001238', null, 'Distracted Driving', 'safety', 'overdue', '2026-08-31', null, '2026-09-19', null, true),
+  ('b0000000-0000-4000-8000-000000001042', null, 'Heat Illness', 'compliance', 'completed', '2026-08-21', '2026-08-23', '2026-11-19', 98, true);
 
 commit;

@@ -75,7 +75,7 @@ export function buildMorningDispatch(db: SeedDatabase) {
   ]);
   const namedNoShowIds = unique(
     [
-      ...todayAttendance.filter((row) => row.status === "absent").map((row) => row.driver_id),
+      ...todayAttendance.filter((row) => row.status === "absent" || row.status === "no_show").map((row) => row.driver_id),
       ...todayEvents.filter((row) => row.event_type === "no_show" && row.driver_id).map((row) => row.driver_id as string),
     ].filter((id) => !ptoIds.includes(id) && !callOutIds.includes(id)),
   );
@@ -370,6 +370,22 @@ function summarizeCoverage(unassigned: Route[], coveragePct: number, db: SeedDat
   return `${formatPct(coveragePct)} coverage. Unassigned: ${codes.join(", ")}.`;
 }
 
+function openRouteAction(route: Route): string {
+  if (route.id === "rte-cx33") {
+    return "Assign an extra DA or split CX-33 onto CX-03. Patel is on approved PTO and DAT6 cannot absorb 1,118 packages on one route.";
+  }
+  if (route.id === "rte-cx40") {
+    return "Call a flex/agency DA or move 20–30 stops from neighboring DLA7 routes. Agency no-show left CX-40 dark.";
+  }
+  if (route.id === "rte-cx41") {
+    return "Staff the DAX5 extra before heat wave lock. CX-41 is still unassigned and Phoenix is under an excessive heat warning.";
+  }
+  if (route.id === "rte-cx42") {
+    return "Romero no-showed and EV-223 failed DVIC. Cover CX-42 with a DCH1 extra or cancel with Amazon RTS. Do not put EV-223 back on the board.";
+  }
+  return `Assign a DA to ${route.route_code} before launch or split stops onto neighboring routes.`;
+}
+
 function summarizeMaintenance(db: SeedDatabase, failedInspections: SeedDatabase["inspections"]): string {
   const overdue = db.maintenance.filter((row) => row.status === "overdue" || (row.status === "in_progress" && row.scheduled_date <= TODAY));
   if (!failedInspections.length && !overdue.length) return "No critical DVIC or shop holds blocking launch.";
@@ -406,10 +422,7 @@ function buildRecommendations(input: {
       category: "staffing",
       severity: "critical",
       title: `Cover ${route.route_code} before launch`,
-      action:
-        route.id === "rte-cx33"
-          ? "Assign an extra DA or split CX-33 onto CX-03. Patel is on approved PTO and DAT6 cannot absorb 1,118 packages on one route."
-          : "Call a flex/agency DA or move 20–30 stops from neighboring DLA7 routes. Agency no-show left CX-42 dark.",
+      action: openRouteAction(route),
       metric: `${route.packages_planned} pkgs · ${route.stops_planned} stops`,
       stationCode: station?.code,
     });
@@ -422,7 +435,7 @@ function buildRecommendations(input: {
       category: "staffing",
       severity: input.staffingDelta < 0 ? "warning" : "watch",
       title: `${names.join(", ")} called out`,
-      action: "Do not put Romero's EV-223 back on the board — it failed DVIC. Keep DCH1 at two routes and use extras at DLA7/DAT6 instead.",
+      action: "Cover the call-out with a flex DA. Do not put a grounded van back on the board if the DA's assigned vehicle failed DVIC.",
       metric: `${input.callOutIds.length} call-out`,
     });
   }
@@ -432,10 +445,9 @@ function buildRecommendations(input: {
       id: "rec-noshow",
       category: "staffing",
       severity: "critical",
-      title: "Agency flex DA no-showed",
-      action: "Close the DLA7 extra with an on-call DA by 07:30 or cancel CX-42 with Amazon RTS before wave lock.",
-      metric: `${input.noShows} no-show`,
-      stationCode: "DLA7",
+      title: input.noShows === 1 ? "No-show before launch" : `${input.noShows} no-shows before launch`,
+      action: "Cover CX-40 (DLA7 agency) and CX-42 (Romero / DCH1) with on-call DAs by 07:30 or cancel with Amazon RTS before wave lock. Keep Romero's EV-223 in the shop.",
+      metric: `${input.noShows} no-show${input.noShows === 1 ? "" : "s"}`,
     });
   }
 

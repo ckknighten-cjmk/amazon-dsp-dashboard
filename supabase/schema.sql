@@ -35,8 +35,13 @@ exception when duplicate_object then null;
 end $$;
 
 do $$ begin
-  create type public.attendance_status as enum ('present', 'late', 'absent', 'pto', 'call_out');
+  create type public.attendance_status as enum ('present', 'late', 'absent', 'pto', 'call_out', 'no_show');
 exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  alter type public.attendance_status add value if not exists 'no_show';
+exception when others then null;
 end $$;
 
 do $$ begin
@@ -58,6 +63,21 @@ end $$;
 
 do $$ begin
   create type public.score_standing as enum ('fantastic', 'great', 'fair', 'poor');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.scorecard_period_type as enum ('weekly', 'monthly');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.metric_polarity as enum ('higher_better', 'lower_better');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.metric_key as enum ('dcr', 'pod', 'cdf', 'fico', 'safety', 'dnr', 'dsc', 'ce');
 exception when duplicate_object then null;
 end $$;
 
@@ -143,6 +163,75 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.maintenance_event_type as enum ('preventive', 'repair', 'inspection', 'damage', 'dvic');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.work_order_status as enum ('open', 'in_progress', 'completed', 'cancelled');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.work_order_priority as enum ('low', 'medium', 'high', 'critical');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.work_order_type as enum ('preventive', 'repair', 'body', 'tire', 'recall', 'dvic');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.vehicle_status_code as enum ('new', 'active', 'maintenance', 'oos');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.repair_cost_category as enum ('parts', 'labor', 'body', 'tires', 'glass', 'other');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.employment_status as enum ('onboarding', 'active', 'offboarding', 'terminated');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.recruiting_stage as enum (
+    'applied', 'phone_screen', 'interview', 'ride_along', 'offer', 'hired', 'rejected', 'withdrawn'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.recruiting_status as enum ('open', 'hired', 'rejected', 'withdrawn');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.interview_stage as enum (
+    'phone_screen', 'ops_interview', 'ride_along', 'background', 'offer_review'
+  );
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.interview_result as enum ('scheduled', 'passed', 'failed', 'no_show', 'cancelled');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.training_category as enum ('onboarding', 'compliance', 'safety', 'offboarding');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.training_status as enum ('not_started', 'in_progress', 'completed', 'overdue', 'waived');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.stations (
   id uuid primary key default gen_random_uuid(),
   code text unique not null,
@@ -181,7 +270,8 @@ create table if not exists public.drivers (
   created_at timestamptz not null default now()
 );
 
-alter table public.profiles
+alter table public.drivers add column if not exists employment_status public.employment_status not null default 'active';
+alter table public.drivers add column if not exists termination_date date;
   drop constraint if exists profiles_driver_id_fkey;
 alter table public.profiles
   add constraint profiles_driver_id_fkey
@@ -344,6 +434,96 @@ alter table public.scorecards add column if not exists dsc numeric(5,2);
 alter table public.scorecards add column if not exists customer_escalations integer;
 alter table public.scorecards add column if not exists fico_score integer;
 
+create table if not exists public.scorecard_history (
+  id uuid primary key default gen_random_uuid(),
+  scorecard_id uuid references public.scorecards (id) on delete set null,
+  station_id uuid not null references public.stations (id),
+  period_type public.scorecard_period_type not null,
+  period_start date not null,
+  period_end date not null,
+  metric_key public.metric_key not null,
+  metric_value numeric(8,3) not null,
+  standing public.score_standing not null,
+  recorded_at timestamptz not null default now(),
+  unique (station_id, period_type, period_start, metric_key)
+);
+
+create table if not exists public.scorecard_targets (
+  id uuid primary key default gen_random_uuid(),
+  metric_key public.metric_key not null unique,
+  display_name text not null,
+  full_name text not null,
+  unit text not null,
+  polarity public.metric_polarity not null,
+  fantastic_threshold numeric(8,3) not null,
+  great_threshold numeric(8,3) not null,
+  fair_threshold numeric(8,3) not null,
+  effective_from date not null default current_date,
+  notes text
+);
+
+create table if not exists public.driver_scorecard_metrics (
+  id uuid primary key default gen_random_uuid(),
+  scorecard_id uuid not null references public.scorecards (id) on delete cascade,
+  driver_id uuid not null references public.drivers (id),
+  driver_name text not null,
+  primary_route text not null,
+  period_type public.scorecard_period_type not null,
+  period_start date not null,
+  dcr numeric(6,3) not null,
+  pod numeric(6,3) not null,
+  cdf numeric(6,3) not null,
+  fico numeric(6,2) not null,
+  safety_score numeric(6,2) not null,
+  dnr numeric(6,3) not null,
+  dsc numeric(6,3) not null,
+  ce numeric(6,3) not null,
+  packages_delivered integer not null check (packages_delivered >= 0),
+  stops_completed integer not null check (stops_completed >= 0),
+  composite_score numeric(6,2) not null,
+  standing public.score_standing not null,
+  at_risk boolean not null default false,
+  unique (scorecard_id, driver_id)
+);
+
+create table if not exists public.route_scorecard_metrics (
+  id uuid primary key default gen_random_uuid(),
+  scorecard_id uuid not null references public.scorecards (id) on delete cascade,
+  route_code text not null,
+  station_id uuid not null references public.stations (id),
+  period_type public.scorecard_period_type not null,
+  period_start date not null,
+  dcr numeric(6,3) not null,
+  pod numeric(6,3) not null,
+  cdf numeric(6,3) not null,
+  fico numeric(6,2) not null,
+  safety_score numeric(6,2) not null,
+  dnr numeric(6,3) not null,
+  dsc numeric(6,3) not null,
+  ce numeric(6,3) not null,
+  packages_delivered integer not null check (packages_delivered >= 0),
+  stops_completed integer not null check (stops_completed >= 0),
+  composite_score numeric(6,2) not null,
+  standing public.score_standing not null,
+  high_risk boolean not null default false,
+  risk_factors text[] not null default '{}',
+  unique (scorecard_id, route_code)
+);
+
+insert into public.scorecard_targets (
+  metric_key, display_name, full_name, unit, polarity,
+  fantastic_threshold, great_threshold, fair_threshold, notes
+) values
+  ('dcr', 'DCR', 'Delivery Completion Rate', '%', 'higher_better', 99.5, 99.0, 98.2, 'First-attempt completion'),
+  ('pod', 'POD', 'Photo on Delivery', '%', 'higher_better', 98.0, 96.0, 93.0, 'Valid in-policy photos'),
+  ('cdf', 'CDF', 'Customer Delivery Feedback', '%', 'higher_better', 92.0, 88.0, 82.0, 'Positive customer feedback'),
+  ('fico', 'FICO', 'FICO Safe Driving Score', 'pts', 'higher_better', 850, 800, 740, 'Mentor FICO score'),
+  ('safety', 'Safety', 'Safety Score', 'pts', 'higher_better', 90, 82, 74, 'Composite safety standing'),
+  ('dnr', 'DNR', 'Delivered-Not-Received', '%', 'lower_better', 0.12, 0.25, 0.40, 'Lower is better'),
+  ('dsc', 'DSC', 'Delivery Success Compliance', '%', 'higher_better', 99.0, 97.5, 95.5, 'Contact and exception workflow'),
+  ('ce', 'CE', 'Customer Experience', '%', 'higher_better', 95.0, 92.0, 88.0, 'Composite CX score')
+on conflict (metric_key) do nothing;
+
 create table if not exists public.forecasts (
   id uuid primary key default gen_random_uuid(),
   station_id uuid not null references public.stations(id),
@@ -443,6 +623,100 @@ create table if not exists public.vehicle_downtime (
   notes text
 );
 
+create table if not exists public.work_orders (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  wo_number text unique not null,
+  title text not null,
+  description text not null,
+  type public.work_order_type not null,
+  status public.work_order_status not null default 'open',
+  priority public.work_order_priority not null default 'medium',
+  opened_at date not null,
+  due_at date not null,
+  completed_at date,
+  shop text not null,
+  estimated_hours numeric(8,1) not null default 0,
+  actual_hours numeric(8,1)
+);
+
+create table if not exists public.maintenance_events (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  work_order_id uuid references public.work_orders(id) on delete set null,
+  event_type public.maintenance_event_type not null,
+  occurred_at timestamptz not null,
+  odometer_miles integer not null default 0,
+  title text not null,
+  description text not null,
+  downtime_hours numeric(8,1) not null default 0,
+  technician text not null
+);
+
+create table if not exists public.vehicle_status_history (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  from_status public.vehicle_status_code not null,
+  to_status public.vehicle_status_code not null,
+  changed_at timestamptz not null,
+  reason text not null,
+  changed_by text not null
+);
+
+create table if not exists public.repair_costs (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  work_order_id uuid not null references public.work_orders(id) on delete cascade,
+  category public.repair_cost_category not null,
+  amount numeric(12,2) not null,
+  incurred_at date not null,
+  vendor text not null,
+  description text not null
+);
+
+create table if not exists public.recruiting (
+  id uuid primary key default gen_random_uuid(),
+  station_id uuid not null references public.stations(id),
+  driver_id uuid references public.drivers(id) on delete set null,
+  full_name text not null,
+  email text not null,
+  phone text,
+  source text not null,
+  role text not null default 'driver_associate',
+  stage public.recruiting_stage not null default 'applied',
+  status public.recruiting_status not null default 'open',
+  applied_at date not null,
+  recruiter text not null,
+  notes text
+);
+
+create table if not exists public.interviews (
+  id uuid primary key default gen_random_uuid(),
+  recruiting_id uuid not null references public.recruiting(id) on delete cascade,
+  stage public.interview_stage not null,
+  scheduled_at timestamptz not null,
+  interviewer text not null,
+  result public.interview_result not null default 'scheduled',
+  score numeric(5,1),
+  notes text
+);
+
+create table if not exists public.training_records (
+  id uuid primary key default gen_random_uuid(),
+  driver_id uuid references public.drivers(id) on delete set null,
+  recruiting_id uuid references public.recruiting(id) on delete set null,
+  course text not null,
+  category public.training_category not null,
+  status public.training_status not null default 'not_started',
+  started_at date,
+  completed_at date,
+  due_date date not null,
+  score numeric(5,1),
+  required boolean not null default true
+);
+
 create table if not exists public.import_jobs (
   id uuid primary key default gen_random_uuid(),
   source public.import_source unique not null,
@@ -531,6 +805,12 @@ create index if not exists safety_events_occurred_idx on public.safety_events (o
 create index if not exists attendance_date_idx on public.attendance (service_date, driver_id);
 create index if not exists forecasts_date_idx on public.forecasts (forecast_date, station_id);
 create index if not exists scorecards_week_idx on public.scorecards (week_start desc);
+create index if not exists scorecard_history_lookup_idx
+  on public.scorecard_history (station_id, period_type, metric_key, period_start);
+create index if not exists driver_scorecard_risk_idx
+  on public.driver_scorecard_metrics (scorecard_id, at_risk, composite_score desc);
+create index if not exists route_scorecard_risk_idx
+  on public.route_scorecard_metrics (scorecard_id, high_risk, composite_score);
 create index if not exists maintenance_station_idx on public.maintenance_orders (station_id, scheduled_date);
 create index if not exists payroll_period_idx on public.payroll (period_start, station_id);
 create index if not exists expenses_date_idx on public.expenses (service_date, station_id);
@@ -540,6 +820,13 @@ create index if not exists dispatch_events_date_idx on public.dispatch_events (s
 create index if not exists route_assignments_date_idx on public.route_assignments (service_date, station_id);
 create index if not exists readiness_snapshots_date_idx on public.daily_readiness_snapshots (service_date desc, station_id);
 create index if not exists weather_alerts_date_idx on public.weather_alerts (service_date, station_id);
+create index if not exists work_orders_station_idx on public.work_orders (station_id, due_at);
+create index if not exists maintenance_events_vehicle_idx on public.maintenance_events (vehicle_id, occurred_at desc);
+create index if not exists vehicle_status_history_idx on public.vehicle_status_history (vehicle_id, changed_at desc);
+create index if not exists repair_costs_vehicle_idx on public.repair_costs (vehicle_id, incurred_at desc);
+create index if not exists recruiting_station_idx on public.recruiting (station_id, stage, status);
+create index if not exists interviews_recruiting_idx on public.interviews (recruiting_id, scheduled_at);
+create index if not exists training_driver_idx on public.training_records (driver_id, category, status);
 
 create or replace function public.current_profile()
 returns public.profiles
@@ -607,6 +894,10 @@ alter table public.incidents enable row level security;
 alter table public.coaching_recommendations enable row level security;
 alter table public.financial_daily enable row level security;
 alter table public.scorecards enable row level security;
+alter table public.scorecard_history enable row level security;
+alter table public.scorecard_targets enable row level security;
+alter table public.driver_scorecard_metrics enable row level security;
+alter table public.route_scorecard_metrics enable row level security;
 alter table public.forecasts enable row level security;
 alter table public.route_hourly_stats enable row level security;
 alter table public.maintenance_orders enable row level security;
@@ -620,6 +911,13 @@ alter table public.dispatch_events enable row level security;
 alter table public.route_assignments enable row level security;
 alter table public.daily_readiness_snapshots enable row level security;
 alter table public.weather_alerts enable row level security;
+alter table public.work_orders enable row level security;
+alter table public.maintenance_events enable row level security;
+alter table public.vehicle_status_history enable row level security;
+alter table public.repair_costs enable row level security;
+alter table public.recruiting enable row level security;
+alter table public.interviews enable row level security;
+alter table public.training_records enable row level security;
 
 drop policy if exists stations_select on public.stations;
 create policy stations_select on public.stations
@@ -810,6 +1108,56 @@ create policy scorecards_write on public.scorecards
   using (public.current_app_role() in ('owner', 'operations_manager'))
   with check (public.current_app_role() in ('owner', 'operations_manager'));
 
+drop policy if exists scorecard_history_select on public.scorecard_history;
+create policy scorecard_history_select on public.scorecard_history
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists scorecard_history_write on public.scorecard_history;
+create policy scorecard_history_write on public.scorecard_history
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists scorecard_targets_select on public.scorecard_targets;
+create policy scorecard_targets_select on public.scorecard_targets
+  for select to authenticated
+  using (public.current_app_role() is not null);
+
+drop policy if exists scorecard_targets_write on public.scorecard_targets;
+create policy scorecard_targets_write on public.scorecard_targets
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists driver_scorecard_select on public.driver_scorecard_metrics;
+create policy driver_scorecard_select on public.driver_scorecard_metrics
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'operations_manager', 'safety_manager')
+    or (
+      public.current_app_role() = 'driver'
+      and driver_id = (select driver_id from public.current_profile())
+    )
+  );
+
+drop policy if exists driver_scorecard_write on public.driver_scorecard_metrics;
+create policy driver_scorecard_write on public.driver_scorecard_metrics
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists route_scorecard_select on public.route_scorecard_metrics;
+create policy route_scorecard_select on public.route_scorecard_metrics
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists route_scorecard_write on public.route_scorecard_metrics;
+create policy route_scorecard_write on public.route_scorecard_metrics
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
 drop policy if exists forecasts_select on public.forecasts;
 create policy forecasts_select on public.forecasts
   for select to authenticated
@@ -909,6 +1257,118 @@ create policy downtime_select on public.vehicle_downtime
 
 drop policy if exists downtime_write on public.vehicle_downtime;
 create policy downtime_write on public.vehicle_downtime
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists work_orders_select on public.work_orders;
+create policy work_orders_select on public.work_orders
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists work_orders_write on public.work_orders;
+create policy work_orders_write on public.work_orders
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists maintenance_events_select on public.maintenance_events;
+create policy maintenance_events_select on public.maintenance_events
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists maintenance_events_write on public.maintenance_events;
+create policy maintenance_events_write on public.maintenance_events
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists vehicle_status_history_select on public.vehicle_status_history;
+create policy vehicle_status_history_select on public.vehicle_status_history
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists vehicle_status_history_write on public.vehicle_status_history;
+create policy vehicle_status_history_write on public.vehicle_status_history
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists repair_costs_select on public.repair_costs;
+create policy repair_costs_select on public.repair_costs
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists repair_costs_write on public.repair_costs;
+create policy repair_costs_write on public.repair_costs
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'finance', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'finance', 'safety_manager'));
+
+drop policy if exists recruiting_select on public.recruiting;
+create policy recruiting_select on public.recruiting
+  for select to authenticated
+  using (
+    public.current_app_role() in ('owner', 'operations_manager', 'dispatcher')
+    and public.can_read_station(station_id)
+  );
+
+drop policy if exists recruiting_write on public.recruiting;
+create policy recruiting_write on public.recruiting
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists interviews_select on public.interviews;
+create policy interviews_select on public.interviews
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.recruiting r
+      where r.id = recruiting_id
+        and public.current_app_role() in ('owner', 'operations_manager', 'dispatcher')
+        and public.can_read_station(r.station_id)
+    )
+  );
+
+drop policy if exists interviews_write on public.interviews;
+create policy interviews_write on public.interviews
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager'));
+
+drop policy if exists training_select on public.training_records;
+create policy training_select on public.training_records
+  for select to authenticated
+  using (
+    driver_id = (select driver_id from public.current_profile())
+    or exists (
+      select 1 from public.drivers d
+      where d.id = driver_id and public.can_read_station(d.station_id)
+    )
+    or exists (
+      select 1 from public.recruiting r
+      where r.id = recruiting_id and public.can_read_station(r.station_id)
+    )
+  );
+
+drop policy if exists training_write on public.training_records;
+create policy training_write on public.training_records
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
   with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));

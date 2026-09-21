@@ -38,15 +38,15 @@ export const dispatchEvents: DispatchEvent[] = [
       };
     }),
   {
-    id: "de-callout-1308",
+    id: "de-noshow-1308",
     station_id: "stn-dch1",
     driver_id: "drv-1308",
     vehicle_id: "van-14",
-    route_id: null,
+    route_id: "rte-cx42",
     service_date: TODAY,
-    event_type: "call_out",
+    event_type: "no_show",
     occurred_at: `${TODAY}T05:41:00Z`,
-    notes: "Pablo Romero called out at 05:41. EV-223 remains in shop from DVIC fail.",
+    notes: "Pablo Romero no-showed. EV-223 remains in shop from DVIC fail. CX-42 at DCH1 is still open.",
     created_by: "Sam Okonkwo",
   },
   {
@@ -66,11 +66,11 @@ export const dispatchEvents: DispatchEvent[] = [
     station_id: "stn-dla7",
     driver_id: null,
     vehicle_id: null,
-    route_id: "rte-cx42",
+    route_id: "rte-cx40",
     service_date: TODAY,
     event_type: "no_show",
     occurred_at: `${TODAY}T07:10:00Z`,
-    notes: "Agency flex DA did not report for CX-42 extra Sunday volume at DLA7.",
+    notes: "Agency flex DA did not report for CX-40 extra Sunday volume at DLA7.",
     created_by: "Sam Okonkwo",
   },
   {
@@ -153,7 +153,11 @@ export const routeAssignments: RouteAssignment[] = routes
       notes: !route.driver_id
         ? route.id === "rte-cx33"
           ? "Open after Patel PTO — needs extra DA or split onto CX-03."
-          : "Open after agency no-show — DLA7 Sunday overflow."
+          : route.id === "rte-cx40"
+            ? "Open after agency no-show — DLA7 Sunday overflow."
+            : route.id === "rte-cx41"
+              ? "Open extra at DAX5 — staff before heat wave lock."
+              : "Open after Romero no-show — DCH1 Sunday coverage."
         : route.status === "rescue"
           ? "Rescue in progress — monitor remaining stops."
           : att?.status === "late"
@@ -170,7 +174,7 @@ export const weatherAlerts: WeatherAlert[] = [
     alert_type: "heat",
     severity: "critical",
     title: "Excessive Heat Warning — Phoenix",
-    summary: "DAX5 heat index 108–112°F through 19:00. High-risk operating conditions for CX-31 / CX-05 / CX-18. Mandatory extra water, 50-min cooling breaks, and no new OT without ops approval.",
+    summary: "DAX5 heat index 108–112°F through 19:00. High-risk operating conditions for CX-31 / CX-05 / CX-18. CX-41 is still unassigned. Mandatory extra water, 50-min cooling breaks, and no new OT without ops approval.",
     starts_at: `${TODAY}T15:00:00Z`,
     ends_at: `${addDays(TODAY, 1)}T02:00:00Z`,
     high_risk: true,
@@ -194,7 +198,7 @@ export const weatherAlerts: WeatherAlert[] = [
     alert_type: "wind",
     severity: "watch",
     title: "Wind Advisory — Chicago",
-    summary: "Sustained 20–25 mph with gusts to 40 mph at DCH1. Secure totes on EV-221 / EV-222 and watch for door-prop incidents on high-rise stops.",
+    summary: "Sustained 20–25 mph with gusts to 40 mph at DCH1. Secure totes on EV-221 / EV-222 and watch for door-prop incidents on high-rise stops. CX-42 is still open after Romero no-show.",
     starts_at: `${TODAY}T12:00:00Z`,
     ends_at: `${TODAY}T22:00:00Z`,
     high_risk: false,
@@ -206,7 +210,7 @@ export const weatherAlerts: WeatherAlert[] = [
     alert_type: "air_quality",
     severity: "watch",
     title: "Air Quality Advisory — Los Angeles",
-    summary: "Smoke-influenced AQI 118 (Unhealthy for sensitive groups) at DLA7. Issue N95s at stand-up and keep CX-42 unassigned until staffing recovers.",
+    summary: "Smoke-influenced AQI 118 (Unhealthy for sensitive groups) at DLA7. Issue N95s at stand-up and keep CX-40 unassigned until staffing recovers.",
     starts_at: `${TODAY}T06:00:00Z`,
     ends_at: `${TODAY}T20:00:00Z`,
     high_risk: false,
@@ -264,9 +268,9 @@ export const dailyReadinessSnapshots: DailyReadinessSnapshot[] = [
     drivers_scheduled: 14,
     drivers_checked_in: 8,
     pto_count: 1,
-    call_outs: 1,
-    no_shows: 1,
-    open_routes: 2,
+    call_outs: 0,
+    no_shows: 2,
+    open_routes: 4,
     staffing_delta: -2,
     vans_available: 13,
     vans_grounded: 2,
@@ -275,24 +279,24 @@ export const dailyReadinessSnapshots: DailyReadinessSnapshot[] = [
     new_damage_alerts: 2,
     fleet_readiness_pct: 86.7,
     routes_assigned: 12,
-    routes_unassigned: 2,
-    route_coverage_pct: 85.7,
+    routes_unassigned: 4,
+    route_coverage_pct: 75,
     rescue_risk: 42,
     high_volume_routes: 5,
     staffing_readiness_pct: 85.7,
     launch_readiness_score: 78.2,
     weather_risk: 40,
-    notes: "Pre-wave snapshot: two open routes, Phoenix heat, Seattle storm.",
+    notes: "Pre-wave snapshot: four open routes, Romero no-show, Phoenix heat, Seattle storm.",
   }),
   ...stations.map((station, index) =>
     snapshotBase(`snap-${station.code.toLowerCase()}-today`, station.id, TODAY, `${TODAY}T05:32:00Z`, {
       drivers_scheduled: station.id === "stn-dla7" ? 4 : station.id === "stn-dax5" ? 3 : 3,
       drivers_checked_in: station.id === "stn-dla7" ? 3 : station.id === "stn-dch1" ? 2 : station.id === "stn-dat6" ? 1 : 3,
       pto_count: station.id === "stn-dat6" ? 1 : 0,
-      call_outs: station.id === "stn-dch1" ? 1 : 0,
-      no_shows: station.id === "stn-dla7" ? 1 : 0,
-      open_routes: station.id === "stn-dla7" || station.id === "stn-dat6" ? 1 : 0,
-      staffing_delta: station.id === "stn-dla7" || station.id === "stn-dat6" ? -1 : 0,
+      call_outs: 0,
+      no_shows: station.id === "stn-dla7" || station.id === "stn-dch1" ? 1 : 0,
+      open_routes: station.id === "stn-dse2" ? 0 : 1,
+      staffing_delta: station.id === "stn-dse2" ? 0 : -1,
       vans_available: station.id === "stn-dla7" ? 3 : station.id === "stn-dch1" ? 2 : 3,
       vans_grounded: station.id === "stn-dla7" || station.id === "stn-dch1" ? 1 : 0,
       vans_in_service: 0,
@@ -300,8 +304,8 @@ export const dailyReadinessSnapshots: DailyReadinessSnapshot[] = [
       new_damage_alerts: station.id === "stn-dla7" || station.id === "stn-dse2" ? 1 : 0,
       fleet_readiness_pct: station.id === "stn-dla7" ? 75 : station.id === "stn-dch1" ? 66.7 : 100,
       routes_assigned: station.id === "stn-dla7" ? 3 : station.id === "stn-dat6" ? 1 : station.id === "stn-dch1" ? 2 : 3,
-      routes_unassigned: station.id === "stn-dla7" || station.id === "stn-dat6" ? 1 : 0,
-      route_coverage_pct: station.id === "stn-dla7" ? 75 : station.id === "stn-dat6" ? 50 : 100,
+      routes_unassigned: station.id === "stn-dse2" ? 0 : 1,
+      route_coverage_pct: station.id === "stn-dla7" ? 75 : station.id === "stn-dat6" ? 50 : station.id === "stn-dch1" ? 67 : station.id === "stn-dax5" ? 75 : 100,
       rescue_risk: station.id === "stn-dse2" ? 62 : station.id === "stn-dax5" ? 55 : 20 + index,
       high_volume_routes: station.id === "stn-dla7" ? 2 : 1,
       staffing_readiness_pct: station.id === "stn-dla7" ? 75 : station.id === "stn-dat6" ? 50 : 100,

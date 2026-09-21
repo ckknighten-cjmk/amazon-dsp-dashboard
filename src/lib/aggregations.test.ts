@@ -72,7 +72,7 @@ describe("command center aggregations", () => {
     const view = buildFleet(seedDb);
     expect(view.rows.length).toBe(seedDb.vehicles.length);
     expect(view.rows.some((row) => row.status === "oos")).toBe(true);
-    expect(view.kpis[0].label).toBe("Active vans");
+    expect(view.kpis[0].label).toBe("Vans available");
   });
 
   it("reports inspections, speeding, and incidents", () => {
@@ -120,9 +120,18 @@ describe("command center aggregations", () => {
 
   it("tracks fleet maintenance, DVIC, and downtime", () => {
     const view = buildFleet(seedDb);
-    expect(view.kpis[2].label).toBe("DVIC compliance");
+    expect(view.kpis.map((kpi) => kpi.label)).toEqual([
+      "Vans available",
+      "Vans grounded",
+      "Vans needing service",
+      "Open DVIC defects",
+      "Readiness",
+    ]);
     expect(view.maintenance.length).toBeGreaterThan(0);
     expect(view.downtime.some((row) => !row.ended_at)).toBe(true);
+    expect(view.workOrders.length).toBeGreaterThan(0);
+    expect(view.available.length + view.grounded.length).toBeLessThanOrEqual(seedDb.vehicles.length);
+    expect(view.readinessPct).toBeGreaterThan(0);
   });
 
   it("includes driver PTO, discipline, and revenue per driver", () => {
@@ -159,14 +168,14 @@ describe("command center aggregations", () => {
       "Launch Readiness Score",
     ]);
     expect(view.staffing.ptoToday).toBe(1);
-    expect(view.staffing.callOuts).toBe(1);
-    expect(view.staffing.noShows).toBe(1);
-    expect(view.staffing.openRoutes).toBe(2);
+    expect(view.staffing.callOuts).toBe(0);
+    expect(view.staffing.noShows).toBe(2);
+    expect(view.staffing.openRoutes).toBe(4);
     expect(view.staffing.staffingDelta).toBeLessThan(0);
     expect(view.fleet.vansGrounded).toBeGreaterThan(0);
     expect(view.fleet.newDvicDefects).toBeGreaterThan(0);
     expect(view.fleet.newDamageAlerts).toBeGreaterThan(0);
-    expect(view.routes.unassigned).toBe(2);
+    expect(view.routes.unassigned).toBe(4);
     expect(view.routes.highVolume).toBeGreaterThan(0);
     expect(view.weather.heatWarnings).toBeGreaterThan(0);
     expect(view.weather.stormWarnings).toBeGreaterThan(0);

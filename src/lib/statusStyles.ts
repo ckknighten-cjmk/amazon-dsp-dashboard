@@ -14,6 +14,13 @@ import type {
   RouteStatus,
   ScoreStanding,
   WeatherSeverity,
+  WorkOrderPriority,
+  WorkOrderStatus,
+  EmploymentStatus,
+  RecruitingStage,
+  RecruitingStatus,
+  InterviewResult,
+  TrainingStatus,
 } from "../types/database";
 
 export const driverStatusLabel: Record<DriverStatus, string> = {
@@ -64,6 +71,7 @@ export const attendanceClass: Record<AttendanceStatus, string> = {
   absent: "badge-danger",
   pto: "badge-info",
   call_out: "badge-danger",
+  no_show: "badge-danger",
 };
 
 export const severityClass: Record<IncidentSeverity, string> = {
@@ -152,4 +160,71 @@ export const launchGateClass: Record<LaunchGate, string> = {
   go: "badge-success",
   conditional: "badge-warning",
   hold: "badge-danger",
+};
+
+export const workOrderStatusClass: Record<WorkOrderStatus, string> = {
+  open: "badge-info",
+  in_progress: "badge-warning",
+  completed: "badge-success",
+  cancelled: "badge-neutral",
+};
+
+export const workOrderPriorityClass: Record<WorkOrderPriority, string> = {
+  low: "badge-neutral",
+  medium: "badge-info",
+  high: "badge-warning",
+  critical: "badge-danger",
+};
+
+export const fleetBoardClass: Record<"available" | "grounded" | "needs_service", string> = {
+  available: "badge-success",
+  grounded: "badge-danger",
+  needs_service: "badge-warning",
+};
+
+export const fleetBoardLabel: Record<"available" | "grounded" | "needs_service", string> = {
+  available: "Available",
+  grounded: "Grounded",
+  needs_service: "Needs service",
+};
+
+export const employmentClass: Record<EmploymentStatus, string> = {
+  onboarding: "badge-info",
+  active: "badge-success",
+  offboarding: "badge-warning",
+  terminated: "badge-neutral",
+};
+
+export const recruitingStageClass: Record<RecruitingStage, string> = {
+  applied: "badge-neutral",
+  phone_screen: "badge-info",
+  interview: "badge-info",
+  ride_along: "badge-warning",
+  offer: "badge-success",
+  hired: "badge-success",
+  rejected: "badge-danger",
+  withdrawn: "badge-neutral",
+};
+
+export const recruitingStatusClass: Record<RecruitingStatus, string> = {
+  open: "badge-info",
+  hired: "badge-success",
+  rejected: "badge-danger",
+  withdrawn: "badge-neutral",
+};
+
+export const interviewResultClass: Record<InterviewResult, string> = {
+  scheduled: "badge-info",
+  passed: "badge-success",
+  failed: "badge-danger",
+  no_show: "badge-danger",
+  cancelled: "badge-neutral",
+};
+
+export const trainingStatusClass: Record<TrainingStatus, string> = {
+  not_started: "badge-neutral",
+  in_progress: "badge-warning",
+  completed: "badge-success",
+  overdue: "badge-danger",
+  waived: "badge-info",
 };

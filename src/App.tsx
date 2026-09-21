@@ -8,12 +8,29 @@ import DriverPerformance from "./pages/DriverPerformance";
 import Financial from "./pages/Financial";
 import SafetyCompliance from "./pages/SafetyCompliance";
 import Forecasting from "./pages/Forecasting";
+import FleetLayout from "./pages/FleetLayout";
 import Fleet from "./pages/Fleet";
+import FleetDispatch from "./pages/FleetDispatch";
+import FleetMaintenance from "./pages/FleetMaintenance";
+import FleetKpis from "./pages/FleetKpis";
+import VehicleDetail from "./pages/VehicleDetail";
 import Scorecard from "./pages/Scorecard";
+import ScorecardLayout from "./pages/scorecard/ScorecardLayout";
+import ExecutiveScorecard from "./pages/scorecard/ExecutiveScorecard";
+import DriverImpact from "./pages/scorecard/DriverImpact";
+import RouteImpact from "./pages/scorecard/RouteImpact";
+import Recommendations from "./pages/scorecard/Recommendations";
+import ScorecardForecast from "./pages/scorecard/ScorecardForecast";
 import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
 import Imports from "./pages/Imports";
 import MorningDispatch from "./pages/MorningDispatch";
+import WorkforceLayout from "./pages/workforce/WorkforceLayout";
+import AttendanceDashboard from "./pages/workforce/AttendanceDashboard";
+import PtoCalendar from "./pages/workforce/PtoCalendar";
+import StaffingForecast from "./pages/workforce/StaffingForecast";
+import RecruitingPipeline from "./pages/workforce/RecruitingPipeline";
+import DriverLifecycle from "./pages/workforce/DriverLifecycle";
 import Login from "./pages/Login";
 import Unauthorized from "./pages/Unauthorized";
 
@@ -38,11 +55,32 @@ export default function App() {
         <Route path="financial" element={<Financial />} />
         <Route path="safety" element={<SafetyCompliance />} />
         <Route path="forecasting" element={<Forecasting />} />
-        <Route path="fleet" element={<Fleet />} />
-        <Route path="scorecard" element={<Scorecard />} />
+        <Route path="fleet" element={<FleetLayout />}>
+          <Route index element={<Fleet />} />
+          <Route path="dispatch" element={<FleetDispatch />} />
+          <Route path="maintenance" element={<FleetMaintenance />} />
+          <Route path="kpis" element={<FleetKpis />} />
+          <Route path="vehicles/:vehicleId" element={<VehicleDetail />} />
+        </Route>
+        <Route path="scorecard" element={<ScorecardLayout />}>
+          <Route index element={<ExecutiveScorecard />} />
+          <Route path="stations" element={<Scorecard />} />
+          <Route path="drivers" element={<DriverImpact />} />
+          <Route path="routes" element={<RouteImpact />} />
+          <Route path="recommendations" element={<Recommendations />} />
+          <Route path="forecast" element={<ScorecardForecast />} />
+        </Route>
         <Route path="routes" element={<RoutesBoard />} />
         <Route path="insights" element={<Insights />} />
         <Route path="imports" element={<Imports />} />
+        <Route path="workforce" element={<WorkforceLayout />}>
+          <Route index element={<AttendanceDashboard />} />
+          <Route path="attendance" element={<AttendanceDashboard />} />
+          <Route path="pto" element={<PtoCalendar />} />
+          <Route path="staffing" element={<StaffingForecast />} />
+          <Route path="recruiting" element={<RecruitingPipeline />} />
+          <Route path="lifecycle" element={<DriverLifecycle />} />
+        </Route>
       </Route>
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
