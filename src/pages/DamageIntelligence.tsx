@@ -98,6 +98,45 @@ export default function DamageIntelligence() {
         />
       </div>
 
+      <div className="mt-4 grid grid-cols-2 gap-3 xl:grid-cols-4">
+        {view.severityBoard.map((row) => (
+          <div key={row.score} className="card p-4">
+            <p className="text-[11px] uppercase tracking-wide text-slate-500">Severity</p>
+            <span className={cn("badge mt-2", scoreClass[row.score])}>{row.label}</span>
+            <p className="mt-3 text-2xl font-semibold text-slate-900 dark:text-white">{row.count}</p>
+            <p className="text-xs text-slate-500">{formatUsd(row.estimated)} estimated</p>
+          </div>
+        ))}
+      </div>
+
+      <div className="card mt-4 p-5">
+        <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage workflow</h3>
+        <p className="mt-1 text-xs text-slate-500">New → Under review → Approved → Scheduled repair → Repaired</p>
+        <div className="mt-4 grid grid-cols-1 gap-3 md:grid-cols-5">
+          {view.workflowBoard.map((column) => (
+            <div key={column.status} className="rounded-lg border border-slate-200 p-3 dark:border-white/5">
+              <div className="flex items-center justify-between gap-2">
+                <span className={cn("badge", workflowClass[column.status])}>{column.label}</span>
+                <span className="text-xs text-slate-500">{column.rows.length}</span>
+              </div>
+              <ul className="mt-3 space-y-2">
+                {column.rows.map((row) => (
+                  <li key={row.id} className="text-xs text-slate-600 dark:text-slate-300">
+                    <p className="font-medium text-slate-800 dark:text-slate-100">
+                      {row.vanId} · {row.zoneLabel}
+                    </p>
+                    <p>
+                      {row.routeCode} · {formatUsd(row.estimated_cost)}
+                    </p>
+                  </li>
+                ))}
+                {column.rows.length === 0 && <li className="text-xs text-slate-400">None</li>}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="card mt-4 overflow-x-auto">
         <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
           <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Vehicle grounding recommendations</h3>
@@ -147,9 +186,9 @@ export default function DamageIntelligence() {
 
       <div className="card mt-4 overflow-x-auto">
         <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
-          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage report</h3>
+          <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Driver accountability</h3>
           <p className="text-xs text-slate-500">
-            Vehicle, date detected, previous driver, current driver, route, damage type, and open investigation status.
+            Previous driver, current driver, route assignment, and open investigation status.
           </p>
         </div>
         <DamageReportTable rows={view.reportRows} empty="No damage events in the current filter." />
@@ -176,14 +215,15 @@ export default function DamageIntelligence() {
         <div className="card overflow-x-auto">
           <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Unresolved damage</h3>
-            <p className="text-xs text-slate-500">Open events with shop linkage and cost estimates</p>
+            <p className="text-xs text-slate-500">Open events with estimated and actual repair cost</p>
           </div>
           <table className="w-full min-w-[560px] text-left text-sm">
             <thead className="text-xs uppercase tracking-wide text-slate-500">
               <tr>
                 <th className="px-5 py-2 font-medium">Event</th>
                 <th className="px-3 py-2 font-medium">Shop</th>
-                <th className="px-5 py-2 font-medium">Estimate</th>
+                <th className="px-3 py-2 font-medium">Estimate</th>
+                <th className="px-5 py-2 font-medium">Actual</th>
               </tr>
             </thead>
             <tbody>
@@ -199,7 +239,8 @@ export default function DamageIntelligence() {
                     </p>
                   </td>
                   <td className="px-3 py-3 capitalize">{row.repair?.status ?? "unquoted"}</td>
-                  <td className="px-5 py-3 tabular-nums">{formatUsd(row.estimated_cost)}</td>
+                  <td className="px-3 py-3 tabular-nums">{formatUsd(row.estimated_cost)}</td>
+                  <td className="px-5 py-3 tabular-nums">{row.actualCost === null ? "—" : formatUsd(row.actualCost)}</td>
                 </tr>
               ))}
             </tbody>
@@ -225,7 +266,7 @@ export default function DamageIntelligence() {
         <div className="card overflow-x-auto">
           <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage by driver</h3>
-            <p className="text-xs text-slate-500">Accountable driver from possession window</p>
+            <p className="text-xs text-slate-500">Cost by driver — estimated and actual repair cost</p>
           </div>
           <table className="w-full min-w-[480px] text-left text-sm">
             <thead className="text-xs uppercase tracking-wide text-slate-500">
@@ -233,7 +274,8 @@ export default function DamageIntelligence() {
                 <th className="px-5 py-2 font-medium">Driver</th>
                 <th className="px-3 py-2 font-medium">Events</th>
                 <th className="px-3 py-2 font-medium">New</th>
-                <th className="px-5 py-2 font-medium">Estimate</th>
+                <th className="px-3 py-2 font-medium">Estimate</th>
+                <th className="px-5 py-2 font-medium">Actual</th>
               </tr>
             </thead>
             <tbody>
@@ -242,7 +284,8 @@ export default function DamageIntelligence() {
                   <td className="px-5 py-3 font-medium text-slate-900 dark:text-white">{row.name}</td>
                   <td className="px-3 py-3 tabular-nums">{row.events}</td>
                   <td className="px-3 py-3 tabular-nums">{row.newThisWeek}</td>
-                  <td className="px-5 py-3 tabular-nums">{formatUsd(row.estimated)}</td>
+                  <td className="px-3 py-3 tabular-nums">{formatUsd(row.estimated)}</td>
+                  <td className="px-5 py-3 tabular-nums">{formatUsd(row.actual)}</td>
                 </tr>
               ))}
             </tbody>
@@ -252,7 +295,7 @@ export default function DamageIntelligence() {
         <div className="card overflow-x-auto">
           <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
             <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Damage by vehicle</h3>
-            <p className="text-xs text-slate-500">Open and historical events per van</p>
+            <p className="text-xs text-slate-500">Cost by vehicle — estimated and actual repair cost</p>
           </div>
           <table className="w-full min-w-[480px] text-left text-sm">
             <thead className="text-xs uppercase tracking-wide text-slate-500">
@@ -260,7 +303,8 @@ export default function DamageIntelligence() {
                 <th className="px-5 py-2 font-medium">Van</th>
                 <th className="px-3 py-2 font-medium">Events</th>
                 <th className="px-3 py-2 font-medium">Open</th>
-                <th className="px-5 py-2 font-medium">Estimate</th>
+                <th className="px-3 py-2 font-medium">Estimate</th>
+                <th className="px-5 py-2 font-medium">Actual</th>
               </tr>
             </thead>
             <tbody>
@@ -272,7 +316,8 @@ export default function DamageIntelligence() {
                   </td>
                   <td className="px-3 py-3 tabular-nums">{row.events}</td>
                   <td className="px-3 py-3 tabular-nums">{row.unresolved}</td>
-                  <td className="px-5 py-3 tabular-nums">{formatUsd(row.estimated)}</td>
+                  <td className="px-3 py-3 tabular-nums">{formatUsd(row.estimated)}</td>
+                  <td className="px-5 py-3 tabular-nums">{formatUsd(row.actual)}</td>
                 </tr>
               ))}
             </tbody>
@@ -283,33 +328,42 @@ export default function DamageIntelligence() {
       <div className="card mt-4">
         <div className="border-b border-slate-200 px-5 py-4 dark:border-white/5">
           <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Vehicle damage timeline</h3>
-          <p className="text-xs text-slate-500">DVIC chain with new or progressed findings</p>
+          <p className="text-xs text-slate-500">DVIC history, damage history, and repair history on one chain per van</p>
         </div>
-        <ul className="divide-y divide-slate-200 dark:divide-white/5">
-          {view.timeline
-            .filter((row) => row.events.length > 0)
-            .map((row) => (
-              <li key={row.id} className="px-5 py-3">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <p className="text-sm font-medium text-slate-900 dark:text-white">
-                      {row.vanId} · {row.driverName} · {row.shift_type.replace("_", " ")}
-                    </p>
-                    <p className="text-xs text-slate-500">
-                      {row.inspected_at.replace("T", " ").slice(0, 16)} · {row.stationCode} · {row.comparison_status}
-                    </p>
-                    {row.events.map((event) => (
-                      <p key={event.id} className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-                        {event.detected_via === "progression" ? "Progressed" : "New"} {event.zoneLabel.toLowerCase()} ({event.damage_type})
-                        {event.priorDriverName !== "Unassigned" ? ` · before ${event.priorDriverName}` : ""} → after {event.foundByName}
+        <div className="divide-y divide-slate-200 dark:divide-white/5">
+          {view.vehicleTimelines.map((vehicle) => (
+            <section key={vehicle.vehicleId} className="px-5 py-4">
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <h4 className="text-sm font-semibold text-slate-900 dark:text-white">
+                  {vehicle.vanId} · {vehicle.stationCode}
+                </h4>
+                <p className="text-xs text-slate-500">
+                  {vehicle.dvicCount} DVIC · {vehicle.damageCount} damage · {vehicle.repairCount} repair
+                </p>
+              </div>
+              <ul className="mt-3 space-y-2">
+                {vehicle.entries.slice(0, 8).map((entry) => (
+                  <li key={`${entry.kind}-${entry.id}`} className="flex flex-wrap items-start gap-2 text-sm">
+                    <span
+                      className={cn(
+                        "badge",
+                        entry.kind === "dvic" ? "badge-info" : entry.kind === "damage" ? "badge-warning" : "badge-success",
+                      )}
+                    >
+                      {entry.kind === "dvic" ? "DVIC" : entry.kind === "damage" ? "Damage" : "Repair"}
+                    </span>
+                    <div>
+                      <p className="font-medium text-slate-800 dark:text-slate-100">{entry.title}</p>
+                      <p className="text-xs text-slate-500">
+                        {entry.at.replace("T", " ").slice(0, 16)} · {entry.detail}
                       </p>
-                    ))}
-                  </div>
-                  <span className={cn("badge capitalize", row.status === "fail" ? "badge-danger" : "badge-success")}>{row.status}</span>
-                </div>
-              </li>
-            ))}
-        </ul>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
       </div>
 
       <div className="card mt-4">

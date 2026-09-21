@@ -462,6 +462,8 @@ export interface DamagePhoto {
   similarity_score: number | null;
   change_confidence: number | null;
   ai_notes: string | null;
+  bbox_json: { x: number; y: number; w: number; h: number } | null;
+  mask_storage_path: string | null;
 }
 
 export interface DamageReview {

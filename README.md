@@ -11,7 +11,7 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 - **Safety & Compliance** — Vehicle inspections, speeding, seatbelt, incidents
 - **Forecasting** — Route, volume, staffing, and overtime outlook
 - **Fleet** — Inventory, maintenance schedules, DVIC compliance, and downtime
-- **DVIC Damage Intelligence** — Before/after photos, severity scores, repair estimates, driver accountability, approval workflow, grounding recommendations
+- **DVIC Damage Intelligence** — Severity scores, estimated/actual cost by driver and vehicle, accountability, approval workflow, vehicle DVIC/damage/repair timelines, AI photo comparison schema
 - **Damage Report** — New damage report with previous/current driver, route, investigation, charge/clear/ground, and approval steps
 - **Photo Pipeline** — Upload → computer vision analysis → location detection → compare to previous photos → potential new damage alert
 - **Amazon Scorecard** — DCR, POD, CDF, Safety, FICO, and weekly trends
