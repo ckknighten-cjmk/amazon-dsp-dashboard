@@ -126,7 +126,7 @@ export function evaluateStanding(key: MetricKey, value: number): Standing {
 export function standingFromComposite(score: number): Standing {
   if (score >= 90) return "fantastic";
   if (score >= 75) return "great";
-  if (score >= 58) return "fair";
+  if (score >= 50) return "fair";
   return "poor";
 }
 
