@@ -4,6 +4,10 @@
 begin;
 
 delete from public.import_jobs;
+delete from public.daily_readiness_snapshots;
+delete from public.weather_alerts;
+delete from public.dispatch_events;
+delete from public.route_assignments;
 delete from public.training_records;
 delete from public.interviews;
 delete from public.recruiting;
@@ -130,6 +134,7 @@ insert into public.routes (
   ('d0000000-0000-4000-8000-000000000003', 'CX-03', 'a0000000-0000-4000-8000-000000000004', 'b0000000-0000-4000-8000-000000001252', 'c0000000-0000-4000-8000-000000000010', '2026-09-20', 'in_progress', 170, 138, 1104, 896, 2, '2026-09-20 07:16+00', null, '2026-09-20 18:35+00'),
   ('d0000000-0000-4000-8000-000000000016', 'CX-16', 'a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001280', 'c0000000-0000-4000-8000-000000000012', '2026-09-20', 'in_progress', 174, 141, 1135, 918, 3, '2026-09-20 07:09+00', null, '2026-09-20 18:50+00'),
   ('d0000000-0000-4000-8000-000000000021', 'CX-21', 'a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001294', 'c0000000-0000-4000-8000-000000000013', '2026-09-20', 'in_progress', 188, 157, 1220, 1014, 1, '2026-09-20 07:04+00', null, '2026-09-20 18:25+00'),
+  ('d0000000-0000-4000-8000-000000000033', 'CX-33', 'a0000000-0000-4000-8000-000000000004', null, null, '2026-09-20', 'planned', 172, 0, 1118, 0, 0, null, null, '2026-09-20 19:10+00'),
   ('d0000000-0000-4000-8000-000000000040', 'CX-40', 'a0000000-0000-4000-8000-000000000001', null, null, '2026-09-20', 'planned', 176, 0, 1150, 0, 0, null, null, '2026-09-20 18:30+00'),
   ('d0000000-0000-4000-8000-000000000041', 'CX-41', 'a0000000-0000-4000-8000-000000000002', null, null, '2026-09-20', 'planned', 162, 0, 1048, 0, 0, null, null, '2026-09-20 18:45+00'),
   ('d0000000-0000-4000-8000-000000000042', 'CX-42', 'a0000000-0000-4000-8000-000000000005', null, null, '2026-09-20', 'planned', 170, 0, 1102, 0, 0, null, null, '2026-09-20 18:55+00');
@@ -442,6 +447,87 @@ insert into public.import_jobs (source, status, last_run_at, next_run_at, record
   ('payroll', 'imported', '2026-09-13 22:15+00', '2026-09-26 22:00+00', 14, 0, 'ADP / Paycom hours, OT, bonuses, and net pay by employee code', 'SFTP payroll register'),
   ('fuel_card', 'imported', '2026-09-19 03:40+00', '2026-09-21 03:40+00', 70, 2, 'WEX / charge-network transactions → expenses.fuel', 'WEX Connect API'),
   ('fleet_maintenance', 'ready', '2026-09-17 01:20+00', '2026-09-20 23:30+00', 0, 0, 'Shop work orders, DVIC defects, and downtime from fleet vendor', 'Amazon Fleet / shop CSV');
+
+update public.attendance
+set status = 'pto', actual_start = null
+where driver_id = 'b0000000-0000-4000-8000-000000001266' and service_date = '2026-09-20';
+
+insert into public.route_assignments (
+  id, route_id, station_id, service_date, driver_id, vehicle_id, assignment_status, check_in_at, dispatched_at, notes
+)
+select
+  ('f0000000-0000-4000-8000-0000000000' || lpad(row_number() over (order by r.route_code)::text, 2, '0'))::uuid,
+  r.id,
+  r.station_id,
+  r.service_date,
+  r.driver_id,
+  r.vehicle_id,
+  case
+    when r.driver_id is null then 'unassigned'::dispatch_status
+    when r.status = 'rescue' then 'delayed'::dispatch_status
+    when r.driver_id = 'b0000000-0000-4000-8000-000000001156' then 'delayed'::dispatch_status
+    when r.status in ('in_progress', 'completed') then 'dispatched'::dispatch_status
+    else 'assigned'::dispatch_status
+  end,
+  case when r.started_at is not null then r.started_at - interval '20 minutes' else null end,
+  r.started_at,
+  case
+    when r.route_code = 'CX-33' then 'Open after Patel PTO — needs extra DA or split onto CX-03.'
+    when r.route_code = 'CX-40' then 'Open after agency no-show — DLA7 Sunday overflow.'
+    when r.route_code = 'CX-41' then 'Open extra at DAX5 — staff before heat wave lock.'
+    when r.route_code = 'CX-42' then 'Open after Romero no-show — DCH1 Sunday coverage.'
+    else 'Assigned and on the board.'
+  end
+from public.routes r
+where r.service_date = '2026-09-20';
+
+insert into public.dispatch_events (
+  station_id, driver_id, vehicle_id, route_id, service_date, event_type, occurred_at, notes, created_by
+)
+select
+  d.station_id,
+  d.id,
+  r.vehicle_id,
+  r.id,
+  '2026-09-20',
+  'check_in',
+  '2026-09-20 06:52+00',
+  'Yard check-in complete',
+  'Sam Okonkwo'
+from public.drivers d
+left join public.routes r on r.driver_id = d.id and r.service_date = '2026-09-20'
+join public.attendance a on a.driver_id = d.id and a.service_date = '2026-09-20'
+where a.status in ('present', 'late');
+
+insert into public.dispatch_events (
+  station_id, driver_id, vehicle_id, route_id, service_date, event_type, occurred_at, notes, created_by
+) values
+  ('a0000000-0000-4000-8000-000000000005', 'b0000000-0000-4000-8000-000000001308', 'c0000000-0000-4000-8000-000000000014', 'd0000000-0000-4000-8000-000000000042', '2026-09-20', 'no_show', '2026-09-20 05:41+00', 'Pablo Romero no-showed. EV-223 remains in shop from DVIC fail. CX-42 at DCH1 is still open.', 'Sam Okonkwo'),
+  ('a0000000-0000-4000-8000-000000000004', 'b0000000-0000-4000-8000-000000001266', null, 'd0000000-0000-4000-8000-000000000033', '2026-09-20', 'pto', '2026-09-17 16:00+00', 'Harsh Patel personal day — CX-33 still open at DAT6.', 'Jordan Hale'),
+  ('a0000000-0000-4000-8000-000000000001', null, null, 'd0000000-0000-4000-8000-000000000040', '2026-09-20', 'no_show', '2026-09-20 07:10+00', 'Agency flex DA did not report for CX-40 extra Sunday volume at DLA7.', 'Sam Okonkwo'),
+  ('a0000000-0000-4000-8000-000000000002', 'b0000000-0000-4000-8000-000000001156', 'c0000000-0000-4000-8000-000000000004', 'd0000000-0000-4000-8000-000000000031', '2026-09-20', 'delay', '2026-09-20 07:18+00', 'Sofia Petrova late to wave. CX-31 departed 18 minutes after staged time.', 'Sam Okonkwo'),
+  ('a0000000-0000-4000-8000-000000000001', null, 'c0000000-0000-4000-8000-000000000015', null, '2026-09-20', 'damage_alert', '2026-09-20 06:05+00', 'EV-224 still OOS — rear quarter panel and sensor cluster from cul-de-sac contact.', 'Riley Cho'),
+  ('a0000000-0000-4000-8000-000000000003', 'b0000000-0000-4000-8000-000000001238', 'c0000000-0000-4000-8000-000000000009', 'd0000000-0000-4000-8000-000000000027', '2026-09-20', 'damage_alert', '2026-09-20 06:22+00', 'New DVIC: headlamp out plus bumper scuff on EV-218. Still rolled on CX-27.', 'Riley Cho'),
+  ('a0000000-0000-4000-8000-000000000002', null, null, null, '2026-09-20', 'weather_hold', '2026-09-20 05:15+00', 'Phoenix heat warning — extra water, earlier breaks, no new OT without ops approval.', 'Jordan Hale');
+
+insert into public.weather_alerts (
+  id, station_id, service_date, alert_type, severity, title, summary, starts_at, ends_at, high_risk
+) values
+  ('a2000000-0000-4000-8000-000000000001', 'a0000000-0000-4000-8000-000000000002', '2026-09-20', 'heat', 'critical', 'Excessive Heat Warning — Phoenix', 'DAX5 heat index 108–112°F through 19:00. High-risk operating conditions for CX-31 / CX-05 / CX-18. CX-41 is still unassigned.', '2026-09-20 15:00+00', '2026-09-21 02:00+00', true),
+  ('a2000000-0000-4000-8000-000000000002', 'a0000000-0000-4000-8000-000000000003', '2026-09-20', 'storm', 'warning', 'Storm Warning — Puget Sound', 'Atmospheric river over DSE2 with 0.6–1.1" rain and gusts 35–45 mph. Elevated rescue risk on CX-27.', '2026-09-20 13:00+00', '2026-09-20 23:00+00', true),
+  ('a2000000-0000-4000-8000-000000000003', 'a0000000-0000-4000-8000-000000000005', '2026-09-20', 'wind', 'watch', 'Wind Advisory — Chicago', 'Sustained 20–25 mph with gusts to 40 mph at DCH1. Secure totes and watch door-prop incidents. CX-42 is still open after Romero no-show.', '2026-09-20 12:00+00', '2026-09-20 22:00+00', false),
+  ('a2000000-0000-4000-8000-000000000004', 'a0000000-0000-4000-8000-000000000001', '2026-09-20', 'air_quality', 'watch', 'Air Quality Advisory — Los Angeles', 'Smoke-influenced AQI 118 at DLA7. Issue N95s at stand-up and keep CX-40 unassigned until staffing recovers.', '2026-09-20 06:00+00', '2026-09-20 20:00+00', false),
+  ('a2000000-0000-4000-8000-000000000005', 'a0000000-0000-4000-8000-000000000004', '2026-09-20', 'heat', 'warning', 'Heat Advisory — Atlanta', 'DAT6 afternoon heat index 98°F. CX-33 is still open after Patel PTO.', '2026-09-20 16:00+00', '2026-09-21 00:00+00', true);
+
+insert into public.daily_readiness_snapshots (
+  id, station_id, service_date, captured_at,
+  drivers_scheduled, drivers_checked_in, pto_count, call_outs, no_shows, open_routes, staffing_delta,
+  vans_available, vans_grounded, vans_in_service, new_dvic_defects, new_damage_alerts, fleet_readiness_pct,
+  routes_assigned, routes_unassigned, route_coverage_pct, rescue_risk, high_volume_routes,
+  staffing_readiness_pct, launch_readiness_score, weather_risk, notes
+) values
+  ('a1000000-0000-4000-8000-000000000001', null, '2026-09-19', '2026-09-19 05:30+00', 14, 13, 0, 1, 0, 0, 1, 14, 1, 13, 1, 1, 93.3, 13, 0, 100, 18, 4, 92.9, 91.4, 12, 'Saturday peak cleared with one call-out covered by a flex DA.'),
+  ('a1000000-0000-4000-8000-000000000002', null, '2026-09-20', '2026-09-20 05:30+00', 16, 14, 1, 0, 2, 4, -2, 13, 2, 0, 3, 2, 86.7, 12, 4, 75.0, 42, 5, 75.0, 68.4, 40, 'Pre-wave snapshot: four open routes, Romero no-show, Phoenix heat, Seattle storm.');
 
 insert into public.recruiting (
   id, station_id, driver_id, full_name, email, phone, source, role, stage, status, applied_at, recruiter, notes

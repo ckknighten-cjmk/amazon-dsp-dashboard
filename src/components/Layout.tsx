@@ -10,6 +10,7 @@ import {
   Map,
   Menu,
   Sparkles,
+  Sunrise,
   TrendingUp,
   Truck,
   Upload,
@@ -28,6 +29,7 @@ import ThemeToggle from "./ThemeToggle";
 
 const icons: Record<string, ComponentType<{ className?: string }>> = {
   "/": LayoutDashboard,
+  "/dispatch": Sunrise,
   "/operations": Activity,
   "/drivers": Truck,
   "/financial": DollarSign,

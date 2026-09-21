@@ -2,15 +2,18 @@ import type {
   AttendanceStatus,
   DisciplineStatus,
   DisciplineType,
+  DispatchStatus,
   DriverStatus,
   ImportJobStatus,
   IncidentSeverity,
   InspectionStatus,
+  LaunchGate,
   MaintenanceStatus,
   PtoStatus,
   RescueStatus,
   RouteStatus,
   ScoreStanding,
+  WeatherSeverity,
   WorkOrderPriority,
   WorkOrderStatus,
   EmploymentStatus,
@@ -123,6 +126,40 @@ export const importClass: Record<ImportJobStatus, string> = {
   mapped: "badge-warning",
   imported: "badge-success",
   failed: "badge-danger",
+};
+
+export const dispatchStatusLabel: Record<DispatchStatus, string> = {
+  planned: "Planned",
+  assigned: "Assigned",
+  checked_in: "Checked in",
+  staged: "Staged",
+  dispatched: "Dispatched",
+  delayed: "Delayed",
+  unassigned: "Unassigned",
+  cancelled: "Cancelled",
+};
+
+export const dispatchStatusClass: Record<DispatchStatus, string> = {
+  planned: "badge-neutral",
+  assigned: "badge-info",
+  checked_in: "badge-info",
+  staged: "badge-warning",
+  dispatched: "badge-success",
+  delayed: "badge-danger",
+  unassigned: "badge-danger",
+  cancelled: "badge-neutral",
+};
+
+export const weatherSeverityClass: Record<WeatherSeverity, string> = {
+  watch: "badge-info",
+  warning: "badge-warning",
+  critical: "badge-danger",
+};
+
+export const launchGateClass: Record<LaunchGate, string> = {
+  go: "badge-success",
+  conditional: "badge-warning",
+  hold: "badge-danger",
 };
 
 export const workOrderStatusClass: Record<WorkOrderStatus, string> = {

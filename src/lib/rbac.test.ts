@@ -24,6 +24,10 @@ describe("rbac", () => {
     expect(canAccess("operations_manager", "/scorecard/forecast")).toBe(true);
     expect(canAccess("dispatcher", "/scorecard/forecast")).toBe(false);
     expect(canAccess("operations_manager", "/insights")).toBe(true);
+    expect(canAccess("dispatcher", "/dispatch")).toBe(true);
+    expect(canAccess("owner", "/dispatch")).toBe(true);
+    expect(canAccess("finance", "/dispatch")).toBe(false);
+    expect(canAccess("safety_manager", "/dispatch")).toBe(false);
     expect(canAccess("owner", "/workforce/attendance")).toBe(true);
     expect(canAccess("finance", "/workforce/staffing")).toBe(true);
     expect(canAccess("finance", "/workforce/recruiting")).toBe(false);
@@ -32,7 +36,9 @@ describe("rbac", () => {
     expect(canAccess("driver", "/workforce/staffing")).toBe(false);
   });
 
-  it("sends drivers to their scorecard home", () => {
+  it("sends dispatchers to morning launch and drivers to their scorecard", () => {
+    expect(defaultPathFor("dispatcher")).toBe("/dispatch");
+    expect(navItemsFor("dispatcher").map((item) => item.to)[0]).toBe("/dispatch");
     expect(defaultPathFor("driver")).toBe("/drivers");
     expect(navItemsFor("driver").map((item) => item.to)).toEqual(["/drivers", "/workforce"]);
   });

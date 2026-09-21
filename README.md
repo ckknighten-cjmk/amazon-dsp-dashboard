@@ -5,6 +5,7 @@ Production-style operations console for an Amazon Delivery Service Partner: live
 ## Workspaces
 
 - **Executive** — Revenue, profit, DCR, attendance, safety score, Amazon scorecard KPIs (DCR, CDF, POD, DNR, DSC, CE)
+- **Morning Dispatch** — Launch-readiness board: staffing, fleet/DVIC, route coverage, weather risk, AI actions, and the dispatch command board
 - **Live Operations** — Active routes, completion tracking, rescue assignment, failed deliveries, station performance
 - **Driver Management** — Scorecards, rankings, coaching, attendance, PTO, and disciplinary history
 - **Financial Analytics** — Revenue per route/driver, overtime, fuel, maintenance, net profit
@@ -68,7 +69,7 @@ Without Supabase env vars the app runs in **demo mode**: local authentication, r
 2. Run `supabase/schema.sql` then `supabase/seed.sql` in the SQL editor.
 3. Create Auth users that match the seeded `profiles.email` values and set `profiles.auth_user_id`.
 
-Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, scorecard intelligence tables, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, work orders, maintenance events, vehicle status history, repair costs, recruiting, interviews, training records, import jobs, and row-level security by role/station.
+Schema includes stations, drivers, vehicles, routes, rescues, failed deliveries, attendance, safety events, inspections, incidents, coaching, daily financials, weekly scorecards, scorecard intelligence tables, forecasts, maintenance, payroll, expenses, PTO, discipline, vehicle downtime, work orders, maintenance events, vehicle status history, repair costs, recruiting, interviews, training records, import jobs, dispatch events, route assignments, daily readiness snapshots, weather alerts, and row-level security by role/station.
 
 ## Scripts
 

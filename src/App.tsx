@@ -24,6 +24,7 @@ import ScorecardForecast from "./pages/scorecard/ScorecardForecast";
 import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
 import Imports from "./pages/Imports";
+import MorningDispatch from "./pages/MorningDispatch";
 import WorkforceLayout from "./pages/workforce/WorkforceLayout";
 import AttendanceDashboard from "./pages/workforce/AttendanceDashboard";
 import PtoCalendar from "./pages/workforce/PtoCalendar";
@@ -48,6 +49,7 @@ export default function App() {
         }
       >
         <Route index element={<ExecutiveDashboard />} />
+        <Route path="dispatch" element={<MorningDispatch />} />
         <Route path="operations" element={<LiveOperations />} />
         <Route path="drivers" element={<DriverPerformance />} />
         <Route path="financial" element={<Financial />} />
