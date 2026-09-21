@@ -1,5 +1,6 @@
 export {
   TODAY,
+  TOMORROW,
   WEEK_START,
   MONTH_START,
   stations,
@@ -31,6 +32,8 @@ export {
   importJobs,
 } from "./operations";
 
+export { maintenanceEvents, workOrders, vehicleStatusHistory, repairCosts } from "./fleetReadinessSeed";
+
 import type { SeedDatabase } from "../types/database";
 import {
   stations,
@@ -50,6 +53,7 @@ import {
   hourlyProgress,
 } from "./seedCore";
 import { discipline, downtime, expenses, importJobs, maintenance, payroll, pto } from "./operations";
+import { maintenanceEvents, repairCosts, vehicleStatusHistory, workOrders } from "./fleetReadinessSeed";
 
 export const seedDb: SeedDatabase = {
   stations,
@@ -74,4 +78,8 @@ export const seedDb: SeedDatabase = {
   discipline,
   downtime,
   importJobs,
+  maintenanceEvents,
+  workOrders,
+  vehicleStatusHistory,
+  repairCosts,
 };

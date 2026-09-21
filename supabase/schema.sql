@@ -116,6 +116,36 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 
+do $$ begin
+  create type public.maintenance_event_type as enum ('preventive', 'repair', 'inspection', 'damage', 'dvic');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.work_order_status as enum ('open', 'in_progress', 'completed', 'cancelled');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.work_order_priority as enum ('low', 'medium', 'high', 'critical');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.work_order_type as enum ('preventive', 'repair', 'body', 'tire', 'recall', 'dvic');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.vehicle_status_code as enum ('new', 'active', 'maintenance', 'oos');
+exception when duplicate_object then null;
+end $$;
+
+do $$ begin
+  create type public.repair_cost_category as enum ('parts', 'labor', 'body', 'tires', 'glass', 'other');
+exception when duplicate_object then null;
+end $$;
+
 create table if not exists public.stations (
   id uuid primary key default gen_random_uuid(),
   code text unique not null,
@@ -416,6 +446,59 @@ create table if not exists public.vehicle_downtime (
   notes text
 );
 
+create table if not exists public.work_orders (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  wo_number text unique not null,
+  title text not null,
+  description text not null,
+  type public.work_order_type not null,
+  status public.work_order_status not null default 'open',
+  priority public.work_order_priority not null default 'medium',
+  opened_at date not null,
+  due_at date not null,
+  completed_at date,
+  shop text not null,
+  estimated_hours numeric(8,1) not null default 0,
+  actual_hours numeric(8,1)
+);
+
+create table if not exists public.maintenance_events (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  station_id uuid not null references public.stations(id),
+  work_order_id uuid references public.work_orders(id) on delete set null,
+  event_type public.maintenance_event_type not null,
+  occurred_at timestamptz not null,
+  odometer_miles integer not null default 0,
+  title text not null,
+  description text not null,
+  downtime_hours numeric(8,1) not null default 0,
+  technician text not null
+);
+
+create table if not exists public.vehicle_status_history (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  from_status public.vehicle_status_code not null,
+  to_status public.vehicle_status_code not null,
+  changed_at timestamptz not null,
+  reason text not null,
+  changed_by text not null
+);
+
+create table if not exists public.repair_costs (
+  id uuid primary key default gen_random_uuid(),
+  vehicle_id uuid not null references public.vehicles(id),
+  work_order_id uuid not null references public.work_orders(id) on delete cascade,
+  category public.repair_cost_category not null,
+  amount numeric(12,2) not null,
+  incurred_at date not null,
+  vendor text not null,
+  description text not null
+);
+
 create table if not exists public.import_jobs (
   id uuid primary key default gen_random_uuid(),
   source public.import_source unique not null,
@@ -440,6 +523,10 @@ create index if not exists payroll_period_idx on public.payroll (period_start, s
 create index if not exists expenses_date_idx on public.expenses (service_date, station_id);
 create index if not exists pto_driver_idx on public.pto_requests (driver_id, start_date);
 create index if not exists downtime_vehicle_idx on public.vehicle_downtime (vehicle_id, started_at desc);
+create index if not exists work_orders_station_idx on public.work_orders (station_id, due_at);
+create index if not exists maintenance_events_vehicle_idx on public.maintenance_events (vehicle_id, occurred_at desc);
+create index if not exists vehicle_status_history_idx on public.vehicle_status_history (vehicle_id, changed_at desc);
+create index if not exists repair_costs_vehicle_idx on public.repair_costs (vehicle_id, incurred_at desc);
 
 create or replace function public.current_profile()
 returns public.profiles
@@ -516,6 +603,10 @@ alter table public.pto_requests enable row level security;
 alter table public.disciplinary_records enable row level security;
 alter table public.vehicle_downtime enable row level security;
 alter table public.import_jobs enable row level security;
+alter table public.work_orders enable row level security;
+alter table public.maintenance_events enable row level security;
+alter table public.vehicle_status_history enable row level security;
+alter table public.repair_costs enable row level security;
 
 drop policy if exists stations_select on public.stations;
 create policy stations_select on public.stations
@@ -808,6 +899,65 @@ create policy downtime_write on public.vehicle_downtime
   for all to authenticated
   using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'))
   with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager'));
+
+drop policy if exists work_orders_select on public.work_orders;
+create policy work_orders_select on public.work_orders
+  for select to authenticated
+  using (public.can_read_station(station_id));
+
+drop policy if exists work_orders_write on public.work_orders;
+create policy work_orders_write on public.work_orders
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists maintenance_events_select on public.maintenance_events;
+create policy maintenance_events_select on public.maintenance_events
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists maintenance_events_write on public.maintenance_events;
+create policy maintenance_events_write on public.maintenance_events
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists vehicle_status_history_select on public.vehicle_status_history;
+create policy vehicle_status_history_select on public.vehicle_status_history
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists vehicle_status_history_write on public.vehicle_status_history;
+create policy vehicle_status_history_write on public.vehicle_status_history
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'safety_manager', 'dispatcher'));
+
+drop policy if exists repair_costs_select on public.repair_costs;
+create policy repair_costs_select on public.repair_costs
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.vehicles v
+      where v.id = vehicle_id and public.can_read_station(v.station_id)
+    )
+  );
+
+drop policy if exists repair_costs_write on public.repair_costs;
+create policy repair_costs_write on public.repair_costs
+  for all to authenticated
+  using (public.current_app_role() in ('owner', 'operations_manager', 'finance', 'safety_manager'))
+  with check (public.current_app_role() in ('owner', 'operations_manager', 'finance', 'safety_manager'));
 
 drop policy if exists import_jobs_select on public.import_jobs;
 create policy import_jobs_select on public.import_jobs

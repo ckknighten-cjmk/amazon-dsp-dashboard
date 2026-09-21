@@ -8,7 +8,12 @@ import DriverPerformance from "./pages/DriverPerformance";
 import Financial from "./pages/Financial";
 import SafetyCompliance from "./pages/SafetyCompliance";
 import Forecasting from "./pages/Forecasting";
+import FleetLayout from "./pages/FleetLayout";
 import Fleet from "./pages/Fleet";
+import FleetDispatch from "./pages/FleetDispatch";
+import FleetMaintenance from "./pages/FleetMaintenance";
+import FleetKpis from "./pages/FleetKpis";
+import VehicleDetail from "./pages/VehicleDetail";
 import Scorecard from "./pages/Scorecard";
 import RoutesBoard from "./pages/Routes";
 import Insights from "./pages/Insights";
@@ -36,7 +41,13 @@ export default function App() {
         <Route path="financial" element={<Financial />} />
         <Route path="safety" element={<SafetyCompliance />} />
         <Route path="forecasting" element={<Forecasting />} />
-        <Route path="fleet" element={<Fleet />} />
+        <Route path="fleet" element={<FleetLayout />}>
+          <Route index element={<Fleet />} />
+          <Route path="dispatch" element={<FleetDispatch />} />
+          <Route path="maintenance" element={<FleetMaintenance />} />
+          <Route path="kpis" element={<FleetKpis />} />
+          <Route path="vehicles/:vehicleId" element={<VehicleDetail />} />
+        </Route>
         <Route path="scorecard" element={<Scorecard />} />
         <Route path="routes" element={<RoutesBoard />} />
         <Route path="insights" element={<Insights />} />

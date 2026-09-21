@@ -28,6 +28,7 @@ import type {
 } from "../types/database";
 
 export const TODAY = "2026-09-20";
+export const TOMORROW = addDays(TODAY, 1);
 export const WEEK_START = "2026-09-14";
 export const MONTH_START = "2026-09-01";
 
