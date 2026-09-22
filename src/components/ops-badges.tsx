@@ -33,6 +33,8 @@ export function RouteStatusBadge({ status }: { status: RouteStatus }) {
       "border-zinc-400/60 bg-zinc-500/10 text-zinc-700 dark:border-zinc-500/40 dark:text-zinc-300",
     no_progress:
       "border-orange-400/50 bg-orange-500/10 text-orange-800 dark:border-orange-500/40 dark:text-orange-300",
+    incomplete:
+      "border-orange-400/50 bg-orange-500/10 text-orange-800 dark:border-orange-500/40 dark:text-orange-300",
     in_progress:
       "border-sky-400/50 bg-sky-500/10 text-sky-800 dark:border-sky-500/40 dark:text-sky-300",
     completed:

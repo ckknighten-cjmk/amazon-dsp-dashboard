@@ -1,6 +1,7 @@
-import type { Alert, DateRange, Kpi, OverviewSnapshot, RouteStatus } from "@/lib/types";
+import type { Alert, DateRange, Kpi, OverviewSnapshot, Route, RouteStatus } from "@/lib/types";
 import { deliveryBoard, routes } from "@/lib/data/delivery-execution";
 import { consoleDrivers } from "@/lib/data/delivery-execution";
+import { formatConsoleCapture, formatConsoleDay } from "@/lib/format";
 
 const t = deliveryBoard.totals;
 const deliveredToday = t.packagesDelivered;
@@ -13,6 +14,7 @@ function statusCounts(): { status: RouteStatus; count: number }[] {
   const counts: Record<RouteStatus, number> = {
     not_started: 0,
     no_progress: 0,
+    incomplete: 0,
     in_progress: 0,
     completed: 0,
     rescued: 0,
@@ -23,6 +25,18 @@ function statusCounts(): { status: RouteStatus; count: number }[] {
     count: counts[status],
   }));
 }
+
+function associateNames(route: Route) {
+  return route.associateIds
+    .map((id) => consoleDrivers.find((driver) => driver.id === id)?.name)
+    .filter((name): name is string => Boolean(name))
+    .join("/");
+}
+
+const captureLabel = formatConsoleCapture(deliveryBoard.capturedAt);
+const inProgressRoutes = routes.filter((route) => route.status === "in_progress");
+const incompleteRoutes = routes.filter((route) => route.status === "incomplete");
+const completedCount = routes.filter((route) => route.status === "completed").length;
 
 export const alerts: Alert[] = [
   {
@@ -35,16 +49,26 @@ export const alerts: Alert[] = [
   },
   {
     id: "al-inprogress",
-    severity: "warning",
-    title: "2 routes still in progress",
-    detail: "CX253 (Lewis/Cathey) and CX260 (Clark) open at the 8:42 p.m. Console capture.",
+    severity: inProgressRoutes.length > 0 ? "warning" : "info",
+    title:
+      inProgressRoutes.length > 0
+        ? `${inProgressRoutes.length} routes still in progress`
+        : "End of day · 0 routes in progress",
+    detail:
+      inProgressRoutes.length > 0
+        ? `${inProgressRoutes.map((route) => `${route.code} (${associateNames(route)})`).join(" and ")} open at the ${captureLabel} Console capture.`
+        : `${completedCount} routes complete. Incomplete: ${
+            incompleteRoutes
+              .map((route) => `${route.code} (${associateNames(route) || "unassigned"})`)
+              .join(", ") || "none"
+          }.`,
     href: "/routes",
   },
   {
     id: "al-whr",
     severity: "warning",
     title: `${t.workHourRisk} work-hour risk`,
-    detail: `${t.multiTransporter} multi-transporter routes. Vehicle and on-time % were not on the board.`,
+    detail: `${t.multiTransporter} multi-transporter routes, ${t.onBreak} on break, ${t.inactive} inactive. Vehicle and on-time % were not on the board.`,
     href: "/routes",
   },
   {
@@ -64,7 +88,7 @@ const todayKpis: Kpi[] = [
     unit: "number",
     delta: null,
     sparkline: [],
-    hint: `Console DE ${assignedToday.toLocaleString()} planned · 8:42 p.m. CT. No prior-day delta.`,
+    hint: `Sum of Console route rows · ${assignedToday.toLocaleString()} planned · ${captureLabel}. Board package gauge is ${completionToday}%. No prior-day delta.`,
   },
   {
     id: "dcr",
@@ -109,7 +133,7 @@ const todayKpis: Kpi[] = [
     unit: "number",
     delta: null,
     sparkline: [],
-    hint: "Routes still open at 8:42 p.m. CT.",
+    hint: `Routes still in progress at ${captureLabel}.`,
   },
   {
     id: "shift",
@@ -127,7 +151,7 @@ export function getOverview(range: DateRange): OverviewSnapshot {
     range,
     asOfLabel:
       range === "today"
-        ? "Delivery Execution · Mon Sep 21, 8:42 p.m. CT"
+        ? `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}`
         : "Live Sep 21 only — no other days in this Console pull",
     kpis: todayKpis,
     packagesByDay: [

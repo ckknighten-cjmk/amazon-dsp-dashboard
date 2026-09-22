@@ -31,6 +31,7 @@ import {
   getExceptionsForRoute,
   getRoutes,
 } from "@/lib/data";
+import { exceptionExportNote } from "@/lib/data/delivery-execution";
 import {
   CONSOLE_UNAVAILABLE,
   exceptionStatusLabel,
@@ -44,6 +45,7 @@ import type { PackageExceptionStatus, Route, RouteStatus } from "@/lib/types";
 const STATUSES: Array<RouteStatus | "all"> = [
   "all",
   "in_progress",
+  "incomplete",
   "no_progress",
   "completed",
   "not_started",
@@ -103,7 +105,7 @@ export default function RoutesPage() {
     <div>
       <PageHeader
         title="Delivery Execution"
-        description="Amazon DSP Console board for DNA4 Memphis / CJMK Inc., service day Sep 21, 2026. Vehicle and on-time % were not on the Console — shown as unavailable."
+        description="Amazon DSP Console end-of-day board for DNA4 Memphis / CJMK Inc., service day Sep 21, 2026. Vehicle and on-time % were not on the Console — shown as unavailable."
       />
 
       <DeliveryBoardSummary board={board} />
@@ -180,9 +182,7 @@ export default function RoutesPage() {
 
       {tab === "exceptions" ? (
         <p className="mb-3 text-xs text-muted-foreground">
-          Table is the 178-row Packages CSV (19 reattemptable, 17 undeliverable, 68 RTS).
-          Board chips above use Console totals (17 / 15 / 72) and can differ from export
-          rows.
+          {exceptionExportNote()}
         </p>
       ) : null}
 
