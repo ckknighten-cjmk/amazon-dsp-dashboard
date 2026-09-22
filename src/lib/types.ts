@@ -288,3 +288,56 @@ export interface RosterFilters {
   status?: DriverStatus | "all";
   role?: DriverRole | "all";
 }
+
+export type InvoiceStatus = "New" | "Paid";
+
+export type InvoiceKind = "incentive" | "variable" | "other";
+
+export interface SettlementInvoice {
+  id: string;
+  periodLabel: string;
+  week: number | null;
+  kind: InvoiceKind;
+  status: InvoiceStatus;
+  amount: number;
+}
+
+export interface SettlementLine {
+  label: string;
+  qty: number | null;
+  amount: number;
+}
+
+export interface WeekSettlement {
+  invoiceId: string;
+  status: InvoiceStatus;
+  disputeWindowCloses: string;
+  total: number;
+}
+
+export interface YtdInsights {
+  station: string;
+  yearAsShownInConsole: number;
+  totalRevenue: number;
+  variablePayment: number;
+  fixedMonthly: number;
+  perPiecePlusDxi: number;
+  other: number;
+  disclaimer: string;
+}
+
+/** Amazon DSP Console Flex Payments scrape. Amounts are copied from Console, not derived. */
+export interface PaymentsSnapshot {
+  source: string;
+  company: string;
+  station: { code: string; name: string };
+  capturedAt: string;
+  timezone: string;
+  pendingAction: { count: number; totalExact: number; currency: string };
+  visiblePaidTotal: number;
+  invoices: SettlementInvoice[];
+  week37Variable: WeekSettlement & { lines: SettlementLine[] };
+  week37Incentive: WeekSettlement & { notes: string };
+  ytdInsights: YtdInsights;
+  disclaimer: string;
+}

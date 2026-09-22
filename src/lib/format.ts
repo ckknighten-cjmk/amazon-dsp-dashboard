@@ -65,6 +65,28 @@ export function formatNumber(value: number) {
   return new Intl.NumberFormat("en-US").format(value);
 }
 
+export function formatUsd(value: number, digits = 2) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: digits,
+    maximumFractionDigits: digits,
+  }).format(value);
+}
+
+/** Console timestamps include an offset; always render them in the station zone. */
+export function formatZonedDateTime(iso: string, timeZone = OPS_TIMEZONE) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone,
+    timeZoneName: "short",
+  }).format(new Date(iso));
+}
+
 export function formatPercent(value: number, digits = 1) {
   return `${value.toFixed(digits)}%`;
 }
