@@ -341,3 +341,10 @@ export interface PaymentsSnapshot {
   ytdInsights: YtdInsights;
   disclaimer: string;
 }
+
+export type {
+  ComplianceReport,
+  ExceptionRow,
+  MealRow,
+  UnmatchedRow,
+} from "@/lib/compliance/types";
