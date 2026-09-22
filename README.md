@@ -41,6 +41,7 @@ No auth in v1. Dark theme is the default; toggle light/dark from the top bar or 
 | --- | --- |
 | **Routes / Delivery Execution** | Amazon DSP Console Delivery Execution board for **2026-09-21** (37 routes, associates, stops, packages, notes, board totals) plus the exception Packages CSV (178 rows). Board package-status chips use Console totals (e.g. reattemptable **17**); the exceptions table uses export rows (19 reattemptable). Vehicle and on-time % were **not** on the Console board — the UI leaves them unavailable and does not invent them. |
 | **Scorecard** | DSP Console Performance Summary for **Week 37 (Sep 6–12, 2026)** — overall standing **85.8 Fantastic**. No prior-week comparison was published, so the UI does not invent deltas. |
+| **Payments** | Amazon DSP Console Flex Payments scrape captured **2026-09-21** for CJMK Inc. / DNA4. Pending action **$192,202.66** (6 invoices), visible paid total, invoice list, Week 37 variable **$88,556.70** and incentive **$3,878.88**, and YTD Insights labeled **2025** as Console displayed them. No deposit or payment-method details were in that scrape. |
 | **Drivers** | Associate names from the Sep 21 Console routes (including multi-transporter crews). Tenure, phone, and scorecard contribution were not on the board. |
 | **Fleet / incidents** | Still **mock** fixtures. Console did not show vehicle IDs, so the yard roster is not linked to live routes. |
 
@@ -54,6 +55,7 @@ Station clock is frozen at **Mon Sep 21, 2026 · 8:42 p.m. CT** (the Console cap
 - **Drivers** — Associates named on those routes (all names on split / multi-transporter routes)
 - **Fleet** — Mock EDV / rental cargo / step van yard status
 - **Incidents** — Mock DVR, complaint, vehicle, and safety log
+- **Payments** — Flex Payments settlements seeded **2026-09-21**: pending action, paid total, invoice table, Week 37 breakdowns, and 2025 YTD Insights
 - **Settings** — Company display name, timezone (`America/Chicago` default), theme
 
 The sticky top bar **Today / This week** control drives Overview KPIs. The week toggle still only has Sep 21 in this Console pull.
@@ -70,6 +72,7 @@ Console snapshots used here live at:
 
 - [`src/lib/data/seed/delivery-execution-2026-09-21.json`](src/lib/data/seed/delivery-execution-2026-09-21.json)
 - [`src/lib/data/seed/packages-exceptions-2026-09-21.csv`](src/lib/data/seed/packages-exceptions-2026-09-21.csv)
+- [`src/lib/data/seed/payments-settlements-2026-09-21.json`](src/lib/data/seed/payments-settlements-2026-09-21.json) — Flex Payments seed date **2026-09-21**
 
 Do **not** put Amazon credentials in this repo. Do not scrape Seller Central / DSP consoles from the app.
 

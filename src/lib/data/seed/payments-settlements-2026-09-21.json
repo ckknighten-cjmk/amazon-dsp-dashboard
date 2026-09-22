@@ -1,0 +1,152 @@
+{
+  "source": "Amazon DSP Console Flex Payments / Invoices",
+  "company": "CJMK Inc.",
+  "station": {
+    "code": "DNA4",
+    "name": "Memphis"
+  },
+  "capturedAt": "2026-09-21T22:08:00-05:00",
+  "timezone": "America/Chicago",
+  "urls": {
+    "latestIncentiveInvoice": "https://logistics.amazon.com/flexpayments/simpson/flexpro/invoices/US_FLEXPRO.CJMK.DNA4.INC.2026.37"
+  },
+  "pendingAction": {
+    "count": 6,
+    "totalExact": 192202.66,
+    "currency": "USD"
+  },
+  "visiblePaidTotal": 229557.0,
+  "invoices": [
+    {
+      "id": "INV-GA6T0P-0000000615",
+      "periodLabel": "Sep 06-12 / Sep 12, 2026",
+      "week": 37,
+      "kind": "incentive",
+      "status": "New",
+      "amount": 3878.88
+    },
+    {
+      "id": "INV-GA6T0P-0000000614",
+      "periodLabel": "Week 37 / Sep 06-12 / Sep 12, 2026",
+      "week": 37,
+      "kind": "variable",
+      "status": "New",
+      "amount": 88556.7
+    },
+    {
+      "id": "INV-GA6T0P-0000000613",
+      "periodLabel": "Sep 01-30 / Sep 11, 2026",
+      "week": null,
+      "kind": "other",
+      "status": "New",
+      "amount": 3757.94
+    },
+    {
+      "id": "INV-USGA6T0P-0000000612",
+      "periodLabel": "Aug 01-31 / Sep 10, 2026",
+      "week": null,
+      "kind": "other",
+      "status": "New",
+      "amount": 4029.15
+    },
+    {
+      "id": "INV-GA6T0P-0000000610",
+      "periodLabel": "Aug 30-05 / Sep 5, 2026",
+      "week": null,
+      "kind": "other",
+      "status": "New",
+      "amount": 3906.76
+    },
+    {
+      "id": "INV-GA6T0P-0000000609",
+      "periodLabel": "Week 36 / Aug 30-Sep 5, 2026",
+      "week": 36,
+      "kind": "variable",
+      "status": "New",
+      "amount": 88073.23
+    },
+    {
+      "id": "INV-USGA6T0P-0000000608",
+      "periodLabel": "Sep 01-30 / Sep 4, 2026",
+      "week": null,
+      "kind": "other",
+      "status": "Paid",
+      "amount": 45750.0
+    },
+    {
+      "id": "INV-GA6T0P-0000000607",
+      "periodLabel": "Week 35 / Aug 23-29, 2026",
+      "week": 35,
+      "kind": "variable",
+      "status": "Paid",
+      "amount": 84133.0
+    },
+    {
+      "id": "INV-GA6T0P-0000000603",
+      "periodLabel": "Week 34 / Aug 16-22, 2026",
+      "week": 34,
+      "kind": "variable",
+      "status": "Paid",
+      "amount": 95528.0
+    },
+    {
+      "id": "INV-GA6T0P-0000000606",
+      "periodLabel": "Aug 16-22 / Aug 22, 2026",
+      "week": null,
+      "kind": "other",
+      "status": "Paid",
+      "amount": 4146.0
+    }
+  ],
+  "week37Variable": {
+    "invoiceId": "INV-GA6T0P-0000000614",
+    "status": "New",
+    "disputeWindowCloses": "2026-09-30T09:37:00-05:00",
+    "total": 88556.7,
+    "lines": [
+      {
+        "label": "Routes",
+        "qty": 240,
+        "amount": 78886.0
+      },
+      {
+        "label": "Training",
+        "qty": 9,
+        "amount": 2008.8
+      },
+      {
+        "label": "Late cancellations",
+        "qty": 5,
+        "amount": 1000.0
+      },
+      {
+        "label": "Unplanned delay",
+        "qty": null,
+        "amount": 12.02
+      },
+      {
+        "label": "Packages/per-piece/branding",
+        "qty": 55428,
+        "amount": 6649.88
+      }
+    ]
+  },
+  "week37Incentive": {
+    "invoiceId": "INV-GA6T0P-0000000615",
+    "status": "New",
+    "disputeWindowCloses": "2026-09-30T11:49:00-05:00",
+    "total": 3878.88,
+    "notes": "Delivery Excellence Incentive; largest line qty 46259 \u00d7 $0.07 = $3238.13"
+  },
+  "ytdInsights": {
+    "station": "DNA4",
+    "yearAsShownInConsole": 2025,
+    "totalRevenue": 4360191,
+    "variablePayment": 3210934,
+    "fixedMonthly": 564962,
+    "perPiecePlusDxi": 452462,
+    "other": 131833,
+    "disclaimer": "Year label is as displayed in Console YTD Insights; do not invent a 2026 YTD if Console showed 2025."
+  },
+  "disclaimer": "Seeded from live DSP Console Flex Payments. No payment-method/deposit details were shown. PDF links existed but no payment export landed in Downloads."
+}
