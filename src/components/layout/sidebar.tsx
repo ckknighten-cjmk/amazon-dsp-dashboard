@@ -8,6 +8,7 @@ import {
   Gauge,
   LayoutDashboard,
   Settings,
+  ShieldCheck,
   Truck,
   Users,
   Wallet,
@@ -23,6 +24,7 @@ const NAV = [
   { href: "/drivers", label: "Drivers", icon: Users },
   { href: "/fleet", label: "Fleet", icon: Truck },
   { href: "/incidents", label: "Incidents", icon: AlertTriangle },
+  { href: "/compliance", label: "Compliance", icon: ShieldCheck },
   { href: "/payments", label: "Payments", icon: Wallet },
   { href: "/settings", label: "Settings", icon: Settings },
 ];

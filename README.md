@@ -9,7 +9,7 @@ This repository is the single source of truth for CJMK DSP operations software.
 | Repository root | **CJMK Ops** — daily HQ for CJMK Inc. / DNA4 Memphis | Next.js App Router |
 | [`apps/morning-dispatch`](apps/morning-dispatch) | Earlier Vite command center, including the Morning Dispatch Readiness Center | Vite + React |
 
-Live CJMK Ops seeds come from Amazon DSP Console: the **Week 37** scorecard (Sep 6–12, 2026) and the **2026-09-21** Delivery Execution board. Fleet and incidents in CJMK Ops are still mock fixtures. Do not invent metrics that Console did not publish.
+Live CJMK Ops seeds come from Amazon DSP Console: the **Week 37** scorecard (Sep 6–12, 2026), the **2026-09-21** Delivery Execution board, and the **Week 39** schedule workbook used by Compliance. Fleet and incidents in CJMK Ops are still mock fixtures. Do not invent metrics that Console did not publish.
 
 ## CJMK Ops (repository root)
 
@@ -42,6 +42,7 @@ No auth in v1. Dark theme is the default; toggle light/dark from the top bar or 
 | **Routes / Delivery Execution** | Amazon DSP Console Delivery Execution **end-of-day** board for **2026-09-21** (37 routes, 0 in progress, associates, stops, packages, sign-out notes, board totals) plus the exception Packages CSV (179 rows). Board package-status chips use Console totals (reattemptable **1**, undeliverable **1**, missing **9**, RTS **105**, pickup failed **63**). Those chips match the CSV on this capture. Vehicle and on-time % were **not** on the Console board — the UI leaves them unavailable and does not invent them. |
 | **Scorecard** | DSP Console Performance Summary for **Week 37 (Sep 6–12, 2026)** — overall standing **85.8 Fantastic**. No prior-week comparison was published, so the UI does not invent deltas. |
 | **Payments** | Amazon DSP Console Flex Payments scrape captured **2026-09-21** for CJMK Inc. / DNA4. Pending action **$192,202.66** (6 invoices), visible paid total, invoice list, Week 37 variable **$88,556.70** and incentive **$3,878.88**, and YTD Insights labeled **2025** as Console displayed them. No deposit or payment-method details were in that scrape. |
+| **Compliance** | **Week 39 (Sep 20–26, 2026)** timecard check. Amazon side is the DSP Console weekly schedule workbook (Rostered Work Blocks + Shifts & Availability, exported 9/21/26, 11:40:31 PM). ADP side is a read-only Workforce Now **Group Timecard** for **Sep 20 and Sep 21** only — the Sep 22 grid was blank, and the Timecard Detail Report export failed (**ORA-20005**). Individual timecard views for Zora Bobo, Brandon Clark, and Chance Stupp are included. Compliance Breaks meal clocks were not in the capture; the page only joins the three associates named on the attached breaks screenshot. **Loading that week into ADP schedule templates is deferred** and the control on the page stays disabled. |
 | **Drivers** | Associate names from the Sep 21 Console routes (including multi-transporter crews). Tenure, phone, and scorecard contribution were not on the board. |
 | **Fleet / incidents** | Still **mock** fixtures. Console did not show vehicle IDs, so the yard roster is not linked to live routes. |
 
@@ -56,6 +57,7 @@ Station clock is frozen at **Mon Sep 21, 2026 · 10:12 p.m. CT** (the end-of-day
 - **Fleet** — Mock EDV / rental cargo / step van yard status
 - **Incidents** — Mock DVR, complaint, vehicle, and safety log
 - **Payments** — Flex Payments settlements seeded **2026-09-21**: pending action, paid total, invoice table, Week 37 breakdowns, and 2025 YTD Insights
+- **Compliance** — Week 39 ADP vs Amazon timecard exceptions: missing punches, days over 12 hours, rolling 7-day totals over 60 hours (captured ADP days only), and meal-status disagreements. Unmatched Amazon and ADP names are listed separately. ADP schedule template load is **coming later** and is not implemented.
 - **Settings** — Company display name, timezone (`America/Chicago` default), theme
 
 The sticky top bar **Today / This week** control drives Overview KPIs. The week toggle still only has Sep 21 in this Console pull.
@@ -73,6 +75,10 @@ Console snapshots used here live at:
 - [`src/lib/data/seed/delivery-execution-2026-09-21.json`](src/lib/data/seed/delivery-execution-2026-09-21.json)
 - [`src/lib/data/seed/packages-exceptions-2026-09-21.csv`](src/lib/data/seed/packages-exceptions-2026-09-21.csv)
 - [`src/lib/data/seed/payments-settlements-2026-09-21.json`](src/lib/data/seed/payments-settlements-2026-09-21.json) — Flex Payments seed date **2026-09-21**
+- [`src/lib/data/seed/week39-amazon-schedule.xlsx`](src/lib/data/seed/week39-amazon-schedule.xlsx) — Amazon Scheduling Week 39 workbook (source for blocks and shifts)
+- [`src/lib/data/seed/week39-amazon-schedule.json`](src/lib/data/seed/week39-amazon-schedule.json) — that workbook parsed with the real headers (Rostered Work Blocks and Shifts & Availability)
+- [`src/lib/data/seed/adp-timecards-week39.json`](src/lib/data/seed/adp-timecards-week39.json) — ADP Group Timecard for Sep 20–21, plus three individual timecards
+- [`src/lib/data/seed/week39-amazon-breaks.json`](src/lib/data/seed/week39-amazon-breaks.json) — Compliance Breaks rows visible in the Week 39 screenshot, and the dashboard totals. No meal start/end times.
 
 Do **not** put Amazon credentials in this repo. Do not scrape Seller Central / DSP consoles from the app.
 
