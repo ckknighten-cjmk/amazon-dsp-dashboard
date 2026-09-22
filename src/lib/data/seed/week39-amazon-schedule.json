@@ -1,0 +1,6243 @@
+{
+  "parsedFrom": "week39-amazon-schedule.xlsx",
+  "source": "Amazon DSP Console weekly schedule export",
+  "sheets": [
+    "Rostered Work Blocks",
+    "Shifts & Availability"
+  ],
+  "exportedAt": "9/21/26, 11:40:31 PM",
+  "company": "CJMK Inc.",
+  "station": "DNA4",
+  "week": 39,
+  "serviceDates": {
+    "start": "2026-09-20",
+    "end": "2026-09-26"
+  },
+  "rosteredTotals": {
+    "2026-09-20": 35.0,
+    "2026-09-21": 39.0,
+    "2026-09-22": 39.0,
+    "2026-09-23": 0.0,
+    "2026-09-24": 0.0,
+    "2026-09-25": 0.0,
+    "2026-09-26": 0.0
+  },
+  "scheduledTotals": {
+    "2026-09-20": 41.0,
+    "2026-09-21": 41.0,
+    "2026-09-22": 47.0,
+    "2026-09-23": 45.0,
+    "2026-09-24": 41.0,
+    "2026-09-25": 41.0,
+    "2026-09-26": 39.0
+  },
+  "associates": [
+    {
+      "name": "Aaron  Calvin Davis",
+      "transporterId": "AD3O3G0B92UUS",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aaron Lorenzo Armstrong",
+      "transporterId": "A3R3MGCML0ST2V",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Aaron marcellus Hines",
+      "transporterId": "A24A27T9YG04Q1",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Adrian Sandoval Arellano",
+      "transporterId": "A1AXNNYXQB9I48",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alexis Marrie Hutchison",
+      "transporterId": "A192RYYFZFFMSS",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Amy  Ann Rhinehart",
+      "transporterId": "A18P3MJLHQG320",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Asja Renee Hurt",
+      "transporterId": "A3HP4KOKQGPPSN",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Bernard Timothy Nelson",
+      "transporterId": "AA4AHUL18JSQ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Brandon  Michael Clark",
+      "transporterId": "A3U0VHDQG06ZIH",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Nursery Route Level 2 - Electric Vehicle\n10:20am \u2022 10 hrs",
+            "route": "Nursery Route Level 2 - Electric Vehicle",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Caleb Jordan Spann",
+      "transporterId": "A2FIO1V1QD1BPK",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cameyon Smith",
+      "transporterId": "A4N7AZCUEP775",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Candido Antoinio Fulcher",
+      "transporterId": "AQPGHMOP3NF7K",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Caprio Cazz Newman",
+      "transporterId": "AVQPVCZGOU00M",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Catera Janay Kyles",
+      "transporterId": "A1I2GAH4TILXLP",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Cedric Deandre Lewis",
+      "transporterId": "A171HG42BQZSXA",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Chance Ryan Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Cole Regan Perkins",
+      "transporterId": "A2FLK6PKFVYES1",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Nursery Route Level 2 - Electric Vehicle\n10:20am \u2022 10 hrs",
+            "route": "Nursery Route Level 2 - Electric Vehicle",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Colter  Lane Stupp",
+      "transporterId": "A24JUFEW15NVGM",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Dajon Jewell D Trice",
+      "transporterId": "A1NSNADSITU26I",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Daniel  Isaac  Gilmore",
+      "transporterId": "A22MZ4DFI0C8ZC",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Daniel Aponte espinoza",
+      "transporterId": "A1L4PYMEDT9L09",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Darius Marques Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Darrell Eugene jr Woods",
+      "transporterId": "A4MAGYVQM5PGJ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Daurieal  Quadeem  Hervey",
+      "transporterId": "A34MW811FQAA8W",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "DeAndre Craig Adams",
+      "transporterId": "A2AGM4NIADDZCA",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Demarcus  Faulkner",
+      "transporterId": "A3ECKQ5DJ0N3QX",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 16ft\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 16ft",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Denzel  Marcus  Hall",
+      "transporterId": "A1HNQM7L1YEG6L",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Devarius  Mitchell",
+      "transporterId": "A3OJONT0UU0YBP",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Dibrell Antwoine Armstrong",
+      "transporterId": "A23WKB7VSYZNRC",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Donald Fitzgerald jr",
+      "transporterId": "A117TBM9U27YCQ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Donnell Jr Jefferson",
+      "transporterId": "A34GYVUOVK3EDE",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Donovan Lee Doss",
+      "transporterId": "A19H72099HHGKF",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Draem Thomarcus  Hines",
+      "transporterId": "A37WIIASEUMD34",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Frank Anthony  Robertson",
+      "transporterId": "A1FS7NBSL27A8T",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Gregory Deon Lowery",
+      "transporterId": "A3VR5VD4EICDJN",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Unavailable",
+            "role": "Unavailable",
+            "start": null,
+            "durationHours": null,
+            "unavailable": true
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Henry james Taylor",
+      "transporterId": "AFGPX7CNYVUU9",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Jahmian Lee Turner",
+      "transporterId": "A22RUKGCHV4TMX",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n12:00pm \u2022 10 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "12:00pm",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jakira Janae Cathey",
+      "transporterId": "A9QRRP0VJCOBZ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 12ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 12ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n12:00pm \u2022 8 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "12:00pm",
+            "durationHours": 8.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Jalon Gerald Lewis",
+      "transporterId": "A1Y1SP1C56AWAY",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jayden Williams",
+      "transporterId": "AIV81DDB28OQY",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Jazmonjr Worles",
+      "transporterId": "A3LU7MIJX30B38",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Jeromy Darius Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Jessica  Bricale Davis",
+      "transporterId": "A107WQOKQLFEPH",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n12:00pm \u2022 10 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "12:00pm",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n12:00pm \u2022 8 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "12:00pm",
+            "durationHours": 8.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "John  Glenn Scott",
+      "transporterId": "A2QE20MAK8EZ1O",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "John Madison Byrd",
+      "transporterId": "AAYB6T7YHW8EG",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Jordan Hutchinson",
+      "transporterId": "A3KR47EPY6TTWJ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Joshua Devon Watson",
+      "transporterId": "A3E2NOST9E4S2K",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Justin  Amir Scott",
+      "transporterId": "A8PGMZ7KQSLOC",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Justin  Matthew  Knighten",
+      "transporterId": "AWNFM073QG0KT",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Karlton James Lawrence",
+      "transporterId": "A2AYK63KJFWN0C",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Kashif Tarik Festherson",
+      "transporterId": "AFIA1WFNMVB14",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kaveyon Tyrone Lewis",
+      "transporterId": "A2BR1PSYFKCGM4",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kaylon DeMarious Christopher",
+      "transporterId": "A2LNU308WD1QH7",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n11:00am \u2022 10 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "11:00am",
+            "durationHours": 10.0
+          },
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Kemareyon Nizer Lewis",
+      "transporterId": "AB6V5H02K9CXM",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Keon Kentrell Gross",
+      "transporterId": "A15R9KO3IKFV8C",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Kevin Miquel Daffin",
+      "transporterId": "A83SR1JA88SR9",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Keyshawn Montrez Dickerson",
+      "transporterId": "A3O3YFD8RWNTME",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Khalid Darian Jones",
+      "transporterId": "A8KHM4HNLX109",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kiona Nicole Pree",
+      "transporterId": "A39TU0PM58APEZ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Kylan Laron Knight",
+      "transporterId": "ATVZQU3FX6P6G",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "LaKendra MarShae Shaw",
+      "transporterId": "A2LYBBNVCK3HX9",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ladarias  Cortez Clifton",
+      "transporterId": "AR9WHC5JCG9C7",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Ladereka Wilkerson",
+      "transporterId": "A1KZB5N35QM852",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Larrico Kihyoshi Pickens",
+      "transporterId": "A3P3UQT0G24W63",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Larry Durnell Shipp",
+      "transporterId": "A3FV3BFASBIL0W",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lauquetta Tranka Vaughn",
+      "transporterId": "A1LCU1N5FEVGQ4",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lorenzo Kaleb Miller",
+      "transporterId": "A28ISWM9Q09T7B",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lyric malasha Cole",
+      "transporterId": "A12WKVOVE91RR",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Makayla  Sharmaine  Cooper",
+      "transporterId": "A3O2FADDZOT32G",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": {
+            "raw": "Unavailable",
+            "role": "Unavailable",
+            "start": null,
+            "durationHours": null,
+            "unavailable": true
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Unavailable",
+            "role": "Unavailable",
+            "start": null,
+            "durationHours": null,
+            "unavailable": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Malyk Devontai  Latham",
+      "transporterId": "AZNBO363CZLL9",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marcelous  Kyles",
+      "transporterId": "A3GUCWA3TCEUKN",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n12:00pm \u2022 10 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "12:00pm",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Markayla Diane Tillis",
+      "transporterId": "A2NV8RDD9O85KN",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Marquel Phipps jr",
+      "transporterId": "A19K6TK9PN2RSE",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marquise Montrell Crum",
+      "transporterId": "A2FCHFSPW48DMN",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Marshay Matheney",
+      "transporterId": "A3ILMEJV3P7NF",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Martavious Deshaun Malone",
+      "transporterId": "A3RHXRMG19R02Q",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Mary Wilene Acker",
+      "transporterId": "AQ034EE9I10SU",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Mauricio Ramon jr Hearns",
+      "transporterId": "A27UUDX8RO4SUY",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Melissa  Denise Holmes",
+      "transporterId": "A329MWNGQ08U3X",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Michael Neal",
+      "transporterId": "A33H6DLA0H8B1P",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 16ft\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 16ft",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Nolan Jerard Goliday",
+      "transporterId": "A1JEJU977JQYXR",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Nursery Route Level 2 - Electric Vehicle\n10:15am \u2022 8 hrs",
+            "route": "Nursery Route Level 2 - Electric Vehicle",
+            "start": "10:15am",
+            "durationHours": 8.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Nursery Route Level 2 - Electric Vehicle\n10:15am \u2022 8 hrs",
+            "route": "Nursery Route Level 2 - Electric Vehicle",
+            "start": "10:15am",
+            "durationHours": 8.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Rilesha Breonna Hines",
+      "transporterId": "A3HLAJ10SBZ37Q",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Shachaniah  Juda Israel",
+      "transporterId": "A1JJKVC1X5U64J",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 12ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 12ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Shakira Kenyato Singleton",
+      "transporterId": "A3QKC7PYJRZ2DO",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "DSP Initiated Work (Standard Vehicle)\n12:00pm \u2022 10 hrs",
+            "route": "DSP Initiated Work (Standard Vehicle)",
+            "start": "12:00pm",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Shameka Nicole Williams",
+      "transporterId": "A14IG0657EKX55",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Shaquille  Mercedes  Tate",
+      "transporterId": "A22LPDLTFWN54N",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel - Extra Large Van - US\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Extra Large Van - US",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 14ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 14ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Taylor Lynne Hornung",
+      "transporterId": "A3HX32I5WXRD0H",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Timothy Terrell Tanner",
+      "transporterId": "AHDZ148R6PH4Y",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "Venson  Cortez Muskin",
+      "transporterId": "A1HVP4BMWDNLOJ",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Xavion Frazier",
+      "transporterId": "A3DVVNH87JLZ7",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "Zora Ann Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 12ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 12ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "briana Maeleah Mosley",
+      "transporterId": "A5YMIZJPDCU64",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:15am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:15am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:00am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:00am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "curtis Lee  caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 14ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 14ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    },
+    {
+      "name": "darome josiah boyland",
+      "transporterId": "A13F2PTEQR6OC0",
+      "days": [
+        {
+          "date": "2026-09-20",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 16ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 16ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-21",
+          "workBlock": {
+            "raw": "Standard Parcel - Custom Delivery Van 14ft\n10:25am \u2022 10 hrs",
+            "route": "Standard Parcel - Custom Delivery Van 14ft",
+            "start": "10:25am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-22",
+          "workBlock": {
+            "raw": "Standard Parcel Electric - Rivian MEDIUM\n10:20am \u2022 10 hrs",
+            "route": "Standard Parcel Electric - Rivian MEDIUM",
+            "start": "10:20am",
+            "durationHours": 10.0
+          },
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-23",
+          "workBlock": null,
+          "shift": {
+            "raw": "Driver \u2022 9:15 AM \u2022 10h",
+            "role": "Driver",
+            "start": "9:15 AM",
+            "durationHours": 10.0,
+            "unavailable": false
+          }
+        },
+        {
+          "date": "2026-09-24",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-25",
+          "workBlock": null,
+          "shift": null
+        },
+        {
+          "date": "2026-09-26",
+          "workBlock": null,
+          "shift": null
+        }
+      ]
+    }
+  ]
+}
