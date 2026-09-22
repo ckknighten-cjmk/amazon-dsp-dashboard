@@ -1,0 +1,26 @@
+import type { Vehicle } from "@/lib/types";
+
+export const vehicles: Vehicle[] = [
+  { id: "van-01", unitId: "EDV-4401", type: "edv", status: "on_route", mileage: 41280, lastInspection: "2026-09-18", assignedRouteId: "rt-cx11", year: 2024, plate: "TN 441-CJM" },
+  { id: "van-02", unitId: "EDV-4402", type: "edv", status: "on_route", mileage: 38814, lastInspection: "2026-09-18", assignedRouteId: "rt-cx12", year: 2024, plate: "TN 442-CJM" },
+  { id: "van-03", unitId: "EDV-4403", type: "edv", status: "on_route", mileage: 45102, lastInspection: "2026-09-16", assignedRouteId: "rt-cx13", year: 2023, plate: "TN 443-CJM" },
+  { id: "van-04", unitId: "EDV-4404", type: "edv", status: "on_route", mileage: 29667, lastInspection: "2026-09-19", assignedRouteId: "rt-cx14", year: 2025, plate: "TN 444-CJM" },
+  { id: "van-05", unitId: "RYD-8811", type: "rental_cargo", status: "on_route", mileage: 61204, lastInspection: "2026-09-14", assignedRouteId: "rt-cx15", year: 2023, plate: "TN 811-RYD" },
+  { id: "van-06", unitId: "EDV-4405", type: "edv", status: "on_route", mileage: 33491, lastInspection: "2026-09-18", assignedRouteId: "rt-cx16", year: 2024, plate: "TN 445-CJM" },
+  { id: "van-07", unitId: "EDV-4406", type: "edv", status: "on_route", mileage: 27855, lastInspection: "2026-09-19", assignedRouteId: "rt-cx17", year: 2025, plate: "TN 446-CJM" },
+  { id: "van-08", unitId: "EDV-4407", type: "edv", status: "on_route", mileage: 40112, lastInspection: "2026-09-17", assignedRouteId: "rt-cx18", year: 2024, plate: "TN 447-CJM" },
+  { id: "van-09", unitId: "EDV-4408", type: "edv", status: "on_route", mileage: 36520, lastInspection: "2026-09-18", assignedRouteId: "rt-cx19", year: 2024, plate: "TN 448-CJM" },
+  { id: "van-10", unitId: "RYD-8812", type: "rental_cargo", status: "on_route", mileage: 54883, lastInspection: "2026-09-12", assignedRouteId: "rt-cx20", year: 2022, plate: "TN 812-RYD" },
+  { id: "van-11", unitId: "EDV-4409", type: "edv", status: "on_route", mileage: 42990, lastInspection: "2026-09-15", assignedRouteId: "rt-cx21", year: 2023, plate: "TN 449-CJM" },
+  { id: "van-12", unitId: "EDV-4410", type: "edv", status: "on_route", mileage: 31004, lastInspection: "2026-09-19", assignedRouteId: "rt-cx22", year: 2025, plate: "TN 450-CJM" },
+  { id: "van-13", unitId: "EDV-4415", type: "edv", status: "oos", mileage: 50211, lastInspection: "2026-08-29", year: 2023, plate: "TN 455-CJM", notes: "12V battery no-start. Waiting on parts." },
+  { id: "van-14", unitId: "EDV-4411", type: "edv", status: "on_route", mileage: 35670, lastInspection: "2026-09-18", assignedRouteId: "rt-cx24", year: 2024, plate: "TN 451-CJM" },
+  { id: "van-15", unitId: "SV-110", type: "step_van", status: "on_route", mileage: 78240, lastInspection: "2026-09-11", assignedRouteId: "rt-cx25", year: 2021, plate: "TN 110-SVN" },
+  { id: "van-16", unitId: "EDV-4412", type: "edv", status: "on_route", mileage: 22108, lastInspection: "2026-09-20", assignedRouteId: "rt-cx26", year: 2025, plate: "TN 452-CJM" },
+  { id: "van-17", unitId: "RYD-8813", type: "rental_cargo", status: "on_route", mileage: 49002, lastInspection: "2026-09-13", assignedRouteId: "rt-cx27", year: 2023, plate: "TN 813-RYD" },
+  { id: "van-18", unitId: "EDV-4413", type: "edv", status: "on_route", mileage: 38441, lastInspection: "2026-09-18", assignedRouteId: "rt-cx28", year: 2024, plate: "TN 453-CJM" },
+  { id: "van-19", unitId: "EDV-4414", type: "edv", status: "on_route", mileage: 26790, lastInspection: "2026-09-19", assignedRouteId: "rt-cx29", year: 2025, plate: "TN 454-CJM" },
+  { id: "van-20", unitId: "EDV-4416", type: "edv", status: "ready", mileage: 19832, lastInspection: "2026-09-20", year: 2025, plate: "TN 456-CJM" },
+  { id: "van-21", unitId: "PNK-2204", type: "rental_cargo", status: "ready", mileage: 33110, lastInspection: "2026-09-16", year: 2024, plate: "TN 204-PNK" },
+  { id: "van-22", unitId: "EDV-4417", type: "edv", status: "maintenance", mileage: 61408, lastInspection: "2026-09-04", year: 2023, plate: "TN 457-CJM", notes: "Quarterly PM + brake inspection." },
+];

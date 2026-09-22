@@ -1,16 +1,16 @@
 {
-  "name": "CJMK Ops",
+  "name": "Amazon DSP Dashboard",
   "install": "npm ci",
   "terminals": [
     {
-      "name": "next-dev",
+      "name": "vite-dev",
       "command": "npm run dev"
     }
   ],
   "ports": [
     {
-      "name": "CJMK Ops",
-      "port": 43123
+      "name": "Vite dev server",
+      "port": 5173
     }
   ]
 }
