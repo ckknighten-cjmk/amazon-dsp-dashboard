@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Relocated Vite command center has its own ESLint config.
+    "apps/**",
   ]),
 ]);
 
