@@ -18,6 +18,7 @@ import type {
   IncidentSeverity,
   IncidentStatus,
   IncidentType,
+  InvoiceStatus,
   PackageExceptionStatus,
   RouteStatus,
   ScorecardTier,
@@ -199,6 +200,18 @@ export function ScoreStatusBadge({
     );
   }
   return <ScoreTierBadge tier={status} size={size} />;
+}
+
+export function InvoiceStatusBadge({ status }: { status: InvoiceStatus }) {
+  const styles: Record<InvoiceStatus, string> = {
+    New: "border-sky-400/50 bg-sky-500/10 text-sky-800 dark:border-sky-500/40 dark:text-sky-300",
+    Paid: "border-emerald-400/50 bg-emerald-500/10 text-emerald-800 dark:border-emerald-500/40 dark:text-emerald-300",
+  };
+  return (
+    <Badge variant="outline" className={cn(pill, styles[status])}>
+      {status}
+    </Badge>
+  );
 }
 
 export function ScoreTierBadge({

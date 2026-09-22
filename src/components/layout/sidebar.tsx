@@ -10,6 +10,7 @@ import {
   Settings,
   Truck,
   Users,
+  Wallet,
   Waypoints,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,6 +23,7 @@ const NAV = [
   { href: "/drivers", label: "Drivers", icon: Users },
   { href: "/fleet", label: "Fleet", icon: Truck },
   { href: "/incidents", label: "Incidents", icon: AlertTriangle },
+  { href: "/payments", label: "Payments", icon: Wallet },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
 

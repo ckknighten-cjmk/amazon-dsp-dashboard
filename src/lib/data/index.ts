@@ -3,7 +3,8 @@
  *
  * Routes / associates / exceptions for 2026-09-21 come from the DSP Console
  * Delivery Execution scrape in `src/lib/data/seed`. Scorecard is Week 37
- * Console Performance Summary. Fleet and incidents remain mock fixtures.
+ * Console Performance Summary. Payments are the 2026-09-21 Flex Payments
+ * scrape. Fleet and incidents remain mock fixtures.
  */
 
 import type {
@@ -17,6 +18,7 @@ import type {
   StationSettings,
   Vehicle,
   DeliveryExecutionBoard,
+  PaymentsSnapshot,
 } from "@/lib/types";
 import { station as seedStation } from "@/lib/data/drivers";
 import { vehicles as mockVehicles } from "@/lib/data/vehicles";
@@ -30,6 +32,7 @@ import {
 import { incidents } from "@/lib/data/incidents";
 import { scorecard } from "@/lib/data/scorecard";
 import { getOverview as buildOverview } from "@/lib/data/overview";
+import { getPaymentsSnapshot } from "@/lib/data/payments";
 
 /** Fleet stays mock; drop assigned-route links to retired mock route IDs. */
 const vehicles: Vehicle[] = mockVehicles.map((van) => ({
@@ -52,6 +55,7 @@ export interface DataSource {
   getExceptions(): PackageException[];
   getExceptionsForRoute(routeId: string): PackageException[];
   getDeliveryBoard(): DeliveryExecutionBoard;
+  getPayments(): PaymentsSnapshot;
 }
 
 const driverById = new Map(consoleDrivers.map((d) => [d.id, d]));
@@ -72,6 +76,7 @@ export const mockDataSource: DataSource = {
   getExceptions: () => exceptions,
   getExceptionsForRoute: (routeId) => exceptionsForRoute(routeId),
   getDeliveryBoard: () => deliveryBoard,
+  getPayments: () => getPaymentsSnapshot(),
 };
 
 /** Active source. Replace with an API-backed implementation later. */
@@ -91,3 +96,4 @@ export const getExceptions = () => source.getExceptions();
 export const getExceptionsForRoute = (routeId: string) =>
   source.getExceptionsForRoute(routeId);
 export const getDeliveryBoard = () => source.getDeliveryBoard();
+export const getPayments = () => source.getPayments();
