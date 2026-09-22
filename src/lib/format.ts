@@ -1,99 +1,167 @@
-export function formatUsd(value: number, digits = 0): string {
-  return new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: digits,
-    minimumFractionDigits: digits,
-  }).format(value);
+import { differenceInMonths, format as formatDateFns, parseISO } from "date-fns";
+import type {
+  DateRange,
+  DriverStatus,
+  IncidentSeverity,
+  IncidentStatus,
+  IncidentType,
+  PackageExceptionStatus,
+  RouteStatus,
+  ScorecardTier,
+  StopStatus,
+  VehicleStatus,
+  VehicleType,
+} from "@/lib/types";
+
+export const OPS_TIMEZONE = "America/Chicago";
+
+/** Frozen station clock so the demo stays consistent (CDT). */
+export const MOCK_NOW = parseISO("2026-09-21T20:42:00");
+
+export function formatTime(iso: string | null | undefined) {
+  if (!iso) return "—";
+  return formatDateFns(parseISO(iso), "h:mm a");
 }
 
-export function formatUsdCompact(value: number): string {
-  const abs = Math.abs(value);
-  const sign = value < 0 ? "-" : "";
-  if (abs >= 1_000_000) return `${sign}$${(abs / 1_000_000).toFixed(2)}M`;
-  if (abs >= 1_000) return `${sign}$${(abs / 1_000).toFixed(1)}K`;
-  return formatUsd(value);
+export function formatDate(iso: string) {
+  return formatDateFns(parseISO(iso), "MMM d, yyyy");
 }
 
-export function formatPct(value: number, digits = 1): string {
+export function formatDateTime(iso: string) {
+  return formatDateFns(parseISO(iso), "MMM d, h:mm a");
+}
+
+export function formatClock() {
+  return formatDateFns(MOCK_NOW, "EEE, MMM d · h:mm a");
+}
+
+export function formatRangeLabel(range: DateRange) {
+  return range === "today" ? "Today · Mon Sep 21" : "This week · Sep 15–21";
+}
+
+export function formatNumber(value: number) {
+  return new Intl.NumberFormat("en-US").format(value);
+}
+
+export function formatPercent(value: number, digits = 1) {
   return `${value.toFixed(digits)}%`;
 }
 
-export function formatNumber(value: number, digits = 0): string {
-  return new Intl.NumberFormat("en-US", {
-    maximumFractionDigits: digits,
+export function formatScorecardValue(metric: {
+  unit: string;
+  current: number | null;
+  digits?: number;
+  unitSuffix?: string;
+  compliance?: string | null;
+}) {
+  if (metric.unit === "unavailable") return "No data";
+  if (metric.unit === "compliance") {
+    return metric.compliance === "compliant" ? "Compliant" : "Noncompliant";
+  }
+  if (metric.current == null) return "—";
+  const digits = metric.digits ?? (metric.unit === "percent" ? 1 : 1);
+  if (metric.unit === "percent") return formatPercent(metric.current, digits);
+  const n = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: digits,
-  }).format(value);
+    maximumFractionDigits: digits,
+  }).format(metric.current);
+  if (metric.unitSuffix) return `${n} ${metric.unitSuffix}`;
+  return n;
 }
 
-export function formatDate(iso: string): string {
-  const date = new Date(`${iso}T00:00:00Z`);
-  return new Intl.DateTimeFormat("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    timeZone: "UTC",
-  }).format(date);
+export function formatDelta(delta: number, unit: "number" | "percent") {
+  const sign = delta > 0 ? "+" : "";
+  if (unit === "percent") return `${sign}${delta.toFixed(1)} pts`;
+  return `${sign}${formatNumber(delta)}`;
 }
 
-export function weekdayShort(iso: string): string {
-  const date = new Date(`${iso}T00:00:00Z`);
-  return new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "UTC" }).format(date);
+export function formatTenure(hiredAt: string | undefined) {
+  if (!hiredAt) return "—";
+  const months = differenceInMonths(MOCK_NOW, parseISO(hiredAt));
+  if (months < 1) return "< 1 mo";
+  if (months < 12) return `${months} mo`;
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  return rem === 0 ? `${years} yr` : `${years} yr ${rem} mo`;
 }
 
-export function round2(value: number): number {
-  return Math.round(value * 100) / 100;
+export function formatMileage(miles: number) {
+  return `${formatNumber(miles)} mi`;
 }
 
-export function clamp(value: number, min: number, max: number): number {
-  return Math.min(max, Math.max(min, value));
-}
+export const routeStatusLabel: Record<RouteStatus, string> = {
+  not_started: "Not started",
+  no_progress: "No progress",
+  in_progress: "In progress",
+  completed: "Completed",
+  rescued: "Rescued",
+};
 
-export function addDays(iso: string, days: number): string {
-  const date = new Date(`${iso}T00:00:00Z`);
-  date.setUTCDate(date.getUTCDate() + days);
-  return date.toISOString().slice(0, 10);
-}
+export const driverStatusLabel: Record<DriverStatus, string> = {
+  available: "Available",
+  on_route: "On route",
+  off: "Off",
+  pto: "PTO",
+};
 
-export function dateRange(from: string, to: string): string[] {
-  const dates: string[] = [];
-  let cursor = from;
-  while (cursor <= to) {
-    dates.push(cursor);
-    cursor = addDays(cursor, 1);
-  }
-  return dates;
-}
+export const vehicleStatusLabel: Record<VehicleStatus, string> = {
+  ready: "Ready",
+  on_route: "On route",
+  maintenance: "Maintenance",
+  oos: "OOS",
+};
 
-export function dayOfWeek(iso: string): number {
-  return new Date(`${iso}T00:00:00Z`).getUTCDay();
-}
+export const vehicleTypeLabel: Record<VehicleType, string> = {
+  edv: "Amazon EDV",
+  rental_cargo: "Rental cargo",
+  step_van: "Step van",
+};
 
-export function hashString(input: string): number {
-  let hash = 2166136261;
-  for (let i = 0; i < input.length; i += 1) {
-    hash ^= input.charCodeAt(i);
-    hash = Math.imul(hash, 16777619);
-  }
-  return hash >>> 0;
-}
+export const incidentTypeLabel: Record<IncidentType, string> = {
+  dvr: "DVR",
+  customer_complaint: "Customer complaint",
+  vehicle_issue: "Vehicle issue",
+  safety_event: "Safety event",
+};
 
-export function mulberry32(seed: number): () => number {
-  let state = seed >>> 0;
-  return () => {
-    state += 0x6d2b79f5;
-    let t = state;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+export const incidentSeverityLabel: Record<IncidentSeverity, string> = {
+  low: "Low",
+  medium: "Medium",
+  high: "High",
+  critical: "Critical",
+};
 
-export function average(values: number[]): number {
-  if (values.length === 0) return 0;
-  return values.reduce((sum, value) => sum + value, 0) / values.length;
-}
+export const incidentStatusLabel: Record<IncidentStatus, string> = {
+  open: "Open",
+  closed: "Closed",
+};
 
-export function sum(values: number[]): number {
-  return values.reduce((total, value) => total + value, 0);
+export const stopStatusLabel: Record<StopStatus, string> = {
+  pending: "Pending",
+  delivered: "Delivered",
+  attempted: "Attempted",
+  rescued: "Rescued",
+  business_closed: "Business closed",
+};
+
+export const exceptionStatusLabel: Record<PackageExceptionStatus, string> = {
+  Reattemptable: "Reattemptable",
+  Undeliverable: "Undeliverable",
+  Missing: "Missing",
+  "Returned to station": "RTS",
+  "Pickup failed": "Pickup failed",
+};
+
+export const scorecardTierLabel: Record<ScorecardTier, string> = {
+  fantastic: "Fantastic",
+  great: "Great",
+  fair: "Fair",
+  poor: "Poor",
+};
+
+/** Console did not publish this field on the Delivery Execution board. */
+export const CONSOLE_UNAVAILABLE = "Not on Console";
+
+export function formatCompletionPct(value: number) {
+  return Number.isInteger(value) ? `${value}%` : `${value.toFixed(1)}%`;
 }
