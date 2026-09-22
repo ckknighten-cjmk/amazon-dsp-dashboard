@@ -15,8 +15,30 @@ import type {
 
 export const OPS_TIMEZONE = "America/Chicago";
 
-/** Frozen station clock so the demo stays consistent (CDT). */
-export const MOCK_NOW = parseISO("2026-09-21T20:42:00");
+/** Frozen station clock so the demo stays consistent (CDT wall time). */
+export const MOCK_NOW = parseISO("2026-09-21T22:12:00");
+
+/** Clock label for a Console capture instant, rendered in the station timezone. */
+export function formatConsoleCapture(iso: string) {
+  const time = new Intl.DateTimeFormat("en-US", {
+    timeZone: OPS_TIMEZONE,
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  }).format(new Date(iso));
+  return `${time.replace(" AM", " a.m.").replace(" PM", " p.m.")} CT`;
+}
+
+export function formatConsoleDay(iso: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: OPS_TIMEZONE,
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  })
+    .format(new Date(iso))
+    .replace(",", "");
+}
 
 export function formatTime(iso: string | null | undefined) {
   if (!iso) return "—";
@@ -114,6 +136,7 @@ export function formatMileage(miles: number) {
 export const routeStatusLabel: Record<RouteStatus, string> = {
   not_started: "Not started",
   no_progress: "No progress",
+  incomplete: "Incomplete",
   in_progress: "In progress",
   completed: "Completed",
   rescued: "Rescued",

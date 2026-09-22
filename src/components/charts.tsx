@@ -18,6 +18,7 @@ import type { RouteStatus } from "@/lib/types";
 const STATUS_COLOR: Record<RouteStatus, string> = {
   not_started: "var(--muted-foreground)",
   no_progress: "var(--poor)",
+  incomplete: "var(--poor)",
   in_progress: "var(--great)",
   completed: "var(--fantastic)",
   rescued: "var(--fair)",

@@ -1,6 +1,8 @@
 /**
- * Maps the DSP Console Delivery Execution scrape (2026-09-21) into domain models.
- * Vehicle and on-time % are left null — Console did not show them.
+ * Maps the DSP Console Delivery Execution end-of-day scrape (2026-09-21, 10:12 p.m. CT)
+ * into domain models. Board chips come from seed totals. Exception rows are the
+ * Packages CSV embedded as `exceptionPackages` (same file as
+ * `packages-exceptions-2026-09-21.csv`). Vehicle and on-time % stay null.
  */
 import type {
   DeliveryExecutionBoard,
@@ -19,6 +21,7 @@ const STATUS_MAP: Record<string, RouteStatus> = {
   complete: "completed",
   in_progress: "in_progress",
   no_progress: "no_progress",
+  incomplete: "incomplete",
 };
 
 function slugName(name: string) {
@@ -64,14 +67,6 @@ export function associateId(name: string) {
   return slugName(name);
 }
 
-export const deliveryBoard: DeliveryExecutionBoard = {
-  source: seed.source,
-  serviceDate: seed.serviceDate,
-  capturedAt: seed.capturedAt,
-  disclaimer: seed.disclaimer,
-  totals: seed.totals,
-};
-
 export const routes: Route[] = (seed.routes as SeedRoute[]).map((row) => {
   const associateIds = row.associates.map(associateId);
   return {
@@ -97,6 +92,43 @@ export const routes: Route[] = (seed.routes as SeedRoute[]).map((row) => {
     stops: [],
   };
 });
+
+const packagesDelivered = routes.reduce((sum, route) => sum + route.packagesDelivered, 0);
+const packagesPlanned = routes.reduce((sum, route) => sum + route.packageCount, 0);
+const pkg = seed.totals.packageStatusCounts;
+
+export const deliveryBoard: DeliveryExecutionBoard = {
+  source: seed.source,
+  serviceDate: seed.serviceDate,
+  capturedAt: seed.capturedAt,
+  snapshot: seed.snapshot,
+  disclaimer: seed.disclaimer,
+  totals: {
+    routes: seed.totals.routes,
+    inProgress: seed.totals.inProgress,
+    incomplete: seed.totals.incomplete,
+    executionGaugesPct: seed.totals.executionGaugesPct,
+    packagesDelivered,
+    packagesPlanned,
+    packageStatusCounts: {
+      remaining: pkg.remaining,
+      reattemptable: pkg.reattemptable,
+      undeliverable: pkg.undeliverable,
+      missing: pkg.missing,
+      returnedToStation: pkg.returned_to_station,
+      pickupFailed: pkg.pickup_failed,
+      pendingContainersPickup: pkg.pending_containers_pickup,
+      pendingPackagesPickup: pkg.pending_packages_pickup,
+    },
+    workHourRisk: seed.totals.workHourRisk,
+    multiTransporter: seed.totals.multiTransporter,
+    unknownStops: seed.totals.unknownStops,
+    onBreak: seed.totals.onBreak,
+    noBreaksTaken: seed.totals.noBreaksTaken,
+    inactive: seed.totals.inactive,
+    onRoadPickups: seed.totals.onRoadPickups,
+  },
+};
 
 const routeIdByCode = new Map(routes.map((r) => [r.code, r.id]));
 
@@ -135,13 +167,14 @@ export const consoleDrivers: Driver[] = [...names]
     const id = associateId(name);
     const assigned = routesByAssociate.get(id) ?? [];
     const hasLive = assigned.some((r) => r.status === "in_progress");
-    const onlyNoProgress =
-      assigned.length > 0 && assigned.every((r) => r.status === "no_progress");
+    const onlyOpen =
+      assigned.length > 0 &&
+      assigned.every((r) => r.status === "no_progress" || r.status === "incomplete");
     return {
       id,
       name,
       role: "DA" as const,
-      status: hasLive ? "on_route" : onlyNoProgress ? "available" : "off",
+      status: hasLive ? "on_route" : onlyOpen ? "available" : "off",
       todayPackages: assigned.reduce((sum, r) => sum + r.packagesDelivered, 0),
       todayStops: assigned.reduce((sum, r) => sum + r.completedStops, 0),
       incidentCount30d: 0,
@@ -154,4 +187,31 @@ export const consoleDrivers: Driver[] = [...names]
 
 export function exceptionsForRoute(routeId: string) {
   return exceptions.filter((row) => row.routeId === routeId);
+}
+
+const EXPORT_CHIPS: Array<{
+  status: PackageExceptionStatus;
+  chip: keyof DeliveryExecutionBoard["totals"]["packageStatusCounts"];
+  label: string;
+}> = [
+  { status: "Reattemptable", chip: "reattemptable", label: "reattemptable" },
+  { status: "Undeliverable", chip: "undeliverable", label: "undeliverable" },
+  { status: "Missing", chip: "missing", label: "missing" },
+  { status: "Returned to station", chip: "returnedToStation", label: "RTS" },
+  { status: "Pickup failed", chip: "pickupFailed", label: "pickup failed" },
+];
+
+/** Console board chips vs the Packages CSV. Only the statuses that disagree are called out. */
+export function exceptionExportNote() {
+  const csv = new Map<PackageExceptionStatus, number>();
+  for (const row of exceptions) csv.set(row.status, (csv.get(row.status) ?? 0) + 1);
+  const chips = deliveryBoard.totals.packageStatusCounts;
+  const gaps = EXPORT_CHIPS.filter((item) => (csv.get(item.status) ?? 0) !== chips[item.chip]);
+  if (gaps.length === 0) {
+    const summary = EXPORT_CHIPS.map((item) => `${chips[item.chip]} ${item.label}`).join(", ");
+    return `Table is the ${exceptions.length}-row Packages CSV. Console board chips match the export (${summary}). Remaining is a board chip and is not an export status.`;
+  }
+  const csvPart = gaps.map((item) => `${csv.get(item.status) ?? 0} ${item.label}`).join(", ");
+  const consolePart = gaps.map((item) => chips[item.chip]).join(" / ");
+  return `Table is the ${exceptions.length}-row Packages CSV (${csvPart}). Board chips above use Console totals (${consolePart}) and can differ from export rows.`;
 }

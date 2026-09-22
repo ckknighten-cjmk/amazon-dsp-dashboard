@@ -9,7 +9,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { getStation } from "@/lib/data";
-import { OPS_TIMEZONE } from "@/lib/format";
+import { formatClock, OPS_TIMEZONE } from "@/lib/format";
 
 const STORAGE_KEY = "cjmk-ops-settings";
 const LEGACY_STORAGE_KEY = "valiant-ops-settings";
@@ -137,7 +137,7 @@ export default function SettingsPage() {
                 ))}
               </select>
               <p className="text-xs text-muted-foreground">
-                Default {OPS_TIMEZONE}. Mock clock is frozen at Mon Sep 21, 2026 · 2:48 p.m.
+                Default {OPS_TIMEZONE}. Mock clock is frozen at {formatClock()} CT.
               </p>
             </div>
             <p className="text-xs text-muted-foreground">

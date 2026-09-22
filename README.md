@@ -39,19 +39,19 @@ No auth in v1. Dark theme is the default; toggle light/dark from the top bar or 
 
 | Surface | Source |
 | --- | --- |
-| **Routes / Delivery Execution** | Amazon DSP Console Delivery Execution board for **2026-09-21** (37 routes, associates, stops, packages, notes, board totals) plus the exception Packages CSV (178 rows). Board package-status chips use Console totals (e.g. reattemptable **17**); the exceptions table uses export rows (19 reattemptable). Vehicle and on-time % were **not** on the Console board — the UI leaves them unavailable and does not invent them. |
+| **Routes / Delivery Execution** | Amazon DSP Console Delivery Execution **end-of-day** board for **2026-09-21** (37 routes, 0 in progress, associates, stops, packages, sign-out notes, board totals) plus the exception Packages CSV (179 rows). Board package-status chips use Console totals (reattemptable **1**, undeliverable **1**, missing **9**, RTS **105**, pickup failed **63**). Those chips match the CSV on this capture. Vehicle and on-time % were **not** on the Console board — the UI leaves them unavailable and does not invent them. |
 | **Scorecard** | DSP Console Performance Summary for **Week 37 (Sep 6–12, 2026)** — overall standing **85.8 Fantastic**. No prior-week comparison was published, so the UI does not invent deltas. |
 | **Payments** | Amazon DSP Console Flex Payments scrape captured **2026-09-21** for CJMK Inc. / DNA4. Pending action **$192,202.66** (6 invoices), visible paid total, invoice list, Week 37 variable **$88,556.70** and incentive **$3,878.88**, and YTD Insights labeled **2025** as Console displayed them. No deposit or payment-method details were in that scrape. |
 | **Drivers** | Associate names from the Sep 21 Console routes (including multi-transporter crews). Tenure, phone, and scorecard contribution were not on the board. |
 | **Fleet / incidents** | Still **mock** fixtures. Console did not show vehicle IDs, so the yard roster is not linked to live routes. |
 
-Station clock is frozen at **Mon Sep 21, 2026 · 8:42 p.m. CT** (the Console capture time).
+Station clock is frozen at **Mon Sep 21, 2026 · 10:12 p.m. CT** (the end-of-day Console capture time).
 
 ### Pages
 
-- **Overview** — KPIs from the Sep 21 Delivery Execution board (99% package gauge, remaining / reattemptable / undeliverable, in-progress routes). No prior-day deltas.
+- **Overview** — KPIs from the Sep 21 end-of-day Delivery Execution board (99% package gauge, remaining / reattemptable / undeliverable, 0 in-progress routes). Package delivered counts are the sum of Console route rows. No prior-day deltas.
 - **Scorecard** — DSP Console Week 37: overall 85.8 Fantastic, plus Safety, Quality, and Service Reliability metrics
-- **Routes** — Delivery Execution board: 37 live routes, 99% gauges, package-status chips, work-hour risk, on-road pickups, and the exception-package export
+- **Routes** — End-of-day Delivery Execution board: 37 routes, 99% gauges, package-status chips (RTS 105), work-hour risk, on-road pickups, and the exception-package export
 - **Drivers** — Associates named on those routes (all names on split / multi-transporter routes)
 - **Fleet** — Mock EDV / rental cargo / step van yard status
 - **Incidents** — Mock DVR, complaint, vehicle, and safety log

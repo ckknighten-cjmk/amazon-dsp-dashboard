@@ -25,6 +25,7 @@ export type ScorecardCompliance = "compliant" | "noncompliant";
 export type RouteStatus =
   | "not_started"
   | "no_progress"
+  | "incomplete"
   | "in_progress"
   | "completed"
   | "rescued";
@@ -157,16 +158,19 @@ export interface DeliveryExecutionBoard {
   source: string;
   serviceDate: string;
   capturedAt: string;
+  snapshot: string;
   disclaimer: string;
   totals: {
     routes: number;
     inProgress: number;
+    incomplete: number;
     executionGaugesPct: {
       locations: number;
       stops: number;
       packages: number;
       attemptSuccess: number;
     };
+    /** Sum of Console route rows. The board did not publish a separate delivered total. */
     packagesDelivered: number;
     packagesPlanned: number;
     packageStatusCounts: {
@@ -176,10 +180,15 @@ export interface DeliveryExecutionBoard {
       missing: number;
       returnedToStation: number;
       pickupFailed: number;
+      pendingContainersPickup: number;
+      pendingPackagesPickup: number;
     };
     workHourRisk: number;
     multiTransporter: number;
     unknownStops: number;
+    onBreak: number;
+    noBreaksTaken: number;
+    inactive: number;
     onRoadPickups: {
       total: number;
       remaining: number;
