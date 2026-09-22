@@ -1,0 +1,49 @@
+{
+  "source": "Amazon DSP Console Compliance Breaks screenshot, Week 39 (Sep 20–Sep 26)",
+  "capturedRowsOnly": true,
+  "summary": {
+    "dasWithViolations": 11,
+    "dasWithViolationsYesterday": 8,
+    "missingBreaks": 5,
+    "delayedBreaks": 1,
+    "shorterBreakThanRequired": 1,
+    "packageDeliveredDuringBreak": 4,
+    "missingPunches": 19,
+    "breaksBoardAssociates": 52
+  },
+  "workHours": {
+    "source": "Amazon DSP Console Work hour compliance screenshot",
+    "dasNearingViolations": 1,
+    "worked50to60HoursPast7Days": 0,
+    "worked5to6ConsecutiveDays": 1,
+    "associateNamed": false,
+    "lastRefreshedDate": "2026-09-22"
+  },
+  "rows": [
+    {
+      "associateName": "Larry Durnell Shipp",
+      "date": "2026-09-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Jazmonjr Worles",
+      "date": "2026-09-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Jazmonjr Worles",
+      "date": "2026-09-21",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Keon Kentrell Gross",
+      "date": "2026-09-20",
+      "status": "missing_punch"
+    }
+  ],
+  "limits": [
+    "Structured Amazon meal start and end times were not in the Compliance Breaks capture. This page does not invent them.",
+    "The breaks table screenshot names three associates. Dashes on their other days are not stored as Compliant.",
+    "Dashboard totals (11 DAs with violations, 19/52 missing punches, and the break-category counts) are not assigned to associates the screenshot did not name."
+  ]
+}
