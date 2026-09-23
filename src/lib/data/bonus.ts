@@ -1,17 +1,22 @@
-import seed from "@/lib/data/seed/10hr-bonus-week38.json";
+import seed from "@/lib/data/seed/10hr-bonus-week38-by-da.json";
 import type { DateRange } from "@/lib/types";
 import { dateInRange } from "@/lib/period";
 
-export interface BonusRoute {
+export interface BonusEntry {
   date: string;
-  route: string;
-  drivers: readonly string[];
+  deliveryAssociate: string;
   stopsCompleted: number;
+  route: string;
+  /** True when more than one DA was on the route. The stop count is the route total. */
+  multiTransporter: boolean;
+  coDrivers: readonly string[];
 }
 
 export interface BonusDayCount {
   date: string;
   count: number;
+  solo: number;
+  multiTransporter: number;
 }
 
 export interface BonusList {
@@ -23,9 +28,20 @@ export interface BonusList {
   thresholdStopsCompleted: number;
   capturedAt: string;
   source: string;
-  routes: BonusRoute[];
+  entries: BonusEntry[];
   dayCounts: BonusDayCount[];
+  soloCount: number;
+  multiTransporterCount: number;
   disclaimer: string;
+}
+
+interface BonusSeedEntry {
+  date: string;
+  deliveryAssociate: string;
+  stopsCompleted: number;
+  route: string;
+  multiTransporter: boolean | string;
+  coDrivers?: string[] | string;
 }
 
 interface BonusSeed {
@@ -35,40 +51,72 @@ interface BonusSeed {
   thresholdStopsCompleted: number;
   capturedAt: string;
   source: string;
-  routes: Array<{
-    date: string;
-    route: string;
-    drivers: string[];
-    stopsCompleted: number;
-  }>;
+  entries: BonusSeedEntry[];
 }
 
 const WEEK_START = "2026-09-13";
 const WEEK_END = "2026-09-19";
 
+function asMulti(value: boolean | string) {
+  if (typeof value === "boolean") return value;
+  const text = value.trim().toLowerCase();
+  return text === "yes" || text === "true";
+}
+
+function asDrivers(value: string[] | string | undefined) {
+  if (Array.isArray(value)) return value.map((name) => name.trim()).filter(Boolean);
+  if (!value?.trim()) return [];
+  return value
+    .split(";")
+    .map((name) => name.trim())
+    .filter(Boolean);
+}
+
 function readSeed(raw: BonusSeed): BonusList {
   if (raw.station !== "DNA4" || raw.week !== 38 || raw.thresholdStopsCompleted !== 180) {
     throw new Error("Week 38 10-hour bonus seed does not match the DNA4 capture.");
   }
-  const routes = raw.routes.map((route) => {
-    if (!route.date || !route.route || route.drivers.length === 0) {
-      throw new Error("Week 38 bonus route is missing a date, route, or driver.");
+  const entries = raw.entries.map((entry) => {
+    const multiTransporter = asMulti(entry.multiTransporter);
+    const coDrivers = asDrivers(entry.coDrivers);
+    if (!entry.date || !entry.route || !entry.deliveryAssociate.trim()) {
+      throw new Error("Week 38 bonus row is missing a date, route, or delivery associate.");
     }
-    if (route.date < WEEK_START || route.date > WEEK_END) {
-      throw new Error(`Week 38 bonus route ${route.route} is outside Sep 13–19.`);
+    if (entry.date < WEEK_START || entry.date > WEEK_END) {
+      throw new Error(`Week 38 bonus row for ${entry.deliveryAssociate} is outside Sep 13–19.`);
     }
-    if (!Number.isInteger(route.stopsCompleted) || route.stopsCompleted < raw.thresholdStopsCompleted) {
-      throw new Error(`Week 38 bonus route ${route.route} is below 180 completed stops.`);
+    if (!Number.isInteger(entry.stopsCompleted) || entry.stopsCompleted < raw.thresholdStopsCompleted) {
+      throw new Error(`Week 38 bonus row for ${entry.deliveryAssociate} is below 180 completed stops.`);
+    }
+    if (multiTransporter && coDrivers.length === 0) {
+      throw new Error(`Week 38 multi-transporter row for ${entry.deliveryAssociate} has no co-drivers.`);
+    }
+    if (!multiTransporter && coDrivers.length > 0) {
+      throw new Error(`Week 38 solo row for ${entry.deliveryAssociate} lists co-drivers.`);
     }
     return {
-      date: route.date,
-      route: route.route,
-      drivers: route.drivers.slice(),
-      stopsCompleted: route.stopsCompleted,
+      date: entry.date,
+      deliveryAssociate: entry.deliveryAssociate,
+      stopsCompleted: entry.stopsCompleted,
+      route: entry.route,
+      multiTransporter,
+      coDrivers,
     };
   });
-  const counts = new Map<string, number>();
-  for (const route of routes) counts.set(route.date, (counts.get(route.date) ?? 0) + 1);
+  const counts = new Map<string, BonusDayCount>();
+  for (const entry of entries) {
+    const day = counts.get(entry.date) ?? {
+      date: entry.date,
+      count: 0,
+      solo: 0,
+      multiTransporter: 0,
+    };
+    day.count += 1;
+    if (entry.multiTransporter) day.multiTransporter += 1;
+    else day.solo += 1;
+    counts.set(entry.date, day);
+  }
+  const soloCount = entries.filter((entry) => !entry.multiTransporter).length;
   return {
     station: raw.station,
     week: 38,
@@ -78,12 +126,12 @@ function readSeed(raw: BonusSeed): BonusList {
     thresholdStopsCompleted: raw.thresholdStopsCompleted,
     capturedAt: raw.capturedAt,
     source: raw.source,
-    routes,
-    dayCounts: [...counts.entries()]
-      .sort(([a], [b]) => a.localeCompare(b))
-      .map(([date, count]) => ({ date, count })),
+    entries,
+    dayCounts: [...counts.values()].sort((a, b) => a.date.localeCompare(b.date)),
+    soloCount,
+    multiTransporterCount: entries.length - soloCount,
     disclaimer:
-      "Week 38 Sep 13–19 DNA4. Routes with at least 180 completed stops from Delivery Execution historical route cards. The threshold is actual completed stops, not planned stops. Driver names stay as captured, including multi-transporter routes. This list does not assign who earns the bonus.",
+      "Week 38 Sep 13–19 DNA4. Each row is a delivery associate on a route with at least 180 completed stops. stopsCompleted is the Delivery Execution route total, not a planned stop count. Solo rows are the only DA on that route. Multi-transporter rows list each DA who was on the route. Amazon did not say which of those DAs completed the stops, so the count is not split and is not assigned to one person.",
   };
 }
 
@@ -93,10 +141,10 @@ export function getBonusList(): BonusList {
   return list;
 }
 
-export function bonusDriverLabel(drivers: readonly string[]) {
+export function bonusCoDriverLabel(drivers: readonly string[]) {
   return drivers.join("; ");
 }
 
-export function bonusRoutesInRange(bonus: BonusList, range: DateRange) {
-  return bonus.routes.filter((route) => dateInRange(route.date, range));
+export function bonusEntriesInRange(bonus: BonusList, range: DateRange) {
+  return bonus.entries.filter((entry) => dateInRange(entry.date, range));
 }
