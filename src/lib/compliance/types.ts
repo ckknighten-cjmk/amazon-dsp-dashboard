@@ -1,4 +1,4 @@
-/** Week 39 timecard validation models. Rules run on seeded ADP and Amazon exports. */
+/** Timecard validation models. Rules run on seeded ADP and Amazon exports. */
 
 export type MatchMethod =
   | "exact"
@@ -77,6 +77,8 @@ export interface EvaluateInput {
   individuals: IndividualTimecard[];
   breaks: AmazonBreakDay[];
   sourceNotes: string[];
+  /** Used in unmatched-ADP reasons. Defaults to Week 39 for existing callers. */
+  rosterWeekLabel?: string;
 }
 
 export interface ExceptionRow {
@@ -126,7 +128,7 @@ export interface Over60Window {
 
 export interface BreaksSummary {
   dasWithViolations: number;
-  dasWithViolationsYesterday: number;
+  dasWithViolationsYesterday: number | null;
   missingBreaks: number;
   delayedBreaks: number;
   shorterBreakThanRequired: number;
@@ -136,19 +138,24 @@ export interface BreaksSummary {
 }
 
 export interface WorkHoursSummary {
-  dasNearingViolations: number;
-  worked50to60HoursPast7Days: number;
-  worked5to6ConsecutiveDays: number;
+  dasNearingViolations: number | null;
+  worked50to60HoursPast7Days: number | null;
+  worked5to6ConsecutiveDays: number | null;
   associateNamed: boolean;
   lastRefreshedDate: string;
 }
 
 export interface ComplianceReport {
+  week: number;
   weekLabel: string;
   company: string;
   station: string;
   exportedAt: string;
   coverageLabel: string;
+  /** Short line under the captured-days tile. */
+  coverageDetail: string;
+  /** Sentence in the source banner after the shared ADP/Amazon lead-in. */
+  sourceNote: string;
   coverageDates: string[];
   weekDates: string[];
   dateLabels: Array<{ date: string; label: string }>;

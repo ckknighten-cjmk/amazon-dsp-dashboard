@@ -1,0 +1,27 @@
+{
+  "source": "Amazon DSP Console Compliance Dashboard \u2192 Breaks, Week 38 (Sep 13\u2013Sep 19)",
+  "capturedRowsOnly": false,
+  "summary": {
+    "dasWithViolations": 31,
+    "dasWithViolationsYesterday": null,
+    "missingBreaks": 8,
+    "delayedBreaks": 2,
+    "shorterBreakThanRequired": 4,
+    "packageDeliveredDuringBreak": 18,
+    "missingPunches": 13,
+    "breaksBoardAssociates": 86
+  },
+  "workHours": {
+    "source": "Amazon DSP Console Work hour compliance (Week 38 capture incomplete / summary only)",
+    "dasNearingViolations": null,
+    "worked50to60HoursPast7Days": null,
+    "worked5to6ConsecutiveDays": null,
+    "associateNamed": false,
+    "lastRefreshedDate": "2026-09-22"
+  },
+  "rows": [],
+  "limits": [
+    "Week 38 Breaks capture is day-level summary only; no per-associate meal start/end rows were exported from the Breaks board.",
+    "Meal mismatch table may be empty until per-associate break rows are captured."
+  ]
+}

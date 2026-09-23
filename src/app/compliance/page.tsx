@@ -1,10 +1,15 @@
 import { ComplianceBoard } from "@/components/compliance-board";
-import { getCompliance } from "@/lib/data";
+import { getCompliance, parseComplianceWeek } from "@/lib/data";
 
 export const metadata = {
   title: "Compliance",
 };
 
-export default function CompliancePage() {
-  return <ComplianceBoard report={getCompliance()} />;
+export default async function CompliancePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ week?: string | string[] }>;
+}) {
+  const week = parseComplianceWeek((await searchParams).week);
+  return <ComplianceBoard key={week} report={getCompliance(week)} />;
 }

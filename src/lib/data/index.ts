@@ -4,8 +4,8 @@
  * Routes / associates / exceptions for 2026-09-21 come from the DSP Console
  * end-of-day Delivery Execution scrape in `src/lib/data/seed`. Scorecard is Week 37
  * Console Performance Summary. Payments are the 2026-09-21 Flex Payments
- * scrape. Week 39 compliance compares the ADP Group Timecard to the Amazon
- * schedule workbook. Fleet and incidents remain mock fixtures.
+ * scrape. Compliance compares ADP Group Timecards to the Amazon schedule
+ * workbooks for Week 38 and Week 39. Fleet and incidents remain mock fixtures.
  */
 
 import type {
@@ -35,7 +35,7 @@ import { incidents } from "@/lib/data/incidents";
 import { scorecard } from "@/lib/data/scorecard";
 import { getOverview as buildOverview } from "@/lib/data/overview";
 import { getPaymentsSnapshot } from "@/lib/data/payments";
-import { getComplianceReport } from "@/lib/data/compliance";
+import { getComplianceReport, type ComplianceWeek } from "@/lib/data/compliance";
 
 /** Fleet stays mock; drop assigned-route links to retired mock route IDs. */
 const vehicles: Vehicle[] = mockVehicles.map((van) => ({
@@ -59,7 +59,7 @@ export interface DataSource {
   getExceptionsForRoute(routeId: string): PackageException[];
   getDeliveryBoard(): DeliveryExecutionBoard;
   getPayments(): PaymentsSnapshot;
-  getCompliance(): ComplianceReport;
+  getCompliance(week?: ComplianceWeek): ComplianceReport;
 }
 
 const driverById = new Map(consoleDrivers.map((d) => [d.id, d]));
@@ -81,7 +81,7 @@ export const mockDataSource: DataSource = {
   getExceptionsForRoute: (routeId) => exceptionsForRoute(routeId),
   getDeliveryBoard: () => deliveryBoard,
   getPayments: () => getPaymentsSnapshot(),
-  getCompliance: () => getComplianceReport(),
+  getCompliance: (week) => getComplianceReport(week),
 };
 
 /** Active source. Replace with an API-backed implementation later. */
@@ -102,4 +102,6 @@ export const getExceptionsForRoute = (routeId: string) =>
   source.getExceptionsForRoute(routeId);
 export const getDeliveryBoard = () => source.getDeliveryBoard();
 export const getPayments = () => source.getPayments();
-export const getCompliance = () => source.getCompliance();
+export const getCompliance = (week?: ComplianceWeek) => source.getCompliance(week);
+export { parseComplianceWeek, COMPLIANCE_WEEKS } from "@/lib/data/compliance";
+export type { ComplianceWeek } from "@/lib/data/compliance";
