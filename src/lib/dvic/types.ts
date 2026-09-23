@@ -41,3 +41,17 @@ export interface NewDamageAlert {
   detail: string;
   reason: string;
 }
+
+/** One vehicle on one service day, with the damage each phase actually listed. */
+export interface DvicDayPair {
+  id: string;
+  vehicleUnit: string;
+  serviceDate: string;
+  hadPreTrip: boolean;
+  hadPostTrip: boolean;
+  hadAviPostTrip: boolean;
+  preTrip: DvicDamage[];
+  postTrip: DvicDamage[];
+  aviPostTrip: DvicDamage[];
+  newDamage: NewDamageAlert[];
+}

@@ -12,5 +12,12 @@
     "aviPostTrip": 0
   },
   "inspections": [],
-  "disclaimer": "This capture published dashboard totals only: 0 pre-trip, 0 post-trip, and 0 AVI post-trip. No inspection rows or damage items were included, so new damage is not scored."
+  "rowShape": {
+    "id": "stable id from the capture",
+    "vehicleUnit": "unit number from My vehicles",
+    "serviceDate": "YYYY-MM-DD",
+    "phase": "pre_trip | post_trip | avi_post_trip",
+    "damage": [{ "area": "body area from the checklist", "detail": "what the checklist said" }]
+  },
+  "disclaimer": "This capture published dashboard totals only: 0 pre-trip, 0 post-trip, and 0 AVI post-trip. No inspection rows or damage items were included, so new damage is not scored. Replace inspections with Console rows. Do not invent damage."
 }

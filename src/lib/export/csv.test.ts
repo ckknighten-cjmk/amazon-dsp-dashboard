@@ -6,7 +6,7 @@ import { associateId } from "../data/delivery-execution";
 import { getDrivers } from "../data";
 import { complianceCombinedCsv, complianceViewCsv } from "./compliance-csv";
 import { csvCell, csvLines, toCsv } from "./csv";
-import { associatesCsv, exceptionsCsv, paymentsCsv, routesCsv, scorecardCsv, vehiclesCsv } from "./datasets";
+import { associatesCsv, dvicCsv, exceptionsCsv, paymentsCsv, routesCsv, scorecardCsv, vehiclesCsv } from "./datasets";
 
 test("csv cells quote commas, quotes, and newlines", () => {
   assert.equal(csvCell("plain"), "plain");
@@ -55,6 +55,12 @@ test("routes export marks multi-associate routes as rescued without replacing Co
 });
 
 test("other dataset exports stay on seeded values", () => {
+  const dvic = dvicCsv();
+  assert.equal(dvic.filename, "dvic-2026-09-23.csv");
+  assert.equal(csvLines(dvic.csv).length, 1);
+  assert.match(dvic.csv, /Pre-trip damage/);
+  assert.doesNotMatch(dvic.csv, /dent|scratch|VIN/i);
+
   const fleet = vehiclesCsv();
   assert.equal(fleet.filename, "fleet-vehicles-mock.csv");
   assert.equal(csvLines(fleet.csv).length - 1, 22);

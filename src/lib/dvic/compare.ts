@@ -1,4 +1,4 @@
-import type { DvicInspection, NewDamageAlert } from "@/lib/dvic/types";
+import type { DvicDamage, DvicDayPair, DvicInspection, DvicPhase, NewDamageAlert } from "@/lib/dvic/types";
 
 export function damageKey(item: { area: string; detail: string }) {
   return `${item.area.trim().toLowerCase()}|${item.detail.trim().toLowerCase()}`;
@@ -46,4 +46,53 @@ export function findNewDamage(inspections: readonly DvicInspection[]): NewDamage
     }
   }
   return alerts;
+}
+
+function damageFor(list: readonly DvicInspection[], phase: DvicPhase): DvicDamage[] {
+  return list.filter((inspection) => inspection.phase === phase).flatMap((inspection) => inspection.damage);
+}
+
+export function damageSummary(items: readonly DvicDamage[]) {
+  return items.map((item) => `${item.area.trim()}: ${item.detail.trim()}`).join("; ");
+}
+
+/** Group inspections by vehicle and service day so pre-trip and post-trip sit together. */
+export function pairInspections(inspections: readonly DvicInspection[]): DvicDayPair[] {
+  const groups = new Map<string, DvicInspection[]>();
+  for (const inspection of inspections) {
+    const key = `${inspection.vehicleUnit}\0${inspection.serviceDate}`;
+    const list = groups.get(key) ?? [];
+    list.push(inspection);
+    groups.set(key, list);
+  }
+
+  const alertsByPair = new Map<string, NewDamageAlert[]>();
+  for (const alert of findNewDamage(inspections)) {
+    const key = `${alert.vehicleUnit}\0${alert.serviceDate}`;
+    const list = alertsByPair.get(key) ?? [];
+    list.push(alert);
+    alertsByPair.set(key, list);
+  }
+
+  return [...groups.values()]
+    .map((list) => {
+      const sample = list[0];
+      const key = `${sample.vehicleUnit}\0${sample.serviceDate}`;
+      return {
+        id: `${sample.vehicleUnit}:${sample.serviceDate}`,
+        vehicleUnit: sample.vehicleUnit,
+        serviceDate: sample.serviceDate,
+        hadPreTrip: list.some((inspection) => inspection.phase === "pre_trip"),
+        hadPostTrip: list.some((inspection) => inspection.phase === "post_trip"),
+        hadAviPostTrip: list.some((inspection) => inspection.phase === "avi_post_trip"),
+        preTrip: damageFor(list, "pre_trip"),
+        postTrip: damageFor(list, "post_trip"),
+        aviPostTrip: damageFor(list, "avi_post_trip"),
+        newDamage: alertsByPair.get(key) ?? [],
+      };
+    })
+    .sort(
+      (a, b) =>
+        a.serviceDate.localeCompare(b.serviceDate) || a.vehicleUnit.localeCompare(b.vehicleUnit)
+    );
 }

@@ -1,4 +1,4 @@
-import { getDrivers, getExceptions, getPayments, getRoutes, getScorecard, getVehicles } from "@/lib/data";
+import { getDrivers, getDvicReport, getExceptions, getPayments, getRoutes, getScorecard, getVehicles } from "@/lib/data";
 import { rosterSourceLabel } from "@/lib/data/roster";
 import {
   formatCompletionPct,
@@ -12,6 +12,7 @@ import {
 import { gradeMetric } from "@/lib/scorecard";
 import type { Driver, Route, ScorecardMetric } from "@/lib/types";
 import { datasetFilename, toCsv, toSectionedCsv, type CsvValue } from "@/lib/export/csv";
+import { damageSummary } from "@/lib/dvic/compare";
 
 const ROSTER_STAMP = "weeks-38-39";
 const SERVICE_DAY = "2026-09-21";
@@ -144,6 +145,40 @@ export function vehiclesCsv(): CsvFile {
   const stamp = getVehicles().some((van) => van.origin === "console") ? "dna4" : "mock";
   return {
     filename: datasetFilename("fleet-vehicles", stamp),
+    csv: toCsv(headers, rows),
+  };
+}
+
+export function dvicCsv(): CsvFile {
+  const report = getDvicReport();
+  const headers = [
+    "Vehicle",
+    "Service date",
+    "Pre-trip in capture",
+    "Pre-trip damage",
+    "Post-trip in capture",
+    "Post-trip damage",
+    "AVI post-trip in capture",
+    "AVI post-trip damage",
+    "New damage count",
+    "New damage",
+    "Alert",
+  ];
+  const rows = report.pairs.map((pair) => [
+    pair.vehicleUnit,
+    pair.serviceDate,
+    pair.hadPreTrip ? "Yes" : "No",
+    damageSummary(pair.preTrip),
+    pair.hadPostTrip ? "Yes" : "No",
+    damageSummary(pair.postTrip),
+    pair.hadAviPostTrip ? "Yes" : "No",
+    damageSummary(pair.aviPostTrip),
+    pair.newDamage.length,
+    damageSummary(pair.newDamage),
+    pair.newDamage.length > 0 ? "Yes" : "No",
+  ]);
+  return {
+    filename: datasetFilename("dvic", report.serviceDate),
     csv: toCsv(headers, rows),
   };
 }

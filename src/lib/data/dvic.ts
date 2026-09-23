@@ -1,6 +1,6 @@
 import seed from "@/lib/data/seed/dvic-2026-09-23.json";
-import { findNewDamage } from "@/lib/dvic/compare";
-import type { DvicCapture, DvicInspection, DvicPhase, NewDamageAlert } from "@/lib/dvic/types";
+import { findNewDamage, pairInspections } from "@/lib/dvic/compare";
+import type { DvicCapture, DvicDayPair, DvicInspection, DvicPhase, NewDamageAlert } from "@/lib/dvic/types";
 
 const PHASES = new Set<DvicPhase>(["pre_trip", "post_trip", "avi_post_trip"]);
 
@@ -29,6 +29,7 @@ function inspections(): DvicInspection[] {
 }
 
 export interface DvicReport extends DvicCapture {
+  pairs: DvicDayPair[];
   newDamage: NewDamageAlert[];
 }
 
@@ -43,6 +44,7 @@ export function getDvicReport(): DvicReport {
     totals: seed.totals,
     inspections: rows,
     disclaimer: seed.disclaimer,
+    pairs: pairInspections(rows),
     newDamage: findNewDamage(rows),
   };
 }
