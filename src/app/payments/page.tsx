@@ -1,5 +1,6 @@
 import { InvoiceStatusBadge } from "@/components/ops-badges";
 import { PageHeader } from "@/components/page-header";
+import { ReconcileBoard } from "@/components/reconcile-board";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -9,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getPayments } from "@/lib/data";
+import { getPayments, getReconcile, parseReconcileWeek } from "@/lib/data";
 import { formatNumber, formatUsd, formatZonedDateTime } from "@/lib/format";
 import type { InvoiceKind, SettlementLine } from "@/lib/types";
 
@@ -25,7 +26,13 @@ const KIND_LABEL: Record<InvoiceKind, string> = {
 
 const DATA_SOURCE = "Amazon DSP Console Flex Payments";
 
-export default function PaymentsPage() {
+export default async function PaymentsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ week?: string | string[] }>;
+}) {
+  const week = parseReconcileWeek((await searchParams).week);
+  const reconcile = getReconcile(week);
   const payments = getPayments();
   const ytd = payments.ytdInsights;
   const variable = payments.week37Variable;
@@ -35,7 +42,7 @@ export default function PaymentsPage() {
     <div>
       <PageHeader
         title="Payments"
-        description={`${payments.company} · ${payments.station.code} ${payments.station.name}. Settlements from ${DATA_SOURCE}.`}
+        description={`${payments.company} · ${payments.station.code} ${payments.station.name}. Settlements from ${DATA_SOURCE}, reconciled to the Work Summary Tool where both captures exist.`}
       />
 
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">
@@ -70,6 +77,8 @@ export default function PaymentsPage() {
           />
         </div>
       </section>
+
+      <ReconcileBoard report={reconcile} />
 
       <section aria-labelledby="all-invoices" className="mb-6">
         <div className="mb-3 flex items-baseline justify-between gap-3">
@@ -158,6 +167,10 @@ export default function PaymentsPage() {
                   </TableBody>
                 </Table>
               </div>
+              <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
+                Section quantities and amounts match the Sep 23 variable invoice. Unplanned delay quantity is the
+                section count. The line quantity on that invoice is 0.37 and is shown in the reconcile above.
+              </p>
             </CardContent>
           </Card>
 

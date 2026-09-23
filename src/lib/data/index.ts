@@ -4,7 +4,9 @@
  * Routes / associates / exceptions for 2026-09-21 come from the DSP Console
  * end-of-day Delivery Execution scrape in `src/lib/data/seed`. Scorecard is Week 37
  * Console Performance Summary. Payments are the 2026-09-21 Flex Payments
- * scrape. Compliance compares ADP Group Timecards to the Amazon schedule
+ * scrape. Week 37 variable section totals are the Sep 23 variable invoice.
+ * Work Summary weeks 37–39 reconcile against that invoice when it is listed.
+ * Compliance compares ADP Group Timecards to the Amazon schedule
  * workbooks for Week 38 and Week 39. Fleet and incidents remain mock fixtures.
  */
 
@@ -36,6 +38,8 @@ import { scorecard } from "@/lib/data/scorecard";
 import { getOverview as buildOverview } from "@/lib/data/overview";
 import { getPaymentsSnapshot } from "@/lib/data/payments";
 import { getComplianceReport, type ComplianceWeek } from "@/lib/data/compliance";
+import { getWeekReconcile, parseReconcileWeek } from "@/lib/payments/reconcile";
+import type { ReconcileWeek, WeekReconcile } from "@/lib/payments/types";
 
 /** Fleet stays mock; drop assigned-route links to retired mock route IDs. */
 const vehicles: Vehicle[] = mockVehicles.map((van) => ({
@@ -60,6 +64,7 @@ export interface DataSource {
   getDeliveryBoard(): DeliveryExecutionBoard;
   getPayments(): PaymentsSnapshot;
   getCompliance(week?: ComplianceWeek): ComplianceReport;
+  getReconcile(week?: ReconcileWeek): WeekReconcile;
 }
 
 const driverById = new Map(consoleDrivers.map((d) => [d.id, d]));
@@ -82,6 +87,7 @@ export const mockDataSource: DataSource = {
   getDeliveryBoard: () => deliveryBoard,
   getPayments: () => getPaymentsSnapshot(),
   getCompliance: (week) => getComplianceReport(week),
+  getReconcile: (week) => getWeekReconcile(week ?? 37),
 };
 
 /** Active source. Replace with an API-backed implementation later. */
@@ -103,5 +109,8 @@ export const getExceptionsForRoute = (routeId: string) =>
 export const getDeliveryBoard = () => source.getDeliveryBoard();
 export const getPayments = () => source.getPayments();
 export const getCompliance = (week?: ComplianceWeek) => source.getCompliance(week);
+export const getReconcile = (week?: ReconcileWeek) => source.getReconcile(week);
 export { parseComplianceWeek, COMPLIANCE_WEEKS } from "@/lib/data/compliance";
+export { parseReconcileWeek };
 export type { ComplianceWeek } from "@/lib/data/compliance";
+export type { ReconcileWeek } from "@/lib/payments/types";

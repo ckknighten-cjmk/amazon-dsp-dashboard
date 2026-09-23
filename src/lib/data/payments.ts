@@ -1,8 +1,11 @@
 /**
  * Amazon DSP Console Flex Payments scrape captured 2026-09-21.
  * Amounts, invoice ids, and the YTD year label are copied from that JSON.
+ * Week 37 variable section lines match the Sep 23 variable invoice capture.
  */
 import seedJson from "@/lib/data/seed/payments-settlements-2026-09-21.json";
+import variableInvoiceWeek37 from "@/lib/data/seed/variable-invoice-week37.json";
+import { parseUsdToCents } from "@/lib/payments/money";
 import type {
   InvoiceKind,
   InvoiceStatus,
@@ -123,6 +126,7 @@ function assertPaymentsSeed(seed: PaymentsSnapshot) {
   if (seed.week37Variable.total !== invoiceAmount(seed.invoices, seed.week37Variable.invoiceId)) {
     throw new Error("Week 37 variable total does not match its invoice row.");
   }
+  assertWeek37MatchesVariableInvoice(seed);
   if (seed.week37Incentive.total !== invoiceAmount(seed.invoices, seed.week37Incentive.invoiceId)) {
     throw new Error("Week 37 incentive total does not match its invoice row.");
   }
@@ -134,6 +138,33 @@ function assertPaymentsSeed(seed: PaymentsSnapshot) {
   }
   if (ytd.yearAsShownInConsole !== 2025) {
     throw new Error("YTD year label must stay 2025, as shown in Console.");
+  }
+}
+
+/** Section rollup on the Sep 21 payments list stays aligned with the Sep 23 variable invoice. */
+function assertWeek37MatchesVariableInvoice(seed: PaymentsSnapshot) {
+  if (seed.week37Variable.invoiceId !== variableInvoiceWeek37.invoiceId) {
+    throw new Error("Week 37 variable invoice id does not match the variable invoice capture.");
+  }
+  if (cents(seed.week37Variable.total) !== parseUsdToCents(variableInvoiceWeek37.total)) {
+    throw new Error("Week 37 variable total does not match the variable invoice capture.");
+  }
+  if (seed.week37Variable.status !== variableInvoiceWeek37.status) {
+    throw new Error("Week 37 variable status does not match the variable invoice capture.");
+  }
+  const lines = new Map(seed.week37Variable.lines.map((line) => [line.label, line]));
+  if (lines.size !== variableInvoiceWeek37.sections.length) {
+    throw new Error("Week 37 variable lines do not match variable invoice sections.");
+  }
+  for (const section of variableInvoiceWeek37.sections) {
+    const line = lines.get(section.name);
+    if (!line) throw new Error(`Week 37 payments line missing section ${section.name}.`);
+    if (cents(line.amount) !== parseUsdToCents(section.total)) {
+      throw new Error(`Week 37 ${section.name} amount does not match the variable invoice.`);
+    }
+    if (line.qty !== section.quantity) {
+      throw new Error(`Week 37 ${section.name} quantity does not match the variable invoice section quantity.`);
+    }
   }
 }
 
