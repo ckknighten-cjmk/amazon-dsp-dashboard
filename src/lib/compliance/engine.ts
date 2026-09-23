@@ -353,7 +353,7 @@ export function evaluateTimecards(input: EvaluateInput): Evaluation {
         ? `Punches on ${punchedDates.map(dateLabel).join(", ")}`
         : "No in/out on captured Group Timecard days",
       reason: parts
-        ? "No Amazon Week 39 roster name matched."
+        ? `No Amazon ${input.rosterWeekLabel ?? "Week 39"} roster name matched.`
         : "ADP name is not LAST, FIRST, so it was left unmatched.",
       searchText: [adpName, positionByName.get(adpName) ?? "", ...punchedDates].join(" ").toLowerCase(),
       dateKeys: punchedDates,
