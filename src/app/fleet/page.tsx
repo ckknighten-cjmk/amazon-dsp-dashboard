@@ -17,7 +17,9 @@ import {
 } from "@/components/ui/table";
 import { getFleetYard, getRoute, getVehicles } from "@/lib/data";
 import { vehiclesCsv } from "@/lib/export/datasets";
+import { CoverageNote } from "@/components/period-coverage";
 import { formatMileage, vehicleStatusLabel, vehicleTypeLabel } from "@/lib/format";
+import { DVIC_COVERAGE } from "@/lib/period";
 import type { VehicleStatus, VehicleType } from "@/lib/types";
 
 export default function FleetPage() {
@@ -62,6 +64,12 @@ export default function FleetPage() {
         }
         actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
       />
+
+      <CoverageNote>
+        Vehicle status is the My vehicles snapshot, not a day-by-day history. Last route is a
+        relative Console phrase, so it is not filtered by the period. Inspections use the DVIC
+        capture. {DVIC_COVERAGE.label}.
+      </CoverageNote>
 
       <DvicBoard />
 

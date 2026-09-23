@@ -1,10 +1,12 @@
 import { ExportCsvButton } from "@/components/export-csv-button";
+import { PeriodCoverage } from "@/components/period-coverage";
 import { PageHeader } from "@/components/page-header";
 import { ScoreStatusBadge, ScoreTierBadge } from "@/components/ops-badges";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getScorecard } from "@/lib/data";
 import { scorecardCsv } from "@/lib/export/datasets";
 import { formatScorecardValue, scorecardTierLabel } from "@/lib/format";
+import { SCORECARD_COVERAGE } from "@/lib/period";
 import { gradeMetric } from "@/lib/scorecard";
 import type { ScorecardMetric } from "@/lib/types";
 
@@ -43,6 +45,13 @@ export default function ScorecardPage() {
         }
       />
 
+      <PeriodCoverage
+        start={SCORECARD_COVERAGE.start}
+        end={SCORECARD_COVERAGE.end}
+        coveredNote={`${SCORECARD_COVERAGE.label}. This is the weekly Console summary. It is shown whole when the selected period overlaps that week, and it is not split into days.`}
+        emptyTitle="No scorecard in this period"
+        emptyDescription={`${SCORECARD_COVERAGE.label}. No other scorecard week is in this build, so the standing is not copied onto empty days.`}
+      >
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-950 dark:text-amber-100">
         {scorecard.disclaimer}
       </p>
@@ -92,6 +101,7 @@ export default function ScorecardPage() {
           </section>
         );
       })}
+      </PeriodCoverage>
     </div>
   );
 }

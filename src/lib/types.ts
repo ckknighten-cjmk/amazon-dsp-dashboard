@@ -1,6 +1,13 @@
 /** Domain models for DSP last-mile operations. Swap mock data, keep these types. */
 
-export type DateRange = "today" | "week";
+/**
+ * Station period. Today and this week follow the frozen Sep 21, 2026 clock.
+ * Custom is an inclusive start/end pair of ISO dates (YYYY-MM-DD).
+ */
+export type DateRange =
+  | { kind: "today" }
+  | { kind: "week" }
+  | { kind: "custom"; start: string; end: string };
 
 export type ScorecardTier = "fantastic" | "great" | "fair" | "poor";
 

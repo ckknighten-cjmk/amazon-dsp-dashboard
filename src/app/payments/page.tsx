@@ -1,6 +1,10 @@
+"use client";
+
 import { ExportCsvButton } from "@/components/export-csv-button";
+import { useDateRange } from "@/components/layout/date-range-context";
+import { CoverageNote } from "@/components/period-coverage";
 import { InvoiceStatusBadge } from "@/components/ops-badges";
-import { PageHeader } from "@/components/page-header";
+import { EmptyState, PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Table,
@@ -12,12 +16,9 @@ import {
 } from "@/components/ui/table";
 import { getPayments } from "@/lib/data";
 import { paymentsCsv } from "@/lib/export/datasets";
-import { formatNumber, formatUsd, formatZonedDateTime } from "@/lib/format";
-import type { InvoiceKind, SettlementLine } from "@/lib/types";
-
-export const metadata = {
-  title: "Payments",
-};
+import { formatNumber, formatRangeLabel, formatUsd, formatZonedDateTime } from "@/lib/format";
+import { invoiceServiceWindow, rangesOverlap, SCORECARD_COVERAGE } from "@/lib/period";
+import type { InvoiceKind, SettlementInvoice, SettlementLine } from "@/lib/types";
 
 const KIND_LABEL: Record<InvoiceKind, string> = {
   incentive: "Incentive",
@@ -27,12 +28,24 @@ const KIND_LABEL: Record<InvoiceKind, string> = {
 
 const DATA_SOURCE = "Amazon DSP Console Flex Payments";
 
+function sumAmount(invoices: SettlementInvoice[]) {
+  return invoices.reduce((total, invoice) => total + invoice.amount, 0);
+}
+
 export default function PaymentsPage() {
+  const { range } = useDateRange();
   const payments = getPayments();
   const paymentsExport = paymentsCsv();
   const ytd = payments.ytdInsights;
   const variable = payments.week37Variable;
   const incentive = payments.week37Incentive;
+  const invoices = payments.invoices.filter((invoice) => {
+    const window = invoiceServiceWindow(invoice.periodLabel);
+    return window ? rangesOverlap(window.start, window.end, range) : false;
+  });
+  const newInvoices = invoices.filter((invoice) => invoice.status === "New");
+  const paidInvoices = invoices.filter((invoice) => invoice.status === "Paid");
+  const showWeek37 = rangesOverlap(SCORECARD_COVERAGE.start, SCORECARD_COVERAGE.end, range);
 
   return (
     <div>
@@ -46,30 +59,45 @@ export default function PaymentsPage() {
         {payments.disclaimer}
       </p>
 
+      <CoverageNote>
+        Invoices are included when their service window overlaps {formatRangeLabel(range)}. The
+        Console pending-action chip on the Sep 21 list is {formatUsd(payments.pendingAction.totalExact)}{" "}
+        for {formatNumber(payments.pendingAction.count)} invoices and is not re-cut by day. Amounts
+        below add only the overlapping published invoices. The export stays the full Console list.
+      </CoverageNote>
+
       <section aria-labelledby="settlement-kpis" className="mb-5">
         <h2 id="settlement-kpis" className="sr-only">
           Settlement totals
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <MoneyStat
-            label="Pending action"
-            value={formatUsd(payments.pendingAction.totalExact)}
-            hint={`${formatNumber(payments.pendingAction.count)} invoices · ${payments.pendingAction.currency}`}
+            label="New invoices in period"
+            value={formatUsd(sumAmount(newInvoices))}
+            hint={`${formatNumber(newInvoices.length)} published New invoices overlapping this period`}
           />
           <MoneyStat
-            label="Visible paid total"
-            value={formatUsd(payments.visiblePaidTotal)}
-            hint="Invoices marked Paid on this Console list"
+            label="Paid invoices in period"
+            value={formatUsd(sumAmount(paidInvoices))}
+            hint={`${formatNumber(paidInvoices.length)} published Paid invoices overlapping this period`}
           />
           <MoneyStat
             label="Week 37 variable"
-            value={formatUsd(variable.total)}
-            hint={`Dispute window closes ${formatZonedDateTime(variable.disputeWindowCloses)}`}
+            value={showWeek37 ? formatUsd(variable.total) : "—"}
+            hint={
+              showWeek37
+                ? `Dispute window closes ${formatZonedDateTime(variable.disputeWindowCloses)}`
+                : `${SCORECARD_COVERAGE.label}. Not in this period.`
+            }
           />
           <MoneyStat
             label="Week 37 incentive"
-            value={formatUsd(incentive.total)}
-            hint={`Dispute window closes ${formatZonedDateTime(incentive.disputeWindowCloses)}`}
+            value={showWeek37 ? formatUsd(incentive.total) : "—"}
+            hint={
+              showWeek37
+                ? `Dispute window closes ${formatZonedDateTime(incentive.disputeWindowCloses)}`
+                : `${SCORECARD_COVERAGE.label}. Not in this period.`
+            }
           />
         </div>
       </section>
@@ -81,7 +109,7 @@ export default function PaymentsPage() {
           </h2>
           <div className="flex items-center gap-3">
             <p className="text-xs text-muted-foreground tabular-nums">
-              {payments.invoices.length} on the {payments.station.code} list
+              {invoices.length} of {payments.invoices.length} on the {payments.station.code} list
             </p>
             <ExportCsvButton
               filename={paymentsExport.filename}
@@ -102,7 +130,18 @@ export default function PaymentsPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {payments.invoices.map((invoice) => (
+              {invoices.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={5}>
+                    <EmptyState
+                      title="No settlements overlap this period"
+                      description="Service windows on the Sep 21 Console list do not meet the selected dates. Amounts are not estimated."
+                      className="border-0 py-8"
+                    />
+                  </TableCell>
+                </TableRow>
+              ) : null}
+              {invoices.map((invoice) => (
                 <TableRow key={invoice.id}>
                   <TableCell className="font-mono text-xs">{invoice.id}</TableCell>
                   <TableCell>{invoice.periodLabel}</TableCell>
@@ -120,6 +159,7 @@ export default function PaymentsPage() {
         </div>
       </section>
 
+      {showWeek37 ? (
       <section aria-labelledby="week-37" className="mb-6">
         <h2 id="week-37" className="mb-3 text-sm font-semibold">
           Week 37 breakdowns
@@ -195,6 +235,11 @@ export default function PaymentsPage() {
           </Card>
         </div>
       </section>
+      ) : (
+        <p className="mb-6 text-xs text-muted-foreground">
+          Week 37 variable and incentive lines are hidden. {SCORECARD_COVERAGE.label}.
+        </p>
+      )}
 
       <section aria-labelledby="ytd-insights">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-2">
@@ -202,7 +247,10 @@ export default function PaymentsPage() {
             <h2 id="ytd-insights" className="text-sm font-semibold">
               YTD Insights · {ytd.yearAsShownInConsole}
             </h2>
-            <p className="mt-1 max-w-3xl text-xs text-muted-foreground">{ytd.disclaimer}</p>
+            <p className="mt-1 max-w-3xl text-xs text-muted-foreground">
+              {ytd.disclaimer} These year figures are the Console YTD on the Sep 21 capture. They
+              are not recalculated for the selected period.
+            </p>
           </div>
           <p className="text-xs text-muted-foreground">
             Station {ytd.station} · year as shown in Console

@@ -4,15 +4,34 @@ import { ExportCsvButton } from "@/components/export-csv-button";
 import { EmptyState } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { useDateRange } from "@/components/layout/date-range-context";
 import { getDvicReport } from "@/lib/data/dvic";
 import { dvicCsv } from "@/lib/export/datasets";
+import { dateInRange, DVIC_COVERAGE } from "@/lib/period";
 import { damageKey } from "@/lib/dvic/compare";
 import type { DvicDamage, DvicDayPair } from "@/lib/dvic/types";
 
 export function DvicBoard() {
+  const { range } = useDateRange();
   const report = getDvicReport();
+  const covered = dateInRange(report.serviceDate, range);
   const totals = report.totals;
   const file = dvicCsv();
+
+  if (!covered) {
+    return (
+      <section aria-labelledby="dvic-heading" className="mb-6" data-dvic-pairs={0}>
+        <h2 id="dvic-heading" className="mb-3 text-sm font-semibold">
+          DVIC · pre-trip vs post-trip
+        </h2>
+        <EmptyState
+          title="No DVIC capture in this period"
+          description={`${DVIC_COVERAGE.label}. The Sep 23 dashboard listed zero inspections. Those zeros are not applied to other days.`}
+          className="py-8"
+        />
+      </section>
+    );
+  }
 
   return (
     <section
@@ -27,7 +46,8 @@ export function DvicBoard() {
             DVIC · pre-trip vs post-trip
           </h2>
           <p className="mt-1 max-w-3xl text-xs leading-relaxed text-muted-foreground">
-            {report.company} · {report.stationCode} · {report.serviceDate}. {report.source}. Open in
+            {report.company} · {report.stationCode} · {report.serviceDate}. {DVIC_COVERAGE.label}.{" "}
+            {report.source}. Open in
             Console via {report.nav}. Each card is one vehicle on one service day. A post-trip item
             is marked new only when that vehicle’s pre-trip for the same day did not list it.
           </p>
