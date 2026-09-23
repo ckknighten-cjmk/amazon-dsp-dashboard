@@ -32,6 +32,8 @@ import {
   getRoutes,
 } from "@/lib/data";
 import { exceptionExportNote, rescueBoardNote } from "@/lib/data/delivery-execution";
+import { useDateRange } from "@/components/layout/date-range-context";
+import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { exceptionsCsv, routesCsv } from "@/lib/export/datasets";
 import {
@@ -70,6 +72,8 @@ function associateNames(route: Route) {
 }
 
 export default function RoutesPage() {
+  const { range } = useDateRange();
+  const covered = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
   const routes = getRoutes();
   const board = getDeliveryBoard();
   const exceptions = getExceptions();
@@ -117,6 +121,14 @@ export default function RoutesPage() {
         description="Amazon DSP Console end-of-day board for DNA4 Memphis / CJMK Inc., service day Sep 21, 2026. Vehicle and on-time % were not on the Console — shown as unavailable."
       />
 
+      {!covered ? (
+        <EmptyState
+          title="No Delivery Execution capture in this period"
+          description={`${DELIVERY_COVERAGE.label}. Routes and package exceptions are not estimated for other days.`}
+        />
+      ) : (
+        <>
+      <p className="mb-4 text-xs text-muted-foreground">{DELIVERY_COVERAGE.label}.</p>
       <DeliveryBoardSummary board={board} />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -388,6 +400,8 @@ export default function RoutesPage() {
           </div>
         </SheetContent>
       </Sheet>
+        </>
+      )}
     </div>
   );
 }

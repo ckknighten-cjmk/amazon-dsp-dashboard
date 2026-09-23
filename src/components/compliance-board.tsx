@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import { PageHeader, EmptyState } from "@/components/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -16,7 +16,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { ExportCsvButton } from "@/components/export-csv-button";
+import { useDateRange } from "@/components/layout/date-range-context";
 import { matchMethodLabel } from "@/lib/compliance/names";
+import type { ComplianceWeek } from "@/lib/data/compliance";
+import { COMPLIANCE_COVERAGE, datesInRange, formatRangeLabel } from "@/lib/period";
 import { complianceCombinedCsv, complianceViewCsv } from "@/lib/export/compliance-csv";
 import type {
   BreaksSummary,
@@ -43,13 +46,34 @@ const VIEWS: Array<{ id: View; label: string }> = [
 ];
 
 export function ComplianceBoard({ report }: { report: ComplianceReport }) {
+  const { range, hrefWithPeriod } = useDateRange();
   const [view, setView] = useState<View>("missing");
   const [query, setQuery] = useState("");
   const [date, setDate] = useState("all");
   const [mealScope, setMealScope] = useState<"mismatches" | "all">("mismatches");
   const [adpScope, setAdpScope] = useState<"punches" | "all">("punches");
 
+  const allowedDates = useMemo(
+    () => datesInRange(report.weekDates, range),
+    [report.weekDates, range]
+  );
+  const allowed = useMemo(() => new Set(allowedDates), [allowedDates]);
+  const fullWeek = report.weekDates.length > 0 && allowedDates.length === report.weekDates.length;
+  const weekCoverage = COMPLIANCE_COVERAGE[report.week as ComplianceWeek];
+  const missingInPeriod = report.missingPunches.filter((row) => allowed.has(row.date));
+  const over12InPeriod = report.over12.filter((row) => allowed.has(row.date));
+  const over60InPeriod = report.over60.filter((row) => allowed.has(row.date));
+  const mealsInPeriod = report.mealRows.filter((row) => allowed.has(row.date));
+  const periodCounts = {
+    missingPunchDays: missingInPeriod.length,
+    missingPunchAssociates: new Set(missingInPeriod.map((row) => row.associate)).size,
+    over12Days: over12InPeriod.length,
+    over60Associates: new Set(over60InPeriod.map((row) => row.adpName)).size,
+    mealMismatches: mealsInPeriod.filter((row) => row.mismatch).length,
+    mealRowsJoined: mealsInPeriod.length,
+  };
   const counts = report.counts;
+  const activeDate = date !== "all" && allowed.has(date) ? date : "all";
 
   return (
     <div
@@ -67,7 +91,7 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
             {WEEKS.map((item) => (
               <Link
                 key={item.week}
-                href={item.href}
+                href={hrefWithPeriod(item.href)}
                 aria-current={report.week === item.week ? "page" : undefined}
                 className={buttonVariants({
                   size: "sm",
@@ -84,7 +108,12 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">
         Sources: Amazon DSP Console Scheduling {report.weekLabel} (exported {report.exportedAt}) and
         Compliance Breaks; ADP Workforce Now Group Timecard, read-only. {report.sourceNote} ADP
-        schedule template load is not part of this page.
+        schedule template load is not part of this page.{" "}
+        {allowedDates.length === 0
+          ? `No ${report.weekLabel} days fall in ${formatRangeLabel(range)}. ${weekCoverage?.label ?? report.weekLabel}. Week totals are not shown as this period's result.`
+          : fullWeek
+            ? `${report.weekLabel} is fully inside ${formatRangeLabel(range)}.`
+            : `Showing ${report.weekLabel} days inside ${formatRangeLabel(range)}. Other days in that week seed are hidden.`}
       </p>
 
       <section aria-labelledby="compliance-kpis" className="mb-5">
@@ -94,29 +123,39 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
           <StatButton
             label="Missing punches"
-            value={String(counts.missingPunchDays)}
-            hint={`${counts.missingPunchAssociates} associates · ${report.coverageLabel}`}
+            value={String(periodCounts.missingPunchDays)}
+            hint={
+              allowedDates.length === 0
+                ? "No week days in this period"
+                : fullWeek
+                  ? `${counts.missingPunchAssociates} associates · ${report.coverageLabel}`
+                  : `${periodCounts.missingPunchAssociates} associates in the selected days · week seed ${counts.missingPunchDays}`
+            }
             pressed={view === "missing"}
             onClick={() => setView("missing")}
           />
           <StatButton
             label="Over 12h / day"
-            value={String(counts.over12Days)}
-            hint="ADP hours when punched"
+            value={String(periodCounts.over12Days)}
+            hint={fullWeek ? "ADP hours when punched" : "Selected days only · ADP hours when punched"}
             pressed={view === "over12"}
             onClick={() => setView("over12")}
           />
           <StatButton
             label="Over 60h / 7 days"
-            value={String(counts.over60Associates)}
-            hint="Captured ADP days only"
+            value={String(periodCounts.over60Associates)}
+            hint={fullWeek ? "Captured ADP days only" : "Flagged days inside the selected period"}
             pressed={view === "over60"}
             onClick={() => setView("over60")}
           />
           <StatButton
             label="Meal mismatches"
-            value={String(counts.mealMismatches)}
-            hint={`${counts.mealRowsJoined} break rows joined`}
+            value={String(periodCounts.mealMismatches)}
+            hint={
+              fullWeek
+                ? `${counts.mealRowsJoined} break rows joined`
+                : `${periodCounts.mealRowsJoined} joined rows in the selected days`
+            }
             pressed={view === "meals"}
             onClick={() => setView("meals")}
           />
@@ -152,8 +191,9 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
           ))}
         </ul>
         <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
-          {breaksTotalsSentence(report.breaksSummary)} Those totals are not copied into the exception
-          tables except where a named row was visible.
+          {allowedDates.length === 0
+            ? `Week break totals are hidden because this period does not include any ${report.weekLabel} days.`
+            : `${fullWeek ? "" : "Full week seed, not limited to the selected days. "}${breaksTotalsSentence(report.breaksSummary)} Those totals are not copied into the exception tables except where a named row was visible.`}
         </p>
       </details>
 
@@ -181,12 +221,14 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
         />
         <select
           className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm dark:bg-input/30"
-          value={date}
+          value={activeDate}
           onChange={(event) => setDate(event.target.value)}
           aria-label="Filter by date"
         >
           <option value="all">All dates</option>
-          {report.dateLabels.map((option) => (
+          {report.dateLabels
+            .filter((option) => allowed.has(option.date))
+            .map((option) => (
             <option key={option.date} value={option.date}>
               {option.label}
             </option>
@@ -219,22 +261,27 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
 
       {view === "missing" ? (
         <ExceptionTable
-          rows={filterRows(report.missingPunches, query, date)}
+          rows={filterRows(missingInPeriod, query, activeDate)}
           empty="No missing ADP punches for this filter. Flags are limited to days the Group Timecard captured."
         />
       ) : null}
       {view === "over12" ? (
         <ExceptionTable
-          rows={filterRows(report.over12, query, date)}
+          rows={filterRows(over12InPeriod, query, activeDate)}
           empty="No calendar day over 12 hours for this filter."
         />
       ) : null}
       {view === "over60" ? (
-        <Over60Section report={report} query={query} date={date} />
+        <Over60Section
+          report={report}
+          rows={filterRows(over60InPeriod, query, activeDate)}
+          showWindows={allowedDates.length > 0}
+          fullWeek={fullWeek}
+        />
       ) : null}
       {view === "meals" ? (
         <MealTable
-          rows={filterRows(report.mealRows, query, date).filter((row) =>
+          rows={filterRows(mealsInPeriod, query, activeDate).filter((row) =>
             mealScope === "all" ? true : row.mismatch
           )}
           empty={
@@ -248,9 +295,9 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
       ) : null}
       {view === "unmatched" ? (
         <UnmatchedSection
-          amazon={filterUnmatched(report.unmatchedAmazon, query, date)}
-          adp={filterUnmatched(report.unmatchedAdp, query, date).filter((row) =>
-            adpScope === "all" ? true : row.dateKeys.length > 0
+          amazon={filterUnmatched(report.unmatchedAmazon, query, activeDate, allowed, allowedDates.length > 0)}
+          adp={filterUnmatched(report.unmatchedAdp, query, activeDate, allowed, allowedDates.length > 0).filter(
+            (row) => (adpScope === "all" ? true : row.dateKeys.length > 0)
           )}
         />
       ) : null}
@@ -333,10 +380,21 @@ function filterRows<T extends ExceptionRow>(rows: T[], query: string, date: stri
   });
 }
 
-function filterUnmatched(rows: UnmatchedRow[], query: string, date: string) {
+function filterUnmatched(
+  rows: UnmatchedRow[],
+  query: string,
+  date: string,
+  allowed: Set<string>,
+  allowUndated: boolean
+) {
   const q = query.trim().toLowerCase();
   return rows.filter((row) => {
-    if (date !== "all" && !row.dateKeys.includes(date)) return false;
+    if (row.dateKeys.length === 0) {
+      if (!allowUndated) return false;
+    } else if (!row.dateKeys.some((key) => allowed.has(key))) {
+      return false;
+    }
+    if (date !== "all" && row.dateKeys.length > 0 && !row.dateKeys.includes(date)) return false;
     if (!q) return true;
     return row.searchText.includes(q);
   });
@@ -435,18 +493,33 @@ function MealTable({ rows, empty }: { rows: MealRow[]; empty: string }) {
 
 function Over60Section({
   report,
-  query,
-  date,
+  rows,
+  showWindows,
+  fullWeek,
 }: {
   report: ComplianceReport;
-  query: string;
-  date: string;
+  rows: ExceptionRow[];
+  showWindows: boolean;
+  fullWeek: boolean;
 }) {
-  const rows = filterRows(report.over60, query, date);
   const peak = report.over60Peak;
+  if (!showWindows) {
+    return (
+      <EmptyState
+        title="No rolling-window days in this period"
+        description={`Week ${report.week} window totals stay on that week’s seed and are not shown as this period’s result.`}
+      />
+    );
+  }
   return (
     <div className="space-y-4">
       <div className="rounded-xl border bg-card px-4 py-3 text-sm">
+        {!fullWeek ? (
+          <p className="mb-2 text-xs text-muted-foreground">
+            Window totals below are the full week seed. The table lists only flagged days inside the
+            selected period.
+          </p>
+        ) : null}
         <p className="font-medium">Rolling 7-day windows ending in Week {report.week}</p>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
           Each window is scored from Group Timecard hours on captured days only. Days the capture

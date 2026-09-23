@@ -20,9 +20,14 @@ import { getDrivers, getRoute } from "@/lib/data";
 import { employmentLabel } from "@/lib/data/census";
 import { filterRoster, rosterSourceLabel } from "@/lib/data/roster";
 import { driverStatusLabel, formatNumber, formatTenure } from "@/lib/format";
+import { useDateRange } from "@/components/layout/date-range-context";
+import { CoverageNote } from "@/components/period-coverage";
+import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
 import type { Driver, DriverRole, DriverStatus, RosterSource } from "@/lib/types";
 
 export default function DriversPage() {
+  const { range } = useDateRange();
+  const activity = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
   const drivers = getDrivers();
   const rosterExport = associatesCsv();
   const [query, setQuery] = useState("");
@@ -46,6 +51,12 @@ export default function DriversPage() {
         description="Full roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID, plus ADP-only timecard names. Today’s packages and routes come from the Sep 21 Delivery Execution board when the name matches. Phone and email come from the ADP Employee Census when the name matches. The list opens on Active, including associates the census did not list. Terminated and deceased stay on the employment filter. Tenure and scorecard contribution were not in these exports."
         actions={<ExportCsvButton filename={rosterExport.filename} csv={rosterExport.csv} label="Export roster" />}
       />
+
+      <CoverageNote>
+        {activity
+          ? `${DELIVERY_COVERAGE.label}. Package counts, route links, and on-road status are that board. Schedule weeks 38 and 39 do not include daily package totals.`
+          : `No associate activity in this period. ${DELIVERY_COVERAGE.label}. Package counts, routes, and on-road status are blank. The roster itself is not a daily metric.`}
+      </CoverageNote>
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <Input
@@ -131,7 +142,7 @@ export default function DriversPage() {
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Tenure</TableHead>
-                <TableHead className="text-right">Today pkgs</TableHead>
+                <TableHead className="text-right">Sep 21 pkgs</TableHead>
                 <TableHead className="text-right">Scorecard</TableHead>
                 <TableHead>Routes</TableHead>
               </TableRow>
@@ -164,17 +175,17 @@ export default function DriversPage() {
                     <TableCell className="text-xs">{rosterSourceLabel(driver)}</TableCell>
                     <TableCell>{driver.role}</TableCell>
                     <TableCell>
-                      <DriverStatusBadge status={driver.status} />
+                      {activity ? <DriverStatusBadge status={driver.status} /> : "—"}
                     </TableCell>
                     <TableCell>{formatTenure(driver.hiredAt)}</TableCell>
                     <TableCell className="text-right tabular-nums">
-                      {formatNumber(driver.todayPackages)}
+                      {activity ? formatNumber(driver.todayPackages) : "—"}
                     </TableCell>
                     <TableCell className="text-right tabular-nums text-muted-foreground">
                       {driver.scorecardContribution ?? "—"}
                     </TableCell>
                     <TableCell>
-                      {assigned.length === 0 ? (
+                      {!activity || assigned.length === 0 ? (
                         "—"
                       ) : (
                         <span className="flex flex-wrap gap-x-2 gap-y-0.5">
