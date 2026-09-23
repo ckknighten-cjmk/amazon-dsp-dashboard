@@ -1,7 +1,9 @@
+import { ExportCsvButton } from "@/components/export-csv-button";
 import { PageHeader } from "@/components/page-header";
 import { ScoreStatusBadge, ScoreTierBadge } from "@/components/ops-badges";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getScorecard } from "@/lib/data";
+import { scorecardCsv } from "@/lib/export/datasets";
 import { formatScorecardValue, scorecardTierLabel } from "@/lib/format";
 import { gradeMetric } from "@/lib/scorecard";
 import type { ScorecardMetric } from "@/lib/types";
@@ -22,13 +24,23 @@ function formatBound(metric: ScorecardMetric, value: number) {
 
 export default function ScorecardPage() {
   const scorecard = getScorecard();
+  const scorecardExport = scorecardCsv();
 
   return (
     <div>
       <PageHeader
         title="Amazon DSP scorecard"
         description={`${scorecard.weekLabel} · ${scorecard.periodLabel} · CJMK Inc. / DNA4 Memphis. Prior week was not shown in Console.`}
-        actions={<ScoreTierBadge tier={scorecard.overallTier} />}
+        actions={
+          <>
+            <ExportCsvButton
+              filename={scorecardExport.filename}
+              csv={scorecardExport.csv}
+              label="Export scorecard"
+            />
+            <ScoreTierBadge tier={scorecard.overallTier} />
+          </>
+        }
       />
 
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-950 dark:text-amber-100">

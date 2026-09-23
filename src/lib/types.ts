@@ -41,6 +41,9 @@ export type DriverRole = "DA" | "Dispatcher" | "Station Manager";
 
 export type DriverStatus = "available" | "on_route" | "off" | "pto";
 
+/** Where a roster row came from. Delivery-board rows are associates who were on a route but did not match a schedule transporter. */
+export type RosterSource = "amazon-schedule" | "adp-only" | "delivery-board";
+
 export type VehicleType = "edv" | "rental_cargo" | "step_van";
 
 export type VehicleStatus = "ready" | "on_route" | "maintenance" | "oos";
@@ -83,6 +86,14 @@ export interface Driver {
   routeIds: string[];
   transporterId?: string;
   initials: string;
+  /** Present on the full roster. Omitted on the Sep 21 board-only associate list. */
+  rosterSource?: RosterSource;
+  /** Amazon schedule weeks that included this transporter ID. */
+  scheduleWeeks?: number[];
+  /** ADP Group Timecard name when it matched, or the raw name for ADP-only rows. */
+  adpName?: string;
+  /** Extra associate ids that should resolve to this person (short Delivery Execution names). */
+  aliasIds?: string[];
 }
 
 export interface Vehicle {
@@ -90,12 +101,18 @@ export interface Vehicle {
   unitId: string;
   type: VehicleType;
   status: VehicleStatus;
-  mileage: number;
-  lastInspection: string;
+  /** Null when the source did not publish mileage. */
+  mileage: number | null;
+  /** Null when the source did not publish an inspection date. */
+  lastInspection: string | null;
   assignedRouteId?: string;
-  year: number;
+  /** Null when the source did not publish a model year. */
+  year: number | null;
   plate: string;
   notes?: string;
+  vin?: string;
+  makeModel?: string;
+  ownership?: string;
 }
 
 export interface Stop {
@@ -116,6 +133,15 @@ export interface Route {
   wave?: 1 | 2 | null;
   driverId: string | null;
   associateIds: string[];
+  /**
+   * True when the route listed more than one associate.
+   * That is the multi-transporter proxy for a rescue. It is not Amazon’s
+   * rescueActions flag unless the capture actually included that list.
+   */
+  receivedRescue: boolean;
+  /** Associates after the first on a multi-transporter route. */
+  rescueDriverIds: string[];
+  /** First rescuer, when `receivedRescue` is true. */
   rescueDriverId?: string;
   vehicleId: string | null;
   packageCount: number;
@@ -185,6 +211,8 @@ export interface DeliveryExecutionBoard {
     };
     workHourRisk: number;
     multiTransporter: number;
+    /** Console rescueActions count when the capture included it. Null when absent. */
+    rescueActions: number | null;
     unknownStops: number;
     onBreak: number;
     noBreaksTaken: number;

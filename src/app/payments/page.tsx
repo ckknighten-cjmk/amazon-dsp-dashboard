@@ -1,3 +1,4 @@
+import { ExportCsvButton } from "@/components/export-csv-button";
 import { InvoiceStatusBadge } from "@/components/ops-badges";
 import { PageHeader } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,6 +11,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getPayments } from "@/lib/data";
+import { paymentsCsv } from "@/lib/export/datasets";
 import { formatNumber, formatUsd, formatZonedDateTime } from "@/lib/format";
 import type { InvoiceKind, SettlementLine } from "@/lib/types";
 
@@ -27,6 +29,7 @@ const DATA_SOURCE = "Amazon DSP Console Flex Payments";
 
 export default function PaymentsPage() {
   const payments = getPayments();
+  const paymentsExport = paymentsCsv();
   const ytd = payments.ytdInsights;
   const variable = payments.week37Variable;
   const incentive = payments.week37Incentive;
@@ -72,13 +75,20 @@ export default function PaymentsPage() {
       </section>
 
       <section aria-labelledby="all-invoices" className="mb-6">
-        <div className="mb-3 flex items-baseline justify-between gap-3">
+        <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
           <h2 id="all-invoices" className="text-sm font-semibold">
             All invoices
           </h2>
-          <p className="text-xs text-muted-foreground tabular-nums">
-            {payments.invoices.length} on the {payments.station.code} list
-          </p>
+          <div className="flex items-center gap-3">
+            <p className="text-xs text-muted-foreground tabular-nums">
+              {payments.invoices.length} on the {payments.station.code} list
+            </p>
+            <ExportCsvButton
+              filename={paymentsExport.filename}
+              csv={paymentsExport.csv}
+              label="Export settlements"
+            />
+          </div>
         </div>
         <div className="overflow-x-auto rounded-xl border bg-card">
           <Table>

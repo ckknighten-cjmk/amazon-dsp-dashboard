@@ -180,9 +180,11 @@ export default function SettingsPage() {
             <div className="rounded-lg border border-dashed px-3 py-2 text-xs leading-relaxed text-muted-foreground">
               Scorecard values are from DSP Console Performance Summary, Week 37
               (Sep 6–12, 2026). Fantastic / Great / Fair / Poor bands on tiles are
-              illustrative; badges match Amazon’s displayed standing. Routes and
-              roster are seeded from DSP Console Delivery Execution for Sep 21,
-              2026. Fleet and incidents remain mock.
+              illustrative; badges match Amazon’s displayed standing. Routes are
+              the Sep 21 Delivery Execution board. The associate roster unions
+              Amazon schedule Weeks 38 and 39, merges that board by name, and
+              labels ADP-only names that have no transporter ID. Fleet and
+              incidents remain mock.
             </div>
           </CardContent>
         </Card>

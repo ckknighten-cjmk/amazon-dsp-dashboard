@@ -14,32 +14,35 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ExportCsvButton } from "@/components/export-csv-button";
+import { associatesCsv } from "@/lib/export/datasets";
 import { getDrivers, getRoute } from "@/lib/data";
+import { filterRoster, rosterSourceLabel } from "@/lib/data/roster";
 import { driverStatusLabel, formatNumber, formatTenure } from "@/lib/format";
-import type { DriverRole, DriverStatus } from "@/lib/types";
+import type { DriverRole, DriverStatus, RosterSource } from "@/lib/types";
 
 export default function DriversPage() {
   const drivers = getDrivers();
+  const rosterExport = associatesCsv();
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<DriverStatus | "all">("all");
   const [role, setRole] = useState<DriverRole | "all">("all");
+  const [source, setSource] = useState<RosterSource | "all">("all");
 
-  const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    return drivers.filter((d) => {
-      if (status !== "all" && d.status !== status) return false;
-      if (role !== "all" && d.role !== role) return false;
-      if (!q) return true;
-      const codes = d.routeIds.map((id) => getRoute(id)?.code ?? "").join(" ");
-      return [d.name, d.role, d.phone, d.transporterId, codes].join(" ").toLowerCase().includes(q);
-    });
-  }, [drivers, query, status, role]);
+  const filtered = useMemo(
+    () =>
+      filterRoster(drivers, { query, status, role, source }, (driver) =>
+        driver.routeIds.map((id) => getRoute(id)?.code ?? "")
+      ),
+    [drivers, query, status, role, source]
+  );
 
   return (
     <div>
       <PageHeader
         title="Associates"
-        description="Names from the DNA4 Delivery Execution board for Sep 21, 2026. Multi-transporter routes list every associate. Tenure, phone, and scorecard contribution were not on the Console."
+        description="Full active roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID. Today’s packages, routes, and status come from the Sep 21 Delivery Execution board when the name matches. ADP Group Timecard names with no schedule transporter ID are labeled ADP only. Tenure, phone, and scorecard contribution were not in these exports."
+        actions={<ExportCsvButton filename={rosterExport.filename} csv={rosterExport.csv} label="Export roster" />}
       />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -74,8 +77,23 @@ export default function DriversPage() {
           <option value="Dispatcher">Dispatcher</option>
           <option value="Station Manager">Station Manager</option>
         </select>
-        <p className="ml-auto text-xs text-muted-foreground tabular-nums">
-          {filtered.length} of {drivers.length}
+        <select
+          className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm dark:bg-input/30"
+          value={source}
+          onChange={(e) => setSource(e.target.value as RosterSource | "all")}
+          aria-label="Filter by source"
+        >
+          <option value="all">All sources</option>
+          <option value="amazon-schedule">Amazon schedule</option>
+          <option value="adp-only">ADP only</option>
+          <option value="delivery-board">Sep 21 board only</option>
+        </select>
+        <p
+          className="ml-auto text-xs text-muted-foreground tabular-nums"
+          data-roster-filtered={filtered.length}
+          data-roster-total={drivers.length}
+        >
+          {filtered.length} of {drivers.length} associates
         </p>
       </div>
 
@@ -90,6 +108,7 @@ export default function DriversPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Associate</TableHead>
+                <TableHead>Source</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Tenure</TableHead>
@@ -113,11 +132,14 @@ export default function DriversPage() {
                         <div>
                           <p className="font-medium">{driver.name}</p>
                           <p className="font-mono text-xs text-muted-foreground">
-                            {driver.transporterId ?? driver.phone ?? "—"}
+                            {driver.rosterSource === "adp-only"
+                              ? `${driver.adpName ?? driver.name} · no transporter ID`
+                              : (driver.transporterId ?? driver.phone ?? "—")}
                           </p>
                         </div>
                       </div>
                     </TableCell>
+                    <TableCell className="text-xs">{rosterSourceLabel(driver)}</TableCell>
                     <TableCell>{driver.role}</TableCell>
                     <TableCell>
                       <DriverStatusBadge status={driver.status} />

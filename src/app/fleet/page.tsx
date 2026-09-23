@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { DvicBoard } from "@/components/dvic-board";
+import { ExportCsvButton } from "@/components/export-csv-button";
 import { PageHeader, EmptyState } from "@/components/page-header";
 import { VehicleStatusBadge } from "@/components/ops-badges";
 import { Input } from "@/components/ui/input";
@@ -14,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getRoute, getVehicles } from "@/lib/data";
+import { vehiclesCsv } from "@/lib/export/datasets";
 import {
   formatDate,
   formatMileage,
@@ -24,6 +27,7 @@ import type { VehicleStatus, VehicleType } from "@/lib/types";
 
 export default function FleetPage() {
   const vehicles = getVehicles();
+  const fleetExport = vehiclesCsv();
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<VehicleStatus | "all">("all");
   const [type, setType] = useState<VehicleType | "all">("all");
@@ -45,8 +49,11 @@ export default function FleetPage() {
     <div>
       <PageHeader
         title="Fleet"
-        description="Yard roster is still mock. Console Delivery Execution for Sep 21 did not include vehicle IDs, so vans are not linked to live routes."
+        description="The yard table is still a 22-van mock. A full DNA4 list needs the Amazon DSP Console export from Administration → Fleet → My vehicles. Year, mileage, and VIN stay blank until that file is in the repo. Delivery Execution did not include vehicle IDs, so these vans are not linked to Sep 21 routes."
+        actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
       />
+
+      <DvicBoard />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <Input
@@ -82,8 +89,12 @@ export default function FleetPage() {
             </option>
           ))}
         </select>
-        <p className="ml-auto text-xs text-muted-foreground tabular-nums">
-          {filtered.length} of {vehicles.length}
+        <p
+          className="ml-auto text-xs text-muted-foreground tabular-nums"
+          data-fleet-filtered={filtered.length}
+          data-fleet-total={vehicles.length}
+        >
+          {filtered.length} of {vehicles.length} vehicles
         </p>
       </div>
 
@@ -113,7 +124,7 @@ export default function FleetPage() {
                     <TableCell>
                       <p className="font-medium font-mono text-sm">{van.unitId}</p>
                       <p className="text-xs text-muted-foreground">
-                        {van.year} · {van.plate}
+                        {van.year ?? "—"} · {van.plate}
                       </p>
                     </TableCell>
                     <TableCell>{vehicleTypeLabel[van.type]}</TableCell>
@@ -121,9 +132,9 @@ export default function FleetPage() {
                       <VehicleStatusBadge status={van.status} />
                     </TableCell>
                     <TableCell className="text-right tabular-nums">
-                      {formatMileage(van.mileage)}
+                      {van.mileage == null ? "—" : formatMileage(van.mileage)}
                     </TableCell>
-                    <TableCell>{formatDate(van.lastInspection)}</TableCell>
+                    <TableCell>{van.lastInspection ? formatDate(van.lastInspection) : "—"}</TableCell>
                     <TableCell>
                       {route ? (
                         <Link

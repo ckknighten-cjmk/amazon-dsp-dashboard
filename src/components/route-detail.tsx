@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExceptionStatusBadge, RouteStatusBadge } from "@/components/ops-badges";
+import { ExceptionStatusBadge, RescueBadge, RouteStatusBadge } from "@/components/ops-badges";
 import { EmptyState } from "@/components/page-header";
 import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
@@ -16,6 +16,9 @@ export function RouteDetail({ route }: { route: Route }) {
   const associates = route.associateIds
     .map((id) => getDriver(id))
     .filter((d): d is NonNullable<typeof d> => Boolean(d));
+  const rescuers = route.rescueDriverIds
+    .map((id) => getDriver(id))
+    .filter((d): d is NonNullable<typeof d> => Boolean(d));
   const remainingStops = Math.max(route.stopCount - route.completedStops, 0);
   const exceptions = getExceptionsForRoute(route.id);
 
@@ -30,8 +33,22 @@ export function RouteDetail({ route }: { route: Route }) {
             {route.stationCode} Memphis · DSP Console Delivery Execution · Sep 21, 2026
           </p>
         </div>
-        <RouteStatusBadge status={route.status} />
+        <div className="flex flex-wrap items-center gap-2">
+          <RouteStatusBadge status={route.status} />
+          <RescueBadge received={route.receivedRescue} />
+        </div>
       </div>
+
+      {route.receivedRescue ? (
+        <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm">
+          Rescue: Yes. {rescuers.map((driver) => driver.name).join(", ") || "Rescuers not named"} listed
+          after the primary associate. Inferred because this route has more than one associate.
+        </p>
+      ) : (
+        <p className="text-xs text-muted-foreground">
+          Rescue: No. Only routes with more than one associate are marked rescued.
+        </p>
+      )}
 
       {route.notes ? (
         <p className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm">
