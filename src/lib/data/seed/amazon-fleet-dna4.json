@@ -1,0 +1,11 @@
+{
+  "source": "Amazon DSP Console Administration → Fleet → My vehicles",
+  "nav": "Administration → Fleet → My vehicles",
+  "station": {
+    "code": "DNA4",
+    "dsp": "CJMK Inc."
+  },
+  "placeholder": true,
+  "note": "This file is the drop-in for the DNA4 My vehicles export. Replace vehicles with the Console rows. Each row uses unit, plate, makeModel, vin, ownership, type, status, statusReason, lastRouteCompleted, and assignedRoute. Year and mileage are not in that export; leave them unset. Do not invent rows.",
+  "vehicles": []
+}

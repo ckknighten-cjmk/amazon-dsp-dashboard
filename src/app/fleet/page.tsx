@@ -49,7 +49,7 @@ export default function FleetPage() {
     <div>
       <PageHeader
         title="Fleet"
-        description="The yard table is still a 22-van mock. A full DNA4 list needs the Amazon DSP Console export from Administration → Fleet → My vehicles. Year, mileage, and VIN stay blank until that file is in the repo. Delivery Execution did not include vehicle IDs, so these vans are not linked to Sep 21 routes."
+        description="This table is still the 22-van mock. Drop the DNA4 export from Administration → Fleet → My vehicles into src/lib/data/seed/amazon-fleet-dna4.json (unit, plate, VIN, make/model, ownership, type, status). Week 38/39 schedules and the Sep 21 board do not name vans, so those fields are not filled in here. Year and mileage stay blank on Console rows."
         actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
       />
 

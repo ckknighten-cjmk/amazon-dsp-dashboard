@@ -113,6 +113,13 @@ export interface Vehicle {
   vin?: string;
   makeModel?: string;
   ownership?: string;
+  /** Console status text when the row came from My vehicles. */
+  consoleStatus?: string;
+  statusReason?: string | null;
+  lastRouteCompleted?: string | null;
+  /** Route code from the fleet export, when Console published one. */
+  assignedRouteCode?: string | null;
+  origin?: "console" | "mock";
 }
 
 export interface Stop {

@@ -7,7 +7,7 @@
  * ADP-only names. Scorecard is Week 37 Console Performance Summary. Payments
  * are the 2026-09-21 Flex Payments scrape. Compliance compares ADP Group
  * Timecards to the Amazon schedule workbooks for Week 38 and Week 39. Fleet
- * and incidents remain mock fixtures.
+ * and incidents remain mock fixtures until `amazon-fleet-dna4.json` has Console rows.
  */
 
 import type {
@@ -25,7 +25,7 @@ import type {
 } from "@/lib/types";
 import type { ComplianceReport } from "@/lib/compliance/types";
 import { station as seedStation } from "@/lib/data/drivers";
-import { vehicles as mockVehicles } from "@/lib/data/vehicles";
+import { loadYard } from "@/lib/data/fleet";
 import {
   deliveryBoard,
   exceptions,
@@ -40,12 +40,12 @@ import { getPaymentsSnapshot } from "@/lib/data/payments";
 import { getComplianceReport, type ComplianceWeek } from "@/lib/data/compliance";
 import { getDvicReport } from "@/lib/data/dvic";
 
-/** Fleet stays mock; drop assigned-route links to retired mock route IDs. */
-const vehicles: Vehicle[] = mockVehicles.map((van) => ({
-  ...van,
-  assignedRouteId: undefined,
-  status: van.status === "on_route" ? "ready" : van.status,
-}));
+/**
+ * Yard roster. Uses `amazon-fleet-dna4.json` when that file has Console rows.
+ * An empty list keeps the mock vans and does not invent VINs or plates.
+ */
+const fleetYard = loadYard();
+const vehicles: Vehicle[] = fleetYard.vehicles;
 
 export interface DataSource {
   getStation(): StationSettings;
@@ -102,6 +102,7 @@ export const getRoute = (id: string) => source.getRoute(id);
 export const getDrivers = () => source.getDrivers();
 export const getDriver = (id: string | null | undefined) => source.getDriver(id);
 export const getVehicles = () => source.getVehicles();
+export const getFleetYard = () => fleetYard;
 export const getVehicle = (id: string | null | undefined) => source.getVehicle(id);
 export const getIncidents = () => source.getIncidents();
 export const getExceptions = () => source.getExceptions();

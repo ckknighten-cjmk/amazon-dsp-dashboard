@@ -139,10 +139,11 @@ export function vehiclesCsv(): CsvFile {
     van.mileage ?? "",
     van.lastInspection ?? "",
     van.notes ?? "",
-    "Mock yard roster",
+    van.origin === "console" ? "Amazon DSP Console My vehicles" : "Mock yard roster",
   ]);
+  const stamp = getVehicles().some((van) => van.origin === "console") ? "dna4" : "mock";
   return {
-    filename: datasetFilename("fleet-vehicles", "mock"),
+    filename: datasetFilename("fleet-vehicles", stamp),
     csv: toCsv(headers, rows),
   };
 }
