@@ -1,0 +1,1261 @@
+{
+  "station": "DNA4",
+  "week": 38,
+  "period": "Sep 13 - Sep 19, 2026",
+  "thresholdStopsCompleted": 180,
+  "capturedAt": "2026-09-23T12:00:28.956244Z",
+  "source": "Delivery Execution historical route cards",
+  "routes": [
+    {
+      "date": "2026-09-13",
+      "route": "CX1",
+      "drivers": [
+        "Makayla Cooper"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX2",
+      "drivers": [
+        "DeAndre Adams",
+        "Jayden Williams"
+      ],
+      "stopsCompleted": 183
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX5",
+      "drivers": [
+        "Mauricio Hearns"
+      ],
+      "stopsCompleted": 181
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX10",
+      "drivers": [
+        "darome boyland",
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 203
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX11",
+      "drivers": [
+        "Kylan Knight"
+      ],
+      "stopsCompleted": 193
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX21",
+      "drivers": [
+        "Michael Neal"
+      ],
+      "stopsCompleted": 189
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX23",
+      "drivers": [
+        "Asja Hurt",
+        "Markayla Tillis"
+      ],
+      "stopsCompleted": 200
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX24",
+      "drivers": [
+        "Shachaniah Israel"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX25",
+      "drivers": [
+        "Jessica Davis",
+        "Mary Acker",
+        "Chance Stupp"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX26",
+      "drivers": [
+        "Nolan Goliday",
+        "briana Mosley"
+      ],
+      "stopsCompleted": 203
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX27",
+      "drivers": [
+        "Jazmonjr Worles"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX28",
+      "drivers": [
+        "Devarius Mitchell"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX29",
+      "drivers": [
+        "Jeromy Mitchell"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX30",
+      "drivers": [
+        "Keon Gross",
+        "briana Mosley"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX32",
+      "drivers": [
+        "Amy Rhinehart"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-13",
+      "route": "CX33",
+      "drivers": [
+        "Daniel Gilmore",
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 204
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX12",
+      "drivers": [
+        "Kylan Knight",
+        "Nolan Goliday"
+      ],
+      "stopsCompleted": 203
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX25",
+      "drivers": [
+        "Asja Hurt"
+      ],
+      "stopsCompleted": 184
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX26",
+      "drivers": [
+        "Daniel Aponte espinoza"
+      ],
+      "stopsCompleted": 188
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX27",
+      "drivers": [
+        "Amy Rhinehart"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX28",
+      "drivers": [
+        "Dajon Trice"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX29",
+      "drivers": [
+        "Jazmonjr Worles"
+      ],
+      "stopsCompleted": 184
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX30",
+      "drivers": [
+        "Devarius Mitchell"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX31",
+      "drivers": [
+        "Aaron Hines"
+      ],
+      "stopsCompleted": 180
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX32",
+      "drivers": [
+        "Aaron Davis"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX33",
+      "drivers": [
+        "Cameyon Smith"
+      ],
+      "stopsCompleted": 182
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX34",
+      "drivers": [
+        "Larrico Pickens"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-14",
+      "route": "CX35",
+      "drivers": [
+        "Henry Taylor",
+        "Larrico Pickens"
+      ],
+      "stopsCompleted": 186
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX11",
+      "drivers": [
+        "Marshay Matheney"
+      ],
+      "stopsCompleted": 187
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX12",
+      "drivers": [
+        "darome boyland"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX13",
+      "drivers": [
+        "Caprio Newman"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX26",
+      "drivers": [
+        "Asja Hurt"
+      ],
+      "stopsCompleted": 191
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX27",
+      "drivers": [
+        "Shachaniah Israel"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX28",
+      "drivers": [
+        "Jakira Cathey",
+        "Jessica Davis"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX29",
+      "drivers": [
+        "Nolan Goliday",
+        "Jessica Davis"
+      ],
+      "stopsCompleted": 191
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX30",
+      "drivers": [
+        "Jazmonjr Worles"
+      ],
+      "stopsCompleted": 191
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX31",
+      "drivers": [
+        "Jeromy Mitchell"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX32",
+      "drivers": [
+        "Aaron Davis"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX33",
+      "drivers": [
+        "Jordan Hutchinson"
+      ],
+      "stopsCompleted": 188
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX34",
+      "drivers": [
+        "Keon Gross"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-15",
+      "route": "CX35",
+      "drivers": [
+        "Venson Muskin",
+        "Colter Stupp"
+      ],
+      "stopsCompleted": 200
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX280",
+      "drivers": [
+        "darome boyland",
+        "Jessica Davis",
+        "Mauricio Hearns"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX256",
+      "drivers": [
+        "Daniel Aponte espinoza"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX274",
+      "drivers": [
+        "Marshay Matheney"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX244",
+      "drivers": [
+        "Keyshawn Dickerson",
+        "Henry Taylor"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX246",
+      "drivers": [
+        "Malyk Latham"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX247",
+      "drivers": [
+        "Aaron Hines"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX248",
+      "drivers": [
+        "Jazmonjr Worles"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX249",
+      "drivers": [
+        "Colter Stupp"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX250",
+      "drivers": [
+        "Donnell Jefferson"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX251",
+      "drivers": [
+        "Jordan Hutchinson"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX252",
+      "drivers": [
+        "Shameka Williams"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX253",
+      "drivers": [
+        "Larrico Pickens"
+      ],
+      "stopsCompleted": 188
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX254",
+      "drivers": [
+        "Asja Hurt"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX255",
+      "drivers": [
+        "Amy Rhinehart"
+      ],
+      "stopsCompleted": 193
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX257",
+      "drivers": [
+        "Gregory Lowery",
+        "Jeromy Mitchell",
+        "Lauquetta Vaughn"
+      ],
+      "stopsCompleted": 200
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX259",
+      "drivers": [
+        "Daniel Gilmore",
+        "Mauricio Hearns"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX261",
+      "drivers": [
+        "Marquise Crum"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX262",
+      "drivers": [
+        "Timothy Tanner",
+        "Jessica Davis",
+        "Jeromy Mitchell"
+      ],
+      "stopsCompleted": 205
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX267",
+      "drivers": [
+        "Adrian Arellano"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX268",
+      "drivers": [
+        "briana Mosley"
+      ],
+      "stopsCompleted": 186
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX269",
+      "drivers": [
+        "Venson Muskin",
+        "Zora Bobo"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX270",
+      "drivers": [
+        "Demarcus Faulkner"
+      ],
+      "stopsCompleted": 180
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX271",
+      "drivers": [
+        "John Scott"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX272",
+      "drivers": [
+        "Makayla Cooper"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX273",
+      "drivers": [
+        "Henry Taylor"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX275",
+      "drivers": [
+        "curtis caples",
+        "Jessica Davis",
+        "Marshay Matheney",
+        "LaKendra Shaw"
+      ],
+      "stopsCompleted": 208
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX276",
+      "drivers": [
+        "Donovan Doss",
+        "Makayla Cooper"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-16",
+      "route": "CX277",
+      "drivers": [
+        "Mary Acker"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX256",
+      "drivers": [
+        "Marcelous Kyles",
+        "Larrico Pickens",
+        "Daniel Aponte espinoza"
+      ],
+      "stopsCompleted": 191
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX257",
+      "drivers": [
+        "Ladarias Clifton"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX258",
+      "drivers": [
+        "Malyk Latham"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX259",
+      "drivers": [
+        "Aaron Hines"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX260",
+      "drivers": [
+        "Shameka Williams"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX262",
+      "drivers": [
+        "Cameyon Smith"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX263",
+      "drivers": [
+        "Keon Gross",
+        "Cameyon Smith",
+        "Alexis Hutchison"
+      ],
+      "stopsCompleted": 204
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX265",
+      "drivers": [
+        "Larrico Pickens"
+      ],
+      "stopsCompleted": 191
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX266",
+      "drivers": [
+        "Darrell Woods"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX267",
+      "drivers": [
+        "Kiona Pree"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX268",
+      "drivers": [
+        "Shachaniah Israel"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX269",
+      "drivers": [
+        "Daniel Aponte espinoza",
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 201
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX274",
+      "drivers": [
+        "Larry Shipp"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX275",
+      "drivers": [
+        "John Byrd"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX276",
+      "drivers": [
+        "DeAndre Adams"
+      ],
+      "stopsCompleted": 189
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX277",
+      "drivers": [
+        "Timothy Tanner"
+      ],
+      "stopsCompleted": 188
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX279",
+      "drivers": [
+        "Shakira Singleton",
+        "Cedric Lewis",
+        "Taylor Hornung",
+        "Marquise Crum"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX280",
+      "drivers": [
+        "Lorenzo Miller",
+        "Cedric Lewis"
+      ],
+      "stopsCompleted": 186
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX282",
+      "drivers": [
+        "Marquel Phipps jr"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX283",
+      "drivers": [
+        "Donovan Doss",
+        "Jordan Hutchinson"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX284",
+      "drivers": [
+        "Darius Randolph"
+      ],
+      "stopsCompleted": 187
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX285",
+      "drivers": [
+        "Adrian Arellano"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX286",
+      "drivers": [
+        "Marquise Crum",
+        "Adrian Arellano"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX287",
+      "drivers": [
+        "curtis caples",
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 201
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX288",
+      "drivers": [
+        "Demarcus Faulkner",
+        "Candido Fulcher",
+        "curtis caples"
+      ],
+      "stopsCompleted": 209
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX289",
+      "drivers": [
+        "Mary Acker"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX290",
+      "drivers": [
+        "Caleb Spann"
+      ],
+      "stopsCompleted": 185
+    },
+    {
+      "date": "2026-09-17",
+      "route": "CX307",
+      "drivers": [
+        "Devarius Mitchell",
+        "Taylor Hornung"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX245",
+      "drivers": [
+        "Kashif Festherson"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX246",
+      "drivers": [
+        "Ladarias Clifton",
+        "Michael Neal"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX247",
+      "drivers": [
+        "Malyk Latham"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX248",
+      "drivers": [
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX249",
+      "drivers": [
+        "Keyshawn Dickerson",
+        "Cameyon Smith"
+      ],
+      "stopsCompleted": 184
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX250",
+      "drivers": [
+        "Cameyon Smith"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX251",
+      "drivers": [
+        "Donnell Jefferson"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX252",
+      "drivers": [
+        "Timothy Tanner"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX253",
+      "drivers": [
+        "Shachaniah Israel"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX254",
+      "drivers": [
+        "Marshay Matheney",
+        "Marquise Crum",
+        "Donovan Doss"
+      ],
+      "stopsCompleted": 204
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX255",
+      "drivers": [
+        "Amy Rhinehart"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX256",
+      "drivers": [
+        "Donovan Doss",
+        "Candido Fulcher",
+        "Daurieal Hervey"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX257",
+      "drivers": [
+        "Kaveyon Lewis",
+        "Marquise Crum",
+        "Ladarias Clifton",
+        "Brandon Clark"
+      ],
+      "stopsCompleted": 202
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX259",
+      "drivers": [
+        "Kylan Knight",
+        "Keon Gross"
+      ],
+      "stopsCompleted": 189
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX260",
+      "drivers": [
+        "Justin Scott",
+        "Keon Gross"
+      ],
+      "stopsCompleted": 180
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX263",
+      "drivers": [
+        "Frank Robertson"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX267",
+      "drivers": [
+        "Adrian Arellano"
+      ],
+      "stopsCompleted": 185
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX269",
+      "drivers": [
+        "Lorenzo Miller",
+        "Keon Gross"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX270",
+      "drivers": [
+        "John Scott"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX271",
+      "drivers": [
+        "Jakira Cathey",
+        "Daurieal Hervey",
+        "Taylor Hornung"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX273",
+      "drivers": [
+        "Dibrell Armstrong"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX274",
+      "drivers": [
+        "Taylor Hornung",
+        "Khalid Jones"
+      ],
+      "stopsCompleted": 201
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX275",
+      "drivers": [
+        "curtis caples",
+        "Khalid Jones",
+        "Bernard Nelson"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX276",
+      "drivers": [
+        "Marquel Phipps jr"
+      ],
+      "stopsCompleted": 191
+    },
+    {
+      "date": "2026-09-18",
+      "route": "CX278",
+      "drivers": [
+        "Darius Randolph"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX232",
+      "drivers": [
+        "Jalon Lewis",
+        "Lyric Cole"
+      ],
+      "stopsCompleted": 203
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX235",
+      "drivers": [
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX236",
+      "drivers": [
+        "Khalid Jones",
+        "Candido Fulcher"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX237",
+      "drivers": [
+        "Keyshawn Dickerson"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX239",
+      "drivers": [
+        "Jordan Hutchinson"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX240",
+      "drivers": [
+        "Shameka Williams",
+        "Lyric Cole"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX241",
+      "drivers": [
+        "Darrell Woods"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX242",
+      "drivers": [
+        "Kiona Pree"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX244",
+      "drivers": [
+        "Daniel Aponte espinoza"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX245",
+      "drivers": [
+        "Xavion Frazier"
+      ],
+      "stopsCompleted": 192
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX248",
+      "drivers": [
+        "Larry Shipp"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX249",
+      "drivers": [
+        "Justin Scott"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX251",
+      "drivers": [
+        "John Byrd"
+      ],
+      "stopsCompleted": 198
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX252",
+      "drivers": [
+        "Bernard Nelson"
+      ],
+      "stopsCompleted": 194
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX253",
+      "drivers": [
+        "Denzel Hall"
+      ],
+      "stopsCompleted": 190
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX254",
+      "drivers": [
+        "Adrian Arellano"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX255",
+      "drivers": [
+        "Marquel Phipps jr"
+      ],
+      "stopsCompleted": 197
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX256",
+      "drivers": [
+        "Kaveyon Lewis",
+        "Lyric Cole",
+        "Kaylon Christopher",
+        "LaKendra Shaw"
+      ],
+      "stopsCompleted": 205
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX257",
+      "drivers": [
+        "Darius Randolph"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX258",
+      "drivers": [
+        "John Scott"
+      ],
+      "stopsCompleted": 199
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX259",
+      "drivers": [
+        "Marquise Crum",
+        "Lyric Cole"
+      ],
+      "stopsCompleted": 201
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX260",
+      "drivers": [
+        "Marshay Matheney"
+      ],
+      "stopsCompleted": 195
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX261",
+      "drivers": [
+        "Demarcus Faulkner"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX262",
+      "drivers": [
+        "LaKendra Shaw",
+        "Kaylon Christopher"
+      ],
+      "stopsCompleted": 196
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX264",
+      "drivers": [
+        "Dibrell Armstrong"
+      ],
+      "stopsCompleted": 183
+    },
+    {
+      "date": "2026-09-19",
+      "route": "CX276",
+      "drivers": [
+        "Aaron Armstrong",
+        "DeAndre Adams"
+      ],
+      "stopsCompleted": 185
+    }
+  ]
+}

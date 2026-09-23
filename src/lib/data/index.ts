@@ -4,10 +4,11 @@
  * Routes and package exceptions for 2026-09-21 come from the DSP Console
  * end-of-day Delivery Execution scrape in `src/lib/data/seed`. The associate
  * roster unions Amazon schedule Weeks 38 and 39, then merges that board and
- * ADP-only names. Scorecard is Week 37 Console Performance Summary. Payments
- * are the 2026-09-21 Flex Payments scrape. Week 37 variable section totals are
- * the Sep 23 variable invoice. Work Summary weeks 37–39 reconcile against that
- * invoice when it is listed. Compliance compares ADP Group Timecards to the
+ * ADP-only names. Scorecard default is the Week 38 Console Performance Summary;
+ * Week 37 stays available. Payments are the 2026-09-21 Flex Payments scrape.
+ * Week 37 variable section totals are the Sep 23 variable invoice. Week 38's
+ * variable invoice was not listed. Work Summary weeks 37–39 reconcile against
+ * that invoice when it is listed. Compliance compares ADP Group Timecards to the
  * Amazon schedule workbooks for Week 38 and Week 39. Fleet is the DNA4 My
  * vehicles capture. Incidents remain mock fixtures.
  */
@@ -36,7 +37,11 @@ import {
 } from "@/lib/data/delivery-execution";
 import { rosterDrivers } from "@/lib/data/roster";
 import { incidents } from "@/lib/data/incidents";
-import { scorecard } from "@/lib/data/scorecard";
+import {
+  getScorecardSnapshot,
+  parseScorecardWeek,
+  type ScorecardWeek,
+} from "@/lib/data/scorecard";
 import { getOverview as buildOverview } from "@/lib/data/overview";
 import { getPaymentsSnapshot } from "@/lib/data/payments";
 import { getComplianceReport, type ComplianceWeek } from "@/lib/data/compliance";
@@ -54,7 +59,7 @@ const vehicles: Vehicle[] = fleetYard.vehicles;
 export interface DataSource {
   getStation(): StationSettings;
   getOverview(range: DateRange): OverviewSnapshot;
-  getScorecard(): ScorecardSnapshot;
+  getScorecard(week?: ScorecardWeek): ScorecardSnapshot;
   getRoutes(): Route[];
   getRoute(id: string): Route | undefined;
   getDrivers(): Driver[];
@@ -81,7 +86,7 @@ const routeById = new Map(routes.map((r) => [r.id, r]));
 export const mockDataSource: DataSource = {
   getStation: () => seedStation,
   getOverview: (range) => buildOverview(range),
-  getScorecard: () => scorecard,
+  getScorecard: (week) => getScorecardSnapshot(week),
   getRoutes: () => routes,
   getRoute: (id) => routeById.get(id),
   getDrivers: () => rosterDrivers,
@@ -102,7 +107,7 @@ export const source: DataSource = mockDataSource;
 
 export const getStation = () => source.getStation();
 export const getOverview = (range: DateRange) => source.getOverview(range);
-export const getScorecard = () => source.getScorecard();
+export const getScorecard = (week?: ScorecardWeek) => source.getScorecard(week);
 export const getRoutes = () => source.getRoutes();
 export const getRoute = (id: string) => source.getRoute(id);
 export const getDrivers = () => source.getDrivers();
@@ -121,5 +126,7 @@ export const getReconcile = (week?: ReconcileWeek) => source.getReconcile(week);
 export { getDvicReport };
 export { parseComplianceWeek, COMPLIANCE_WEEKS } from "@/lib/data/compliance";
 export { parseReconcileWeek };
+export { parseScorecardWeek, SCORECARD_WEEKS } from "@/lib/data/scorecard";
 export type { ComplianceWeek } from "@/lib/data/compliance";
+export type { ScorecardWeek } from "@/lib/data/scorecard";
 export type { ReconcileWeek } from "@/lib/payments/types";

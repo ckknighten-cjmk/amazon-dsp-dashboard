@@ -17,7 +17,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatNumber, formatUsd, formatZonedDateTime } from "@/lib/format";
-import { hrefWithPeriod as withPeriod, parsePeriodParam } from "@/lib/period";
+import {
+  formatRangeLabel,
+  hrefWithPeriod as withPeriod,
+  parsePeriodParam,
+  rangesOverlap,
+  WORK_SUMMARY_COVERAGE,
+} from "@/lib/period";
 import { headlineCompares } from "@/lib/payments/reconcile";
 import type { InvoiceStatus } from "@/lib/types";
 import type {
@@ -38,6 +44,8 @@ export function ReconcileBoard({ report }: { report: WeekReconcile }) {
   const params = useSearchParams();
   const { range } = useDateRange();
   const period = parsePeriodParam(params.get("period"), params.get("start"), params.get("end")) ?? range;
+  const workCoverage = WORK_SUMMARY_COVERAGE[report.week];
+  const workOverlaps = rangesOverlap(workCoverage.start, workCoverage.end, period);
   const headline = headlineCompares(report);
   const holds = report.checks.filter((check) => check.kind === "holds");
   const gaps = report.checks.filter((check) => check.kind === "gap");
@@ -53,7 +61,10 @@ export function ReconcileBoard({ report }: { report: WeekReconcile }) {
           <p className="mt-1 max-w-3xl text-xs text-muted-foreground">
             Week {report.week} · {report.period}. {report.counts.match} match · {report.counts.mismatch} mismatch ·{" "}
             {report.counts.notComparable} not comparable. Variance is invoice minus Work Summary, and only when both
-            sides use the same unit. This week is separate from the top-bar period.
+            sides use the same unit. {workCoverage.label}{" "}
+            {workOverlaps
+              ? `overlaps ${formatRangeLabel(period)}. Weekly totals stay whole.`
+              : `does not overlap ${formatRangeLabel(period)}. The weekly capture stays on this reconcile and is not copied onto empty days.`}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">

@@ -106,8 +106,11 @@ test("Weeks 38 and 39 keep Work Summary and leave the variable invoice unlisted"
   assert.equal(week38.invoiceListed, false);
   assert.equal(week38.invoice, null);
   assert.equal(week38.workSummary.totalPackages, 7865);
+  assert.equal(week38.workSummary.deliveredPackages, 7860);
+  assert.equal(week38.workSummary.pickupPackages, 5);
   assert.equal(week38.workSummary.completedRoutes, 34);
   assert.equal(week38.workSummary.miles, 2410);
+  assert.equal(week38.workSummary.unplannedDelayCount, 0);
   assert.match(week38.listingNote, /Week 38 and Week 39/);
   assert.ok(week38.rows.every((item) => item.status === "not_comparable" && item.variance == null));
   assert.ok(week38.rows.every((item) => item.invoice.text === "Not yet listed"));

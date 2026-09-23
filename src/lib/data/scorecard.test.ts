@@ -1,0 +1,65 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { formatOverallScore, formatScorecardValue } from "../format";
+import { gradeMetric } from "../scorecard";
+import { getScorecardSnapshot, parseScorecardWeek } from "./scorecard";
+
+test("Week 38 is the default Console scorecard", () => {
+  assert.equal(parseScorecardWeek(undefined), 38);
+  assert.equal(parseScorecardWeek("37"), 37);
+  assert.equal(parseScorecardWeek("39"), 38);
+  const week38 = getScorecardSnapshot();
+  assert.equal(week38.weekNumber, 38);
+  assert.equal(week38.periodLabel, "Sep 13–19, 2026");
+  assert.equal(week38.overallScore, 84);
+  assert.equal(week38.overallTier, "fantastic");
+  assert.equal(formatOverallScore(week38.overallScore), "84");
+  assert.match(week38.disclaimer, /Week 38 Sep 13–19 DNA4 from Console Performance Summary/);
+  assert.ok(week38.categories.every((category) => category.tier === "fantastic"));
+  assert.equal(week38.priorWeekLabel, null);
+  assert.ok(week38.metrics.every((metric) => metric.prior == null));
+
+  const byId = Object.fromEntries(week38.metrics.map((metric) => [metric.id, metric]));
+  assert.equal(byId["on-road-safety"].current, null);
+  assert.equal(byId["on-road-safety"].reportedTier, "fantastic");
+  assert.equal(byId["safe-driving"].unit, "unavailable");
+  assert.equal(byId["safe-driving"].current, null);
+  assert.equal(byId["safe-driving"].reportedTier, null);
+  assert.equal(byId.seatbelt.current, 0);
+  assert.equal(byId.speeding.current, 3.6);
+  assert.equal(byId.speeding.reportedTier, "fantastic");
+  assert.equal(byId.speeding.thresholds, null);
+  assert.equal(byId.distractions.current, 2.3);
+  assert.equal(byId.following.current, 0);
+  assert.equal(byId["sign-signal"].current, 1.8);
+  assert.equal(byId["working-device"].unit, "unavailable");
+  assert.equal(byId.boc.compliance, "compliant");
+  assert.equal(byId.audit.compliance, "compliant");
+  assert.equal(byId["dcr-dpmo"].current, 4166.9);
+  assert.equal(byId["dcr-dpmo"].reportedTier, "great");
+  assert.equal(byId["dcr-dpmo"].thresholds, null);
+  assert.equal(gradeMetric(byId["dcr-dpmo"]), "great");
+  assert.equal(formatScorecardValue(byId["dcr-dpmo"]), "4,166.9 DPMO");
+  assert.equal(byId.dsb.current, 119);
+  assert.equal(byId["ced-dpmo"].current, 0);
+  assert.equal(byId["cdf-dpmo"].current, 1360);
+  assert.equal(byId["cdf-dpmo"].reportedTier, "great");
+  assert.equal(byId.pod.current, 99.46);
+  assert.equal(formatScorecardValue(byId.pod), "99.46%");
+  assert.equal(byId.psb.current, 0);
+  assert.equal(byId["fleet-exec"].current, 2.22);
+  assert.equal(byId.tenured.current, 94.01);
+  assert.equal(formatScorecardValue(byId.tenured), "94.01%");
+});
+
+test("Week 37 scorecard stays on the Sep 6–12 capture", () => {
+  const week37 = getScorecardSnapshot(37);
+  assert.equal(week37.overallScore, 85.8);
+  assert.equal(formatOverallScore(week37.overallScore), "85.8");
+  assert.equal(week37.metrics.find((metric) => metric.id === "dcr-dpmo")?.current, 1953.7);
+  assert.equal(week37.metrics.find((metric) => metric.id === "dcr-dpmo")?.reportedTier, "fantastic");
+  assert.equal(week37.metrics.find((metric) => metric.id === "speeding")?.current, 1.4);
+  assert.ok(week37.metrics.find((metric) => metric.id === "speeding")?.thresholds);
+  assert.match(week37.disclaimer, /Week 37/);
+  assert.doesNotMatch(week37.disclaimer, /Week 38/);
+});

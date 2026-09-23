@@ -43,9 +43,9 @@ export const alerts: Alert[] = [
   {
     id: "al-scorecard",
     severity: "info",
-    title: "Scorecard Week 37 · Fantastic 85.8",
+    title: "Scorecard Week 38 · Fantastic 84",
     detail:
-      "DSP Console Performance Summary for Sep 6–12. CDF DPMO is Great; remaining published metrics Fantastic.",
+      "DSP Console Performance Summary for Sep 13–19. Overall 84 Fantastic. Delivery Completion DPMO and CDF DPMO are Great. Safe Driving and Working Device are No Data.",
     href: "/scorecard",
   },
   {

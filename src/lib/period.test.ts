@@ -4,6 +4,7 @@ import paymentsSeed from "./data/seed/payments-settlements-2026-09-21.json";
 import scheduleWeek38 from "./data/seed/week38-amazon-schedule.json";
 import scheduleWeek39 from "./data/seed/week39-amazon-schedule.json";
 import {
+  BONUS_COVERAGE,
   boundsOf,
   COMPLIANCE_COVERAGE,
   dateInRange,
@@ -15,9 +16,12 @@ import {
   invoiceServiceWindow,
   parsePeriodParam,
   rangesOverlap,
+  routeUsesPeriod,
   SCORECARD_COVERAGE,
   serializePeriod,
   STATION_TODAY,
+  WORK_SUMMARY_COVERAGE,
+  workSummaryWeekForRange,
 } from "./period";
 
 describe("period bounds", () => {
@@ -61,6 +65,15 @@ describe("period bounds", () => {
       hrefWithPeriod("/compliance", { kind: "custom", start: "2026-09-21", end: "2026-09-21" }),
       "/compliance?period=custom&start=2026-09-21&end=2026-09-21"
     );
+    assert.equal(
+      hrefWithPeriod("/scorecard?week=37", {
+        kind: "custom",
+        start: "2026-09-06",
+        end: "2026-09-12",
+      }),
+      "/scorecard?week=37&period=custom&start=2026-09-06&end=2026-09-12"
+    );
+    assert.equal(routeUsesPeriod("/bonus"), true);
   });
 });
 
@@ -80,17 +93,49 @@ describe("seed coverage", () => {
 
   it("aligns scorecard and compliance weeks with the schedule seeds", () => {
     assert.equal(
-      rangesOverlap(SCORECARD_COVERAGE.start, SCORECARD_COVERAGE.end, { kind: "today" }),
+      rangesOverlap(SCORECARD_COVERAGE[37].start, SCORECARD_COVERAGE[37].end, { kind: "today" }),
       false
     );
     assert.equal(
-      rangesOverlap(SCORECARD_COVERAGE.start, SCORECARD_COVERAGE.end, {
+      rangesOverlap(SCORECARD_COVERAGE[37].start, SCORECARD_COVERAGE[37].end, {
         kind: "custom",
         start: "2026-09-10",
         end: "2026-09-10",
       }),
       true
     );
+    assert.equal(
+      rangesOverlap(SCORECARD_COVERAGE[38].start, SCORECARD_COVERAGE[38].end, {
+        kind: "custom",
+        start: "2026-09-13",
+        end: "2026-09-19",
+      }),
+      true
+    );
+    assert.equal(
+      rangesOverlap(SCORECARD_COVERAGE[38].start, SCORECARD_COVERAGE[38].end, {
+        kind: "custom",
+        start: "2026-09-06",
+        end: "2026-09-12",
+      }),
+      false
+    );
+    assert.equal(SCORECARD_COVERAGE[38].start, BONUS_COVERAGE.start);
+    assert.equal(SCORECARD_COVERAGE[38].end, WORK_SUMMARY_COVERAGE[38].end);
+    assert.equal(
+      rangesOverlap(BONUS_COVERAGE.start, BONUS_COVERAGE.end, { kind: "today" }),
+      false
+    );
+    assert.equal(
+      workSummaryWeekForRange({ kind: "custom", start: "2026-09-13", end: "2026-09-19" }),
+      38
+    );
+    assert.equal(
+      workSummaryWeekForRange({ kind: "custom", start: "2026-09-06", end: "2026-09-12" }),
+      37
+    );
+    assert.equal(workSummaryWeekForRange({ kind: "week" }), null);
+    assert.equal(workSummaryWeekForRange({ kind: "today" }), 39);
 
     for (const week of [38, 39] as const) {
       const schedule = week === 38 ? scheduleWeek38 : scheduleWeek39;

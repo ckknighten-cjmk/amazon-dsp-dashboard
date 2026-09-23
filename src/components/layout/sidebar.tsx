@@ -7,6 +7,7 @@ import {
   ClipboardList,
   Gauge,
   LayoutDashboard,
+  Timer,
   Settings,
   ShieldCheck,
   Truck,
@@ -21,6 +22,7 @@ import { getStation } from "@/lib/data";
 const NAV = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
   { href: "/scorecard", label: "Scorecard", icon: Gauge },
+  { href: "/bonus", label: "10hr Bonus", icon: Timer },
   { href: "/routes", label: "Routes", icon: Waypoints },
   { href: "/drivers", label: "Drivers", icon: Users },
   { href: "/fleet", label: "Fleet", icon: Truck },

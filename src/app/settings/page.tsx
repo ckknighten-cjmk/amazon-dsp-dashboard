@@ -178,8 +178,10 @@ export default function SettingsPage() {
               )}
             </div>
             <div className="rounded-lg border border-dashed px-3 py-2 text-xs leading-relaxed text-muted-foreground">
-              Scorecard values are from DSP Console Performance Summary, Week 37
-              (Sep 6–12, 2026). Fantastic / Great / Fair / Poor bands on tiles are
+              Scorecard values are from DSP Console Performance Summary. Week 38
+              (Sep 13–19, 2026) is the default, overall 84 Fantastic. Week 37
+              (Sep 6–12, 2026), overall 85.8 Fantastic, stays on the scorecard
+              week switcher. Fantastic / Great / Fair / Poor bands on tiles are
               illustrative; badges match Amazon’s displayed standing. Routes are
               the Sep 21 Delivery Execution board. The associate roster unions
               Amazon schedule Weeks 38 and 39, merges that board by name, and

@@ -20,9 +20,41 @@ export const DELIVERY_COVERAGE = {
 } as const;
 
 export const SCORECARD_COVERAGE = {
-  start: "2026-09-06",
-  end: "2026-09-12",
-  label: "Seeded data: Week 37, Sep 6–12",
+  37: {
+    start: "2026-09-06",
+    end: "2026-09-12",
+    label: "Seeded data: Week 37, Sep 6–12",
+  },
+  38: {
+    start: "2026-09-13",
+    end: "2026-09-19",
+    label: "Seeded data: Week 38, Sep 13–19",
+  },
+} as const;
+
+/** Week 38 10-hour bonus routes. Dates are the route service days, not a single blob. */
+export const BONUS_COVERAGE = {
+  start: "2026-09-13",
+  end: "2026-09-19",
+  label: "Seeded data: Week 38 10-hour bonus, Sep 13–19",
+} as const;
+
+export const WORK_SUMMARY_COVERAGE = {
+  37: {
+    start: "2026-09-06",
+    end: "2026-09-12",
+    label: "Week 37 Work Summary, Sep 6–12",
+  },
+  38: {
+    start: "2026-09-13",
+    end: "2026-09-19",
+    label: "Week 38 Work Summary, Sep 13–19",
+  },
+  39: {
+    start: "2026-09-20",
+    end: "2026-09-26",
+    label: "Week 39 Work Summary, Sep 20–26",
+  },
 } as const;
 
 export const DVIC_COVERAGE = {
@@ -120,7 +152,7 @@ export function formatRangeLabel(range: DateRange) {
 
 export function routeUsesPeriod(pathname: string) {
   if (pathname === "/") return true;
-  return ["/scorecard", "/routes", "/drivers", "/fleet", "/incidents", "/compliance", "/payments"].some(
+  return ["/scorecard", "/bonus", "/routes", "/drivers", "/fleet", "/incidents", "/compliance", "/payments"].some(
     (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
   );
 }
@@ -224,6 +256,14 @@ export function invoiceServiceWindow(periodLabel: string): { start: string; end:
     start: iso(startYear, month, startDay),
     end: iso(year, nextMonth, endDay),
   };
+}
+
+/** The one Work Summary week inside a period, when the period does not span two weeks. */
+export function workSummaryWeekForRange(range: DateRange): 37 | 38 | 39 | null {
+  const hits = ([37, 38, 39] as const).filter((week) =>
+    rangesOverlap(WORK_SUMMARY_COVERAGE[week].start, WORK_SUMMARY_COVERAGE[week].end, range)
+  );
+  return hits.length === 1 ? hits[0] : null;
 }
 
 export function spanOfDates(dates: readonly string[]) {
