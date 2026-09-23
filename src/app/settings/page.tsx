@@ -181,7 +181,7 @@ export default function SettingsPage() {
               Scorecard values are from DSP Console Performance Summary, Week 37
               (Sep 6–12, 2026). Fantastic / Great / Fair / Poor bands on tiles are
               illustrative; badges match Amazon’s displayed standing. Routes and
-              roster are seeded from DSP Console Delivery Execution for Sep 21,
+              roster are seeded from DSP Console Delivery Execution for Sep 22,
               2026. Fleet and incidents remain mock.
             </div>
           </CardContent>

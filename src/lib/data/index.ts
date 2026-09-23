@@ -1,8 +1,8 @@
 /**
  * Data access layer for the DSP ops dashboard.
  *
- * Routes / associates / exceptions for 2026-09-21 come from the DSP Console
- * end-of-day Delivery Execution scrape in `src/lib/data/seed`. Scorecard is Week 37
+ * Routes / associates / exceptions for 2026-09-22 come from the DSP Console
+ * evening wrap Delivery Execution scrape in `src/lib/data/seed`. Scorecard is Week 37
  * Console Performance Summary. Payments are the 2026-09-21 Flex Payments
  * scrape. Week 39 compliance compares the ADP Group Timecard to the Amazon
  * schedule workbook. Fleet and incidents remain mock fixtures.

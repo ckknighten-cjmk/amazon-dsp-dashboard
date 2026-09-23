@@ -1,8 +1,8 @@
 /**
- * Maps the DSP Console Delivery Execution end-of-day scrape (2026-09-21, 10:12 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap scrape (2026-09-22, ~8:26 PM CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-09-21.csv`). Vehicle and on-time % stay null.
+ * `packages-exceptions-2026-09-22.csv`). Vehicle and on-time % stay null.
  */
 import type {
   DeliveryExecutionBoard,
@@ -12,7 +12,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-09-21.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-09-22.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];

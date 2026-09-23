@@ -39,7 +39,7 @@ export default function DriversPage() {
     <div>
       <PageHeader
         title="Associates"
-        description="Names from the DNA4 Delivery Execution board for Sep 21, 2026. Multi-transporter routes list every associate. Tenure, phone, and scorecard contribution were not on the Console."
+        description="Names from the DNA4 Delivery Execution board for Sep 22, 2026. Multi-transporter routes list every associate. Tenure, phone, and scorecard contribution were not on the Console."
       />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
