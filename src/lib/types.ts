@@ -113,6 +113,10 @@ export interface Vehicle {
   vin?: string;
   makeModel?: string;
   ownership?: string;
+  /** Body description from My vehicles, separate from the mapped type. */
+  consoleType?: string;
+  /** Registration or rental expiration when Console published one. */
+  expiration?: string | null;
   /** Console status text when the row came from My vehicles. */
   consoleStatus?: string;
   statusReason?: string | null;

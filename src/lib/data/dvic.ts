@@ -1,31 +1,56 @@
 import seed from "@/lib/data/seed/dvic-2026-09-23.json";
 import { findNewDamage, pairInspections } from "@/lib/dvic/compare";
-import type { DvicCapture, DvicDayPair, DvicInspection, DvicPhase, NewDamageAlert } from "@/lib/dvic/types";
+import type { DvicCapture, DvicDamage, DvicDayPair, DvicInspection, DvicPhase, NewDamageAlert } from "@/lib/dvic/types";
 
-const PHASES = new Set<DvicPhase>(["pre_trip", "post_trip", "avi_post_trip"]);
-
-function asPhase(value: string): DvicPhase {
-  if (PHASES.has(value as DvicPhase)) return value as DvicPhase;
-  throw new Error(`Unexpected DVIC phase: ${value}`);
-}
-
-type SeedInspection = {
-  id: string;
-  vehicleUnit: string;
-  serviceDate: string;
-  phase: string;
-  damage: Array<{ area: string; detail: string }>;
+type SeedDamage = { area?: unknown; detail?: unknown; description?: unknown };
+type SeedRow = {
+  id?: unknown;
+  vehicleUnit?: unknown;
+  unit?: unknown;
+  vehicle?: unknown;
+  serviceDate?: unknown;
+  date?: unknown;
+  damage?: unknown;
 };
 
-function inspections(): DvicInspection[] {
-  const rows = seed.inspections as SeedInspection[];
-  return rows.map((row) => ({
-    id: row.id,
-    vehicleUnit: row.vehicleUnit,
-    serviceDate: row.serviceDate,
-    phase: asPhase(row.phase),
-    damage: row.damage.map((item) => ({ area: item.area, detail: item.detail })),
-  }));
+function text(value: unknown) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function damageItems(value: unknown): DvicDamage[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((item) => {
+    if (!item || typeof item !== "object") return [];
+    const row = item as SeedDamage;
+    const area = text(row.area);
+    const detail = text(row.detail) || text(row.description);
+    if (!area && !detail) return [];
+    return [{ area, detail }];
+  });
+}
+
+function phaseRows(phase: DvicPhase, value: unknown, serviceDate: string): DvicInspection[] {
+  if (!Array.isArray(value)) return [];
+  return value.flatMap((item, index) => {
+    if (!item || typeof item !== "object") return [];
+    const row = item as SeedRow;
+    const id = text(row.id) || `${phase}-${index + 1}`;
+    const vehicleUnit = text(row.vehicleUnit) || text(row.unit) || text(row.vehicle);
+    return [
+      {
+        id,
+        vehicleUnit,
+        serviceDate: text(row.serviceDate) || text(row.date) || serviceDate,
+        phase,
+        damage: damageItems(row.damage),
+      },
+    ];
+  });
+}
+
+function stationCode(station: string) {
+  const match = station.match(/\bDNA4\b/);
+  return match?.[0] ?? station;
 }
 
 export interface DvicReport extends DvicCapture {
@@ -34,16 +59,27 @@ export interface DvicReport extends DvicCapture {
 }
 
 export function getDvicReport(): DvicReport {
-  const rows = inspections();
+  const serviceDate = seed.date;
+  const rows = [
+    ...phaseRows("pre_trip", seed.preTrip, serviceDate),
+    ...phaseRows("post_trip", seed.postTrip, serviceDate),
+    ...phaseRows("avi_post_trip", seed.aviPostTrip, serviceDate),
+  ];
+  const nav = seed.navPath[0] ?? "Administration → Fleet → Dashboard → Today's vehicle inspections";
+  const disclaimer = [seed.note, seed.newDamageComparisonFields].filter(Boolean).join(" ");
   return {
     source: seed.source,
-    nav: seed.nav,
-    stationCode: seed.station.code,
-    company: seed.station.dsp,
-    serviceDate: seed.serviceDate,
-    totals: seed.totals,
+    nav,
+    stationCode: stationCode(seed.station),
+    company: seed.station,
+    serviceDate,
+    totals: {
+      preTrip: seed.preTrip.length,
+      postTrip: seed.postTrip.length,
+      aviPostTrip: seed.aviPostTrip.length,
+    },
     inspections: rows,
-    disclaimer: seed.disclaimer,
+    disclaimer,
     pairs: pairInspections(rows),
     newDamage: findNewDamage(rows),
   };

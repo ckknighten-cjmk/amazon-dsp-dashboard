@@ -7,7 +7,7 @@
  * ADP-only names. Scorecard is Week 37 Console Performance Summary. Payments
  * are the 2026-09-21 Flex Payments scrape. Compliance compares ADP Group
  * Timecards to the Amazon schedule workbooks for Week 38 and Week 39. Fleet
- * and incidents remain mock fixtures until `amazon-fleet-dna4.json` has Console rows.
+ * is the DNA4 My vehicles capture. Incidents remain mock fixtures.
  */
 
 import type {
@@ -41,8 +41,8 @@ import { getComplianceReport, type ComplianceWeek } from "@/lib/data/compliance"
 import { getDvicReport } from "@/lib/data/dvic";
 
 /**
- * Yard roster. Uses `amazon-fleet-dna4.json` when that file has Console rows.
- * An empty list keeps the mock vans and does not invent VINs or plates.
+ * Yard roster from `amazon-fleet-dna4.json` (Administration → Fleet → My vehicles).
+ * An empty `vehicles` array would keep the mock vans. This capture has the DNA4 rows.
  */
 const fleetYard = loadYard();
 const vehicles: Vehicle[] = fleetYard.vehicles;

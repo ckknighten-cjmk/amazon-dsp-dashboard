@@ -23,6 +23,8 @@ test("the Sep 23 capture has no inspections and no invented damage", () => {
   assert.deepEqual(report.pairs, []);
   assert.deepEqual(report.newDamage, []);
   assert.match(report.nav, /Today's vehicle inspections/);
+  assert.match(report.disclaimer, /0 DVIC-Pre Trip/);
+  assert.match(report.source, /Today's vehicle inspections/);
 });
 
 test("new damage is post-trip detail missing from the pre-trip", () => {

@@ -1,23 +1,15 @@
 {
-  "source": "Amazon DSP Console Fleet Dashboard — Today's vehicle inspections",
-  "nav": "Administration → Fleet → Dashboard → Today's vehicle inspections",
-  "station": {
-    "code": "DNA4",
-    "dsp": "CJMK Inc."
-  },
-  "serviceDate": "2026-09-23",
-  "totals": {
-    "preTrip": 0,
-    "postTrip": 0,
-    "aviPostTrip": 0
-  },
-  "inspections": [],
-  "rowShape": {
-    "id": "stable id from the capture",
-    "vehicleUnit": "unit number from My vehicles",
-    "serviceDate": "YYYY-MM-DD",
-    "phase": "pre_trip | post_trip | avi_post_trip",
-    "damage": [{ "area": "body area from the checklist", "detail": "what the checklist said" }]
-  },
-  "disclaimer": "This capture published dashboard totals only: 0 pre-trip, 0 post-trip, and 0 AVI post-trip. No inspection rows or damage items were included, so new damage is not scored. Replace inspections with Console rows. Do not invent damage."
+  "source": "Amazon Logistics DSP Console > Administration > Fleet > Dashboard > Today's vehicle inspections",
+  "capturedAt": "2026-09-23T00:33:00-05:00",
+  "station": "DNA4 / Memphis (DNA4)- Amazon.com",
+  "date": "2026-09-23",
+  "preTrip": [],
+  "postTrip": [],
+  "aviPostTrip": [],
+  "newDamageComparisonFields": "Not present/assessable: today's dashboard counts were zero and no separate DVIC record page or new-damage comparison columns were exposed; the Issues table showed defect descriptions only.",
+  "note": "Dashboard showed 0 DVIC-Pre Trip, 0 DVIC-Post Trip, and 0 AVI-Post Trip for today; no sample records were available. No separate DVIC page was exposed in the visible navigation.",
+  "navPath": [
+    "Administration > Fleet > Dashboard > Today's vehicle inspections",
+    "Administration > Fleet > Issues (inspection defects list)"
+  ]
 }

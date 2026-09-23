@@ -46,7 +46,7 @@ export function DvicBoard() {
       {report.pairs.length === 0 ? (
         <EmptyState
           title="No inspections to pair"
-          description="This capture has no checklist rows, so there is no pre-trip or post-trip damage to compare. Drop Console rows into src/lib/data/seed/dvic-2026-09-23.json (vehicleUnit, serviceDate, phase, and damage area plus detail). Nothing was filled in."
+          description="Today's vehicle inspections listed no pre-trip, post-trip, or AVI post-trip records, so no damage was compared."
           className="py-8"
         />
       ) : (

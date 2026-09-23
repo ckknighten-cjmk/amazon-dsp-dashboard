@@ -62,9 +62,12 @@ test("other dataset exports stay on seeded values", () => {
   assert.doesNotMatch(dvic.csv, /dent|scratch|VIN/i);
 
   const fleet = vehiclesCsv();
-  assert.equal(fleet.filename, "fleet-vehicles-mock.csv");
-  assert.equal(csvLines(fleet.csv).length - 1, 22);
-  assert.match(fleet.csv, /Mock yard roster/);
+  assert.equal(fleet.filename, "fleet-vehicles-dna4.csv");
+  assert.equal(csvLines(fleet.csv).length - 1, 56);
+  assert.match(fleet.csv, /Amazon DSP Console My vehicles/);
+  assert.match(fleet.csv, /3C6MRVJG5ME549360/);
+  assert.match(fleet.csv, /CP81075/);
+  assert.doesNotMatch(fleet.csv, /EDV-4401|TN 441-CJM|Mock yard roster/);
 
   const exceptions = exceptionsCsv();
   assert.equal(exceptions.filename, "package-exceptions-2026-09-21.csv");

@@ -15,18 +15,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getRoute, getVehicles } from "@/lib/data";
+import { getFleetYard, getRoute, getVehicles } from "@/lib/data";
 import { vehiclesCsv } from "@/lib/export/datasets";
-import {
-  formatDate,
-  formatMileage,
-  vehicleStatusLabel,
-  vehicleTypeLabel,
-} from "@/lib/format";
+import { formatMileage, vehicleStatusLabel, vehicleTypeLabel } from "@/lib/format";
 import type { VehicleStatus, VehicleType } from "@/lib/types";
 
 export default function FleetPage() {
   const vehicles = getVehicles();
+  const yard = getFleetYard();
   const fleetExport = vehiclesCsv();
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<VehicleStatus | "all">("all");
@@ -38,7 +34,17 @@ export default function FleetPage() {
       if (status !== "all" && v.status !== status) return false;
       if (type !== "all" && v.type !== type) return false;
       if (!q) return true;
-      return [v.unitId, v.plate, v.notes, vehicleTypeLabel[v.type]]
+      return [
+        v.unitId,
+        v.plate,
+        v.vin,
+        v.makeModel,
+        v.ownership,
+        v.consoleStatus,
+        v.consoleType,
+        v.notes,
+        vehicleTypeLabel[v.type],
+      ]
         .join(" ")
         .toLowerCase()
         .includes(q);
@@ -49,7 +55,11 @@ export default function FleetPage() {
     <div>
       <PageHeader
         title="Fleet"
-        description="This table is still the 22-van mock. Drop the DNA4 export from Administration → Fleet → My vehicles into src/lib/data/seed/amazon-fleet-dna4.json (unit, plate, VIN, make/model, ownership, type, status). Week 38/39 schedules and the Sep 21 board do not name vans, so those fields are not filled in here. Year and mileage stay blank on Console rows."
+        description={
+          yard.origin === "console"
+            ? `DNA4 My vehicles from ${yard.nav}${yard.capturedAt ? `, captured ${yard.capturedAt}` : ""}. ${vehicles.length} vehicles. Year and mileage were blank in that export, so those cells stay empty. A blank unit is shown as an em dash; the plate is the identifier Console published.`
+            : "This table is the mock yard. It is used only when amazon-fleet-dna4.json has no vehicles."
+        }
         actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
       />
 
@@ -59,7 +69,7 @@ export default function FleetPage() {
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search unit ID or plate…"
+          placeholder="Search unit, plate, or VIN…"
           className="max-w-xs"
           aria-label="Search vehicles"
         />
@@ -106,10 +116,11 @@ export default function FleetPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Unit</TableHead>
+                <TableHead>Make/model</TableHead>
                 <TableHead>Type</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-right">Mileage</TableHead>
-                <TableHead>Last inspection</TableHead>
+                <TableHead>Last route</TableHead>
                 <TableHead>Assigned today</TableHead>
                 <TableHead>Notes</TableHead>
               </TableRow>
@@ -122,19 +133,28 @@ export default function FleetPage() {
                 return (
                   <TableRow key={van.id}>
                     <TableCell>
-                      <p className="font-medium font-mono text-sm">{van.unitId}</p>
+                      <p className="font-medium font-mono text-sm">{van.unitId || "—"}</p>
                       <p className="text-xs text-muted-foreground">
                         {van.year ?? "—"} · {van.plate}
                       </p>
                     </TableCell>
+                    <TableCell>
+                      <p>{van.makeModel ?? "—"}</p>
+                      {van.vin ? (
+                        <p className="font-mono text-xs text-muted-foreground">{van.vin}</p>
+                      ) : null}
+                    </TableCell>
                     <TableCell>{vehicleTypeLabel[van.type]}</TableCell>
                     <TableCell>
                       <VehicleStatusBadge status={van.status} />
+                      {van.consoleStatus ? (
+                        <p className="mt-1 text-xs text-muted-foreground">{van.consoleStatus}</p>
+                      ) : null}
                     </TableCell>
                     <TableCell className="text-right tabular-nums">
                       {van.mileage == null ? "—" : formatMileage(van.mileage)}
                     </TableCell>
-                    <TableCell>{van.lastInspection ? formatDate(van.lastInspection) : "—"}</TableCell>
+                    <TableCell>{van.lastRouteCompleted ?? "—"}</TableCell>
                     <TableCell>
                       {route ? (
                         <Link
@@ -147,8 +167,11 @@ export default function FleetPage() {
                         "—"
                       )}
                     </TableCell>
-                    <TableCell className="max-w-56 truncate text-muted-foreground">
-                      {van.notes ?? "—"}
+                    <TableCell className="max-w-56 text-muted-foreground">
+                      <p className="truncate">{van.notes ?? "—"}</p>
+                      {van.expiration ? (
+                        <p className="text-xs">Expires {van.expiration}</p>
+                      ) : null}
                     </TableCell>
                   </TableRow>
                 );
