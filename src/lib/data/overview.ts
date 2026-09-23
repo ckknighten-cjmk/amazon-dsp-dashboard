@@ -152,10 +152,10 @@ export function getOverview(range: DateRange): OverviewSnapshot {
     asOfLabel:
       range === "today"
         ? `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}`
-        : "Live Sep 21 only — no other days in this Console pull",
+        : "Live Sep 22 only — no other days in this Console pull",
     kpis: todayKpis,
     packagesByDay: [
-      { label: "Mon 21", delivered: deliveredToday, assigned: assignedToday },
+      { label: "Tue 22", delivered: deliveredToday, assigned: assignedToday },
     ],
     routeStatusCounts: statusCounts(),
     alerts,

@@ -27,7 +27,7 @@ export function RouteDetail({ route }: { route: Route }) {
             {route.code}
           </h2>
           <p className="text-sm text-muted-foreground">
-            {route.stationCode} Memphis · DSP Console Delivery Execution · Sep 21, 2026
+            {route.stationCode} Memphis · DSP Console Delivery Execution · Sep 22, 2026
           </p>
         </div>
         <RouteStatusBadge status={route.status} />
@@ -79,7 +79,7 @@ export function RouteDetail({ route }: { route: Route }) {
         {exceptions.length === 0 ? (
           <EmptyState
             title="No exception packages"
-            description="This route had no rows in the Sep 21 exception Packages CSV."
+            description="This route had no rows in the Sep 22 exception Packages CSV."
             className="py-8"
           />
         ) : (

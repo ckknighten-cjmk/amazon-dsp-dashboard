@@ -16,7 +16,7 @@ import type {
 export const OPS_TIMEZONE = "America/Chicago";
 
 /** Frozen station clock so the demo stays consistent (CDT wall time). */
-export const MOCK_NOW = parseISO("2026-09-21T22:12:00");
+export const MOCK_NOW = parseISO("2026-09-22T20:26:00");
 
 /** Clock label for a Console capture instant, rendered in the station timezone. */
 export function formatConsoleCapture(iso: string) {
@@ -58,7 +58,7 @@ export function formatClock() {
 }
 
 export function formatRangeLabel(range: DateRange) {
-  return range === "today" ? "Today · Mon Sep 21" : "This week · Sep 15–21";
+  return range === "today" ? "Today · Tue Sep 22" : "This week · Sep 16–22";
 }
 
 export function formatNumber(value: number) {

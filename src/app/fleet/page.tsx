@@ -45,7 +45,7 @@ export default function FleetPage() {
     <div>
       <PageHeader
         title="Fleet"
-        description="Yard roster is still mock. Console Delivery Execution for Sep 21 did not include vehicle IDs, so vans are not linked to live routes."
+        description="Yard roster is still mock. Console Delivery Execution for Sep 22 did not include vehicle IDs, so vans are not linked to live routes."
       />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
