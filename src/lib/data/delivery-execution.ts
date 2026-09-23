@@ -35,12 +35,28 @@ function slugRoute(code: string) {
   return `rt-${code.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
 }
 
-function initials(name: string) {
+export function initials(name: string) {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return "?";
   if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
   return `${parts[0][0]}${parts[parts.length - 1][0]}`.toUpperCase();
 }
+
+function readCount(value: unknown): number | null {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (Array.isArray(value)) return value.length;
+  return null;
+}
+
+type SeedExtras = {
+  totals: { rescueActions?: unknown };
+  exceptions?: { rescueActions?: unknown };
+};
+
+const seedExtras = seed as typeof seed & SeedExtras;
+const rescueActions = readCount(
+  seedExtras.exceptions?.rescueActions ?? seedExtras.totals.rescueActions
+);
 
 function titleStatus(raw: string): PackageExceptionStatus {
   const allowed: PackageExceptionStatus[] = [
@@ -69,6 +85,8 @@ export function associateId(name: string) {
 
 export const routes: Route[] = (seed.routes as SeedRoute[]).map((row) => {
   const associateIds = row.associates.map(associateId);
+  const receivedRescue = associateIds.length > 1;
+  const rescueDriverIds = receivedRescue ? associateIds.slice(1) : [];
   return {
     id: slugRoute(row.routeCode),
     code: row.routeCode,
@@ -76,6 +94,9 @@ export const routes: Route[] = (seed.routes as SeedRoute[]).map((row) => {
     wave: null,
     driverId: associateIds[0] ?? null,
     associateIds,
+    receivedRescue,
+    rescueDriverIds,
+    rescueDriverId: rescueDriverIds[0],
     vehicleId: null,
     packageCount: row.packagesPlanned,
     packagesDelivered: row.packagesDelivered,
@@ -122,6 +143,7 @@ export const deliveryBoard: DeliveryExecutionBoard = {
     },
     workHourRisk: seed.totals.workHourRisk,
     multiTransporter: seed.totals.multiTransporter,
+    rescueActions,
     unknownStops: seed.totals.unknownStops,
     onBreak: seed.totals.onBreak,
     noBreaksTaken: seed.totals.noBreaksTaken,
@@ -200,6 +222,24 @@ const EXPORT_CHIPS: Array<{
   { status: "Returned to station", chip: "returnedToStation", label: "RTS" },
   { status: "Pickup failed", chip: "pickupFailed", label: "pickup failed" },
 ];
+
+/**
+ * Multi-associate Delivery Execution routes are treated as rescued.
+ * The first listed associate is primary. The rest are rescuers.
+ * Sep 21 has a multi-transporter total and no rescueActions list, so this
+ * is not Amazon’s official rescue flag.
+ */
+export const RESCUE_RULE =
+  "Rescue: Yes means the route listed more than one associate. The first associate is primary and the others are rescuers. This follows the multi-transporter crew on the board. It is not Amazon’s rescueActions flag unless that list is in the capture.";
+
+export function rescueBoardNote() {
+  const inferred = routes.filter((route) => route.receivedRescue).length;
+  const actions =
+    deliveryBoard.totals.rescueActions == null
+      ? "This capture has no rescueActions list, so the column is not Amazon’s official rescue flag."
+      : `Console rescueActions count is ${deliveryBoard.totals.rescueActions}.`;
+  return `${RESCUE_RULE} Inferred rescues on this board: ${inferred}. Console multi-transporter total: ${deliveryBoard.totals.multiTransporter}. ${actions}`;
+}
 
 /** Console board chips vs the Packages CSV. Only the statuses that disagree are called out. */
 export function exceptionExportNote() {

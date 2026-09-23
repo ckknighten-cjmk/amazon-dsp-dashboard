@@ -15,7 +15,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ExportCsvButton } from "@/components/export-csv-button";
 import { matchMethodLabel } from "@/lib/compliance/names";
+import { complianceCombinedCsv, complianceViewCsv } from "@/lib/export/compliance-csv";
 import type {
   BreaksSummary,
   ComplianceReport,
@@ -212,6 +214,7 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
             <option value="all">All unmatched ADP</option>
           </select>
         ) : null}
+        <ComplianceExports report={report} view={view} />
       </div>
 
       {view === "missing" ? (
@@ -252,6 +255,33 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
         />
       ) : null}
     </div>
+  );
+}
+
+function ComplianceExports({
+  report,
+  view,
+}: {
+  report: ComplianceReport;
+  view: View;
+}) {
+  const current = complianceViewCsv(report, view);
+  const combined = complianceCombinedCsv(report);
+  const currentLabel =
+    view === "missing"
+      ? "Export missing punches"
+      : view === "over12"
+        ? "Export over 12"
+        : view === "over60"
+          ? "Export over 60"
+          : view === "meals"
+            ? "Export meals"
+            : "Export unmatched";
+  return (
+    <>
+      <ExportCsvButton filename={current.filename} csv={current.csv} label={currentLabel} />
+      <ExportCsvButton filename={combined.filename} csv={combined.csv} label="Export week" />
+    </>
   );
 }
 

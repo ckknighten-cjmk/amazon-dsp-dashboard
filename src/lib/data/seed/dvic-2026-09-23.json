@@ -1,0 +1,15 @@
+{
+  "source": "Amazon Logistics DSP Console > Administration > Fleet > Dashboard > Today's vehicle inspections",
+  "capturedAt": "2026-09-23T00:33:00-05:00",
+  "station": "DNA4 / Memphis (DNA4)- Amazon.com",
+  "date": "2026-09-23",
+  "preTrip": [],
+  "postTrip": [],
+  "aviPostTrip": [],
+  "newDamageComparisonFields": "Not present/assessable: today's dashboard counts were zero and no separate DVIC record page or new-damage comparison columns were exposed; the Issues table showed defect descriptions only.",
+  "note": "Dashboard showed 0 DVIC-Pre Trip, 0 DVIC-Post Trip, and 0 AVI-Post Trip for today; no sample records were available. No separate DVIC page was exposed in the visible navigation.",
+  "navPath": [
+    "Administration > Fleet > Dashboard > Today's vehicle inspections",
+    "Administration > Fleet > Issues (inspection defects list)"
+  ]
+}
