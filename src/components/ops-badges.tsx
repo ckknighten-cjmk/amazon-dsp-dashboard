@@ -13,6 +13,7 @@ import {
   stopStatusLabel,
   vehicleStatusLabel,
 } from "@/lib/format";
+import { RECONCILE_STATUS_LABEL, type ReconcileStatus } from "@/lib/payments/types";
 import type {
   DriverStatus,
   IncidentSeverity,
@@ -219,6 +220,21 @@ export function ScoreStatusBadge({
     );
   }
   return <ScoreTierBadge tier={status} size={size} />;
+}
+
+export function ReconcileStatusBadge({ status }: { status: ReconcileStatus }) {
+  const styles: Record<ReconcileStatus, string> = {
+    match:
+      "border-emerald-400/50 bg-emerald-500/10 text-emerald-800 dark:border-emerald-500/40 dark:text-emerald-300",
+    mismatch:
+      "border-amber-400/60 bg-amber-500/15 text-amber-950 dark:border-amber-500/50 dark:text-amber-200",
+    not_comparable: "border-border bg-muted text-muted-foreground",
+  };
+  return (
+    <Badge variant="outline" className={cn(pill, "normal-case", styles[status])}>
+      {RECONCILE_STATUS_LABEL[status]}
+    </Badge>
+  );
 }
 
 export function InvoiceStatusBadge({ status }: { status: InvoiceStatus }) {

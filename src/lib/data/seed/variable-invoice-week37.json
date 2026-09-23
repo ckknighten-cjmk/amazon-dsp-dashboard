@@ -1,0 +1,563 @@
+{
+  "station": "DNA4",
+  "invoiceType": "Variable invoice",
+  "invoiceId": "INV-GA6T0P-0000000614",
+  "invoiceKey": "45af43cf-b497-4028-99be-c9814f01070c",
+  "period": "Sep 6 - Sep 12, 2026",
+  "week": "Week 37",
+  "status": "New",
+  "disputeWindowCloses": "Sep 30, 2026 at 09:37 AM CDT",
+  "total": "$88,556.70",
+  "capturedAt": "2026-09-23T06:46:51.183332Z",
+  "sourceUrl": "https://logistics.amazon.com/flexpayments/simpson/flexpro/invoices/45af43cf-b497-4028-99be-c9814f01070c",
+  "navPath": "Payments > Invoices > Variable invoice > Week 37",
+  "pdfExport": "/workspace/dsp-live/payments/variable-invoice-week37.pdf",
+  "sections": [
+    {
+      "name": "Routes",
+      "quantityLabel": "routes",
+      "quantity": 240,
+      "total": "$78,886.00",
+      "lineItems": [
+        {
+          "date": "Sep 06, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 06, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 30,
+          "rate": "$325.00",
+          "amount": "$9,750.00"
+        },
+        {
+          "date": "Sep 07, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 8 Hours",
+          "quantity": 1,
+          "rate": "$260.00",
+          "amount": "$260.00"
+        },
+        {
+          "date": "Sep 07, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 07, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 07, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 07, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 30,
+          "rate": "$325.00",
+          "amount": "$9,750.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Nursery Route Level 2 - Block of 8 Hours",
+          "quantity": 1,
+          "rate": "$260.00",
+          "amount": "$260.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$325.00",
+          "amount": "$650.00"
+        },
+        {
+          "date": "Sep 08, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 30,
+          "rate": "$325.00",
+          "amount": "$9,750.00"
+        },
+        {
+          "date": "Sep 09, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 09, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 09, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 09, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - w/ Ride Along - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$579.00",
+          "amount": "$579.00"
+        },
+        {
+          "date": "Sep 09, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 31,
+          "rate": "$325.00",
+          "amount": "$10,075.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Nursery Route Level 1 - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - w/ Ride Along - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$579.00",
+          "amount": "$579.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel - On-Road Experience: Driver - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$579.00",
+          "amount": "$579.00"
+        },
+        {
+          "date": "Sep 10, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 30,
+          "rate": "$325.00",
+          "amount": "$9,750.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Nursery Route Level 1 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Nursery Route Level 3 - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Nursery Route Level 3 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Standard Parcel - On-Road Experience: Driver - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$579.00",
+          "amount": "$579.00"
+        },
+        {
+          "date": "Sep 11, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 26,
+          "rate": "$325.00",
+          "amount": "$8,450.00"
+        },
+        {
+          "date": "Sep 12, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 12, 2026",
+          "label": "Nursery Route Level 3 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$325.00",
+          "amount": "$650.00"
+        },
+        {
+          "date": "Sep 12, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 12, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 12, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$325.00",
+          "amount": "$325.00"
+        },
+        {
+          "date": "Sep 12, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 27,
+          "rate": "$325.00",
+          "amount": "$8,775.00"
+        }
+      ]
+    },
+    {
+      "name": "Training sessions",
+      "quantityLabel": "sessions",
+      "quantity": 9,
+      "total": "$2,008.80",
+      "lineItems": [
+        {
+          "label": "Training - Block of 8 hours",
+          "date": "Mon, Sep 07",
+          "quantity": 2,
+          "rate": "$223.20",
+          "amount": "$446.40"
+        },
+        {
+          "label": "Training - Block of 8 hours",
+          "date": "Tue, Sep 08",
+          "quantity": 2,
+          "rate": "$223.20",
+          "amount": "$446.40"
+        },
+        {
+          "label": "Training - Block of 8 hours",
+          "date": "Wed, Sep 09",
+          "quantity": 1,
+          "rate": "$223.20",
+          "amount": "$223.20"
+        },
+        {
+          "label": "Training - Block of 8 hours",
+          "date": "Thu, Sep 10",
+          "quantity": 3,
+          "rate": "$223.20",
+          "amount": "$669.60"
+        },
+        {
+          "label": "Training - Block of 8 hours",
+          "date": "Fri, Sep 11",
+          "quantity": 1,
+          "rate": "$223.20",
+          "amount": "$223.20"
+        }
+      ]
+    },
+    {
+      "name": "Late cancellations",
+      "quantityLabel": "cancellations",
+      "quantity": 5,
+      "total": "$1,000.00",
+      "lineItems": [
+        {
+          "label": "AMZL Late Cancel- weekend",
+          "serviceType": "Standard Parcel Electric - Rivian MEDIUM",
+          "date": "Sun, Sep 06",
+          "quantity": 1,
+          "rate": "$200.00",
+          "amount": "$200.00"
+        },
+        {
+          "label": "AMZL Late Cancel- weekday",
+          "serviceType": "Standard Parcel Electric - Rivian MEDIUM",
+          "date": "Fri, Sep 11",
+          "quantity": 3,
+          "rate": "$200.00",
+          "amount": "$600.00"
+        },
+        {
+          "label": "AMZL Late Cancel- weekend",
+          "serviceType": "Standard Parcel Electric - Rivian MEDIUM",
+          "date": "Sat, Sep 12",
+          "quantity": 1,
+          "rate": "$200.00",
+          "amount": "$200.00"
+        }
+      ]
+    },
+    {
+      "name": "Unplanned delay",
+      "quantityLabel": "delays",
+      "quantity": 0,
+      "total": "$12.02",
+      "lineItems": [
+        {
+          "label": "Unplanned Delay",
+          "date": "Mon, Sep 07",
+          "quantity": 0.37,
+          "rate": "$32.49",
+          "amount": "$12.02"
+        }
+      ]
+    },
+    {
+      "name": "Packages",
+      "quantityLabel": "packages",
+      "quantity": 55428,
+      "total": "$6,649.88",
+      "lineItems": [
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 5333,
+          "rate": "$0.06",
+          "amount": "$319.98"
+        },
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 7942,
+          "rate": "$0.06",
+          "amount": "$476.52"
+        },
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 8770,
+          "rate": "$0.06",
+          "amount": "$526.20"
+        },
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 8668,
+          "rate": "$0.06",
+          "amount": "$520.08"
+        },
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 8982,
+          "rate": "$0.06",
+          "amount": "$538.92"
+        },
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 7824,
+          "rate": "$0.06",
+          "amount": "$469.44"
+        },
+        {
+          "label": "Payment for branding - deliveries",
+          "quantity": 7885,
+          "rate": "$0.06",
+          "amount": "$473.10"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 2,
+          "rate": "$0.05",
+          "amount": "$0.10"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 5333,
+          "rate": "$0.06",
+          "amount": "$319.98"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 5,
+          "rate": "$0.05",
+          "amount": "$0.25"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 7942,
+          "rate": "$0.06",
+          "amount": "$476.52"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 1,
+          "rate": "$0.10",
+          "amount": "$0.10"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 3,
+          "rate": "$0.05",
+          "amount": "$0.15"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 8770,
+          "rate": "$0.06",
+          "amount": "$526.20"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 2,
+          "rate": "$0.05",
+          "amount": "$0.10"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 8668,
+          "rate": "$0.06",
+          "amount": "$520.08"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 3,
+          "rate": "$0.10",
+          "amount": "$0.30"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 4,
+          "rate": "$0.05",
+          "amount": "$0.20"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 8982,
+          "rate": "$0.06",
+          "amount": "$538.92"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 3,
+          "rate": "$0.05",
+          "amount": "$0.15"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 7824,
+          "rate": "$0.06",
+          "amount": "$469.44"
+        },
+        {
+          "label": "Per piece payment - pickups",
+          "quantity": 1,
+          "rate": "$0.05",
+          "amount": "$0.05"
+        },
+        {
+          "label": "Per piece payment - deliveries",
+          "quantity": 7885,
+          "rate": "$0.06",
+          "amount": "$473.10"
+        }
+      ]
+    }
+  ],
+  "reconciliation": {
+    "sectionTotalsSum": "$88,556.70",
+    "matchesInvoiceTotal": true,
+    "workSummaryWeek37Packages": 5335,
+    "workSummaryWeek37DeliveredPackages": 5333,
+    "workSummaryWeek37CompletedRoutes": 31,
+    "atAGlance": "Invoice section totals sum to the invoice total, but Work Summary counts do not match invoice package/routing quantities at a glance."
+  },
+  "invoiceListingObservation": {
+    "latestVariableListed": "Week 37",
+    "latestVariableAmount": "$88,556.70",
+    "otherVariableListed": "Week 36 ($88,073.23)",
+    "week38OrWeek39VariableListed": false,
+    "note": "Payments invoice list showed Week 37 as the latest variable weekly invoice; Week 38 and Week 39 variable invoices were not listed at capture time."
+  }
+}

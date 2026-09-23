@@ -1,0 +1,26 @@
+{
+  "station": "DNA4",
+  "serviceArea": "Memphis (DNA4)- Amazon.com",
+  "week": 39,
+  "period": "Sep 20 - Sep 26, 2026",
+  "capturedAt": "2026-09-23T06:46:51.183332Z",
+  "sourceUrl": "https://logistics.amazon.com/harmony/v2/#!/dsp-portal?serviceAreaId=e28a313f-a022-4f6f-9295-11641bebe616&providerId=amzn1.flex.provider.v1.f2d1e302-53ae-44ba-8c78-8feaac249398&localDate=2026-09-20",
+  "navPath": "Work Summary Tool > Memphis (DNA4)- Amazon.com > weekly view",
+  "exportFiles": {
+    "zip": "/workspace/dsp-live/payments/work-summary-week39.zip",
+    "weeklyCsv": "/workspace/dsp-live/payments/work-summary-week39.csv",
+    "serviceDetailsCsv": "/workspace/dsp-live/payments/work-summary-week39-service-details.csv",
+    "packagesCsv": "/workspace/dsp-live/payments/work-summary-week39-packages.csv"
+  },
+  "summary": {
+    "totalPackages": 0,
+    "deliveredPackages": 0,
+    "pickupPackages": 0,
+    "completedRoutes": 0,
+    "miles": 0,
+    "unplannedDelayCount": 0
+  },
+  "routeSummaries": [],
+  "rates": "Work Summary UI does not expose dollar rates in the weekly summary; route/service labels include block duration. See variable-invoice-week37.json for invoice rates.",
+  "notes": "Week 39 was present in Work Summary, but the captured view returned no route rows and all displayed summary metrics were zero (week in progress)."
+}

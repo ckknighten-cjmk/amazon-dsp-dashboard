@@ -5,9 +5,11 @@
  * end-of-day Delivery Execution scrape in `src/lib/data/seed`. The associate
  * roster unions Amazon schedule Weeks 38 and 39, then merges that board and
  * ADP-only names. Scorecard is Week 37 Console Performance Summary. Payments
- * are the 2026-09-21 Flex Payments scrape. Compliance compares ADP Group
- * Timecards to the Amazon schedule workbooks for Week 38 and Week 39. Fleet
- * is the DNA4 My vehicles capture. Incidents remain mock fixtures.
+ * are the 2026-09-21 Flex Payments scrape. Week 37 variable section totals are
+ * the Sep 23 variable invoice. Work Summary weeks 37–39 reconcile against that
+ * invoice when it is listed. Compliance compares ADP Group Timecards to the
+ * Amazon schedule workbooks for Week 38 and Week 39. Fleet is the DNA4 My
+ * vehicles capture. Incidents remain mock fixtures.
  */
 
 import type {
@@ -39,6 +41,8 @@ import { getOverview as buildOverview } from "@/lib/data/overview";
 import { getPaymentsSnapshot } from "@/lib/data/payments";
 import { getComplianceReport, type ComplianceWeek } from "@/lib/data/compliance";
 import { getDvicReport } from "@/lib/data/dvic";
+import { getWeekReconcile, parseReconcileWeek } from "@/lib/payments/reconcile";
+import type { ReconcileWeek, WeekReconcile } from "@/lib/payments/types";
 
 /**
  * Yard roster from `amazon-fleet-dna4.json` (Administration → Fleet → My vehicles).
@@ -63,6 +67,7 @@ export interface DataSource {
   getDeliveryBoard(): DeliveryExecutionBoard;
   getPayments(): PaymentsSnapshot;
   getCompliance(week?: ComplianceWeek): ComplianceReport;
+  getReconcile(week?: ReconcileWeek): WeekReconcile;
 }
 
 const driverById = new Map<string, Driver>();
@@ -89,6 +94,7 @@ export const mockDataSource: DataSource = {
   getDeliveryBoard: () => deliveryBoard,
   getPayments: () => getPaymentsSnapshot(),
   getCompliance: (week) => getComplianceReport(week),
+  getReconcile: (week) => getWeekReconcile(week ?? 37),
 };
 
 /** Active source. Replace with an API-backed implementation later. */
@@ -111,6 +117,9 @@ export const getExceptionsForRoute = (routeId: string) =>
 export const getDeliveryBoard = () => source.getDeliveryBoard();
 export const getPayments = () => source.getPayments();
 export const getCompliance = (week?: ComplianceWeek) => source.getCompliance(week);
+export const getReconcile = (week?: ReconcileWeek) => source.getReconcile(week);
 export { getDvicReport };
 export { parseComplianceWeek, COMPLIANCE_WEEKS } from "@/lib/data/compliance";
+export { parseReconcileWeek };
 export type { ComplianceWeek } from "@/lib/data/compliance";
+export type { ReconcileWeek } from "@/lib/payments/types";

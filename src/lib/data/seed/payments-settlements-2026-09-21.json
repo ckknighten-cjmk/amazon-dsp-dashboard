@@ -110,7 +110,7 @@
         "amount": 78886.0
       },
       {
-        "label": "Training",
+        "label": "Training sessions",
         "qty": 9,
         "amount": 2008.8
       },
@@ -121,11 +121,11 @@
       },
       {
         "label": "Unplanned delay",
-        "qty": null,
+        "qty": 0,
         "amount": 12.02
       },
       {
-        "label": "Packages/per-piece/branding",
+        "label": "Packages",
         "qty": 55428,
         "amount": 6649.88
       }

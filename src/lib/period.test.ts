@@ -54,6 +54,10 @@ describe("period bounds", () => {
       "/compliance?week=39&period=week"
     );
     assert.equal(
+      hrefWithPeriod("/payments?week=38", { kind: "today" }),
+      "/payments?week=38&period=today"
+    );
+    assert.equal(
       hrefWithPeriod("/compliance", { kind: "custom", start: "2026-09-21", end: "2026-09-21" }),
       "/compliance?period=custom&start=2026-09-21&end=2026-09-21"
     );
