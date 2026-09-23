@@ -1,6 +1,5 @@
 import { differenceInMonths, format as formatDateFns, parseISO } from "date-fns";
 import type {
-  DateRange,
   DriverStatus,
   IncidentSeverity,
   IncidentStatus,
@@ -57,9 +56,7 @@ export function formatClock() {
   return formatDateFns(MOCK_NOW, "EEE, MMM d · h:mm a");
 }
 
-export function formatRangeLabel(range: DateRange) {
-  return range === "today" ? "Today · Mon Sep 21" : "This week · Sep 15–21";
-}
+export { formatRangeLabel } from "@/lib/period";
 
 export function formatNumber(value: number) {
   return new Intl.NumberFormat("en-US").format(value);

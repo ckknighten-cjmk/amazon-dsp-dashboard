@@ -2,6 +2,7 @@ import type { Alert, DateRange, Kpi, OverviewSnapshot, Route, RouteStatus } from
 import { deliveryBoard, routes } from "@/lib/data/delivery-execution";
 import { consoleDrivers } from "@/lib/data/delivery-execution";
 import { formatConsoleCapture, formatConsoleDay } from "@/lib/format";
+import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
 
 const t = deliveryBoard.totals;
 const deliveredToday = t.packagesDelivered;
@@ -147,16 +148,22 @@ const todayKpis: Kpi[] = [
 ];
 
 export function getOverview(range: DateRange): OverviewSnapshot {
+  const covered = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
+  if (!covered) {
+    return {
+      range,
+      asOfLabel: `No Delivery Execution capture in this period. ${DELIVERY_COVERAGE.label}.`,
+      kpis: [],
+      packagesByDay: [],
+      routeStatusCounts: [],
+      alerts: [],
+    };
+  }
   return {
     range,
-    asOfLabel:
-      range === "today"
-        ? `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}`
-        : "Live Sep 21 only — no other days in this Console pull",
+    asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
     kpis: todayKpis,
-    packagesByDay: [
-      { label: "Mon 21", delivered: deliveredToday, assigned: assignedToday },
-    ],
+    packagesByDay: [{ label: "Mon 21", delivered: deliveredToday, assigned: assignedToday }],
     routeStatusCounts: statusCounts(),
     alerts,
   };

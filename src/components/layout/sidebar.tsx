@@ -14,6 +14,7 @@ import {
   Wallet,
   Waypoints,
 } from "lucide-react";
+import { useDateRange } from "@/components/layout/date-range-context";
 import { cn } from "@/lib/utils";
 import { getStation } from "@/lib/data";
 
@@ -31,6 +32,7 @@ const NAV = [
 
 export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
+  const { hrefWithPeriod } = useDateRange();
   const station = getStation();
 
   return (
@@ -59,7 +61,7 @@ export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
           return (
             <Link
               key={item.href}
-              href={item.href}
+              href={hrefWithPeriod(item.href)}
               onClick={onNavigate}
               aria-current={active ? "page" : undefined}
               className={cn(

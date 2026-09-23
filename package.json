@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start --port 43123 --hostname 127.0.0.1",
     "lint": "eslint",
-    "test": "tsx --test src/lib/compliance/engine.test.ts src/lib/data/compliance.test.ts src/lib/payments/reconcile.test.ts"
+    "test": "tsx --test src/lib/compliance/engine.test.ts src/lib/data/compliance.test.ts src/lib/data/roster.test.ts src/lib/data/census.test.ts src/lib/data/fleet.test.ts src/lib/dvic/compare.test.ts src/lib/export/csv.test.ts src/lib/period.test.ts src/lib/payments/reconcile.test.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -31,7 +31,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
     "tailwindcss": "^4",
-    "tsx": "^4.20.5",
+    "tsx": "^4.23.15",
     "typescript": "^5"
   }
 }

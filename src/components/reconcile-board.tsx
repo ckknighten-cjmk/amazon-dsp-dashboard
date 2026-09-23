@@ -1,5 +1,9 @@
+"use client";
+
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Download } from "lucide-react";
+import { useDateRange } from "@/components/layout/date-range-context";
 import { EmptyState } from "@/components/page-header";
 import { InvoiceStatusBadge, ReconcileStatusBadge } from "@/components/ops-badges";
 import { buttonVariants } from "@/components/ui/button";
@@ -13,6 +17,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatNumber, formatUsd, formatZonedDateTime } from "@/lib/format";
+import { hrefWithPeriod as withPeriod, parsePeriodParam } from "@/lib/period";
 import { headlineCompares } from "@/lib/payments/reconcile";
 import type { InvoiceStatus } from "@/lib/types";
 import type {
@@ -25,11 +30,14 @@ import { RECONCILE_WEEKS } from "@/lib/payments/types";
 
 const WEEKS = RECONCILE_WEEKS.map((week) => ({
   week,
-  href: `/payments?week=${week}#reconcile`,
+  href: `/payments?week=${week}`,
   label: `Week ${week}`,
 }));
 
 export function ReconcileBoard({ report }: { report: WeekReconcile }) {
+  const params = useSearchParams();
+  const { range } = useDateRange();
+  const period = parsePeriodParam(params.get("period"), params.get("start"), params.get("end")) ?? range;
   const headline = headlineCompares(report);
   const holds = report.checks.filter((check) => check.kind === "holds");
   const gaps = report.checks.filter((check) => check.kind === "gap");
@@ -45,7 +53,7 @@ export function ReconcileBoard({ report }: { report: WeekReconcile }) {
           <p className="mt-1 max-w-3xl text-xs text-muted-foreground">
             Week {report.week} · {report.period}. {report.counts.match} match · {report.counts.mismatch} mismatch ·{" "}
             {report.counts.notComparable} not comparable. Variance is invoice minus Work Summary, and only when both
-            sides use the same unit.
+            sides use the same unit. This week is separate from the top-bar period.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -53,7 +61,7 @@ export function ReconcileBoard({ report }: { report: WeekReconcile }) {
             {WEEKS.map((item) => (
               <Link
                 key={item.week}
-                href={item.href}
+                href={`${withPeriod(item.href, period)}#reconcile`}
                 aria-current={report.week === item.week ? "page" : undefined}
                 className={buttonVariants({
                   size: "sm",

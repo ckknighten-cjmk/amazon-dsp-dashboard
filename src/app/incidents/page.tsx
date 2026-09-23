@@ -23,17 +23,29 @@ import {
   incidentStatusLabel,
   incidentTypeLabel,
 } from "@/lib/format";
+import { useDateRange } from "@/components/layout/date-range-context";
+import { CoverageNote } from "@/components/period-coverage";
+import { dateInRange, formatSpanLabel, spanOfDates } from "@/lib/period";
 import type { IncidentStatus, IncidentType } from "@/lib/types";
 
 export default function IncidentsPage() {
+  const { range } = useDateRange();
   const incidents = getIncidents();
+  const inPeriod = useMemo(
+    () => incidents.filter((incident) => dateInRange(incident.occurredAt, range)),
+    [incidents, range]
+  );
+  const span = spanOfDates(incidents.map((incident) => incident.occurredAt));
+  const coverage = span
+    ? `Incident notes are fixtures from ${formatSpanLabel(span.start, span.end)}.`
+    : "No incident dates are seeded.";
   const [query, setQuery] = useState("");
   const [type, setType] = useState<IncidentType | "all">("all");
   const [status, setStatus] = useState<IncidentStatus | "all">("all");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return incidents.filter((i) => {
+    return inPeriod.filter((i) => {
       if (type !== "all" && i.type !== type) return false;
       if (status !== "all" && i.status !== status) return false;
       if (!q) return true;
@@ -45,16 +57,22 @@ export default function IncidentsPage() {
         .toLowerCase()
         .includes(q);
     });
-  }, [incidents, query, type, status]);
+  }, [inPeriod, query, type, status]);
 
-  const openCount = incidents.filter((i) => i.status === "open").length;
+  const openCount = inPeriod.filter((i) => i.status === "open").length;
 
   return (
     <div>
       <PageHeader
         title="Incidents & notes"
-        description={`${openCount} open. DVRs, customer complaints, vehicle issues, and safety events.`}
+        description={`${openCount} open in this period. DVRs, customer complaints, vehicle issues, and safety events.`}
       />
+
+      <CoverageNote>
+        {inPeriod.length === 0
+          ? `No incidents in this period. ${coverage}`
+          : `${coverage} ${inPeriod.length} of ${incidents.length} notes fall in the selected period.`}
+      </CoverageNote>
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <Input
@@ -91,14 +109,18 @@ export default function IncidentsPage() {
           ))}
         </select>
         <p className="ml-auto text-xs text-muted-foreground tabular-nums">
-          {filtered.length} of {incidents.length}
+          {filtered.length} of {inPeriod.length}
         </p>
       </div>
 
       {filtered.length === 0 ? (
         <EmptyState
-          title="No incidents match"
-          description="Clear search or filters to see the full log."
+          title={inPeriod.length === 0 ? "No incidents in this period" : "No incidents match"}
+          description={
+            inPeriod.length === 0
+              ? `${coverage} Nothing is filled in for days without a note.`
+              : "Clear search or filters to see the notes in this period."
+          }
         />
       ) : (
         <div className="rounded-xl border bg-card">

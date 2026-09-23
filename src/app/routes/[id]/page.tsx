@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { DeliveryPeriodNote } from "@/components/period-coverage";
 import { PageHeader } from "@/components/page-header";
 import { RouteDetail } from "@/components/route-detail";
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,7 @@ export default async function RoutePage({
           </Button>
         }
       />
+      <DeliveryPeriodNote />
       <div className="rounded-xl border bg-card p-5">
         <RouteDetail route={route} />
       </div>

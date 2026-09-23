@@ -5,7 +5,7 @@ import Link from "next/link";
 import { DeliveryBoardSummary } from "@/components/delivery-board";
 import { PageHeader, EmptyState } from "@/components/page-header";
 import { RouteDetail } from "@/components/route-detail";
-import { ExceptionStatusBadge, RouteStatusBadge } from "@/components/ops-badges";
+import { ExceptionStatusBadge, RescueBadge, RouteStatusBadge } from "@/components/ops-badges";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
@@ -31,7 +31,11 @@ import {
   getExceptionsForRoute,
   getRoutes,
 } from "@/lib/data";
-import { exceptionExportNote } from "@/lib/data/delivery-execution";
+import { exceptionExportNote, rescueBoardNote } from "@/lib/data/delivery-execution";
+import { useDateRange } from "@/components/layout/date-range-context";
+import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
+import { ExportCsvButton } from "@/components/export-csv-button";
+import { exceptionsCsv, routesCsv } from "@/lib/export/datasets";
 import {
   CONSOLE_UNAVAILABLE,
   exceptionStatusLabel,
@@ -68,6 +72,8 @@ function associateNames(route: Route) {
 }
 
 export default function RoutesPage() {
+  const { range } = useDateRange();
+  const covered = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
   const routes = getRoutes();
   const board = getDeliveryBoard();
   const exceptions = getExceptions();
@@ -75,19 +81,26 @@ export default function RoutesPage() {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<RouteStatus | "all">("all");
   const [exStatus, setExStatus] = useState<PackageExceptionStatus | "all">("all");
+  const [rescue, setRescue] = useState<"all" | "yes" | "no">("all");
   const [selected, setSelected] = useState<Route | null>(null);
+  const routesExport = routesCsv();
+  const exceptionsExport = exceptionsCsv();
+  const rescuedCount = routes.filter((route) => route.receivedRescue).length;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
     return routes.filter((route) => {
       if (status !== "all" && route.status !== status) return false;
+      if (rescue === "yes" && !route.receivedRescue) return false;
+      if (rescue === "no" && route.receivedRescue) return false;
       if (!q) return true;
-      return [route.code, route.notes, ...associateNames(route)]
+      const rescueText = route.receivedRescue ? "rescue yes" : "rescue no";
+      return [route.code, route.notes, rescueText, ...associateNames(route)]
         .join(" ")
         .toLowerCase()
         .includes(q);
     });
-  }, [routes, query, status]);
+  }, [routes, query, status, rescue]);
 
   const filteredExceptions = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -108,6 +121,14 @@ export default function RoutesPage() {
         description="Amazon DSP Console end-of-day board for DNA4 Memphis / CJMK Inc., service day Sep 21, 2026. Vehicle and on-time % were not on the Console — shown as unavailable."
       />
 
+      {!covered ? (
+        <EmptyState
+          title="No Delivery Execution capture in this period"
+          description={`${DELIVERY_COVERAGE.label}. Routes and package exceptions are not estimated for other days.`}
+        />
+      ) : (
+        <>
+      <p className="mb-4 text-xs text-muted-foreground">{DELIVERY_COVERAGE.label}.</p>
       <DeliveryBoardSummary board={board} />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
@@ -159,6 +180,18 @@ export default function RoutesPage() {
               </option>
             ))}
           </select>
+        ) : null}
+        {tab === "routes" ? (
+          <select
+            className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm dark:bg-input/30"
+            value={rescue}
+            onChange={(e) => setRescue(e.target.value as "all" | "yes" | "no")}
+            aria-label="Filter by rescue"
+          >
+            <option value="all">Rescue: all</option>
+            <option value="yes">Rescue: yes</option>
+            <option value="no">Rescue: no</option>
+          </select>
         ) : (
           <select
             className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm dark:bg-input/30"
@@ -173,6 +206,15 @@ export default function RoutesPage() {
             ))}
           </select>
         )}
+        {tab === "routes" ? (
+          <ExportCsvButton filename={routesExport.filename} csv={routesExport.csv} label="Export routes" />
+        ) : (
+          <ExportCsvButton
+            filename={exceptionsExport.filename}
+            csv={exceptionsExport.csv}
+            label="Export exceptions"
+          />
+        )}
         <p className="ml-auto text-xs text-muted-foreground tabular-nums">
           {tab === "routes"
             ? `${filtered.length} of ${routes.length} routes`
@@ -180,11 +222,13 @@ export default function RoutesPage() {
         </p>
       </div>
 
-      {tab === "exceptions" ? (
-        <p className="mb-3 text-xs text-muted-foreground">
-          {exceptionExportNote()}
+      {tab === "routes" ? (
+        <p className="mb-3 text-xs leading-relaxed text-muted-foreground" data-rescued={rescuedCount}>
+          {rescueBoardNote()}
         </p>
-      ) : null}
+      ) : (
+        <p className="mb-3 text-xs text-muted-foreground">{exceptionExportNote()}</p>
+      )}
 
       {tab === "routes" ? (
         filtered.length === 0 ? (
@@ -203,6 +247,7 @@ export default function RoutesPage() {
                   <TableHead className="text-right">Packages</TableHead>
                   <TableHead className="text-right">Remaining</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead>Rescue</TableHead>
                   <TableHead className="min-w-32">Completion</TableHead>
                   <TableHead>Van / on-time</TableHead>
                   <TableHead>Notes</TableHead>
@@ -211,6 +256,9 @@ export default function RoutesPage() {
               <TableBody>
                 {filtered.map((route) => {
                   const names = associateNames(route);
+                  const rescuerLabels = route.rescueDriverIds
+                    .map((id) => getDriver(id)?.name)
+                    .filter((name): name is string => Boolean(name));
                   const exCount = getExceptionsForRoute(route.id).length;
                   return (
                     <TableRow
@@ -251,6 +299,14 @@ export default function RoutesPage() {
                       </TableCell>
                       <TableCell>
                         <RouteStatusBadge status={route.status} />
+                      </TableCell>
+                      <TableCell>
+                        <RescueBadge received={route.receivedRescue} />
+                        {route.receivedRescue ? (
+                          <p className="mt-1 max-w-40 text-[11px] leading-snug text-muted-foreground">
+                            {rescuerLabels.join(", ")}
+                          </p>
+                        ) : null}
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center gap-2">
@@ -344,6 +400,8 @@ export default function RoutesPage() {
           </div>
         </SheetContent>
       </Sheet>
+        </>
+      )}
     </div>
   );
 }

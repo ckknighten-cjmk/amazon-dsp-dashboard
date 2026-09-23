@@ -51,6 +51,23 @@ export function RouteStatusBadge({ status }: { status: RouteStatus }) {
   );
 }
 
+export function RescueBadge({ received }: { received: boolean }) {
+  if (!received) {
+    return <span className="text-xs text-muted-foreground">Rescue: No</span>;
+  }
+  return (
+    <Badge
+      variant="outline"
+      className={cn(
+        pill,
+        "border-amber-400/50 bg-amber-500/10 text-amber-900 dark:border-amber-500/40 dark:text-amber-300"
+      )}
+    >
+      Rescue: Yes
+    </Badge>
+  );
+}
+
 export function DriverStatusBadge({ status }: { status: DriverStatus }) {
   const styles: Record<DriverStatus, string> = {
     available:

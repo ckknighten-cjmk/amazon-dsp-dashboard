@@ -34,7 +34,13 @@ export function DeliveryBoardSummary({ board }: { board: DeliveryExecutionBoard 
         <Card size="sm">
           <CardHeader>
             <CardTitle>Risk & DA activity</CardTitle>
-            <CardDescription>Board chips — vehicle / on-time not shown</CardDescription>
+            <CardDescription>
+              Board chips — vehicle / on-time not shown. Multi-transporter routes are marked Rescue:
+              Yes.
+              {t.rescueActions == null
+                ? " rescueActions was not in this capture."
+                : ` rescueActions ${formatNumber(t.rescueActions)}.`}
+            </CardDescription>
           </CardHeader>
           <CardContent className="grid grid-cols-3 gap-2">
             <Chip value={t.workHourRisk} label="Work-hour risk" />
