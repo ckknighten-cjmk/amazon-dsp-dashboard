@@ -1,7 +1,14 @@
 import type { ScorecardMetric, ScorecardSnapshot } from "@/lib/types";
+import { gradeByThreshold } from "@/lib/scorecard";
+
+export const SCORECARD_WEEKS = [38, 37] as const;
+export type ScorecardWeek = (typeof SCORECARD_WEEKS)[number];
 
 export const SCORECARD_DISCLAIMER =
   "Values pulled from Amazon DSP Console → Performance Summary for CJMK Inc. / DNA4 Memphis, Week 37 (Sep 6–12, 2026). Fantastic / Great / Fair / Poor threshold bands shown on each tile are illustrative only — Amazon does not publish the exact numeric cutoffs in Console. Badges match the standing Amazon displayed. No prior-week comparison was shown in that summary.";
+
+export const SCORECARD_WEEK38_DISCLAIMER =
+  "Week 38 Sep 13–19 DNA4 from Console Performance Summary. Values pulled from Amazon DSP Console → Performance Summary for CJMK Inc. / DNA4 Memphis. Fantastic / Great / Fair / Poor threshold bands shown on each tile are illustrative only — Amazon does not publish the exact numeric cutoffs in Console. Badges match the standing Amazon displayed. No prior-week comparison was shown in that summary.";
 
 function metric(partial: Omit<ScorecardMetric, "prior">): ScorecardMetric {
   return { ...partial, prior: null };
@@ -263,7 +270,13 @@ export const scorecardMetrics: ScorecardMetric[] = [
   }),
 ];
 
-export const scorecard: ScorecardSnapshot = {
+const categories = [
+  { id: "safety_compliance" as const, name: "Safety and Compliance", tier: "fantastic" as const },
+  { id: "quality" as const, name: "Quality", tier: "fantastic" as const },
+  { id: "service_reliability" as const, name: "Service Reliability", tier: "fantastic" as const },
+];
+
+export const scorecardWeek37: ScorecardSnapshot = {
   weekNumber: 37,
   weekLabel: "Week 37",
   periodLabel: "Sep 6–12, 2026",
@@ -271,11 +284,76 @@ export const scorecard: ScorecardSnapshot = {
   asOf: "2026-09-12T23:59:00",
   overallScore: 85.8,
   overallTier: "fantastic",
-  categories: [
-    { id: "safety_compliance", name: "Safety and Compliance", tier: "fantastic" },
-    { id: "quality", name: "Quality", tier: "fantastic" },
-    { id: "service_reliability", name: "Service Reliability", tier: "fantastic" },
-  ],
+  categories,
   metrics: scorecardMetrics,
   disclaimer: SCORECARD_DISCLAIMER,
 };
+
+/**
+ * Week 38 Console Performance Summary, captured 2026-09-23.
+ * Numbers and tiers are the capture. Illustrative bands that would grade a
+ * value differently from Amazon's displayed tier are omitted.
+ */
+const WEEK38_PATCH: Record<string, Partial<ScorecardMetric>> = {
+  "safe-driving": {
+    description: "DSP Console showed No Data for Week 38.",
+  },
+  seatbelt: { current: 0 },
+  speeding: { current: 3.6 },
+  distractions: { current: 2.3 },
+  following: { current: 0 },
+  "sign-signal": { current: 1.8 },
+  "working-device": {
+    description: "DSP Console showed No Data for this preview metric in Week 38.",
+  },
+  "dcr-dpmo": { current: 4166.9, reportedTier: "great" },
+  dsb: { current: 119 },
+  "cdf-dpmo": { current: 1360 },
+  pod: { current: 99.46, digits: 2 },
+  tenured: { current: 94.01, digits: 2 },
+};
+
+function week38Metric(metric: ScorecardMetric): ScorecardMetric {
+  const next: ScorecardMetric = { ...metric, ...WEEK38_PATCH[metric.id], prior: null };
+  const graded = gradeByThreshold(next);
+  if (next.reportedTier && graded && graded !== next.reportedTier) {
+    return { ...next, thresholds: null };
+  }
+  return next;
+}
+
+for (const id of Object.keys(WEEK38_PATCH)) {
+  if (!scorecardMetrics.some((metric) => metric.id === id)) {
+    throw new Error(`Week 38 scorecard patch has no Week 37 metric ${id}.`);
+  }
+}
+
+export const scorecardWeek38: ScorecardSnapshot = {
+  weekNumber: 38,
+  weekLabel: "Week 38",
+  periodLabel: "Sep 13–19, 2026",
+  priorWeekLabel: null,
+  asOf: "2026-09-23T12:01:44.632Z",
+  overallScore: 84,
+  overallTier: "fantastic",
+  categories,
+  metrics: scorecardMetrics.map(week38Metric),
+  disclaimer: SCORECARD_WEEK38_DISCLAIMER,
+};
+
+const BY_WEEK: Record<ScorecardWeek, ScorecardSnapshot> = {
+  37: scorecardWeek37,
+  38: scorecardWeek38,
+};
+
+export function parseScorecardWeek(value: string | string[] | undefined | null): ScorecardWeek {
+  const raw = Array.isArray(value) ? value[0] : value;
+  return raw === "37" ? 37 : 38;
+}
+
+export function getScorecardSnapshot(week: ScorecardWeek = 38) {
+  return BY_WEEK[week];
+}
+
+/** @deprecated Week 37 snapshot. Week 38 is the default via getScorecardSnapshot. */
+export const scorecard = scorecardWeek37;

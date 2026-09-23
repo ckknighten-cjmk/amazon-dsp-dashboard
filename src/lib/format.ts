@@ -88,6 +88,11 @@ export function formatPercent(value: number, digits = 1) {
   return `${value.toFixed(digits)}%`;
 }
 
+/** Whole Console standings stay whole. 84 displays as 84; 85.8 stays 85.8. */
+export function formatOverallScore(score: number) {
+  return Number.isInteger(score) ? String(score) : score.toFixed(1);
+}
+
 export function formatScorecardValue(metric: {
   unit: string;
   current: number | null;

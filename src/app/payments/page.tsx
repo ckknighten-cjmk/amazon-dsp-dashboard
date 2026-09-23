@@ -20,7 +20,12 @@ import {
 import { getPayments, getReconcile, parseReconcileWeek } from "@/lib/data";
 import { paymentsCsv } from "@/lib/export/datasets";
 import { formatNumber, formatRangeLabel, formatUsd, formatZonedDateTime } from "@/lib/format";
-import { invoiceServiceWindow, rangesOverlap, SCORECARD_COVERAGE } from "@/lib/period";
+import {
+  invoiceServiceWindow,
+  rangesOverlap,
+  SCORECARD_COVERAGE,
+  workSummaryWeekForRange,
+} from "@/lib/period";
 import type { InvoiceKind, SettlementInvoice, SettlementLine } from "@/lib/types";
 
 const KIND_LABEL: Record<InvoiceKind, string> = {
@@ -45,7 +50,9 @@ export default function PaymentsPage() {
 
 function PaymentsBody() {
   const { range } = useDateRange();
-  const week = parseReconcileWeek(useSearchParams().get("week"));
+  const weekParam = useSearchParams().get("week");
+  const weekFromPeriod = range.kind === "custom" ? workSummaryWeekForRange(range) : null;
+  const week = weekParam ? parseReconcileWeek(weekParam) : (weekFromPeriod ?? 37);
   const reconcile = getReconcile(week);
   const payments = getPayments();
   const paymentsExport = paymentsCsv();
@@ -58,7 +65,8 @@ function PaymentsBody() {
   });
   const newInvoices = invoices.filter((invoice) => invoice.status === "New");
   const paidInvoices = invoices.filter((invoice) => invoice.status === "Paid");
-  const showWeek37 = rangesOverlap(SCORECARD_COVERAGE.start, SCORECARD_COVERAGE.end, range);
+  const week37Coverage = SCORECARD_COVERAGE[37];
+  const showWeek37 = rangesOverlap(week37Coverage.start, week37Coverage.end, range);
 
   return (
     <div>
@@ -101,7 +109,7 @@ function PaymentsBody() {
             hint={
               showWeek37
                 ? `Dispute window closes ${formatZonedDateTime(variable.disputeWindowCloses)}`
-                : `${SCORECARD_COVERAGE.label}. Not in this period.`
+                : `${week37Coverage.label}. Not in this period.`
             }
           />
           <MoneyStat
@@ -110,7 +118,7 @@ function PaymentsBody() {
             hint={
               showWeek37
                 ? `Dispute window closes ${formatZonedDateTime(incentive.disputeWindowCloses)}`
-                : `${SCORECARD_COVERAGE.label}. Not in this period.`
+                : `${week37Coverage.label}. Not in this period.`
             }
           />
         </div>
@@ -257,7 +265,7 @@ function PaymentsBody() {
       </section>
       ) : (
         <p className="mb-6 text-xs text-muted-foreground">
-          Week 37 variable and incentive lines are hidden. {SCORECARD_COVERAGE.label}.
+          Week 37 variable and incentive lines are hidden. {week37Coverage.label}.
         </p>
       )}
 

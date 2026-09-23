@@ -2,10 +2,11 @@ import { ExportCsvButton } from "@/components/export-csv-button";
 import { PeriodCoverage } from "@/components/period-coverage";
 import { PageHeader } from "@/components/page-header";
 import { ScoreStatusBadge, ScoreTierBadge } from "@/components/ops-badges";
+import { ScorecardWeekSwitcher } from "@/components/scorecard-week-switcher";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getScorecard } from "@/lib/data";
+import { getScorecard, parseScorecardWeek } from "@/lib/data";
 import { scorecardCsv } from "@/lib/export/datasets";
-import { formatScorecardValue, scorecardTierLabel } from "@/lib/format";
+import { formatOverallScore, formatScorecardValue, scorecardTierLabel } from "@/lib/format";
 import { SCORECARD_COVERAGE } from "@/lib/period";
 import { gradeMetric } from "@/lib/scorecard";
 import type { ScorecardMetric } from "@/lib/types";
@@ -24,9 +25,15 @@ function formatBound(metric: ScorecardMetric, value: number) {
   return formatScorecardValue({ ...metric, current: value });
 }
 
-export default function ScorecardPage() {
-  const scorecard = getScorecard();
-  const scorecardExport = scorecardCsv();
+export default async function ScorecardPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ week?: string | string[] }>;
+}) {
+  const week = parseScorecardWeek((await searchParams).week);
+  const scorecard = getScorecard(week);
+  const coverage = SCORECARD_COVERAGE[week];
+  const scorecardExport = scorecardCsv(week);
 
   return (
     <div>
@@ -35,6 +42,7 @@ export default function ScorecardPage() {
         description={`${scorecard.weekLabel} · ${scorecard.periodLabel} · CJMK Inc. / DNA4 Memphis. Prior week was not shown in Console.`}
         actions={
           <>
+            <ScorecardWeekSwitcher week={week} />
             <ExportCsvButton
               filename={scorecardExport.filename}
               csv={scorecardExport.csv}
@@ -46,24 +54,24 @@ export default function ScorecardPage() {
       />
 
       <PeriodCoverage
-        start={SCORECARD_COVERAGE.start}
-        end={SCORECARD_COVERAGE.end}
-        coveredNote={`${SCORECARD_COVERAGE.label}. This is the weekly Console summary. It is shown whole when the selected period overlaps that week, and it is not split into days.`}
+        start={coverage.start}
+        end={coverage.end}
+        coveredNote={`${coverage.label}. This is the weekly Console summary. It is shown whole when the selected period overlaps that week, and it is not split into days.`}
         emptyTitle="No scorecard in this period"
-        emptyDescription={`${SCORECARD_COVERAGE.label}. No other scorecard week is in this build, so the standing is not copied onto empty days.`}
+        emptyDescription={`${coverage.label}. Switch weeks or choose a period that overlaps that Console week. The standing is not copied onto empty days.`}
       >
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-950 dark:text-amber-100">
         {scorecard.disclaimer}
       </p>
 
-      <Card className="mb-5">
+      <Card className="mb-5" data-scorecard-week={scorecard.weekNumber} data-overall={scorecard.overallScore}>
         <CardContent className="flex flex-wrap items-end justify-between gap-4 pt-1">
           <div>
             <p className="text-[11px] font-medium tracking-wide text-muted-foreground uppercase">
               Overall standing
             </p>
             <p className="font-heading text-4xl font-semibold tabular-nums tracking-tight">
-              {scorecard.overallScore.toFixed(1)}
+              {formatOverallScore(scorecard.overallScore)}
             </p>
             <p className="mt-1 text-sm text-muted-foreground">
               {scorecardTierLabel[scorecard.overallTier]} · {scorecard.weekLabel}

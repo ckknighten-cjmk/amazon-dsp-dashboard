@@ -1,0 +1,1818 @@
+{
+  "station": "DNA4",
+  "week": 38,
+  "period": "Sep 13 - Sep 19, 2026",
+  "thresholdStopsCompleted": 180,
+  "unit": "deliveryAssociate",
+  "note": "stopsCompleted is the route total from Delivery Execution. On multi-transporter routes Amazon does not attribute stops to one DA; those rows are flagged multiTransporter=yes.",
+  "entries": [
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 204,
+      "route": "CX33",
+      "multiTransporter": "yes",
+      "coDrivers": "Daniel Gilmore"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Daniel Gilmore",
+      "stopsCompleted": 204,
+      "route": "CX33",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 203,
+      "route": "CX10",
+      "multiTransporter": "yes",
+      "coDrivers": "darome boyland"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Nolan Goliday",
+      "stopsCompleted": 203,
+      "route": "CX26",
+      "multiTransporter": "yes",
+      "coDrivers": "briana Mosley"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "briana Mosley",
+      "stopsCompleted": 203,
+      "route": "CX26",
+      "multiTransporter": "yes",
+      "coDrivers": "Nolan Goliday"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "darome boyland",
+      "stopsCompleted": 203,
+      "route": "CX10",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Asja Hurt",
+      "stopsCompleted": 200,
+      "route": "CX23",
+      "multiTransporter": "yes",
+      "coDrivers": "Markayla Tillis"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Markayla Tillis",
+      "stopsCompleted": 200,
+      "route": "CX23",
+      "multiTransporter": "yes",
+      "coDrivers": "Asja Hurt"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Amy Rhinehart",
+      "stopsCompleted": 199,
+      "route": "CX32",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Chance Stupp",
+      "stopsCompleted": 199,
+      "route": "CX25",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis, Mary Acker"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Jessica Davis",
+      "stopsCompleted": 199,
+      "route": "CX25",
+      "multiTransporter": "yes",
+      "coDrivers": "Mary Acker, Chance Stupp"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Makayla Cooper",
+      "stopsCompleted": 199,
+      "route": "CX1",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Mary Acker",
+      "stopsCompleted": 199,
+      "route": "CX25",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis, Chance Stupp"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Jazmonjr Worles",
+      "stopsCompleted": 198,
+      "route": "CX27",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Jeromy Mitchell",
+      "stopsCompleted": 198,
+      "route": "CX29",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Keon Gross",
+      "stopsCompleted": 198,
+      "route": "CX30",
+      "multiTransporter": "yes",
+      "coDrivers": "briana Mosley"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "briana Mosley",
+      "stopsCompleted": 198,
+      "route": "CX30",
+      "multiTransporter": "yes",
+      "coDrivers": "Keon Gross"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Devarius Mitchell",
+      "stopsCompleted": 196,
+      "route": "CX28",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Shachaniah Israel",
+      "stopsCompleted": 196,
+      "route": "CX24",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Kylan Knight",
+      "stopsCompleted": 193,
+      "route": "CX11",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Michael Neal",
+      "stopsCompleted": 189,
+      "route": "CX21",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "DeAndre Adams",
+      "stopsCompleted": 183,
+      "route": "CX2",
+      "multiTransporter": "yes",
+      "coDrivers": "Jayden Williams"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Jayden Williams",
+      "stopsCompleted": 183,
+      "route": "CX2",
+      "multiTransporter": "yes",
+      "coDrivers": "DeAndre Adams"
+    },
+    {
+      "date": "2026-09-13",
+      "deliveryAssociate": "Mauricio Hearns",
+      "stopsCompleted": 181,
+      "route": "CX5",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Kylan Knight",
+      "stopsCompleted": 203,
+      "route": "CX12",
+      "multiTransporter": "yes",
+      "coDrivers": "Nolan Goliday"
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Nolan Goliday",
+      "stopsCompleted": 203,
+      "route": "CX12",
+      "multiTransporter": "yes",
+      "coDrivers": "Kylan Knight"
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Amy Rhinehart",
+      "stopsCompleted": 199,
+      "route": "CX27",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Aaron Davis",
+      "stopsCompleted": 198,
+      "route": "CX32",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Devarius Mitchell",
+      "stopsCompleted": 198,
+      "route": "CX30",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Dajon Trice",
+      "stopsCompleted": 196,
+      "route": "CX28",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Larrico Pickens",
+      "stopsCompleted": 196,
+      "route": "CX34",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Daniel Aponte espinoza",
+      "stopsCompleted": 188,
+      "route": "CX26",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Henry Taylor",
+      "stopsCompleted": 186,
+      "route": "CX35",
+      "multiTransporter": "yes",
+      "coDrivers": "Larrico Pickens"
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Larrico Pickens",
+      "stopsCompleted": 186,
+      "route": "CX35",
+      "multiTransporter": "yes",
+      "coDrivers": "Henry Taylor"
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Asja Hurt",
+      "stopsCompleted": 184,
+      "route": "CX25",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Jazmonjr Worles",
+      "stopsCompleted": 184,
+      "route": "CX29",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Cameyon Smith",
+      "stopsCompleted": 182,
+      "route": "CX33",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-14",
+      "deliveryAssociate": "Aaron Hines",
+      "stopsCompleted": 180,
+      "route": "CX31",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Colter Stupp",
+      "stopsCompleted": 200,
+      "route": "CX35",
+      "multiTransporter": "yes",
+      "coDrivers": "Venson Muskin"
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Venson Muskin",
+      "stopsCompleted": 200,
+      "route": "CX35",
+      "multiTransporter": "yes",
+      "coDrivers": "Colter Stupp"
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Aaron Davis",
+      "stopsCompleted": 197,
+      "route": "CX32",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Jakira Cathey",
+      "stopsCompleted": 197,
+      "route": "CX28",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis"
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Jessica Davis",
+      "stopsCompleted": 197,
+      "route": "CX28",
+      "multiTransporter": "yes",
+      "coDrivers": "Jakira Cathey"
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Keon Gross",
+      "stopsCompleted": 196,
+      "route": "CX34",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Jeromy Mitchell",
+      "stopsCompleted": 194,
+      "route": "CX31",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Asja Hurt",
+      "stopsCompleted": 191,
+      "route": "CX26",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Jazmonjr Worles",
+      "stopsCompleted": 191,
+      "route": "CX30",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Jessica Davis",
+      "stopsCompleted": 191,
+      "route": "CX29",
+      "multiTransporter": "yes",
+      "coDrivers": "Nolan Goliday"
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Nolan Goliday",
+      "stopsCompleted": 191,
+      "route": "CX29",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis"
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Caprio Newman",
+      "stopsCompleted": 190,
+      "route": "CX13",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Shachaniah Israel",
+      "stopsCompleted": 190,
+      "route": "CX27",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "darome boyland",
+      "stopsCompleted": 190,
+      "route": "CX12",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Jordan Hutchinson",
+      "stopsCompleted": 188,
+      "route": "CX33",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-15",
+      "deliveryAssociate": "Marshay Matheney",
+      "stopsCompleted": 187,
+      "route": "CX11",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jessica Davis",
+      "stopsCompleted": 208,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "curtis caples, Marshay Matheney, LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "LaKendra Shaw",
+      "stopsCompleted": 208,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "curtis caples, Jessica Davis, Marshay Matheney"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Marshay Matheney",
+      "stopsCompleted": 208,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "curtis caples, Jessica Davis, LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "curtis caples",
+      "stopsCompleted": 208,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis, Marshay Matheney, LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jeromy Mitchell",
+      "stopsCompleted": 205,
+      "route": "CX262",
+      "multiTransporter": "yes",
+      "coDrivers": "Timothy Tanner, Jessica Davis"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jessica Davis",
+      "stopsCompleted": 205,
+      "route": "CX262",
+      "multiTransporter": "yes",
+      "coDrivers": "Timothy Tanner, Jeromy Mitchell"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Timothy Tanner",
+      "stopsCompleted": 205,
+      "route": "CX262",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis, Jeromy Mitchell"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Gregory Lowery",
+      "stopsCompleted": 200,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Jeromy Mitchell, Lauquetta Vaughn"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jeromy Mitchell",
+      "stopsCompleted": 200,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Gregory Lowery, Lauquetta Vaughn"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Lauquetta Vaughn",
+      "stopsCompleted": 200,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Gregory Lowery, Jeromy Mitchell"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Donovan Doss",
+      "stopsCompleted": 199,
+      "route": "CX276",
+      "multiTransporter": "yes",
+      "coDrivers": "Makayla Cooper"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "John Scott",
+      "stopsCompleted": 199,
+      "route": "CX271",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Makayla Cooper",
+      "stopsCompleted": 199,
+      "route": "CX276",
+      "multiTransporter": "yes",
+      "coDrivers": "Donovan Doss"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Shameka Williams",
+      "stopsCompleted": 199,
+      "route": "CX252",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Aaron Hines",
+      "stopsCompleted": 198,
+      "route": "CX247",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Adrian Arellano",
+      "stopsCompleted": 198,
+      "route": "CX267",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Donnell Jefferson",
+      "stopsCompleted": 198,
+      "route": "CX250",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Makayla Cooper",
+      "stopsCompleted": 198,
+      "route": "CX272",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Henry Taylor",
+      "stopsCompleted": 197,
+      "route": "CX244",
+      "multiTransporter": "yes",
+      "coDrivers": "Keyshawn Dickerson"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jessica Davis",
+      "stopsCompleted": 197,
+      "route": "CX280",
+      "multiTransporter": "yes",
+      "coDrivers": "darome boyland, Mauricio Hearns"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Keyshawn Dickerson",
+      "stopsCompleted": 197,
+      "route": "CX244",
+      "multiTransporter": "yes",
+      "coDrivers": "Henry Taylor"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Malyk Latham",
+      "stopsCompleted": 197,
+      "route": "CX246",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Mauricio Hearns",
+      "stopsCompleted": 197,
+      "route": "CX280",
+      "multiTransporter": "yes",
+      "coDrivers": "darome boyland, Jessica Davis"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "darome boyland",
+      "stopsCompleted": 197,
+      "route": "CX280",
+      "multiTransporter": "yes",
+      "coDrivers": "Jessica Davis, Mauricio Hearns"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jazmonjr Worles",
+      "stopsCompleted": 196,
+      "route": "CX248",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Colter Stupp",
+      "stopsCompleted": 195,
+      "route": "CX249",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Daniel Aponte espinoza",
+      "stopsCompleted": 195,
+      "route": "CX256",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Henry Taylor",
+      "stopsCompleted": 195,
+      "route": "CX273",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Marshay Matheney",
+      "stopsCompleted": 195,
+      "route": "CX274",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Jordan Hutchinson",
+      "stopsCompleted": 194,
+      "route": "CX251",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Mary Acker",
+      "stopsCompleted": 194,
+      "route": "CX277",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Amy Rhinehart",
+      "stopsCompleted": 193,
+      "route": "CX255",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Asja Hurt",
+      "stopsCompleted": 192,
+      "route": "CX254",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Daniel Gilmore",
+      "stopsCompleted": 192,
+      "route": "CX259",
+      "multiTransporter": "yes",
+      "coDrivers": "Mauricio Hearns"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Marquise Crum",
+      "stopsCompleted": 192,
+      "route": "CX261",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Mauricio Hearns",
+      "stopsCompleted": 192,
+      "route": "CX259",
+      "multiTransporter": "yes",
+      "coDrivers": "Daniel Gilmore"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Venson Muskin",
+      "stopsCompleted": 190,
+      "route": "CX269",
+      "multiTransporter": "yes",
+      "coDrivers": "Zora Bobo"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Zora Bobo",
+      "stopsCompleted": 190,
+      "route": "CX269",
+      "multiTransporter": "yes",
+      "coDrivers": "Venson Muskin"
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Larrico Pickens",
+      "stopsCompleted": 188,
+      "route": "CX253",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "briana Mosley",
+      "stopsCompleted": 186,
+      "route": "CX268",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-16",
+      "deliveryAssociate": "Demarcus Faulkner",
+      "stopsCompleted": 180,
+      "route": "CX270",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 209,
+      "route": "CX288",
+      "multiTransporter": "yes",
+      "coDrivers": "Demarcus Faulkner, curtis caples"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Demarcus Faulkner",
+      "stopsCompleted": 209,
+      "route": "CX288",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher, curtis caples"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "curtis caples",
+      "stopsCompleted": 209,
+      "route": "CX288",
+      "multiTransporter": "yes",
+      "coDrivers": "Demarcus Faulkner, Candido Fulcher"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Alexis Hutchison",
+      "stopsCompleted": 204,
+      "route": "CX263",
+      "multiTransporter": "yes",
+      "coDrivers": "Keon Gross, Cameyon Smith"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Cameyon Smith",
+      "stopsCompleted": 204,
+      "route": "CX263",
+      "multiTransporter": "yes",
+      "coDrivers": "Keon Gross, Alexis Hutchison"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Keon Gross",
+      "stopsCompleted": 204,
+      "route": "CX263",
+      "multiTransporter": "yes",
+      "coDrivers": "Cameyon Smith, Alexis Hutchison"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 201,
+      "route": "CX269",
+      "multiTransporter": "yes",
+      "coDrivers": "Daniel Aponte espinoza"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 201,
+      "route": "CX287",
+      "multiTransporter": "yes",
+      "coDrivers": "curtis caples"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Daniel Aponte espinoza",
+      "stopsCompleted": 201,
+      "route": "CX269",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "curtis caples",
+      "stopsCompleted": 201,
+      "route": "CX287",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Adrian Arellano",
+      "stopsCompleted": 199,
+      "route": "CX285",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Cameyon Smith",
+      "stopsCompleted": 199,
+      "route": "CX262",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Darrell Woods",
+      "stopsCompleted": 199,
+      "route": "CX266",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Shachaniah Israel",
+      "stopsCompleted": 199,
+      "route": "CX268",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Marquel Phipps jr",
+      "stopsCompleted": 198,
+      "route": "CX282",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Cedric Lewis",
+      "stopsCompleted": 197,
+      "route": "CX279",
+      "multiTransporter": "yes",
+      "coDrivers": "Shakira Singleton, Taylor Hornung, Marquise Crum"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Malyk Latham",
+      "stopsCompleted": 197,
+      "route": "CX258",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Marquise Crum",
+      "stopsCompleted": 197,
+      "route": "CX279",
+      "multiTransporter": "yes",
+      "coDrivers": "Shakira Singleton, Cedric Lewis, Taylor Hornung"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Shakira Singleton",
+      "stopsCompleted": 197,
+      "route": "CX279",
+      "multiTransporter": "yes",
+      "coDrivers": "Cedric Lewis, Taylor Hornung, Marquise Crum"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Taylor Hornung",
+      "stopsCompleted": 197,
+      "route": "CX279",
+      "multiTransporter": "yes",
+      "coDrivers": "Shakira Singleton, Cedric Lewis, Marquise Crum"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Adrian Arellano",
+      "stopsCompleted": 196,
+      "route": "CX286",
+      "multiTransporter": "yes",
+      "coDrivers": "Marquise Crum"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Marquise Crum",
+      "stopsCompleted": 196,
+      "route": "CX286",
+      "multiTransporter": "yes",
+      "coDrivers": "Adrian Arellano"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Shameka Williams",
+      "stopsCompleted": 196,
+      "route": "CX260",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Kiona Pree",
+      "stopsCompleted": 194,
+      "route": "CX267",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Aaron Hines",
+      "stopsCompleted": 192,
+      "route": "CX259",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "John Byrd",
+      "stopsCompleted": 192,
+      "route": "CX275",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Ladarias Clifton",
+      "stopsCompleted": 192,
+      "route": "CX257",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Larry Shipp",
+      "stopsCompleted": 192,
+      "route": "CX274",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Daniel Aponte espinoza",
+      "stopsCompleted": 191,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Marcelous Kyles, Larrico Pickens"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Larrico Pickens",
+      "stopsCompleted": 191,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Marcelous Kyles, Daniel Aponte espinoza"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Larrico Pickens",
+      "stopsCompleted": 191,
+      "route": "CX265",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Marcelous Kyles",
+      "stopsCompleted": 191,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Larrico Pickens, Daniel Aponte espinoza"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Devarius Mitchell",
+      "stopsCompleted": 190,
+      "route": "CX307",
+      "multiTransporter": "yes",
+      "coDrivers": "Taylor Hornung"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Donovan Doss",
+      "stopsCompleted": 190,
+      "route": "CX283",
+      "multiTransporter": "yes",
+      "coDrivers": "Jordan Hutchinson"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Jordan Hutchinson",
+      "stopsCompleted": 190,
+      "route": "CX283",
+      "multiTransporter": "yes",
+      "coDrivers": "Donovan Doss"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Mary Acker",
+      "stopsCompleted": 190,
+      "route": "CX289",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Taylor Hornung",
+      "stopsCompleted": 190,
+      "route": "CX307",
+      "multiTransporter": "yes",
+      "coDrivers": "Devarius Mitchell"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "DeAndre Adams",
+      "stopsCompleted": 189,
+      "route": "CX276",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Timothy Tanner",
+      "stopsCompleted": 188,
+      "route": "CX277",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Darius Randolph",
+      "stopsCompleted": 187,
+      "route": "CX284",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Cedric Lewis",
+      "stopsCompleted": 186,
+      "route": "CX280",
+      "multiTransporter": "yes",
+      "coDrivers": "Lorenzo Miller"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Lorenzo Miller",
+      "stopsCompleted": 186,
+      "route": "CX280",
+      "multiTransporter": "yes",
+      "coDrivers": "Cedric Lewis"
+    },
+    {
+      "date": "2026-09-17",
+      "deliveryAssociate": "Caleb Spann",
+      "stopsCompleted": 185,
+      "route": "CX290",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Donovan Doss",
+      "stopsCompleted": 204,
+      "route": "CX254",
+      "multiTransporter": "yes",
+      "coDrivers": "Marshay Matheney, Marquise Crum"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Marquise Crum",
+      "stopsCompleted": 204,
+      "route": "CX254",
+      "multiTransporter": "yes",
+      "coDrivers": "Marshay Matheney, Donovan Doss"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Marshay Matheney",
+      "stopsCompleted": 204,
+      "route": "CX254",
+      "multiTransporter": "yes",
+      "coDrivers": "Marquise Crum, Donovan Doss"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Brandon Clark",
+      "stopsCompleted": 202,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaveyon Lewis, Marquise Crum, Ladarias Clifton"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Kaveyon Lewis",
+      "stopsCompleted": 202,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Marquise Crum, Ladarias Clifton, Brandon Clark"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Ladarias Clifton",
+      "stopsCompleted": 202,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaveyon Lewis, Marquise Crum, Brandon Clark"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Marquise Crum",
+      "stopsCompleted": 202,
+      "route": "CX257",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaveyon Lewis, Ladarias Clifton, Brandon Clark"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Khalid Jones",
+      "stopsCompleted": 201,
+      "route": "CX274",
+      "multiTransporter": "yes",
+      "coDrivers": "Taylor Hornung"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Taylor Hornung",
+      "stopsCompleted": 201,
+      "route": "CX274",
+      "multiTransporter": "yes",
+      "coDrivers": "Khalid Jones"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Amy Rhinehart",
+      "stopsCompleted": 199,
+      "route": "CX255",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Donnell Jefferson",
+      "stopsCompleted": 199,
+      "route": "CX251",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Keon Gross",
+      "stopsCompleted": 199,
+      "route": "CX269",
+      "multiTransporter": "yes",
+      "coDrivers": "Lorenzo Miller"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Lorenzo Miller",
+      "stopsCompleted": 199,
+      "route": "CX269",
+      "multiTransporter": "yes",
+      "coDrivers": "Keon Gross"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Shachaniah Israel",
+      "stopsCompleted": 199,
+      "route": "CX253",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 198,
+      "route": "CX248",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Daurieal Hervey",
+      "stopsCompleted": 198,
+      "route": "CX271",
+      "multiTransporter": "yes",
+      "coDrivers": "Jakira Cathey, Taylor Hornung"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Jakira Cathey",
+      "stopsCompleted": 198,
+      "route": "CX271",
+      "multiTransporter": "yes",
+      "coDrivers": "Daurieal Hervey, Taylor Hornung"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "John Scott",
+      "stopsCompleted": 198,
+      "route": "CX270",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Taylor Hornung",
+      "stopsCompleted": 198,
+      "route": "CX271",
+      "multiTransporter": "yes",
+      "coDrivers": "Jakira Cathey, Daurieal Hervey"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Timothy Tanner",
+      "stopsCompleted": 198,
+      "route": "CX252",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Kashif Festherson",
+      "stopsCompleted": 197,
+      "route": "CX245",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Malyk Latham",
+      "stopsCompleted": 197,
+      "route": "CX247",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Dibrell Armstrong",
+      "stopsCompleted": 196,
+      "route": "CX273",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Ladarias Clifton",
+      "stopsCompleted": 196,
+      "route": "CX246",
+      "multiTransporter": "yes",
+      "coDrivers": "Michael Neal"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Michael Neal",
+      "stopsCompleted": 196,
+      "route": "CX246",
+      "multiTransporter": "yes",
+      "coDrivers": "Ladarias Clifton"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Bernard Nelson",
+      "stopsCompleted": 195,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "curtis caples, Khalid Jones"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 195,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Donovan Doss, Daurieal Hervey"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Daurieal Hervey",
+      "stopsCompleted": 195,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Donovan Doss, Candido Fulcher"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Donovan Doss",
+      "stopsCompleted": 195,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher, Daurieal Hervey"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Khalid Jones",
+      "stopsCompleted": 195,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "curtis caples, Bernard Nelson"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "curtis caples",
+      "stopsCompleted": 195,
+      "route": "CX275",
+      "multiTransporter": "yes",
+      "coDrivers": "Khalid Jones, Bernard Nelson"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Cameyon Smith",
+      "stopsCompleted": 194,
+      "route": "CX250",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Darius Randolph",
+      "stopsCompleted": 194,
+      "route": "CX278",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Frank Robertson",
+      "stopsCompleted": 192,
+      "route": "CX263",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Marquel Phipps jr",
+      "stopsCompleted": 191,
+      "route": "CX276",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Keon Gross",
+      "stopsCompleted": 189,
+      "route": "CX259",
+      "multiTransporter": "yes",
+      "coDrivers": "Kylan Knight"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Kylan Knight",
+      "stopsCompleted": 189,
+      "route": "CX259",
+      "multiTransporter": "yes",
+      "coDrivers": "Keon Gross"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Adrian Arellano",
+      "stopsCompleted": 185,
+      "route": "CX267",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Cameyon Smith",
+      "stopsCompleted": 184,
+      "route": "CX249",
+      "multiTransporter": "yes",
+      "coDrivers": "Keyshawn Dickerson"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Keyshawn Dickerson",
+      "stopsCompleted": 184,
+      "route": "CX249",
+      "multiTransporter": "yes",
+      "coDrivers": "Cameyon Smith"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Justin Scott",
+      "stopsCompleted": 180,
+      "route": "CX260",
+      "multiTransporter": "yes",
+      "coDrivers": "Keon Gross"
+    },
+    {
+      "date": "2026-09-18",
+      "deliveryAssociate": "Keon Gross",
+      "stopsCompleted": 180,
+      "route": "CX260",
+      "multiTransporter": "yes",
+      "coDrivers": "Justin Scott"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Kaveyon Lewis",
+      "stopsCompleted": 205,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Lyric Cole, Kaylon Christopher, LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Kaylon Christopher",
+      "stopsCompleted": 205,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaveyon Lewis, Lyric Cole, LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "LaKendra Shaw",
+      "stopsCompleted": 205,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaveyon Lewis, Lyric Cole, Kaylon Christopher"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Lyric Cole",
+      "stopsCompleted": 205,
+      "route": "CX256",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaveyon Lewis, Kaylon Christopher, LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Jalon Lewis",
+      "stopsCompleted": 203,
+      "route": "CX232",
+      "multiTransporter": "yes",
+      "coDrivers": "Lyric Cole"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Lyric Cole",
+      "stopsCompleted": 203,
+      "route": "CX232",
+      "multiTransporter": "yes",
+      "coDrivers": "Jalon Lewis"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Lyric Cole",
+      "stopsCompleted": 201,
+      "route": "CX259",
+      "multiTransporter": "yes",
+      "coDrivers": "Marquise Crum"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Marquise Crum",
+      "stopsCompleted": 201,
+      "route": "CX259",
+      "multiTransporter": "yes",
+      "coDrivers": "Lyric Cole"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 199,
+      "route": "CX235",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Candido Fulcher",
+      "stopsCompleted": 199,
+      "route": "CX236",
+      "multiTransporter": "yes",
+      "coDrivers": "Khalid Jones"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Daniel Aponte espinoza",
+      "stopsCompleted": 199,
+      "route": "CX244",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Darius Randolph",
+      "stopsCompleted": 199,
+      "route": "CX257",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "John Scott",
+      "stopsCompleted": 199,
+      "route": "CX258",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Keyshawn Dickerson",
+      "stopsCompleted": 199,
+      "route": "CX237",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Khalid Jones",
+      "stopsCompleted": 199,
+      "route": "CX236",
+      "multiTransporter": "yes",
+      "coDrivers": "Candido Fulcher"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "John Byrd",
+      "stopsCompleted": 198,
+      "route": "CX251",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Marquel Phipps jr",
+      "stopsCompleted": 197,
+      "route": "CX255",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Demarcus Faulkner",
+      "stopsCompleted": 196,
+      "route": "CX261",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Kaylon Christopher",
+      "stopsCompleted": 196,
+      "route": "CX262",
+      "multiTransporter": "yes",
+      "coDrivers": "LaKendra Shaw"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "LaKendra Shaw",
+      "stopsCompleted": 196,
+      "route": "CX262",
+      "multiTransporter": "yes",
+      "coDrivers": "Kaylon Christopher"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Adrian Arellano",
+      "stopsCompleted": 195,
+      "route": "CX254",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Justin Scott",
+      "stopsCompleted": 195,
+      "route": "CX249",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Marshay Matheney",
+      "stopsCompleted": 195,
+      "route": "CX260",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Bernard Nelson",
+      "stopsCompleted": 194,
+      "route": "CX252",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Darrell Woods",
+      "stopsCompleted": 194,
+      "route": "CX241",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Lyric Cole",
+      "stopsCompleted": 194,
+      "route": "CX240",
+      "multiTransporter": "yes",
+      "coDrivers": "Shameka Williams"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Shameka Williams",
+      "stopsCompleted": 194,
+      "route": "CX240",
+      "multiTransporter": "yes",
+      "coDrivers": "Lyric Cole"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Jordan Hutchinson",
+      "stopsCompleted": 192,
+      "route": "CX239",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Kiona Pree",
+      "stopsCompleted": 192,
+      "route": "CX242",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Xavion Frazier",
+      "stopsCompleted": 192,
+      "route": "CX245",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Denzel Hall",
+      "stopsCompleted": 190,
+      "route": "CX253",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Larry Shipp",
+      "stopsCompleted": 190,
+      "route": "CX248",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Aaron Armstrong",
+      "stopsCompleted": 185,
+      "route": "CX276",
+      "multiTransporter": "yes",
+      "coDrivers": "DeAndre Adams"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "DeAndre Adams",
+      "stopsCompleted": 185,
+      "route": "CX276",
+      "multiTransporter": "yes",
+      "coDrivers": "Aaron Armstrong"
+    },
+    {
+      "date": "2026-09-19",
+      "deliveryAssociate": "Dibrell Armstrong",
+      "stopsCompleted": 183,
+      "route": "CX264",
+      "multiTransporter": "no",
+      "coDrivers": ""
+    }
+  ],
+  "uniqueDeliveryAssociates": [
+    "Aaron Armstrong",
+    "Aaron Davis",
+    "Aaron Hines",
+    "Adrian Arellano",
+    "Alexis Hutchison",
+    "Amy Rhinehart",
+    "Asja Hurt",
+    "Bernard Nelson",
+    "Brandon Clark",
+    "Caleb Spann",
+    "Cameyon Smith",
+    "Candido Fulcher",
+    "Caprio Newman",
+    "Cedric Lewis",
+    "Chance Stupp",
+    "Colter Stupp",
+    "Dajon Trice",
+    "Daniel Aponte espinoza",
+    "Daniel Gilmore",
+    "Darius Randolph",
+    "Darrell Woods",
+    "Daurieal Hervey",
+    "DeAndre Adams",
+    "Demarcus Faulkner",
+    "Denzel Hall",
+    "Devarius Mitchell",
+    "Dibrell Armstrong",
+    "Donnell Jefferson",
+    "Donovan Doss",
+    "Frank Robertson",
+    "Gregory Lowery",
+    "Henry Taylor",
+    "Jakira Cathey",
+    "Jalon Lewis",
+    "Jayden Williams",
+    "Jazmonjr Worles",
+    "Jeromy Mitchell",
+    "Jessica Davis",
+    "John Byrd",
+    "John Scott",
+    "Jordan Hutchinson",
+    "Justin Scott",
+    "Kashif Festherson",
+    "Kaveyon Lewis",
+    "Kaylon Christopher",
+    "Keon Gross",
+    "Keyshawn Dickerson",
+    "Khalid Jones",
+    "Kiona Pree",
+    "Kylan Knight",
+    "LaKendra Shaw",
+    "Ladarias Clifton",
+    "Larrico Pickens",
+    "Larry Shipp",
+    "Lauquetta Vaughn",
+    "Lorenzo Miller",
+    "Lyric Cole",
+    "Makayla Cooper",
+    "Malyk Latham",
+    "Marcelous Kyles",
+    "Markayla Tillis",
+    "Marquel Phipps jr",
+    "Marquise Crum",
+    "Marshay Matheney",
+    "Mary Acker",
+    "Mauricio Hearns",
+    "Michael Neal",
+    "Nolan Goliday",
+    "Shachaniah Israel",
+    "Shakira Singleton",
+    "Shameka Williams",
+    "Taylor Hornung",
+    "Timothy Tanner",
+    "Venson Muskin",
+    "Xavion Frazier",
+    "Zora Bobo",
+    "briana Mosley",
+    "curtis caples",
+    "darome boyland"
+  ],
+  "counts": {
+    "entryRows": 215,
+    "uniqueDas": 79,
+    "soloEntries": 100,
+    "uniqueSoloDas": 51,
+    "multiEntries": 115
+  }
+}

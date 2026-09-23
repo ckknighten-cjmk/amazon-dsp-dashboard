@@ -77,9 +77,17 @@ test("other dataset exports stay on seeded values", () => {
   assert.equal(csvLines(exceptions.csv).length - 1, 179);
 
   const scorecard = scorecardCsv();
-  assert.equal(scorecard.filename, "scorecard-week-37.csv");
-  assert.match(scorecard.csv, /85\.8/);
+  assert.equal(scorecard.filename, "scorecard-week-38.csv");
+  assert.match(scorecard.csv, /,84,/);
+  assert.match(scorecard.csv, /4,166\.9 DPMO/);
+  assert.match(scorecard.csv, /99\.46%/);
+  assert.match(scorecard.csv, /94\.01%/);
+  assert.match(scorecard.csv, /Great/);
   assert.match(scorecard.csv, /Not shown in Console/);
+  assert.doesNotMatch(scorecard.csv, /85\.8/);
+  const week37 = scorecardCsv(37);
+  assert.equal(week37.filename, "scorecard-week-37.csv");
+  assert.match(week37.csv, /85\.8/);
   assert.doesNotMatch(scorecard.csv, /prior week was \d/i);
 
   const payments = paymentsCsv();
