@@ -13,6 +13,13 @@ import week39Schedule from "@/lib/data/seed/week39-amazon-schedule.json";
 import week38Adp from "@/lib/data/seed/adp-timecards-week38.json";
 import week39Adp from "@/lib/data/seed/adp-timecards-week39.json";
 import { collapseSpaces, matchAmazonName, nameTokens } from "@/lib/compliance/names";
+import {
+  employmentLabel,
+  employmentStatus,
+  matchCensusEmployee,
+  publishedEmail,
+  publishedPhone,
+} from "@/lib/data/census";
 import { associateId, consoleDrivers, initials, routes } from "@/lib/data/delivery-execution";
 import type { Driver, DriverRole, DriverStatus, RosterSource } from "@/lib/types";
 
@@ -295,10 +302,25 @@ function buildRoster(): Driver[] {
   }
 
   drivers.sort((a, b) => a.name.localeCompare(b.name, "en"));
-  return drivers;
+  return drivers.map((driver) => {
+    const employee = matchCensusEmployee(driver.name);
+    if (!employee) return driver;
+    const status = employmentStatus(employee.status);
+    return {
+      ...driver,
+      phone: publishedPhone(employee),
+      email: publishedEmail(employee),
+      employmentStatus: status ?? undefined,
+      censusName: employee.name,
+    };
+  });
 }
 
 export const rosterDrivers: Driver[] = buildRoster();
+
+export function isPrimaryRoster(driver: Pick<Driver, "employmentStatus">) {
+  return !driver.employmentStatus || driver.employmentStatus === "active";
+}
 
 export function filterRoster(
   drivers: readonly Driver[],
@@ -307,6 +329,7 @@ export function filterRoster(
     status?: DriverStatus | "all";
     role?: DriverRole | "all";
     source?: RosterSource | "all";
+    employment?: Driver["employmentStatus"] | "unlisted" | "all";
   },
   routeCodes: (driver: Driver) => string[] = () => []
 ) {
@@ -314,15 +337,29 @@ export function filterRoster(
   const status = filters.status ?? "all";
   const role = filters.role ?? "all";
   const source = filters.source ?? "all";
+  const employment = filters.employment ?? "all";
   return drivers.filter((driver) => {
     if (status !== "all" && driver.status !== status) return false;
     if (role !== "all" && driver.role !== role) return false;
     if (source !== "all" && driver.rosterSource !== source) return false;
+    if (employment === "unlisted" && driver.employmentStatus) return false;
+    if (employment === "active" && !isPrimaryRoster(driver)) return false;
+    if (
+      employment !== "all" &&
+      employment !== "active" &&
+      employment !== "unlisted" &&
+      driver.employmentStatus !== employment
+    ) {
+      return false;
+    }
     if (!query) return true;
     const haystack = [
       driver.name,
       driver.role,
       driver.phone,
+      driver.email,
+      driver.censusName,
+      employmentLabel(driver.employmentStatus),
       driver.transporterId,
       driver.adpName,
       rosterSourceLabel(driver),

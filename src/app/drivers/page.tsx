@@ -17,9 +17,10 @@ import {
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { associatesCsv } from "@/lib/export/datasets";
 import { getDrivers, getRoute } from "@/lib/data";
+import { employmentLabel } from "@/lib/data/census";
 import { filterRoster, rosterSourceLabel } from "@/lib/data/roster";
 import { driverStatusLabel, formatNumber, formatTenure } from "@/lib/format";
-import type { DriverRole, DriverStatus, RosterSource } from "@/lib/types";
+import type { Driver, DriverRole, DriverStatus, RosterSource } from "@/lib/types";
 
 export default function DriversPage() {
   const drivers = getDrivers();
@@ -28,20 +29,21 @@ export default function DriversPage() {
   const [status, setStatus] = useState<DriverStatus | "all">("all");
   const [role, setRole] = useState<DriverRole | "all">("all");
   const [source, setSource] = useState<RosterSource | "all">("all");
+  const [employment, setEmployment] = useState<Driver["employmentStatus"] | "unlisted" | "all">("active");
 
   const filtered = useMemo(
     () =>
-      filterRoster(drivers, { query, status, role, source }, (driver) =>
+      filterRoster(drivers, { query, status, role, source, employment }, (driver) =>
         driver.routeIds.map((id) => getRoute(id)?.code ?? "")
       ),
-    [drivers, query, status, role, source]
+    [drivers, query, status, role, source, employment]
   );
 
   return (
     <div>
       <PageHeader
         title="Associates"
-        description="Full active roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID. Today’s packages, routes, and status come from the Sep 21 Delivery Execution board when the name matches. ADP Group Timecard names with no schedule transporter ID are labeled ADP only. Tenure, phone, and scorecard contribution were not in these exports."
+        description="Full roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID, plus ADP-only timecard names. Today’s packages and routes come from the Sep 21 Delivery Execution board when the name matches. Phone and email come from the ADP Employee Census when the name matches. The list opens on Active, including associates the census did not list. Terminated and deceased stay on the employment filter. Tenure and scorecard contribution were not in these exports."
         actions={<ExportCsvButton filename={rosterExport.filename} csv={rosterExport.csv} label="Export roster" />}
       />
 
@@ -49,7 +51,7 @@ export default function DriversPage() {
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search name, route, or transporter ID…"
+          placeholder="Search name, phone, email, or transporter ID…"
           className="max-w-xs"
           aria-label="Search associates"
         />
@@ -88,6 +90,20 @@ export default function DriversPage() {
           <option value="adp-only">ADP only</option>
           <option value="delivery-board">Sep 21 board only</option>
         </select>
+        <select
+          className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm dark:bg-input/30"
+          value={employment}
+          onChange={(e) =>
+            setEmployment(e.target.value as Driver["employmentStatus"] | "unlisted" | "all")
+          }
+          aria-label="Filter by employment"
+        >
+          <option value="active">Active</option>
+          <option value="terminated">Terminated</option>
+          <option value="deceased">Deceased</option>
+          <option value="unlisted">Not in census</option>
+          <option value="all">All employment</option>
+        </select>
         <p
           className="ml-auto text-xs text-muted-foreground tabular-nums"
           data-roster-filtered={filtered.length}
@@ -108,6 +124,9 @@ export default function DriversPage() {
             <TableHeader>
               <TableRow>
                 <TableHead>Associate</TableHead>
+                <TableHead>Phone</TableHead>
+                <TableHead>Email</TableHead>
+                <TableHead>Employment</TableHead>
                 <TableHead>Source</TableHead>
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
@@ -134,11 +153,14 @@ export default function DriversPage() {
                           <p className="font-mono text-xs text-muted-foreground">
                             {driver.rosterSource === "adp-only"
                               ? `${driver.adpName ?? driver.name} · no transporter ID`
-                              : (driver.transporterId ?? driver.phone ?? "—")}
+                              : (driver.transporterId ?? "—")}
                           </p>
                         </div>
                       </div>
                     </TableCell>
+                    <TableCell className="font-mono text-xs">{driver.phone ?? "—"}</TableCell>
+                    <TableCell className="text-xs">{driver.email ?? "—"}</TableCell>
+                    <TableCell className="text-xs">{employmentLabel(driver.employmentStatus)}</TableCell>
                     <TableCell className="text-xs">{rosterSourceLabel(driver)}</TableCell>
                     <TableCell>{driver.role}</TableCell>
                     <TableCell>

@@ -1,4 +1,5 @@
 import { getDrivers, getDvicReport, getExceptions, getPayments, getRoutes, getScorecard, getVehicles } from "@/lib/data";
+import { employmentLabel } from "@/lib/data/census";
 import { rosterSourceLabel } from "@/lib/data/roster";
 import {
   formatCompletionPct,
@@ -40,6 +41,10 @@ export function associatesCsv(): CsvFile {
     "Name",
     "Transporter ID",
     "ADP name",
+    "Phone",
+    "Email",
+    "Census name",
+    "Employment",
     "Source",
     "Schedule weeks",
     "Role",
@@ -53,6 +58,10 @@ export function associatesCsv(): CsvFile {
     driver.name,
     driver.transporterId ?? "",
     driver.adpName ?? "",
+    driver.phone ?? "",
+    driver.email ?? "",
+    driver.censusName ?? "",
+    driver.employmentStatus ? employmentLabel(driver.employmentStatus) : "",
     rosterSourceLabel(driver),
     (driver.scheduleWeeks ?? []).join("; "),
     driver.role,

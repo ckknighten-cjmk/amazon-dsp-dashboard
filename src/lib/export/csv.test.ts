@@ -24,6 +24,9 @@ test("associates export is the full roster", () => {
   assert.ok(lines.length - 1 > 40);
   assert.match(file.csv, /Aaron Calvin Davis/);
   assert.match(file.csv, /ADP only/);
+  assert.match(file.csv, /aaronmacalot@gmail.com/);
+  assert.match(file.csv, /AARON C DAVIS/);
+  assert.doesNotMatch(file.csv, /1-901-2385020/);
 });
 
 test("routes export marks multi-associate routes as rescued without replacing Console status", () => {

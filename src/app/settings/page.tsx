@@ -183,8 +183,9 @@ export default function SettingsPage() {
               illustrative; badges match Amazon’s displayed standing. Routes are
               the Sep 21 Delivery Execution board. The associate roster unions
               Amazon schedule Weeks 38 and 39, merges that board by name, and
-              labels ADP-only names that have no transporter ID. Fleet and
-              incidents remain mock.
+              labels ADP-only names that have no transporter ID. Phone and email
+              come from the ADP Employee Census when the name matches. Fleet is
+              the DNA4 My vehicles capture. Incidents remain mock.
             </div>
           </CardContent>
         </Card>

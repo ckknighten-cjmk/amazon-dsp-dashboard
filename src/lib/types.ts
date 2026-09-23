@@ -78,6 +78,11 @@ export interface Driver {
   status: DriverStatus;
   hiredAt?: string;
   phone?: string;
+  email?: string;
+  /** ADP Employee Census status when the name matched. Absent when the census has no row. */
+  employmentStatus?: "active" | "terminated" | "deceased";
+  /** Census name that supplied phone and email. */
+  censusName?: string;
   todayPackages: number;
   todayStops: number;
   scorecardContribution?: number;
