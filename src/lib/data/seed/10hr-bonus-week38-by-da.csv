@@ -1,0 +1,216 @@
+date,deliveryAssociate,stopsCompleted,route,multiTransporter,coDrivers
+2026-09-13,Candido Fulcher,204,CX33,yes,Daniel Gilmore
+2026-09-13,Daniel Gilmore,204,CX33,yes,Candido Fulcher
+2026-09-13,Candido Fulcher,203,CX10,yes,darome boyland
+2026-09-13,Nolan Goliday,203,CX26,yes,briana Mosley
+2026-09-13,briana Mosley,203,CX26,yes,Nolan Goliday
+2026-09-13,darome boyland,203,CX10,yes,Candido Fulcher
+2026-09-13,Asja Hurt,200,CX23,yes,Markayla Tillis
+2026-09-13,Markayla Tillis,200,CX23,yes,Asja Hurt
+2026-09-13,Amy Rhinehart,199,CX32,no,
+2026-09-13,Chance Stupp,199,CX25,yes,"Jessica Davis, Mary Acker"
+2026-09-13,Jessica Davis,199,CX25,yes,"Mary Acker, Chance Stupp"
+2026-09-13,Makayla Cooper,199,CX1,no,
+2026-09-13,Mary Acker,199,CX25,yes,"Jessica Davis, Chance Stupp"
+2026-09-13,Jazmonjr Worles,198,CX27,no,
+2026-09-13,Jeromy Mitchell,198,CX29,no,
+2026-09-13,Keon Gross,198,CX30,yes,briana Mosley
+2026-09-13,briana Mosley,198,CX30,yes,Keon Gross
+2026-09-13,Devarius Mitchell,196,CX28,no,
+2026-09-13,Shachaniah Israel,196,CX24,no,
+2026-09-13,Kylan Knight,193,CX11,no,
+2026-09-13,Michael Neal,189,CX21,no,
+2026-09-13,DeAndre Adams,183,CX2,yes,Jayden Williams
+2026-09-13,Jayden Williams,183,CX2,yes,DeAndre Adams
+2026-09-13,Mauricio Hearns,181,CX5,no,
+2026-09-14,Kylan Knight,203,CX12,yes,Nolan Goliday
+2026-09-14,Nolan Goliday,203,CX12,yes,Kylan Knight
+2026-09-14,Amy Rhinehart,199,CX27,no,
+2026-09-14,Aaron Davis,198,CX32,no,
+2026-09-14,Devarius Mitchell,198,CX30,no,
+2026-09-14,Dajon Trice,196,CX28,no,
+2026-09-14,Larrico Pickens,196,CX34,no,
+2026-09-14,Daniel Aponte espinoza,188,CX26,no,
+2026-09-14,Henry Taylor,186,CX35,yes,Larrico Pickens
+2026-09-14,Larrico Pickens,186,CX35,yes,Henry Taylor
+2026-09-14,Asja Hurt,184,CX25,no,
+2026-09-14,Jazmonjr Worles,184,CX29,no,
+2026-09-14,Cameyon Smith,182,CX33,no,
+2026-09-14,Aaron Hines,180,CX31,no,
+2026-09-15,Colter Stupp,200,CX35,yes,Venson Muskin
+2026-09-15,Venson Muskin,200,CX35,yes,Colter Stupp
+2026-09-15,Aaron Davis,197,CX32,no,
+2026-09-15,Jakira Cathey,197,CX28,yes,Jessica Davis
+2026-09-15,Jessica Davis,197,CX28,yes,Jakira Cathey
+2026-09-15,Keon Gross,196,CX34,no,
+2026-09-15,Jeromy Mitchell,194,CX31,no,
+2026-09-15,Asja Hurt,191,CX26,no,
+2026-09-15,Jazmonjr Worles,191,CX30,no,
+2026-09-15,Jessica Davis,191,CX29,yes,Nolan Goliday
+2026-09-15,Nolan Goliday,191,CX29,yes,Jessica Davis
+2026-09-15,Caprio Newman,190,CX13,no,
+2026-09-15,Shachaniah Israel,190,CX27,no,
+2026-09-15,darome boyland,190,CX12,no,
+2026-09-15,Jordan Hutchinson,188,CX33,no,
+2026-09-15,Marshay Matheney,187,CX11,no,
+2026-09-16,Jessica Davis,208,CX275,yes,"curtis caples, Marshay Matheney, LaKendra Shaw"
+2026-09-16,LaKendra Shaw,208,CX275,yes,"curtis caples, Jessica Davis, Marshay Matheney"
+2026-09-16,Marshay Matheney,208,CX275,yes,"curtis caples, Jessica Davis, LaKendra Shaw"
+2026-09-16,curtis caples,208,CX275,yes,"Jessica Davis, Marshay Matheney, LaKendra Shaw"
+2026-09-16,Jeromy Mitchell,205,CX262,yes,"Timothy Tanner, Jessica Davis"
+2026-09-16,Jessica Davis,205,CX262,yes,"Timothy Tanner, Jeromy Mitchell"
+2026-09-16,Timothy Tanner,205,CX262,yes,"Jessica Davis, Jeromy Mitchell"
+2026-09-16,Gregory Lowery,200,CX257,yes,"Jeromy Mitchell, Lauquetta Vaughn"
+2026-09-16,Jeromy Mitchell,200,CX257,yes,"Gregory Lowery, Lauquetta Vaughn"
+2026-09-16,Lauquetta Vaughn,200,CX257,yes,"Gregory Lowery, Jeromy Mitchell"
+2026-09-16,Donovan Doss,199,CX276,yes,Makayla Cooper
+2026-09-16,John Scott,199,CX271,no,
+2026-09-16,Makayla Cooper,199,CX276,yes,Donovan Doss
+2026-09-16,Shameka Williams,199,CX252,no,
+2026-09-16,Aaron Hines,198,CX247,no,
+2026-09-16,Adrian Arellano,198,CX267,no,
+2026-09-16,Donnell Jefferson,198,CX250,no,
+2026-09-16,Makayla Cooper,198,CX272,no,
+2026-09-16,Henry Taylor,197,CX244,yes,Keyshawn Dickerson
+2026-09-16,Jessica Davis,197,CX280,yes,"darome boyland, Mauricio Hearns"
+2026-09-16,Keyshawn Dickerson,197,CX244,yes,Henry Taylor
+2026-09-16,Malyk Latham,197,CX246,no,
+2026-09-16,Mauricio Hearns,197,CX280,yes,"darome boyland, Jessica Davis"
+2026-09-16,darome boyland,197,CX280,yes,"Jessica Davis, Mauricio Hearns"
+2026-09-16,Jazmonjr Worles,196,CX248,no,
+2026-09-16,Colter Stupp,195,CX249,no,
+2026-09-16,Daniel Aponte espinoza,195,CX256,no,
+2026-09-16,Henry Taylor,195,CX273,no,
+2026-09-16,Marshay Matheney,195,CX274,no,
+2026-09-16,Jordan Hutchinson,194,CX251,no,
+2026-09-16,Mary Acker,194,CX277,no,
+2026-09-16,Amy Rhinehart,193,CX255,no,
+2026-09-16,Asja Hurt,192,CX254,no,
+2026-09-16,Daniel Gilmore,192,CX259,yes,Mauricio Hearns
+2026-09-16,Marquise Crum,192,CX261,no,
+2026-09-16,Mauricio Hearns,192,CX259,yes,Daniel Gilmore
+2026-09-16,Venson Muskin,190,CX269,yes,Zora Bobo
+2026-09-16,Zora Bobo,190,CX269,yes,Venson Muskin
+2026-09-16,Larrico Pickens,188,CX253,no,
+2026-09-16,briana Mosley,186,CX268,no,
+2026-09-16,Demarcus Faulkner,180,CX270,no,
+2026-09-17,Candido Fulcher,209,CX288,yes,"Demarcus Faulkner, curtis caples"
+2026-09-17,Demarcus Faulkner,209,CX288,yes,"Candido Fulcher, curtis caples"
+2026-09-17,curtis caples,209,CX288,yes,"Demarcus Faulkner, Candido Fulcher"
+2026-09-17,Alexis Hutchison,204,CX263,yes,"Keon Gross, Cameyon Smith"
+2026-09-17,Cameyon Smith,204,CX263,yes,"Keon Gross, Alexis Hutchison"
+2026-09-17,Keon Gross,204,CX263,yes,"Cameyon Smith, Alexis Hutchison"
+2026-09-17,Candido Fulcher,201,CX269,yes,Daniel Aponte espinoza
+2026-09-17,Candido Fulcher,201,CX287,yes,curtis caples
+2026-09-17,Daniel Aponte espinoza,201,CX269,yes,Candido Fulcher
+2026-09-17,curtis caples,201,CX287,yes,Candido Fulcher
+2026-09-17,Adrian Arellano,199,CX285,no,
+2026-09-17,Cameyon Smith,199,CX262,no,
+2026-09-17,Darrell Woods,199,CX266,no,
+2026-09-17,Shachaniah Israel,199,CX268,no,
+2026-09-17,Marquel Phipps jr,198,CX282,no,
+2026-09-17,Cedric Lewis,197,CX279,yes,"Shakira Singleton, Taylor Hornung, Marquise Crum"
+2026-09-17,Malyk Latham,197,CX258,no,
+2026-09-17,Marquise Crum,197,CX279,yes,"Shakira Singleton, Cedric Lewis, Taylor Hornung"
+2026-09-17,Shakira Singleton,197,CX279,yes,"Cedric Lewis, Taylor Hornung, Marquise Crum"
+2026-09-17,Taylor Hornung,197,CX279,yes,"Shakira Singleton, Cedric Lewis, Marquise Crum"
+2026-09-17,Adrian Arellano,196,CX286,yes,Marquise Crum
+2026-09-17,Marquise Crum,196,CX286,yes,Adrian Arellano
+2026-09-17,Shameka Williams,196,CX260,no,
+2026-09-17,Kiona Pree,194,CX267,no,
+2026-09-17,Aaron Hines,192,CX259,no,
+2026-09-17,John Byrd,192,CX275,no,
+2026-09-17,Ladarias Clifton,192,CX257,no,
+2026-09-17,Larry Shipp,192,CX274,no,
+2026-09-17,Daniel Aponte espinoza,191,CX256,yes,"Marcelous Kyles, Larrico Pickens"
+2026-09-17,Larrico Pickens,191,CX256,yes,"Marcelous Kyles, Daniel Aponte espinoza"
+2026-09-17,Larrico Pickens,191,CX265,no,
+2026-09-17,Marcelous Kyles,191,CX256,yes,"Larrico Pickens, Daniel Aponte espinoza"
+2026-09-17,Devarius Mitchell,190,CX307,yes,Taylor Hornung
+2026-09-17,Donovan Doss,190,CX283,yes,Jordan Hutchinson
+2026-09-17,Jordan Hutchinson,190,CX283,yes,Donovan Doss
+2026-09-17,Mary Acker,190,CX289,no,
+2026-09-17,Taylor Hornung,190,CX307,yes,Devarius Mitchell
+2026-09-17,DeAndre Adams,189,CX276,no,
+2026-09-17,Timothy Tanner,188,CX277,no,
+2026-09-17,Darius Randolph,187,CX284,no,
+2026-09-17,Cedric Lewis,186,CX280,yes,Lorenzo Miller
+2026-09-17,Lorenzo Miller,186,CX280,yes,Cedric Lewis
+2026-09-17,Caleb Spann,185,CX290,no,
+2026-09-18,Donovan Doss,204,CX254,yes,"Marshay Matheney, Marquise Crum"
+2026-09-18,Marquise Crum,204,CX254,yes,"Marshay Matheney, Donovan Doss"
+2026-09-18,Marshay Matheney,204,CX254,yes,"Marquise Crum, Donovan Doss"
+2026-09-18,Brandon Clark,202,CX257,yes,"Kaveyon Lewis, Marquise Crum, Ladarias Clifton"
+2026-09-18,Kaveyon Lewis,202,CX257,yes,"Marquise Crum, Ladarias Clifton, Brandon Clark"
+2026-09-18,Ladarias Clifton,202,CX257,yes,"Kaveyon Lewis, Marquise Crum, Brandon Clark"
+2026-09-18,Marquise Crum,202,CX257,yes,"Kaveyon Lewis, Ladarias Clifton, Brandon Clark"
+2026-09-18,Khalid Jones,201,CX274,yes,Taylor Hornung
+2026-09-18,Taylor Hornung,201,CX274,yes,Khalid Jones
+2026-09-18,Amy Rhinehart,199,CX255,no,
+2026-09-18,Donnell Jefferson,199,CX251,no,
+2026-09-18,Keon Gross,199,CX269,yes,Lorenzo Miller
+2026-09-18,Lorenzo Miller,199,CX269,yes,Keon Gross
+2026-09-18,Shachaniah Israel,199,CX253,no,
+2026-09-18,Candido Fulcher,198,CX248,no,
+2026-09-18,Daurieal Hervey,198,CX271,yes,"Jakira Cathey, Taylor Hornung"
+2026-09-18,Jakira Cathey,198,CX271,yes,"Daurieal Hervey, Taylor Hornung"
+2026-09-18,John Scott,198,CX270,no,
+2026-09-18,Taylor Hornung,198,CX271,yes,"Jakira Cathey, Daurieal Hervey"
+2026-09-18,Timothy Tanner,198,CX252,no,
+2026-09-18,Kashif Festherson,197,CX245,no,
+2026-09-18,Malyk Latham,197,CX247,no,
+2026-09-18,Dibrell Armstrong,196,CX273,no,
+2026-09-18,Ladarias Clifton,196,CX246,yes,Michael Neal
+2026-09-18,Michael Neal,196,CX246,yes,Ladarias Clifton
+2026-09-18,Bernard Nelson,195,CX275,yes,"curtis caples, Khalid Jones"
+2026-09-18,Candido Fulcher,195,CX256,yes,"Donovan Doss, Daurieal Hervey"
+2026-09-18,Daurieal Hervey,195,CX256,yes,"Donovan Doss, Candido Fulcher"
+2026-09-18,Donovan Doss,195,CX256,yes,"Candido Fulcher, Daurieal Hervey"
+2026-09-18,Khalid Jones,195,CX275,yes,"curtis caples, Bernard Nelson"
+2026-09-18,curtis caples,195,CX275,yes,"Khalid Jones, Bernard Nelson"
+2026-09-18,Cameyon Smith,194,CX250,no,
+2026-09-18,Darius Randolph,194,CX278,no,
+2026-09-18,Frank Robertson,192,CX263,no,
+2026-09-18,Marquel Phipps jr,191,CX276,no,
+2026-09-18,Keon Gross,189,CX259,yes,Kylan Knight
+2026-09-18,Kylan Knight,189,CX259,yes,Keon Gross
+2026-09-18,Adrian Arellano,185,CX267,no,
+2026-09-18,Cameyon Smith,184,CX249,yes,Keyshawn Dickerson
+2026-09-18,Keyshawn Dickerson,184,CX249,yes,Cameyon Smith
+2026-09-18,Justin Scott,180,CX260,yes,Keon Gross
+2026-09-18,Keon Gross,180,CX260,yes,Justin Scott
+2026-09-19,Kaveyon Lewis,205,CX256,yes,"Lyric Cole, Kaylon Christopher, LaKendra Shaw"
+2026-09-19,Kaylon Christopher,205,CX256,yes,"Kaveyon Lewis, Lyric Cole, LaKendra Shaw"
+2026-09-19,LaKendra Shaw,205,CX256,yes,"Kaveyon Lewis, Lyric Cole, Kaylon Christopher"
+2026-09-19,Lyric Cole,205,CX256,yes,"Kaveyon Lewis, Kaylon Christopher, LaKendra Shaw"
+2026-09-19,Jalon Lewis,203,CX232,yes,Lyric Cole
+2026-09-19,Lyric Cole,203,CX232,yes,Jalon Lewis
+2026-09-19,Lyric Cole,201,CX259,yes,Marquise Crum
+2026-09-19,Marquise Crum,201,CX259,yes,Lyric Cole
+2026-09-19,Candido Fulcher,199,CX235,no,
+2026-09-19,Candido Fulcher,199,CX236,yes,Khalid Jones
+2026-09-19,Daniel Aponte espinoza,199,CX244,no,
+2026-09-19,Darius Randolph,199,CX257,no,
+2026-09-19,John Scott,199,CX258,no,
+2026-09-19,Keyshawn Dickerson,199,CX237,no,
+2026-09-19,Khalid Jones,199,CX236,yes,Candido Fulcher
+2026-09-19,John Byrd,198,CX251,no,
+2026-09-19,Marquel Phipps jr,197,CX255,no,
+2026-09-19,Demarcus Faulkner,196,CX261,no,
+2026-09-19,Kaylon Christopher,196,CX262,yes,LaKendra Shaw
+2026-09-19,LaKendra Shaw,196,CX262,yes,Kaylon Christopher
+2026-09-19,Adrian Arellano,195,CX254,no,
+2026-09-19,Justin Scott,195,CX249,no,
+2026-09-19,Marshay Matheney,195,CX260,no,
+2026-09-19,Bernard Nelson,194,CX252,no,
+2026-09-19,Darrell Woods,194,CX241,no,
+2026-09-19,Lyric Cole,194,CX240,yes,Shameka Williams
+2026-09-19,Shameka Williams,194,CX240,yes,Lyric Cole
+2026-09-19,Jordan Hutchinson,192,CX239,no,
+2026-09-19,Kiona Pree,192,CX242,no,
+2026-09-19,Xavion Frazier,192,CX245,no,
+2026-09-19,Denzel Hall,190,CX253,no,
+2026-09-19,Larry Shipp,190,CX248,no,
+2026-09-19,Aaron Armstrong,185,CX276,yes,DeAndre Adams
+2026-09-19,DeAndre Adams,185,CX276,yes,Aaron Armstrong
+2026-09-19,Dibrell Armstrong,183,CX264,no,

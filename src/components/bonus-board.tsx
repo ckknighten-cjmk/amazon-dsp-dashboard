@@ -73,7 +73,9 @@ export function BonusBoard({ list }: { list: BonusList }) {
       />
 
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">
-        {list.disclaimer} Source: {list.source}. Captured {formatZonedDateTime(list.capturedAt)}.{" "}
+        {list.disclaimer}{" "}
+        {list.source ? `Source: ${list.source}. ` : null}
+        {list.capturedAt ? `Captured ${formatZonedDateTime(list.capturedAt)}. ` : null}
         {allowedDates.length === 0
           ? `No Week ${list.week} days fall in ${formatRangeLabel(range)}. Associates are not copied onto empty days.`
           : fullWeek

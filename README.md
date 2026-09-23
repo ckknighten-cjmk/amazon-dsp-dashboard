@@ -82,7 +82,7 @@ Console snapshots used here live at:
 - [`src/lib/data/seed/work-summary-week38.json`](src/lib/data/seed/work-summary-week38.json) — Work Summary Tool, Week 38 (7,865 packages, 34 routes completed). No variable invoice was listed.
 - [`src/lib/data/seed/variable-invoice-week38.json`](src/lib/data/seed/variable-invoice-week38.json) — Week 38 variable invoice status **not_listed**. No dollars.
 - [`src/lib/data/seed/10hr-bonus-week38.json`](src/lib/data/seed/10hr-bonus-week38.json) — 148 Week 38 routes with 180 or more completed stops.
-- [`src/lib/data/seed/10hr-bonus-week38-by-da.json`](src/lib/data/seed/10hr-bonus-week38-by-da.json) — those routes as delivery-associate rows: 100 solo, 115 multi-transporter. Stops stay the route total.
+- [`src/lib/data/seed/10hr-bonus-week38-by-da.json`](src/lib/data/seed/10hr-bonus-week38-by-da.json) — DA-first Week 38 list: 100 solo, 115 multi-transporter (`yes`/`no`), co-drivers as captured. Stops stay the route total. CSV twin: [`10hr-bonus-week38-by-da.csv`](src/lib/data/seed/10hr-bonus-week38-by-da.csv).
 - [`src/lib/data/seed/work-summary-week39.json`](src/lib/data/seed/work-summary-week39.json) — Work Summary Tool, Week 39, captured in progress with zero summary metrics. No variable invoice was listed.
 - [`src/lib/data/seed/week38-amazon-schedule.xlsx`](src/lib/data/seed/week38-amazon-schedule.xlsx) — Amazon Scheduling Week 38 workbook (source for blocks and shifts)
 - [`src/lib/data/seed/week38-amazon-schedule.json`](src/lib/data/seed/week38-amazon-schedule.json) — that workbook parsed with the real headers (Rostered Work Blocks and Shifts & Availability)

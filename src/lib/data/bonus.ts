@@ -26,8 +26,8 @@ export interface BonusList {
   start: string;
   end: string;
   thresholdStopsCompleted: number;
-  capturedAt: string;
-  source: string;
+  capturedAt: string | null;
+  source: string | null;
   entries: BonusEntry[];
   dayCounts: BonusDayCount[];
   soloCount: number;
@@ -49,9 +49,17 @@ interface BonusSeed {
   week: number;
   period: string;
   thresholdStopsCompleted: number;
-  capturedAt: string;
-  source: string;
+  capturedAt?: string;
+  source?: string;
+  note?: string;
   entries: BonusSeedEntry[];
+  counts?: {
+    entryRows: number;
+    uniqueDas: number;
+    soloEntries: number;
+    uniqueSoloDas: number;
+    multiEntries: number;
+  };
 }
 
 const WEEK_START = "2026-09-13";
@@ -67,7 +75,7 @@ function asDrivers(value: string[] | string | undefined) {
   if (Array.isArray(value)) return value.map((name) => name.trim()).filter(Boolean);
   if (!value?.trim()) return [];
   return value
-    .split(";")
+    .split(",")
     .map((name) => name.trim())
     .filter(Boolean);
 }
@@ -117,6 +125,26 @@ function readSeed(raw: BonusSeed): BonusList {
     counts.set(entry.date, day);
   }
   const soloCount = entries.filter((entry) => !entry.multiTransporter).length;
+  const multiTransporterCount = entries.length - soloCount;
+  const uniqueDas = new Set(entries.map((entry) => entry.deliveryAssociate)).size;
+  const uniqueSoloDas = new Set(
+    entries.filter((entry) => !entry.multiTransporter).map((entry) => entry.deliveryAssociate)
+  ).size;
+  if (raw.counts) {
+    const published = raw.counts;
+    if (
+      published.entryRows !== entries.length ||
+      published.soloEntries !== soloCount ||
+      published.multiEntries !== multiTransporterCount ||
+      published.uniqueDas !== uniqueDas ||
+      published.uniqueSoloDas !== uniqueSoloDas
+    ) {
+      throw new Error("Week 38 bonus seed counts do not match its delivery-associate rows.");
+    }
+  }
+  const note =
+    raw.note ??
+    "stopsCompleted is the route total from Delivery Execution. On multi-transporter routes Amazon does not attribute stops to one DA; those rows are flagged multiTransporter=yes.";
   return {
     station: raw.station,
     week: 38,
@@ -124,14 +152,13 @@ function readSeed(raw: BonusSeed): BonusList {
     start: WEEK_START,
     end: WEEK_END,
     thresholdStopsCompleted: raw.thresholdStopsCompleted,
-    capturedAt: raw.capturedAt,
-    source: raw.source,
+    capturedAt: raw.capturedAt ?? null,
+    source: raw.source ?? null,
     entries,
     dayCounts: [...counts.values()].sort((a, b) => a.date.localeCompare(b.date)),
     soloCount,
-    multiTransporterCount: entries.length - soloCount,
-    disclaimer:
-      "Week 38 Sep 13–19 DNA4. Each row is a delivery associate on a route with at least 180 completed stops. stopsCompleted is the Delivery Execution route total, not a planned stop count. Solo rows are the only DA on that route. Multi-transporter rows list each DA who was on the route. Amazon did not say which of those DAs completed the stops, so the count is not split and is not assigned to one person.",
+    multiTransporterCount,
+    disclaimer: `Week 38 Sep 13–19 DNA4. ${note} Solo rows are the only DA on that route. This list does not decide who is paid the bonus.`,
   };
 }
 
@@ -142,7 +169,7 @@ export function getBonusList(): BonusList {
 }
 
 export function bonusCoDriverLabel(drivers: readonly string[]) {
-  return drivers.join("; ");
+  return drivers.join(", ");
 }
 
 export function bonusEntriesInRange(bonus: BonusList, range: DateRange) {

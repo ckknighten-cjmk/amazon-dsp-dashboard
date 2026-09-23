@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import routeSeed from "./seed/10hr-bonus-week38.json";
 import { bonusCsv, bonusExcel } from "../export/bonus";
@@ -33,6 +34,13 @@ test("Week 38 bonus list is one row per delivery associate", () => {
     EXPECTED_SOLO_BY_DAY
   );
 
+  assert.equal(list.entries[0]?.deliveryAssociate, "Candido Fulcher");
+  assert.equal(list.entries[0]?.route, "CX33");
+  assert.equal(list.entries[0]?.stopsCompleted, 204);
+  assert.equal(list.entries[0]?.multiTransporter, true);
+  assert.deepEqual(list.entries[0]?.coDrivers, ["Daniel Gilmore"]);
+  assert.match(list.disclaimer, /multiTransporter=yes/);
+
   const solo = list.entries.find((entry) => entry.deliveryAssociate === "Makayla Cooper" && entry.date === "2026-09-13");
   assert.ok(solo);
   assert.equal(solo.multiTransporter, false);
@@ -40,14 +48,24 @@ test("Week 38 bonus list is one row per delivery associate", () => {
   assert.equal(solo.stopsCompleted, 199);
   assert.deepEqual(solo.coDrivers, []);
 
-  const multi = list.entries.filter((entry) => entry.date === "2026-09-13" && entry.route === "CX2");
-  assert.deepEqual(
-    multi.map((entry) => entry.deliveryAssociate),
-    ["DeAndre Adams", "Jayden Williams"]
+  const deandre = list.entries.find(
+    (entry) => entry.date === "2026-09-13" && entry.route === "CX2" && entry.deliveryAssociate === "DeAndre Adams"
   );
-  assert.ok(multi.every((entry) => entry.multiTransporter && entry.stopsCompleted === 183));
-  assert.equal(bonusCoDriverLabel(multi[0]!.coDrivers), "Jayden Williams");
-  assert.equal(bonusCoDriverLabel(multi[1]!.coDrivers), "DeAndre Adams");
+  const jayden = list.entries.find(
+    (entry) => entry.date === "2026-09-13" && entry.route === "CX2" && entry.deliveryAssociate === "Jayden Williams"
+  );
+  assert.ok(deandre && jayden);
+  assert.equal(deandre.multiTransporter, true);
+  assert.equal(jayden.multiTransporter, true);
+  assert.equal(deandre.stopsCompleted, 183);
+  assert.equal(jayden.stopsCompleted, 183);
+  assert.equal(bonusCoDriverLabel(deandre.coDrivers), "Jayden Williams");
+  assert.equal(bonusCoDriverLabel(jayden.coDrivers), "DeAndre Adams");
+
+  const chance = list.entries.find(
+    (entry) => entry.date === "2026-09-13" && entry.route === "CX25" && entry.deliveryAssociate === "Chance Stupp"
+  );
+  assert.deepEqual(chance?.coDrivers, ["Jessica Davis", "Mary Acker"]);
 
   const casing = list.entries.find((entry) => entry.deliveryAssociate === "darome boyland");
   assert.ok(casing);
@@ -75,8 +93,8 @@ test("multi-transporter rows keep the route total and do not invent a split", ()
     const route = routes.get(key);
     assert.ok(route, key);
     assert.deepEqual(
-      rows.map((row) => row.deliveryAssociate),
-      route.drivers
+      rows.map((row) => row.deliveryAssociate).sort(),
+      [...route.drivers].sort()
     );
     assert.ok(rows.every((row) => row.stopsCompleted === route.stopsCompleted));
     if (route.drivers.length === 1) {
@@ -103,8 +121,11 @@ test("10-hour bonus CSV and Excel are delivery-associate first", () => {
   assert.equal(lines[0], "date,deliveryAssociate,stopsCompleted,route,multiTransporter,coDrivers");
   assert.match(csv.csv, /2026-09-13,Makayla Cooper,199,CX1,no,/);
   assert.match(csv.csv, /2026-09-13,DeAndre Adams,183,CX2,yes,Jayden Williams/);
+  assert.match(csv.csv, /2026-09-13,Chance Stupp,199,CX25,yes,"Jessica Davis, Mary Acker"/);
   assert.match(csv.csv, /darome boyland/);
   assert.doesNotMatch(csv.csv, /\$/);
+  const published = readFileSync("src/lib/data/seed/10hr-bonus-week38-by-da.csv", "utf8");
+  assert.deepEqual(csvLines(csv.csv), csvLines(published));
 
   const excel = bonusExcel(list);
   assert.equal(excel.filename, "10-hour-bonus-week-38-by-da.xls");
