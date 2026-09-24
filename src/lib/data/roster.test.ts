@@ -19,7 +19,7 @@ test("ADP display names turn LAST, FIRST into First Last", () => {
   assert.equal(adpDisplayName("Lexie"), "Lexie");
 });
 
-test("active roster is the schedule union, not the Sep 21 board", () => {
+test("active roster is the schedule union, not the Sep 23 board", () => {
   const drivers = getDrivers();
   const scheduled = drivers.filter((driver) => driver.rosterSource === "amazon-schedule");
   const adpOnly = drivers.filter((driver) => driver.rosterSource === "adp-only");
