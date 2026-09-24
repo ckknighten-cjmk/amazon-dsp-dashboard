@@ -1,0 +1,1885 @@
+{
+  "source": "Amazon DSP Console Delivery Execution",
+  "url": "https://logistics.amazon.com/operations/execution/dv/routes?operationView=true&provider=ALL_DRIVERS&selectedDay=2026-09-23&serviceAreaId=e28a313f-a022-4f6f-9295-11641bebe616",
+  "station": {
+    "code": "DNA4",
+    "name": "Memphis",
+    "dsp": "CJMK Inc.",
+    "companyShortCode": "CJMK"
+  },
+  "serviceDate": "2026-09-23",
+  "timezone": "America/Chicago",
+  "capturedAt": "2026-09-23T20:15:00-05:00",
+  "snapshot": "evening-wrap",
+  "totals": {
+    "routes": 35,
+    "inProgress": 0,
+    "incomplete": 2,
+    "workHourRisk": 1,
+    "multiTransporter": 18,
+    "unknownStops": 24,
+    "onBreak": 0,
+    "noBreaksTaken": 0,
+    "inactive": 0,
+    "executionGaugesPct": {
+      "locations": 99,
+      "stops": 99,
+      "packages": 99,
+      "attemptSuccess": 99
+    },
+    "packageStatusCounts": {
+      "remaining": 2,
+      "reattemptable": 2,
+      "undeliverable": 7,
+      "missing": 8,
+      "returned_to_station": 25,
+      "pickup_failed": 72,
+      "pending_containers_pickup": 0,
+      "pending_packages_pickup": 0
+    },
+    "onRoadPickups": {
+      "total": 4,
+      "remaining": 0,
+      "complete": 4
+    },
+    "rescueActions": 0
+  },
+  "routes": [
+    {
+      "routeCode": "CX232",
+      "associates": [
+        "Colter Stupp"
+      ],
+      "status": "incomplete",
+      "stopsDone": 189,
+      "stopsPlanned": 190,
+      "packagesDelivered": 286,
+      "packagesPlanned": 287,
+      "packagesRemaining": 1,
+      "completionPct": 99.7,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX253",
+      "associates": [
+        "Darius Randolph"
+      ],
+      "status": "incomplete",
+      "stopsDone": 191,
+      "stopsPlanned": 192,
+      "packagesDelivered": 331,
+      "packagesPlanned": 332,
+      "packagesRemaining": 1,
+      "completionPct": 99.7,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX229",
+      "associates": [
+        "Shameka Williams",
+        "Venson Muskin"
+      ],
+      "status": "complete",
+      "stopsDone": 203,
+      "stopsPlanned": 203,
+      "packagesDelivered": 320,
+      "packagesPlanned": 320,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "14m over on shift",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX230",
+      "associates": [
+        "curtis caples",
+        "Shakira Singleton"
+      ],
+      "status": "complete",
+      "stopsDone": 199,
+      "stopsPlanned": 199,
+      "packagesDelivered": 333,
+      "packagesPlanned": 333,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX231",
+      "associates": [
+        "Jazmonjr Worles",
+        "Colter Stupp"
+      ],
+      "status": "complete",
+      "stopsDone": 195,
+      "stopsPlanned": 195,
+      "packagesDelivered": 316,
+      "packagesPlanned": 316,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX233",
+      "associates": [
+        "Donnell Jefferson",
+        "Jessica Davis"
+      ],
+      "status": "complete",
+      "stopsDone": 199,
+      "stopsPlanned": 199,
+      "packagesDelivered": 311,
+      "packagesPlanned": 311,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX234",
+      "associates": [
+        "Jordan Hutchinson"
+      ],
+      "status": "complete",
+      "stopsDone": 198,
+      "stopsPlanned": 198,
+      "packagesDelivered": 313,
+      "packagesPlanned": 313,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX235",
+      "associates": [
+        "Lauquetta Vaughn"
+      ],
+      "status": "complete",
+      "stopsDone": 140,
+      "stopsPlanned": 140,
+      "packagesDelivered": 214,
+      "packagesPlanned": 214,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX236",
+      "associates": [
+        "Larrico Pickens"
+      ],
+      "status": "complete",
+      "stopsDone": 197,
+      "stopsPlanned": 197,
+      "packagesDelivered": 284,
+      "packagesPlanned": 284,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX237",
+      "associates": [
+        "Asja Hurt"
+      ],
+      "status": "complete",
+      "stopsDone": 199,
+      "stopsPlanned": 199,
+      "packagesDelivered": 296,
+      "packagesPlanned": 296,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX238",
+      "associates": [
+        "Amy Rhinehart",
+        "Jessica Davis"
+      ],
+      "status": "complete",
+      "stopsDone": 192,
+      "stopsPlanned": 192,
+      "packagesDelivered": 280,
+      "packagesPlanned": 280,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX239",
+      "associates": [
+        "Caprio Newman"
+      ],
+      "status": "complete",
+      "stopsDone": 200,
+      "stopsPlanned": 200,
+      "packagesDelivered": 308,
+      "packagesPlanned": 308,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX240",
+      "associates": [
+        "Makayla Cooper",
+        "Shakira Singleton"
+      ],
+      "status": "complete",
+      "stopsDone": 184,
+      "stopsPlanned": 184,
+      "packagesDelivered": 323,
+      "packagesPlanned": 323,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX241",
+      "associates": [
+        "Zora Bobo",
+        "Jessica Davis"
+      ],
+      "status": "complete",
+      "stopsDone": 158,
+      "stopsPlanned": 158,
+      "packagesDelivered": 383,
+      "packagesPlanned": 383,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX242",
+      "associates": [
+        "Daniel Gilmore"
+      ],
+      "status": "complete",
+      "stopsDone": 171,
+      "stopsPlanned": 171,
+      "packagesDelivered": 352,
+      "packagesPlanned": 352,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX243",
+      "associates": [
+        "Aaron Davis",
+        "Timothy Tanner"
+      ],
+      "status": "complete",
+      "stopsDone": 161,
+      "stopsPlanned": 161,
+      "packagesDelivered": 290,
+      "packagesPlanned": 290,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX244",
+      "associates": [
+        "Malyk Latham"
+      ],
+      "status": "complete",
+      "stopsDone": 195,
+      "stopsPlanned": 195,
+      "packagesDelivered": 261,
+      "packagesPlanned": 261,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX245",
+      "associates": [
+        "Mauricio Hearns",
+        "Timothy Tanner"
+      ],
+      "status": "complete",
+      "stopsDone": 202,
+      "stopsPlanned": 202,
+      "packagesDelivered": 271,
+      "packagesPlanned": 271,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX246",
+      "associates": [
+        "Jeromy Mitchell",
+        "Nolan Goliday",
+        "Bernard Nelson"
+      ],
+      "status": "complete",
+      "stopsDone": 202,
+      "stopsPlanned": 202,
+      "packagesDelivered": 289,
+      "packagesPlanned": 289,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX247",
+      "associates": [
+        "Bernard Nelson"
+      ],
+      "status": "complete",
+      "stopsDone": 168,
+      "stopsPlanned": 168,
+      "packagesDelivered": 420,
+      "packagesPlanned": 420,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX248",
+      "associates": [
+        "Denzel Hall",
+        "Jessica Davis"
+      ],
+      "status": "complete",
+      "stopsDone": 190,
+      "stopsPlanned": 190,
+      "packagesDelivered": 334,
+      "packagesPlanned": 334,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX249",
+      "associates": [
+        "Adrian Arellano"
+      ],
+      "status": "complete",
+      "stopsDone": 190,
+      "stopsPlanned": 190,
+      "packagesDelivered": 349,
+      "packagesPlanned": 349,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX250",
+      "associates": [
+        "Martavious Malone"
+      ],
+      "status": "complete",
+      "stopsDone": 194,
+      "stopsPlanned": 194,
+      "packagesDelivered": 336,
+      "packagesPlanned": 336,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX251",
+      "associates": [
+        "Marquel Phipps jr"
+      ],
+      "status": "complete",
+      "stopsDone": 182,
+      "stopsPlanned": 182,
+      "packagesDelivered": 307,
+      "packagesPlanned": 307,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX252",
+      "associates": [
+        "briana Mosley",
+        "Timothy Tanner"
+      ],
+      "status": "complete",
+      "stopsDone": 195,
+      "stopsPlanned": 195,
+      "packagesDelivered": 306,
+      "packagesPlanned": 306,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX254",
+      "associates": [
+        "John Scott"
+      ],
+      "status": "complete",
+      "stopsDone": 199,
+      "stopsPlanned": 199,
+      "packagesDelivered": 290,
+      "packagesPlanned": 290,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX255",
+      "associates": [
+        "Marquise Crum",
+        "Nolan Goliday"
+      ],
+      "status": "complete",
+      "stopsDone": 192,
+      "stopsPlanned": 192,
+      "packagesDelivered": 279,
+      "packagesPlanned": 279,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX256",
+      "associates": [
+        "Marshay Matheney"
+      ],
+      "status": "complete",
+      "stopsDone": 195,
+      "stopsPlanned": 195,
+      "packagesDelivered": 324,
+      "packagesPlanned": 324,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX257",
+      "associates": [
+        "Lyric Cole",
+        "Venson Muskin"
+      ],
+      "status": "complete",
+      "stopsDone": 203,
+      "stopsPlanned": 203,
+      "packagesDelivered": 374,
+      "packagesPlanned": 374,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX258",
+      "associates": [
+        "Aaron Hines"
+      ],
+      "status": "complete",
+      "stopsDone": 191,
+      "stopsPlanned": 191,
+      "packagesDelivered": 312,
+      "packagesPlanned": 312,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX259",
+      "associates": [
+        "Caleb Spann",
+        "Nolan Goliday"
+      ],
+      "status": "complete",
+      "stopsDone": 162,
+      "stopsPlanned": 162,
+      "packagesDelivered": 259,
+      "packagesPlanned": 259,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX260",
+      "associates": [
+        "Mary Acker"
+      ],
+      "status": "complete",
+      "stopsDone": 195,
+      "stopsPlanned": 195,
+      "packagesDelivered": 333,
+      "packagesPlanned": 333,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX261",
+      "associates": [
+        "Shaquille Tate",
+        "Shakira Singleton"
+      ],
+      "status": "complete",
+      "stopsDone": 182,
+      "stopsPlanned": 182,
+      "packagesDelivered": 320,
+      "packagesPlanned": 320,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX262",
+      "associates": [
+        "Chance Stupp",
+        "Nolan Goliday"
+      ],
+      "status": "complete",
+      "stopsDone": 147,
+      "stopsPlanned": 147,
+      "packagesDelivered": 300,
+      "packagesPlanned": 300,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "0m left on shift",
+      "vehicle": null,
+      "onTimePct": null
+    },
+    {
+      "routeCode": "CX263",
+      "associates": [
+        "Candido Fulcher",
+        "Venson Muskin"
+      ],
+      "status": "complete",
+      "stopsDone": 199,
+      "stopsPlanned": 199,
+      "packagesDelivered": 337,
+      "packagesPlanned": 337,
+      "packagesRemaining": 0,
+      "completionPct": 100.0,
+      "notes": "",
+      "vehicle": null,
+      "onTimePct": null
+    }
+  ],
+  "exceptionPackages": [
+    {
+      "scannableId": "TBA334832705084",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "5204 Lexington Club Cv Apt 301, MEMPHIS, TN 38117-4391",
+      "packageStatus": "Reattemptable",
+      "reasonCode": "INACCESSIBLE DELIVERY LOCATION",
+      "lastScan": "2026-09-23 13:26:54"
+    },
+    {
+      "scannableId": "TBA334831561612",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "5204 Lexington Club Cv Apt 301, MEMPHIS, TN 38117-4391",
+      "packageStatus": "Reattemptable",
+      "reasonCode": "INACCESSIBLE DELIVERY LOCATION",
+      "lastScan": "2026-09-23 13:26:54"
+    },
+    {
+      "scannableId": "TBA334808707637",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 09:55:29"
+    },
+    {
+      "scannableId": "TBA334757849933",
+      "routeCode": "CX260",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 08:31:27"
+    },
+    {
+      "scannableId": "TBA334861222482",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 08:31:48"
+    },
+    {
+      "scannableId": "TBA334821677836",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 08:38:19"
+    },
+    {
+      "scannableId": "TBA334862307773",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 07:59:12"
+    },
+    {
+      "scannableId": "TBA334856958165",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 08:25:11"
+    },
+    {
+      "scannableId": "TBA334836935259",
+      "routeCode": "CX247",
+      "companyShortCode": "CJMK",
+      "transporterName": "",
+      "transporterId": "unassigned",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Undeliverable",
+      "reasonCode": "TR CANCELLED",
+      "lastScan": "2026-09-23 08:39:28"
+    },
+    {
+      "scannableId": "TBA334844314559",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "Zora Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "address": "361 N 3rd St, MEMPHIS, TN 38105-3007",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 11:13:11"
+    },
+    {
+      "scannableId": "TBA334852665224",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "John Scott",
+      "transporterId": "A2QE20MAK8EZ1O",
+      "address": "3651 Guernsey Ave, MEMPHIS, TN 38122-3417",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 16:03:28"
+    },
+    {
+      "scannableId": "TBA334836530464",
+      "routeCode": "CX258",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Hines",
+      "transporterId": "A24A27T9YG04Q1",
+      "address": "4260 Poplar Ave, MEMPHIS, TN 38117-3620",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 11:51:40"
+    },
+    {
+      "scannableId": "TBA334853819963",
+      "routeCode": "CX251",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marquel Phipps jr",
+      "transporterId": "A19K6TK9PN2RSE",
+      "address": "3077 Pershing Ave, MEMPHIS, TN 38112-2011",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 15:23:23"
+    },
+    {
+      "scannableId": "TBA334853034560",
+      "routeCode": "CX246",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jeromy Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "address": "4400 Howardcrest Dr, MEMPHIS, TN 38128-1731",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 18:58:17"
+    },
+    {
+      "scannableId": "TBA334828110383",
+      "routeCode": "CX243",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Davis",
+      "transporterId": "AD3O3G0B92UUS",
+      "address": "143 River Bridge Ln, MEMPHIS, TN 38103-7900",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 19:36:04"
+    },
+    {
+      "scannableId": "TBA334848817708",
+      "routeCode": "CX247",
+      "companyShortCode": "CJMK",
+      "transporterName": "Bernard Nelson",
+      "transporterId": "AA4AHUL18JSQ",
+      "address": "1952 Snowden Ave, MEMPHIS, TN 38107-5121",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 14:58:49"
+    },
+    {
+      "scannableId": "TBA334831633095",
+      "routeCode": "CX247",
+      "companyShortCode": "CJMK",
+      "transporterName": "Bernard Nelson",
+      "transporterId": "AA4AHUL18JSQ",
+      "address": "1397 Jackson Ave B B Beauty Plus, MEMPHIS, TN 38107-4431",
+      "packageStatus": "Missing",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 15:49:35"
+    },
+    {
+      "scannableId": "TBA334858874386",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "Zora Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "address": "Attn Sc Donations 262 Danny Thomas Pl, MEMPHIS, TN 38105-3678",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 11:12:15"
+    },
+    {
+      "scannableId": "TBA334863726559",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "Zora Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "address": "The Dominos Village 361 N 3rd St, MEMPHIS, TN 38105-3007",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 11:13:23"
+    },
+    {
+      "scannableId": "TBA334833284606",
+      "routeCode": "CX234",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jordan Hutchinson",
+      "transporterId": "A3KR47EPY6TTWJ",
+      "address": "House 5153 Foggy River Ln, MEMPHIS, TN 38135-6262",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 14:40:49"
+    },
+    {
+      "scannableId": "TBA334811650740",
+      "routeCode": "CX234",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jordan Hutchinson",
+      "transporterId": "A3KR47EPY6TTWJ",
+      "address": "5011 French Broad Lane, bartlett, tn 38135",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 15:49:18"
+    },
+    {
+      "scannableId": "TBA334836758843",
+      "routeCode": "CX260",
+      "companyShortCode": "CJMK",
+      "transporterName": "Mary Acker",
+      "transporterId": "AQ034EE9I10SU",
+      "address": "5668 Sycamore Grove Ln, MEMPHIS, TN 38120-2261",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 18:18:27"
+    },
+    {
+      "scannableId": "TBA334746290342",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "John Scott",
+      "transporterId": "A2QE20MAK8EZ1O",
+      "address": "1404 N Graham St, Memphis, Tennessee 38108",
+      "packageStatus": "Returned to station",
+      "reasonCode": "CUSTOMER UNAVAILABLE",
+      "lastScan": "2026-09-23 12:45:36"
+    },
+    {
+      "scannableId": "TBA334774829253",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "John Scott",
+      "transporterId": "A2QE20MAK8EZ1O",
+      "address": "924 National St, MEMPHIS, TN 38122-3318",
+      "packageStatus": "Returned to station",
+      "reasonCode": "CUSTOMER UNAVAILABLE",
+      "lastScan": "2026-09-23 16:50:59"
+    },
+    {
+      "scannableId": "TBA334801939700",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "John Scott",
+      "transporterId": "A2QE20MAK8EZ1O",
+      "address": "3441 Lamphier Ave, Memphis, Tn 38122",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 16:56:06"
+    },
+    {
+      "scannableId": "TBA334860900627",
+      "routeCode": "CX237",
+      "companyShortCode": "CJMK",
+      "transporterName": "Asja Hurt",
+      "transporterId": "A3HP4KOKQGPPSN",
+      "address": "3950 Lakemont Dr, MEMPHIS, TN 38128-2438",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 11:17:51"
+    },
+    {
+      "scannableId": "TBA334843300349",
+      "routeCode": "CX233",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jessica Davis",
+      "transporterId": "A107WQOKQLFEPH",
+      "address": "5609 Fieldcrest Ave, MEMPHIS, TN 38134-3423",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 18:37:54"
+    },
+    {
+      "scannableId": "TBA334853166546",
+      "routeCode": "CX258",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Hines",
+      "transporterId": "A24A27T9YG04Q1",
+      "address": "104 Cherry Rd, MEMPHIS, TN 38117-3102",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 13:06:53"
+    },
+    {
+      "scannableId": "TBA334843659199",
+      "routeCode": "CX246",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jeromy Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "address": "4700 Raleigh Millington Rd 4059 Hinge Gate Ln, Memphis, TN 38128",
+      "packageStatus": "Returned to station",
+      "reasonCode": "BUSINESS CLOSED",
+      "lastScan": "2026-09-23 16:49:34"
+    },
+    {
+      "scannableId": "TBA334782953915",
+      "routeCode": "CX246",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jeromy Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "address": "4694 Raleigh Millington Rd, MEMPHIS, TN 38128-1324",
+      "packageStatus": "Returned to station",
+      "reasonCode": "BUSINESS CLOSED",
+      "lastScan": "2026-09-23 16:50:50"
+    },
+    {
+      "scannableId": "TBA334862490829",
+      "routeCode": "CX243",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Davis",
+      "transporterId": "AD3O3G0B92UUS",
+      "address": "123 River Bridge Ln Apt 102 Unit J1, MEMPHIS, TN 38103-6998",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 13:05:20"
+    },
+    {
+      "scannableId": "TBA334841241296",
+      "routeCode": "CX243",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Davis",
+      "transporterId": "AD3O3G0B92UUS",
+      "address": "1871 Warner Ave, MEMPHIS, TN 38127-6558",
+      "packageStatus": "Returned to station",
+      "reasonCode": "UNSAFE DUE TO DOG",
+      "lastScan": "2026-09-23 19:41:26"
+    },
+    {
+      "scannableId": "TBA334855384251",
+      "routeCode": "CX229",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shameka Williams",
+      "transporterId": "A14IG0657EKX55",
+      "address": "4788 Avi Cv, ARLINGTON, TN 38002-6053",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 18:40:38"
+    },
+    {
+      "scannableId": "TBA334858950417",
+      "routeCode": "CX229",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shameka Williams",
+      "transporterId": "A14IG0657EKX55",
+      "address": "4847 Esty Rd, ARLINGTON, TN 38002-5988",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 12:07:46"
+    },
+    {
+      "scannableId": "TBA334811800625",
+      "routeCode": "CX242",
+      "companyShortCode": "CJMK",
+      "transporterName": "Daniel Gilmore",
+      "transporterId": "A22MZ4DFI0C8ZC",
+      "address": "642 Bethel Ave, MEMPHIS, TN 38107-2535",
+      "packageStatus": "Returned to station",
+      "reasonCode": "UNSAFE DUE TO DOG",
+      "lastScan": "2026-09-23 19:30:34"
+    },
+    {
+      "scannableId": "TBA334855859275",
+      "routeCode": "CX256",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marshay Matheney",
+      "transporterId": "A3ILMEJV3P7NF",
+      "address": "5177 Princeton Rd, MEMPHIS, TN 38117-2108",
+      "packageStatus": "Returned to station",
+      "reasonCode": "NONE",
+      "lastScan": "2026-09-23 18:37:25"
+    },
+    {
+      "scannableId": "TBA334854816057",
+      "routeCode": "CX232",
+      "companyShortCode": "CJMK",
+      "transporterName": "Colter Stupp",
+      "transporterId": "A24JUFEW15NVGM",
+      "address": "6107 Dalron Dr, MEMPHIS, TN 38135-9432",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 17:03:05"
+    },
+    {
+      "scannableId": "TBA334833115078",
+      "routeCode": "CX240",
+      "companyShortCode": "CJMK",
+      "transporterName": "Makayla Cooper",
+      "transporterId": "A3O2FADDZOT32G",
+      "address": "3307 Emmons Dr, MEMPHIS, TN 38128",
+      "packageStatus": "Returned to station",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 17:24:06"
+    },
+    {
+      "scannableId": "TBA334859629975",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3562 Summer Ave, MEMPHIS, TN 38122-3628",
+      "packageStatus": "Returned to station",
+      "reasonCode": "BAD WEATHER",
+      "lastScan": "2026-09-23 18:20:03"
+    },
+    {
+      "scannableId": "TBA334831343084",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3551 Summer Ave, MEMPHIS, TN 38122-3639",
+      "packageStatus": "Returned to station",
+      "reasonCode": "BAD WEATHER",
+      "lastScan": "2026-09-23 18:20:35"
+    },
+    {
+      "scannableId": "TBA334829489822",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3710 Summer Ave, MEMPHIS, TN 38122-3744",
+      "packageStatus": "Returned to station",
+      "reasonCode": "BAD WEATHER",
+      "lastScan": "2026-09-23 18:20:57"
+    },
+    {
+      "scannableId": "TBA334778348242",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "475 N Highland St, MEMPHIS, TN 38122-4544",
+      "packageStatus": "Returned to station",
+      "reasonCode": "DAMAGED",
+      "lastScan": "2026-09-23 17:25:57"
+    },
+    {
+      "scannableId": "TBA334835037591",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "Zora Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:06"
+    },
+    {
+      "scannableId": "TBA334821426722",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "Zora Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:06"
+    },
+    {
+      "scannableId": "TBA334807637432",
+      "routeCode": "CX241",
+      "companyShortCode": "CJMK",
+      "transporterName": "Zora Bobo",
+      "transporterId": "A2PG5TOBR1IOSA",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:06"
+    },
+    {
+      "scannableId": "TBA334853596044",
+      "routeCode": "CX260",
+      "companyShortCode": "CJMK",
+      "transporterName": "Mary Acker",
+      "transporterId": "AQ034EE9I10SU",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:25:13"
+    },
+    {
+      "scannableId": "TBA334859673898",
+      "routeCode": "CX260",
+      "companyShortCode": "CJMK",
+      "transporterName": "Mary Acker",
+      "transporterId": "AQ034EE9I10SU",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:25:13"
+    },
+    {
+      "scannableId": "TBA334834354378",
+      "routeCode": "CX254",
+      "companyShortCode": "CJMK",
+      "transporterName": "John Scott",
+      "transporterId": "A2QE20MAK8EZ1O",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:24:23"
+    },
+    {
+      "scannableId": "TBA334842600375",
+      "routeCode": "CX237",
+      "companyShortCode": "CJMK",
+      "transporterName": "Asja Hurt",
+      "transporterId": "A3HP4KOKQGPPSN",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:06:46"
+    },
+    {
+      "scannableId": "TBA334845299915",
+      "routeCode": "CX261",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shaquille Tate",
+      "transporterId": "A22LPDLTFWN54N",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:24"
+    },
+    {
+      "scannableId": "TBA334848128513",
+      "routeCode": "CX261",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shaquille Tate",
+      "transporterId": "A22LPDLTFWN54N",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:24"
+    },
+    {
+      "scannableId": "TBA334854731433",
+      "routeCode": "CX261",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shaquille Tate",
+      "transporterId": "A22LPDLTFWN54N",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:27"
+    },
+    {
+      "scannableId": "TBA334838662442",
+      "routeCode": "CX233",
+      "companyShortCode": "CJMK",
+      "transporterName": "Donnell Jefferson",
+      "transporterId": "A34GYVUOVK3EDE",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:30:21"
+    },
+    {
+      "scannableId": "TBA334836086176",
+      "routeCode": "CX258",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Hines",
+      "transporterId": "A24A27T9YG04Q1",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:37:04"
+    },
+    {
+      "scannableId": "TBA334832030619",
+      "routeCode": "CX258",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Hines",
+      "transporterId": "A24A27T9YG04Q1",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:37:02"
+    },
+    {
+      "scannableId": "TBA334838947948",
+      "routeCode": "CX258",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Hines",
+      "transporterId": "A24A27T9YG04Q1",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:37:04"
+    },
+    {
+      "scannableId": "TBA334744192970",
+      "routeCode": "CX251",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marquel Phipps jr",
+      "transporterId": "A19K6TK9PN2RSE",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 11:00:07"
+    },
+    {
+      "scannableId": "TBA334844608179",
+      "routeCode": "CX244",
+      "companyShortCode": "CJMK",
+      "transporterName": "Malyk Latham",
+      "transporterId": "AZNBO363CZLL9",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:30"
+    },
+    {
+      "scannableId": "TBA334513667277",
+      "routeCode": "CX244",
+      "companyShortCode": "CJMK",
+      "transporterName": "Malyk Latham",
+      "transporterId": "AZNBO363CZLL9",
+      "address": "2570 Frayser Blvd, MEMPHIS, TN 38127-5829",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "INACCESSIBLE PICKUP LOCATION",
+      "lastScan": "2026-09-23 19:19:58"
+    },
+    {
+      "scannableId": "HR6000258036",
+      "routeCode": "CX244",
+      "companyShortCode": "CJMK",
+      "transporterName": "Malyk Latham",
+      "transporterId": "AZNBO363CZLL9",
+      "address": "2570 Frayser Blvd, MEMPHIS, TN 38127-5829",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "INACCESSIBLE PICKUP LOCATION",
+      "lastScan": "2026-09-23 19:19:58"
+    },
+    {
+      "scannableId": "TBA334858847650",
+      "routeCode": "CX257",
+      "companyShortCode": "CJMK",
+      "transporterName": "Lyric Cole",
+      "transporterId": "A12WKVOVE91RR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:27:50"
+    },
+    {
+      "scannableId": "TBA334857611159",
+      "routeCode": "CX257",
+      "companyShortCode": "CJMK",
+      "transporterName": "Lyric Cole",
+      "transporterId": "A12WKVOVE91RR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:27:47"
+    },
+    {
+      "scannableId": "TBA334843774306",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:15:58"
+    },
+    {
+      "scannableId": "TBA334825810113",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:15:58"
+    },
+    {
+      "scannableId": "TBA334853965493",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:15:58"
+    },
+    {
+      "scannableId": "TBA334797707257",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:15:58"
+    },
+    {
+      "scannableId": "TBA334841420307",
+      "routeCode": "CX262",
+      "companyShortCode": "CJMK",
+      "transporterName": "Chance Stupp",
+      "transporterId": "A2QES901JW2VTP",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:16:02"
+    },
+    {
+      "scannableId": "TBA334844968591",
+      "routeCode": "CX246",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jeromy Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:28:39"
+    },
+    {
+      "scannableId": "TBA334833323385",
+      "routeCode": "CX246",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jeromy Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:28:39"
+    },
+    {
+      "scannableId": "TBA334859568726",
+      "routeCode": "CX246",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jeromy Mitchell",
+      "transporterId": "A30LSY7CQEIJ47",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:28:36"
+    },
+    {
+      "scannableId": "TBA334859009738",
+      "routeCode": "CX236",
+      "companyShortCode": "CJMK",
+      "transporterName": "Larrico Pickens",
+      "transporterId": "A3P3UQT0G24W63",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:54"
+    },
+    {
+      "scannableId": "TBA334828156953",
+      "routeCode": "CX236",
+      "companyShortCode": "CJMK",
+      "transporterName": "Larrico Pickens",
+      "transporterId": "A3P3UQT0G24W63",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:54"
+    },
+    {
+      "scannableId": "TBA334841631025",
+      "routeCode": "CX236",
+      "companyShortCode": "CJMK",
+      "transporterName": "Larrico Pickens",
+      "transporterId": "A3P3UQT0G24W63",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:54"
+    },
+    {
+      "scannableId": "TBA334842827267",
+      "routeCode": "CX243",
+      "companyShortCode": "CJMK",
+      "transporterName": "Aaron Davis",
+      "transporterId": "AD3O3G0B92UUS",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:08:19"
+    },
+    {
+      "scannableId": "TBA334837671401",
+      "routeCode": "CX231",
+      "companyShortCode": "CJMK",
+      "transporterName": "Jazmonjr Worles",
+      "transporterId": "A3LU7MIJX30B38",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:22:56"
+    },
+    {
+      "scannableId": "TBA334857712689",
+      "routeCode": "CX229",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shameka Williams",
+      "transporterId": "A14IG0657EKX55",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:12:18"
+    },
+    {
+      "scannableId": "TBA334860635591",
+      "routeCode": "CX229",
+      "companyShortCode": "CJMK",
+      "transporterName": "Shameka Williams",
+      "transporterId": "A14IG0657EKX55",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:12:22"
+    },
+    {
+      "scannableId": "TBA334834093418",
+      "routeCode": "CX242",
+      "companyShortCode": "CJMK",
+      "transporterName": "Daniel Gilmore",
+      "transporterId": "A22MZ4DFI0C8ZC",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:20:02"
+    },
+    {
+      "scannableId": "TBA334840514636",
+      "routeCode": "CX242",
+      "companyShortCode": "CJMK",
+      "transporterName": "Daniel Gilmore",
+      "transporterId": "A22MZ4DFI0C8ZC",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:20:02"
+    },
+    {
+      "scannableId": "TBA334863557864",
+      "routeCode": "CX242",
+      "companyShortCode": "CJMK",
+      "transporterName": "Daniel Gilmore",
+      "transporterId": "A22MZ4DFI0C8ZC",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:20:05"
+    },
+    {
+      "scannableId": "TBA334802692289",
+      "routeCode": "CX238",
+      "companyShortCode": "CJMK",
+      "transporterName": "Amy Rhinehart",
+      "transporterId": "A18P3MJLHQG320",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:13:15"
+    },
+    {
+      "scannableId": "TBA334862979851",
+      "routeCode": "CX238",
+      "companyShortCode": "CJMK",
+      "transporterName": "Amy Rhinehart",
+      "transporterId": "A18P3MJLHQG320",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:13:18"
+    },
+    {
+      "scannableId": "TBA334828655199",
+      "routeCode": "CX238",
+      "companyShortCode": "CJMK",
+      "transporterName": "Amy Rhinehart",
+      "transporterId": "A18P3MJLHQG320",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:13:15"
+    },
+    {
+      "scannableId": "TBA334844789114",
+      "routeCode": "CX238",
+      "companyShortCode": "CJMK",
+      "transporterName": "Amy Rhinehart",
+      "transporterId": "A18P3MJLHQG320",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:13:15"
+    },
+    {
+      "scannableId": "CR1146389098",
+      "routeCode": "CX252",
+      "companyShortCode": "CJMK",
+      "transporterName": "briana Mosley",
+      "transporterId": "A5YMIZJPDCU64",
+      "address": "446 Sharon Dr, MEMPHIS, TN 38122-3942",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "CUSTOMER UNAVAILABLE",
+      "lastScan": "2026-09-23 12:50:23"
+    },
+    {
+      "scannableId": "TBA334783859321",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:20"
+    },
+    {
+      "scannableId": "TBA334823552213",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:20"
+    },
+    {
+      "scannableId": "TBA334834370802",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:23"
+    },
+    {
+      "scannableId": "TBA334849160445",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:20"
+    },
+    {
+      "scannableId": "TBA334863084150",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:23"
+    },
+    {
+      "scannableId": "TBA334831160167",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:23"
+    },
+    {
+      "scannableId": "TBA334851168687",
+      "routeCode": "CX230",
+      "companyShortCode": "CJMK",
+      "transporterName": "curtis caples",
+      "transporterId": "A20NX4ERT7E1FR",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:26:23"
+    },
+    {
+      "scannableId": "TBA334861239323",
+      "routeCode": "CX256",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marshay Matheney",
+      "transporterId": "A3ILMEJV3P7NF",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:29:52"
+    },
+    {
+      "scannableId": "TBA334800889328",
+      "routeCode": "CX250",
+      "companyShortCode": "CJMK",
+      "transporterName": "Martavious Malone",
+      "transporterId": "A3RHXRMG19R02Q",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:11:29"
+    },
+    {
+      "scannableId": "TBA334849319133",
+      "routeCode": "CX263",
+      "companyShortCode": "CJMK",
+      "transporterName": "Candido Fulcher",
+      "transporterId": "AQPGHMOP3NF7K",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:01"
+    },
+    {
+      "scannableId": "TBA334841132445",
+      "routeCode": "CX263",
+      "companyShortCode": "CJMK",
+      "transporterName": "Candido Fulcher",
+      "transporterId": "AQPGHMOP3NF7K",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:01"
+    },
+    {
+      "scannableId": "TBA334841767250",
+      "routeCode": "CX255",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marquise Crum",
+      "transporterId": "A2FCHFSPW48DMN",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:49"
+    },
+    {
+      "scannableId": "TBA334834053051",
+      "routeCode": "CX255",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marquise Crum",
+      "transporterId": "A2FCHFSPW48DMN",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:46"
+    },
+    {
+      "scannableId": "TBA334853912528",
+      "routeCode": "CX255",
+      "companyShortCode": "CJMK",
+      "transporterName": "Marquise Crum",
+      "transporterId": "A2FCHFSPW48DMN",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:34:46"
+    },
+    {
+      "scannableId": "TBA334839118644",
+      "routeCode": "CX248",
+      "companyShortCode": "CJMK",
+      "transporterName": "Denzel Hall",
+      "transporterId": "A1HNQM7L1YEG6L",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:22:57"
+    },
+    {
+      "scannableId": "TBA334857231773",
+      "routeCode": "CX248",
+      "companyShortCode": "CJMK",
+      "transporterName": "Denzel Hall",
+      "transporterId": "A1HNQM7L1YEG6L",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:22:57"
+    },
+    {
+      "scannableId": "TBA334860141771",
+      "routeCode": "CX248",
+      "companyShortCode": "CJMK",
+      "transporterName": "Denzel Hall",
+      "transporterId": "A1HNQM7L1YEG6L",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:22:53"
+    },
+    {
+      "scannableId": "TBA334857841091",
+      "routeCode": "CX248",
+      "companyShortCode": "CJMK",
+      "transporterName": "Denzel Hall",
+      "transporterId": "A1HNQM7L1YEG6L",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:22:53"
+    },
+    {
+      "scannableId": "TBA334840159736",
+      "routeCode": "CX249",
+      "companyShortCode": "CJMK",
+      "transporterName": "Adrian Arellano",
+      "transporterId": "A1AXNNYXQB9I48",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:10:57"
+    },
+    {
+      "scannableId": "TBA334816720513",
+      "routeCode": "CX235",
+      "companyShortCode": "CJMK",
+      "transporterName": "Lauquetta Vaughn",
+      "transporterId": "A1LCU1N5FEVGQ4",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:30:44"
+    },
+    {
+      "scannableId": "TBA334804685102",
+      "routeCode": "CX235",
+      "companyShortCode": "CJMK",
+      "transporterName": "Lauquetta Vaughn",
+      "transporterId": "A1LCU1N5FEVGQ4",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:30:44"
+    },
+    {
+      "scannableId": "TBA334845117886",
+      "routeCode": "CX240",
+      "companyShortCode": "CJMK",
+      "transporterName": "Makayla Cooper",
+      "transporterId": "A3O2FADDZOT32G",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:29:43"
+    },
+    {
+      "scannableId": "TBA334834542142",
+      "routeCode": "CX240",
+      "companyShortCode": "CJMK",
+      "transporterName": "Makayla Cooper",
+      "transporterId": "A3O2FADDZOT32G",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:29:43"
+    },
+    {
+      "scannableId": "TBA334855005566",
+      "routeCode": "CX240",
+      "companyShortCode": "CJMK",
+      "transporterName": "Makayla Cooper",
+      "transporterId": "A3O2FADDZOT32G",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:29:43"
+    },
+    {
+      "scannableId": "TBA334836234087",
+      "routeCode": "CX240",
+      "companyShortCode": "CJMK",
+      "transporterName": "Makayla Cooper",
+      "transporterId": "A3O2FADDZOT32G",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:29:46"
+    },
+    {
+      "scannableId": "TBA334837186306",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:53"
+    },
+    {
+      "scannableId": "TBA334844170728",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:53"
+    },
+    {
+      "scannableId": "TBA334854319461",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:53"
+    },
+    {
+      "scannableId": "TBA334830863219",
+      "routeCode": "CX253",
+      "companyShortCode": "CJMK",
+      "transporterName": "Darius Randolph",
+      "transporterId": "AEAPP9NVQAEM7",
+      "address": "3140 Victory Ridge Cove, Memphis, TN 38128",
+      "packageStatus": "Pickup failed",
+      "reasonCode": "OBJECT MISSING",
+      "lastScan": "2026-09-23 10:21:53"
+    }
+  ],
+  "disclaimer": "Captured from the live Delivery Execution board at about 8:15 PM CDT. The board showed 0 In progress; complete/incomplete route statuses were inferred from the visible route progress ratios because the route cards did not display explicit status labels. Vehicle and on-time percentage were not shown on the board; route vehicle fields are null."
+}

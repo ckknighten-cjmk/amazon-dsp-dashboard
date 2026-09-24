@@ -18,7 +18,7 @@ import { datasetFilename, toCsv, toSectionedCsv, type CsvValue } from "@/lib/exp
 import { damageSummary } from "@/lib/dvic/compare";
 
 const ROSTER_STAMP = "weeks-38-39";
-const SERVICE_DAY = "2026-09-21";
+const SERVICE_DAY = "2026-09-23";
 const SCORECARD_STAMP: Record<ScorecardWeek, string> = {
   37: "week-37",
   38: "week-38",
@@ -57,7 +57,7 @@ export function associatesCsv(): CsvFile {
     "Today packages",
     "Today stops",
     "Routes",
-    "On Sep 21 board",
+    "On Sep 23 board",
   ];
   const rows = drivers.map((driver) => [
     driver.name,

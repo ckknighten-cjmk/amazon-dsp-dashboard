@@ -31,11 +31,11 @@ describe("period bounds", () => {
       end: STATION_TODAY,
     });
     assert.deepEqual(boundsOf({ kind: "week" }), {
-      start: "2026-09-15",
-      end: "2026-09-21",
+      start: "2026-09-17",
+      end: "2026-09-23",
     });
-    assert.equal(formatRangeLabel({ kind: "today" }), "Today · Mon Sep 21");
-    assert.equal(formatRangeLabel({ kind: "week" }), "This week · Sep 15–21");
+    assert.equal(formatRangeLabel({ kind: "today" }), "Today · Wed Sep 23");
+    assert.equal(formatRangeLabel({ kind: "week" }), "This week · Sep 17–23");
   });
 
   it("orders a custom range and rejects dates that are not real", () => {
@@ -78,7 +78,7 @@ describe("period bounds", () => {
 });
 
 describe("seed coverage", () => {
-  it("shows delivery metrics only when the range includes Sep 21", () => {
+  it("shows delivery metrics only when the range includes Sep 23", () => {
     assert.equal(dateInRange(DELIVERY_COVERAGE.start, { kind: "today" }), true);
     assert.equal(rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, { kind: "week" }), true);
     assert.equal(
@@ -144,8 +144,8 @@ describe("seed coverage", () => {
       assert.equal(dates[dates.length - 1], COMPLIANCE_COVERAGE[week].end);
     }
 
-    assert.deepEqual(datesInRange(["2026-09-20", "2026-09-21", "2026-09-22"], { kind: "today" }), [
-      "2026-09-21",
+    assert.deepEqual(datesInRange(["2026-09-21", "2026-09-22", "2026-09-23"], { kind: "today" }), [
+      "2026-09-23",
     ]);
   });
 

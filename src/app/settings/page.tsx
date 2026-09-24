@@ -183,7 +183,7 @@ export default function SettingsPage() {
               (Sep 6–12, 2026), overall 85.8 Fantastic, stays on the scorecard
               week switcher. Fantastic / Great / Fair / Poor bands on tiles are
               illustrative; badges match Amazon’s displayed standing. Routes are
-              the Sep 21 Delivery Execution board. The associate roster unions
+              the Sep 23 Delivery Execution board. The associate roster unions
               Amazon schedule Weeks 38 and 39, merges that board by name, and
               labels ADP-only names that have no transporter ID. Phone and email
               come from the ADP Employee Census when the name matches. Fleet is

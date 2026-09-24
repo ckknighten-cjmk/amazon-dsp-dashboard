@@ -1,8 +1,8 @@
 /**
  * Data access layer for the DSP ops dashboard.
  *
- * Routes and package exceptions for 2026-09-21 come from the DSP Console
- * end-of-day Delivery Execution scrape in `src/lib/data/seed`. The associate
+ * Routes and package exceptions for 2026-09-23 come from the DSP Console
+ * evening-wrap Delivery Execution scrape in `src/lib/data/seed`. The associate
  * roster unions Amazon schedule Weeks 38 and 39, then merges that board and
  * ADP-only names. Scorecard default is the Week 38 Console Performance Summary;
  * Week 37 stays available. Payments are the 2026-09-21 Flex Payments scrape.
