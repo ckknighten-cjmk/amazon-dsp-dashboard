@@ -2,7 +2,7 @@
  * Active associate roster.
  *
  * Primary list: union of Amazon schedule associates in Weeks 38 and 39,
- * keyed by transporter ID. Sep 23 Delivery Execution routes, packages, and
+ * keyed by transporter ID. Sep 24 Delivery Execution routes, packages, and
  * status merge in when the board name matches (first + last, so a schedule
  * middle name still joins). ADP Group Timecard names that do not match a
  * schedule associate are appended and labeled ADP only. They have no
@@ -72,7 +72,7 @@ export function adpDisplayName(name: string) {
 
 export function rosterSourceLabel(driver: Pick<Driver, "rosterSource" | "scheduleWeeks">) {
   if (driver.rosterSource === "adp-only") return "ADP only";
-  if (driver.rosterSource === "delivery-board") return "Sep 23 board only";
+  if (driver.rosterSource === "delivery-board") return "Sep 24 board only";
   const weeks = driver.scheduleWeeks ?? [];
   if (weeks.length === 0) return "Amazon schedule";
   return `Schedule · ${weeks.map((week) => `W${week}`).join(", ")}`;

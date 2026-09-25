@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getDriver, getDrivers } from "./index";
-import { associateId } from "./delivery-execution";
+import { getDrivers } from "./index";
 import {
   censusEmployees,
   censusMatchScore,
@@ -58,7 +57,7 @@ test("roster phones and emails are copied only from the matched census row", () 
     assert.ok(driver.censusName);
   }
 
-  const aaron = getDriver(associateId("Aaron Davis"));
+  const aaron = getDrivers().find((driver) => driver.transporterId === "AD3O3G0B92UUS");
   assert.equal(aaron?.censusName, "AARON C DAVIS");
   assert.equal(aaron?.email, "aaronmacalot@gmail.com");
   assert.equal(aaron?.phone, undefined);
