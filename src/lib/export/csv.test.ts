@@ -31,32 +31,50 @@ test("associates export is the full roster", () => {
 
 test("routes export marks multi-associate routes as rescued without replacing Console status", () => {
   const rescued = routes.filter((route) => route.receivedRescue);
-  assert.equal(deliveryBoard.serviceDate, "2026-09-23");
-  assert.equal(routes.length, 35);
-  assert.equal(deliveryBoard.totals.packagesDelivered, 10941);
-  assert.equal(deliveryBoard.totals.packagesPlanned, 10943);
-  assert.equal(rescued.length, 18);
+  assert.equal(deliveryBoard.serviceDate, "2026-09-25");
+  assert.equal(routes.length, 33);
+  assert.equal(deliveryBoard.totals.inProgress, 2);
+  assert.equal(deliveryBoard.totals.incomplete, 0);
+  assert.equal(routes.filter((route) => route.status === "in_progress").length, 2);
+  assert.equal(routes.filter((route) => route.status === "completed").length, 31);
+  assert.equal(deliveryBoard.totals.executionGaugesPct.locations, 99);
+  assert.equal(deliveryBoard.totals.executionGaugesPct.stops, 99);
+  assert.equal(deliveryBoard.totals.executionGaugesPct.packages, 99);
+  assert.equal(deliveryBoard.totals.executionGaugesPct.attemptSuccess, 99);
+  assert.equal(deliveryBoard.totals.packagesDelivered, 9626);
+  assert.equal(deliveryBoard.totals.packagesPlanned, 9635);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.remaining, 9);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.reattemptable, 4);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.undeliverable, 2);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.missing, 4);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.returnedToStation, 19);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.pickupFailed, 212);
+  assert.equal(deliveryBoard.totals.workHourRisk, 1);
+  assert.equal(deliveryBoard.totals.unknownStops, 25);
+  assert.equal(deliveryBoard.totals.onRoadPickups.total, 6);
+  assert.equal(deliveryBoard.totals.onRoadPickups.complete, 6);
+  assert.equal(rescued.length, 15);
   assert.equal(rescued.length, deliveryBoard.totals.multiTransporter);
   assert.equal(deliveryBoard.totals.rescueActions, 0);
   assert.ok(rescued.every((route) => route.rescueDriverIds.length >= 1));
   assert.ok(rescued.every((route) => route.rescueDriverId === route.rescueDriverIds[0]));
   assert.ok(rescued.every((route) => route.status !== "rescued"));
 
-  const split = routes.find((route) => route.code === "CX238");
+  const split = routes.find((route) => route.code === "CX252");
   assert.ok(split);
   assert.equal(split.receivedRescue, true);
-  assert.equal(split.status, "completed");
-  assert.deepEqual(split.rescueDriverIds, [associateId("Jessica Davis")]);
-  assert.equal(split.driverId, associateId("Amy Rhinehart"));
+  assert.equal(split.status, "in_progress");
+  assert.deepEqual(split.rescueDriverIds, [associateId("Draem Hines")]);
+  assert.equal(split.driverId, associateId("Brandon Clark"));
 
   const file = routesCsv();
-  assert.equal(file.filename, "routes-2026-09-23.csv");
+  assert.equal(file.filename, "routes-2026-09-25.csv");
   const lines = csvLines(file.csv);
   const header = lines[0].split(",");
   const rescueCol = header.indexOf("Rescue");
   assert.ok(rescueCol >= 0);
   const yes = lines.slice(1).filter((line) => line.split(",")[rescueCol] === "Yes");
-  assert.equal(yes.length, 18);
+  assert.equal(yes.length, 15);
   assert.match(file.csv, /Multi-associate route; not an Amazon rescueActions flag/);
   assert.match(file.csv, /Completed/);
 });
@@ -77,8 +95,8 @@ test("other dataset exports stay on seeded values", () => {
   assert.doesNotMatch(fleet.csv, /EDV-4401|TN 441-CJM|Mock yard roster/);
 
   const exceptions = exceptionsCsv();
-  assert.equal(exceptions.filename, "package-exceptions-2026-09-23.csv");
-  assert.equal(csvLines(exceptions.csv).length - 1, 114);
+  assert.equal(exceptions.filename, "package-exceptions-2026-09-25.csv");
+  assert.equal(csvLines(exceptions.csv).length - 1, 241);
 
   const scorecard = scorecardCsv();
   assert.equal(scorecard.filename, "scorecard-week-38.csv");

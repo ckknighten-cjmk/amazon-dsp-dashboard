@@ -118,7 +118,7 @@ export default function RoutesPage() {
     <div>
       <PageHeader
         title="Delivery Execution"
-        description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Sep 23, 2026. Vehicle and on-time % were not on the Console — shown as unavailable."
+        description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Sep 25, 2026. Vehicle and on-time % were not on the Console — shown as unavailable."
       />
 
       {!covered ? (
