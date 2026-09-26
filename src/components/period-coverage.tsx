@@ -36,7 +36,7 @@ export function DeliveryPeriodNote() {
   if (rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range)) return null;
   return (
     <p className="mb-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">
-      This route is from the Sep 23 Delivery Execution capture, which is outside the selected
+      This route is from the Sep 25 Delivery Execution capture, which is outside the selected
       period. {DELIVERY_COVERAGE.label}. Stops are not filled in for other days.
     </p>
   );

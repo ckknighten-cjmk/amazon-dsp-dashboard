@@ -31,24 +31,24 @@ describe("period bounds", () => {
       end: STATION_TODAY,
     });
     assert.deepEqual(boundsOf({ kind: "week" }), {
-      start: "2026-09-17",
-      end: "2026-09-23",
+      start: "2026-09-19",
+      end: "2026-09-25",
     });
-    assert.equal(formatRangeLabel({ kind: "today" }), "Today · Wed Sep 23");
-    assert.equal(formatRangeLabel({ kind: "week" }), "This week · Sep 17–23");
+    assert.equal(formatRangeLabel({ kind: "today" }), "Today · Fri Sep 25");
+    assert.equal(formatRangeLabel({ kind: "week" }), "This week · Sep 19–25");
   });
 
   it("orders a custom range and rejects dates that are not real", () => {
-    assert.deepEqual(boundsOf({ kind: "custom", start: "2026-09-23", end: "2026-09-06" }), {
+    assert.deepEqual(boundsOf({ kind: "custom", start: "2026-09-25", end: "2026-09-06" }), {
       start: "2026-09-06",
-      end: "2026-09-23",
+      end: "2026-09-25",
     });
     assert.equal(parsePeriodParam("custom", "2026-02-31", "2026-03-01"), null);
     assert.equal(parsePeriodParam("custom", "09-21-2026", "2026-09-22"), null);
-    assert.deepEqual(deserializePeriod(serializePeriod({ kind: "custom", start: "2026-09-23", end: "2026-09-06" })), {
+    assert.deepEqual(deserializePeriod(serializePeriod({ kind: "custom", start: "2026-09-25", end: "2026-09-06" })), {
       kind: "custom",
       start: "2026-09-06",
-      end: "2026-09-23",
+      end: "2026-09-25",
     });
   });
 
@@ -78,7 +78,7 @@ describe("period bounds", () => {
 });
 
 describe("seed coverage", () => {
-  it("shows delivery metrics only when the range includes Sep 23", () => {
+  it("shows delivery metrics only when the range includes Sep 25", () => {
     assert.equal(dateInRange(DELIVERY_COVERAGE.start, { kind: "today" }), true);
     assert.equal(rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, { kind: "week" }), true);
     assert.equal(
@@ -144,8 +144,8 @@ describe("seed coverage", () => {
       assert.equal(dates[dates.length - 1], COMPLIANCE_COVERAGE[week].end);
     }
 
-    assert.deepEqual(datesInRange(["2026-09-21", "2026-09-22", "2026-09-23"], { kind: "today" }), [
-      "2026-09-23",
+    assert.deepEqual(datesInRange(["2026-09-23", "2026-09-24", "2026-09-25"], { kind: "today" }), [
+      "2026-09-25",
     ]);
   });
 
