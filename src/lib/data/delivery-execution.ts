@@ -1,8 +1,9 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-09-24, ~8:10 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-09-28, ~8:09 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-09-24.csv`). Vehicle and on-time % stay null.
+ * `packages-exceptions-2026-09-28.csv`). Vehicle and on-time % stay null.
+ * Execution gauge percentages were not exposed in this capture and stay null.
  */
 import type {
   DeliveryExecutionBoard,
@@ -12,7 +13,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-09-24.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-09-28.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];
@@ -46,6 +47,21 @@ function readCount(value: unknown): number | null {
   if (typeof value === "number" && Number.isFinite(value)) return value;
   if (Array.isArray(value)) return value.length;
   return null;
+}
+
+/** This capture stores route notes as a list. Older seeds used a string. */
+function routeNotes(notes: SeedRoute["notes"] | string | null | undefined): string | null {
+  if (notes == null) return null;
+  const parts = (Array.isArray(notes) ? notes : [notes])
+    .filter((item): item is string => typeof item === "string")
+    .map((item) => item.trim())
+    .filter(Boolean);
+  return parts.length > 0 ? parts.join("; ") : null;
+}
+
+function readOnTimePct(row: SeedRoute): number | null {
+  const value = (row as { onTimePct?: unknown }).onTimePct;
+  return typeof value === "number" && Number.isFinite(value) ? value : null;
 }
 
 type SeedExtras = {
@@ -108,8 +124,8 @@ export const routes: Route[] = (seed.routes as SeedRoute[]).map((row) => {
     eta: null,
     finishTime: null,
     startedAt: null,
-    onTimePct: row.onTimePct,
-    notes: row.notes || null,
+    onTimePct: readOnTimePct(row),
+    notes: routeNotes(row.notes),
     stops: [],
   };
 });
@@ -226,7 +242,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Sep 24 publishes rescueActions as 0, so this column is still not
+ * Sep 28 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =

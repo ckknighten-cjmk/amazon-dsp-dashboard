@@ -6,7 +6,11 @@ import type { Kpi } from "@/lib/types";
 
 export function KpiCard({ kpi }: { kpi: Kpi }) {
   const display =
-    kpi.unit === "percent" ? formatPercent(kpi.value) : formatNumber(kpi.value);
+    kpi.value == null
+      ? "—"
+      : kpi.unit === "percent"
+        ? formatPercent(kpi.value)
+        : formatNumber(kpi.value);
 
   return (
     <Card size="sm" className="min-w-0">

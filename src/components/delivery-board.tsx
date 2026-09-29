@@ -110,18 +110,21 @@ function Chip({ value, label }: { value: number; label: string }) {
   );
 }
 
-function Gauge({ label, value }: { label: string; value: number }) {
+function Gauge({ label, value }: { label: string; value: number | null }) {
+  const published = value != null;
   return (
     <div className="flex flex-col items-center gap-1">
       <div
         className="flex size-[4.25rem] items-center justify-center rounded-full"
         style={{
-          background: `conic-gradient(var(--fantastic) ${value}%, color-mix(in oklch, var(--muted) 80%, transparent) 0)`,
+          background: published
+            ? `conic-gradient(var(--fantastic) ${value}%, color-mix(in oklch, var(--muted) 80%, transparent) 0)`
+            : "color-mix(in oklch, var(--muted) 80%, transparent)",
         }}
-        aria-label={`${label} ${value} percent`}
+        aria-label={published ? `${label} ${value} percent` : `${label} not in this capture`}
       >
         <div className="flex size-12 items-center justify-center rounded-full bg-card text-sm font-semibold tabular-nums">
-          {value}%
+          {published ? `${value}%` : "—"}
         </div>
       </div>
       <p className="max-w-16 text-center text-[10px] leading-tight text-muted-foreground">
