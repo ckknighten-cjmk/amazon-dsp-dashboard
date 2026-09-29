@@ -35,6 +35,10 @@ function associateNames(route: Route) {
 }
 
 const captureLabel = formatConsoleCapture(deliveryBoard.capturedAt);
+const packageGaugeHint =
+  completionToday == null
+    ? `Sum of Console route rows · ${assignedToday.toLocaleString()} planned · ${captureLabel}. The board did not publish a package gauge. No prior-day delta.`
+    : `Sum of Console route rows · ${assignedToday.toLocaleString()} planned · ${captureLabel}. Board package gauge is ${completionToday}%. No prior-day delta.`;
 const inProgressRoutes = routes.filter((route) => route.status === "in_progress");
 const incompleteRoutes = routes.filter((route) => route.status === "incomplete");
 const completedCount = routes.filter((route) => route.status === "completed").length;
@@ -89,7 +93,7 @@ const todayKpis: Kpi[] = [
     unit: "number",
     delta: null,
     sparkline: [],
-    hint: `Sum of Console route rows · ${assignedToday.toLocaleString()} planned · ${captureLabel}. Board package gauge is ${completionToday}%. No prior-day delta.`,
+    hint: packageGaugeHint,
   },
   {
     id: "dcr",
@@ -98,7 +102,10 @@ const todayKpis: Kpi[] = [
     unit: "percent",
     delta: null,
     sparkline: [],
-    hint: "DSP Console execution gauge (packages).",
+    hint:
+      completionToday == null
+        ? "DSP Console did not expose an execution gauge for packages in this capture."
+        : "DSP Console execution gauge (packages).",
   },
   {
     id: "remaining",
@@ -163,7 +170,7 @@ export function getOverview(range: DateRange): OverviewSnapshot {
     range,
     asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
     kpis: todayKpis,
-    packagesByDay: [{ label: "Wed 23", delivered: deliveredToday, assigned: assignedToday }],
+    packagesByDay: [{ label: "Mon 28", delivered: deliveredToday, assigned: assignedToday }],
     routeStatusCounts: statusCounts(),
     alerts,
   };
