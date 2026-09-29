@@ -75,6 +75,10 @@ Console snapshots used here live at:
 
 - [`src/lib/data/seed/delivery-execution-2026-09-28.json`](src/lib/data/seed/delivery-execution-2026-09-28.json) — live Delivery Execution evening wrap
 - [`src/lib/data/seed/packages-exceptions-2026-09-28.csv`](src/lib/data/seed/packages-exceptions-2026-09-28.csv) — Packages export for that wrap (147 rows)
+- [`src/lib/data/seed/delivery-execution-2026-09-25.json`](src/lib/data/seed/delivery-execution-2026-09-25.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-09-25.csv`](src/lib/data/seed/packages-exceptions-2026-09-25.csv) — Packages export for that earlier wrap (241 rows)
+- [`src/lib/data/seed/delivery-execution-2026-09-24.json`](src/lib/data/seed/delivery-execution-2026-09-24.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-09-24.csv`](src/lib/data/seed/packages-exceptions-2026-09-24.csv) — Packages export for that earlier wrap (102 rows)
 - [`src/lib/data/seed/delivery-execution-2026-09-23.json`](src/lib/data/seed/delivery-execution-2026-09-23.json) — earlier Delivery Execution capture, kept in the repo
 - [`src/lib/data/seed/packages-exceptions-2026-09-23.csv`](src/lib/data/seed/packages-exceptions-2026-09-23.csv) — Packages export for that earlier wrap (114 rows)
 - [`src/lib/data/seed/delivery-execution-2026-09-21.json`](src/lib/data/seed/delivery-execution-2026-09-21.json) — earlier Delivery Execution capture, kept in the repo
