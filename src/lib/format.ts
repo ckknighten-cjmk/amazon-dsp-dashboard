@@ -15,7 +15,7 @@ import type {
 export const OPS_TIMEZONE = "America/Chicago";
 
 /** Frozen station clock so the demo stays consistent (CDT wall time). */
-export const MOCK_NOW = parseISO("2026-09-23T20:15:00");
+export const MOCK_NOW = parseISO("2026-09-24T20:10:00");
 
 /** Clock label for a Console capture instant, rendered in the station timezone. */
 export function formatConsoleCapture(iso: string) {
