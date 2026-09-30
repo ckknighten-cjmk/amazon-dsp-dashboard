@@ -85,7 +85,7 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
     >
       <PageHeader
         title="Compliance"
-        description={`${report.company} · ${report.station}. Week ${report.week} timecard validation compares ADP punches with Amazon work blocks and scheduled shifts.`}
+        description={`${report.company} · ${report.station}. Week ${report.week} timecard validation flags a missing ADP punch only when a rostered Amazon work block has no punch that day.`}
         actions={
           <div className="flex gap-1" role="group" aria-label="Compliance week">
             {WEEKS.map((item) => (
@@ -262,7 +262,7 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
       {view === "missing" ? (
         <ExceptionTable
           rows={filterRows(missingInPeriod, query, activeDate)}
-          empty="No missing ADP punches for this filter. Flags are limited to days the Group Timecard captured."
+          empty="No missing ADP punches for this filter. A flag needs a rostered Amazon work block and no ADP punch on a captured Group Timecard day."
         />
       ) : null}
       {view === "over12" ? (

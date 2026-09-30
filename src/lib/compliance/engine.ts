@@ -161,9 +161,8 @@ export function evaluateTimecards(input: EvaluateInput): Evaluation {
     const link = links.get(associate.name);
     if (!link) continue;
     for (const day of associate.days) {
-      if (!coverage.has(day.date)) continue;
+      if (!coverage.has(day.date) || !day.workBlock) continue;
       const signals = workSignals(day);
-      if (signals.length === 0) continue;
       const segments = segmentsByPersonDay.get(personDay(link.adpName, day.date)) ?? [];
       if (segments.some(isComplete)) continue;
       const partial = segments.length > 0;
