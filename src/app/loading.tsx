@@ -4,7 +4,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function Loading() {
   return (
     <div>
-      <PageHeader title="Loading station…" description="Loading DNA4 Delivery Execution." />
+      <PageHeader
+        title="Loading station…"
+        description="Loading DNA4 Delivery Execution."
+        refresh={false}
+      />
       <div className="mb-5 grid gap-2 lg:grid-cols-2">
         <Skeleton className="h-14" />
         <Skeleton className="h-14" />

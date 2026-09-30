@@ -6,19 +6,22 @@ import { KpiCard } from "@/components/kpi-card";
 import { useDateRange } from "@/components/layout/date-range-context";
 import { PageHeader, EmptyState } from "@/components/page-header";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { getOverview, getStation } from "@/lib/data";
+import { getDeliveryBoard, getOverview, getStation } from "@/lib/data";
+import { seedCapturedLabel } from "@/lib/format";
 import { DELIVERY_COVERAGE } from "@/lib/period";
 
 export default function OverviewPage() {
   const { range } = useDateRange();
   const snapshot = getOverview(range);
   const station = getStation();
+  const captured = seedCapturedLabel(getDeliveryBoard().capturedAt);
 
   return (
     <div>
       <PageHeader
         title="Station overview"
         description={`${station.companyName} · ${station.stationCode} ${station.stationName}. ${snapshot.asOfLabel}.`}
+        updatedLabel={captured}
       />
 
       {snapshot.kpis.length === 0 ? (

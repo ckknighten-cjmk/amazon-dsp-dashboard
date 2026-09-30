@@ -6,7 +6,7 @@ import { ScorecardWeekSwitcher } from "@/components/scorecard-week-switcher";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getScorecard, parseScorecardWeek } from "@/lib/data";
 import { scorecardCsv } from "@/lib/export/datasets";
-import { formatOverallScore, formatScorecardValue, scorecardTierLabel } from "@/lib/format";
+import { formatOverallScore, formatScorecardValue, scorecardTierLabel, seedCapturedLabel } from "@/lib/format";
 import { SCORECARD_COVERAGE } from "@/lib/period";
 import { gradeMetric } from "@/lib/scorecard";
 import type { ScorecardMetric } from "@/lib/types";
@@ -51,6 +51,7 @@ export default async function ScorecardPage({
             <ScoreTierBadge tier={scorecard.overallTier} />
           </>
         }
+        updatedLabel={seedCapturedLabel(scorecard.asOf)}
       />
 
       <PeriodCoverage

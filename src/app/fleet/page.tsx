@@ -18,7 +18,7 @@ import {
 import { getFleetYard, getRoute, getVehicles } from "@/lib/data";
 import { vehiclesCsv } from "@/lib/export/datasets";
 import { CoverageNote } from "@/components/period-coverage";
-import { formatMileage, vehicleStatusLabel, vehicleTypeLabel } from "@/lib/format";
+import { formatMileage, seedCapturedLabel, vehicleStatusLabel, vehicleTypeLabel } from "@/lib/format";
 import { DVIC_COVERAGE } from "@/lib/period";
 import type { VehicleStatus, VehicleType } from "@/lib/types";
 
@@ -63,6 +63,7 @@ export default function FleetPage() {
             : "This table is the mock yard. It is used only when amazon-fleet-dna4.json has no vehicles."
         }
         actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
+        updatedLabel={seedCapturedLabel(yard.capturedAt)}
       />
 
       <CoverageNote>

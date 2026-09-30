@@ -8,6 +8,7 @@ export default function NotFound() {
       <PageHeader
         title="Not found"
         description="That route, page, or record is not in the DNA4 station snapshot."
+        refresh={false}
         actions={
           <Button nativeButton={false} render={<Link href="/" />}>Back to overview</Button>
         }

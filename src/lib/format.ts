@@ -84,6 +84,19 @@ export function formatZonedDateTime(iso: string, timeZone = OPS_TIMEZONE) {
   }).format(new Date(iso));
 }
 
+/** ISO instant with an explicit offset or `Z`. Naive datetimes are left unlabeled. */
+const EXPLICIT_ZONE = /(?:Z|[+-]\d{2}:\d{2})$/i;
+
+/**
+ * Label for a seed capture instant that already includes a timezone.
+ * Returns undefined when the page has no timestamp, so the UI does not invent one.
+ */
+export function seedCapturedLabel(iso: string | null | undefined): string | undefined {
+  const value = iso?.trim();
+  if (!value || !EXPLICIT_ZONE.test(value)) return undefined;
+  return `Seed captured ${formatZonedDateTime(value)}`;
+}
+
 export function formatPercent(value: number, digits = 1) {
   return `${value.toFixed(digits)}%`;
 }
