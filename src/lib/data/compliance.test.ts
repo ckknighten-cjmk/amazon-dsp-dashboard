@@ -3,29 +3,42 @@ import test from "node:test";
 import { getComplianceReport, parseComplianceWeek } from "./compliance";
 import scheduleWeek38 from "./seed/week38-amazon-schedule.json";
 
-test("Week 39 seed flags only captured punches and does not invent meal clocks", () => {
+test("Week 39 seed flags the full Group Timecard and does not invent meal clocks", () => {
   const report = getComplianceReport(39);
 
   assert.deepEqual(report.counts, {
-    missingPunchDays: 28,
-    missingPunchAssociates: 22,
-    over12Days: 2,
+    missingPunchDays: 74,
+    missingPunchAssociates: 39,
+    over12Days: 3,
     over60Associates: 0,
     mealMismatches: 2,
     mealRowsJoined: 4,
   });
-  assert.deepEqual(report.coverageDates, ["2026-09-20", "2026-09-21"]);
+  assert.deepEqual(report.coverageDates, [
+    "2026-09-20",
+    "2026-09-21",
+    "2026-09-22",
+    "2026-09-23",
+    "2026-09-24",
+    "2026-09-25",
+    "2026-09-26",
+  ]);
+  assert.equal(report.coverageDetail, "Group Timecard · Sun–Sat");
   assert.ok(report.missingPunches.every((row) => report.coverageDates.includes(row.date)));
+  assert.ok(report.missingPunches.some((row) => row.date === "2026-09-26"));
   assert.deepEqual(
-    report.over12.map((row) => `${row.associate} ${row.hoursLabel}`),
-    ["Jayden Williams 13.15 ADP", "Shakira Kenyato Singleton 12.08 ADP"]
-  );
-  assert.equal(
-    report.over12.some((row) => row.adpName === "JONES, KHALID"),
-    false
+    report.over12.map((row) => `${row.date} ${row.adpName} ${row.hoursLabel}`),
+    [
+      "2026-09-20 WILLIAMS, JAYDEN 13.15 ADP",
+      "2026-09-21 WILLIAMS, JAYDEN 12.92 ADP",
+      "2026-09-22 LEWIS, CEDRIC 13.37 ADP",
+    ]
   );
   assert.equal(report.over60.length, 0);
-  assert.equal(report.over60Peak?.hoursLabel, "23.83");
+  assert.equal(report.over60Peak?.adpName, "STUPP, CHANCE");
+  assert.equal(report.over60Peak?.hoursLabel, "43.93");
+  assert.match(report.over60Windows[0]?.coverageLabel ?? "", /^1 of 7 days captured/);
+  assert.match(report.over60Windows.at(-1)?.coverageLabel ?? "", /^7 of 7 days captured/);
   assert.match(report.scheduleTemplateNote, /Coming later/);
 
   const mismatches = report.mealRows.filter((row) => row.mismatch);
@@ -43,11 +56,13 @@ test("Week 39 seed flags only captured punches and does not invent meal clocks",
     report.unmatchedAmazon.some((row) => row.name.toLowerCase().includes("mosley")),
     false
   );
-  assert.ok(report.unmatchedAdp.some((row) => row.name === "Ruffin, Arielle" && row.dateKeys.length === 1));
-  assert.match(report.notes.join("\n"), /ORA-20005/);
-  assert.match(report.notes.join("\n"), /CHANCE R STUPP/);
+  assert.ok(report.unmatchedAdp.some((row) => row.name === "Ruffin, Arielle" && row.dateKeys.length === 4));
+  const notes = report.notes.join("\n");
+  assert.doesNotMatch(notes, /ORA-20005/);
+  assert.doesNotMatch(notes, /CHANCE R STUPP/);
+  assert.match(notes, /Date column|displayed Date field/);
   assert.equal(report.week, 39);
-  assert.equal(report.coverageLabel, "Sep 20–Sep 21");
+  assert.equal(report.coverageLabel, "Sep 20–Sep 26");
   assert.equal(report.workHoursSummary.dasNearingViolations, 1);
 });
 

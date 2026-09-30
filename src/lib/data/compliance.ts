@@ -113,13 +113,10 @@ const WEEK_COPY: Record<ComplianceWeek, WeekCopy> = {
   },
   39: {
     sourceNote:
-      "The Timecard Detail Report export failed (ORA-20005), so punches are from the Group Timecard grid.",
-    coverageDetail: "Group Timecard · Sep 22 grid was blank",
-    adpPreface: [
-      "ADP Timecard Detail Report export failed (ORA-20005). Punches are the read-only Group Timecard grid, plus individual timecard views opened for Zora Bobo, Brandon Clark, and Chance Stupp.",
-    ],
-    outsideCoverageNote:
-      "Sep 22–26 are outside missing-punch flags. The Group Timecard capture has Sep 20 and Sep 21 only. Sep 22 was opened and the visible rows were blank.",
+      "Punches are the read-only Group Timecard for Sun–Sat, bucketed by the displayed Date column. No individual Timecard Detail views were captured.",
+    coverageDetail: "Group Timecard · Sun–Sat",
+    adpPreface: [],
+    outsideCoverageNote: null,
   },
 };
 
