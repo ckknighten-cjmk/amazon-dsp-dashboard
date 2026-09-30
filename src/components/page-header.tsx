@@ -1,15 +1,24 @@
 import type { ReactNode } from "react";
+import { RefreshDataButton } from "@/components/refresh-data";
 import { cn } from "@/lib/utils";
 
 export function PageHeader({
   title,
   description,
   actions,
+  refresh = true,
+  updatedLabel,
 }: {
   title: string;
   description?: string;
   actions?: ReactNode;
+  /** Re-read this page's seeded data. Off for loading and not-found shells. */
+  refresh?: boolean;
+  /** Existing seed capture label. Omit when the page has no single timestamp. */
+  updatedLabel?: string;
 }) {
+  const toolbar = Boolean(refresh || actions || updatedLabel);
+
   return (
     <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
       <div className="min-w-0">
@@ -20,7 +29,15 @@ export function PageHeader({
           <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{description}</p>
         ) : null}
       </div>
-      {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+      {toolbar ? (
+        <div className="flex flex-wrap items-center gap-2" data-page-toolbar>
+          {updatedLabel ? (
+            <p className="text-xs whitespace-nowrap text-muted-foreground">{updatedLabel}</p>
+          ) : null}
+          {refresh ? <RefreshDataButton /> : null}
+          {actions}
+        </div>
+      ) : null}
     </div>
   );
 }

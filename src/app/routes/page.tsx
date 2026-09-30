@@ -43,6 +43,7 @@ import {
   formatDateTime,
   formatNumber,
   routeStatusLabel,
+  seedCapturedLabel,
 } from "@/lib/format";
 import type { PackageExceptionStatus, Route, RouteStatus } from "@/lib/types";
 
@@ -119,6 +120,7 @@ export default function RoutesPage() {
       <PageHeader
         title="Delivery Execution"
         description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Sep 28, 2026. Vehicle, on-time %, and execution gauges were not on the Console — shown as unavailable."
+        updatedLabel={seedCapturedLabel(board.capturedAt)}
       />
 
       {!covered ? (

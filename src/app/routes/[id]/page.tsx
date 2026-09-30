@@ -4,7 +4,8 @@ import { DeliveryPeriodNote } from "@/components/period-coverage";
 import { PageHeader } from "@/components/page-header";
 import { RouteDetail } from "@/components/route-detail";
 import { Button } from "@/components/ui/button";
-import { getDriver, getRoute } from "@/lib/data";
+import { getDeliveryBoard, getDriver, getRoute } from "@/lib/data";
+import { seedCapturedLabel } from "@/lib/format";
 
 export async function generateStaticParams() {
   const { getRoutes } = await import("@/lib/data");
@@ -35,6 +36,7 @@ export default async function RoutePage({
             Back to board
           </Button>
         }
+        updatedLabel={seedCapturedLabel(getDeliveryBoard().capturedAt)}
       />
       <DeliveryPeriodNote />
       <div className="rounded-xl border bg-card p-5">

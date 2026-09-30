@@ -7,6 +7,7 @@ import { DateRangeProvider } from "@/components/layout/date-range-context";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
 import { PeriodSwitcher } from "@/components/period-switcher";
+import { RefreshProvider } from "@/components/refresh-data";
 import { routeUsesPeriod } from "@/lib/period";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
@@ -14,9 +15,11 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <DateRangeProvider>
-      <ShellFrame navOpen={navOpen} setNavOpen={setNavOpen}>
-        {children}
-      </ShellFrame>
+      <RefreshProvider>
+        <ShellFrame navOpen={navOpen} setNavOpen={setNavOpen}>
+          {children}
+        </ShellFrame>
+      </RefreshProvider>
     </DateRangeProvider>
   );
 }
