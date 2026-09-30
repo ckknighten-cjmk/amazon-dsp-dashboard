@@ -2,13 +2,14 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { getComplianceReport, parseComplianceWeek } from "./compliance";
 import scheduleWeek38 from "./seed/week38-amazon-schedule.json";
+import scheduleWeek39 from "./seed/week39-amazon-schedule.json";
 
 test("Week 39 seed flags the full Group Timecard and does not invent meal clocks", () => {
   const report = getComplianceReport(39);
 
   assert.deepEqual(report.counts, {
-    missingPunchDays: 74,
-    missingPunchAssociates: 39,
+    missingPunchDays: 16,
+    missingPunchAssociates: 13,
     over12Days: 3,
     over60Associates: 0,
     mealMismatches: 2,
@@ -25,7 +26,26 @@ test("Week 39 seed flags the full Group Timecard and does not invent meal clocks
   ]);
   assert.equal(report.coverageDetail, "Group Timecard · Sun–Sat");
   assert.ok(report.missingPunches.every((row) => report.coverageDates.includes(row.date)));
-  assert.ok(report.missingPunches.some((row) => row.date === "2026-09-26"));
+  assert.ok(report.missingPunches.every((row) => row.amazonTimes.startsWith("Block:")));
+  assert.ok(
+    report.missingPunches.some(
+      (row) =>
+        row.associate === "Draem Thomarcus Hines" &&
+        row.date === "2026-09-20" &&
+        row.adpTimes === "No ADP punch"
+    )
+  );
+  assert.ok(
+    report.missingPunches.some(
+      (row) => row.associate === "Makayla Sharmaine Cooper" && row.date === "2026-09-20" && /no out/.test(row.adpTimes)
+    )
+  );
+  assert.ok(report.coverageDates.includes("2026-09-26"));
+  for (const date of ["2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26"]) {
+    assert.equal(scheduleWeek39.rosteredTotals[date], 0);
+    assert.ok(scheduleWeek39.scheduledTotals[date] > 0);
+    assert.equal(report.missingPunches.some((row) => row.date === date), false);
+  }
   assert.deepEqual(
     report.over12.map((row) => `${row.date} ${row.adpName} ${row.hoursLabel}`),
     [
@@ -86,8 +106,8 @@ test("Week 38 seed uses the full Group Timecard and does not invent meals or wor
   ]);
   assert.equal(report.exportedAt, "9/22/26, 8:59:54 PM");
   assert.deepEqual(report.counts, {
-    missingPunchDays: 37,
-    missingPunchAssociates: 21,
+    missingPunchDays: 18,
+    missingPunchAssociates: 7,
     over12Days: 8,
     over60Associates: 0,
     mealMismatches: 0,
@@ -106,6 +126,7 @@ test("Week 38 seed uses the full Group Timecard and does not invent meals or wor
   assert.equal(report.breaksSummary.missingPunches, 13);
   assert.equal(report.breaksSummary.breaksBoardAssociates, 86);
   assert.ok(report.missingPunches.every((row) => report.coverageDates.includes(row.date)));
+  assert.ok(report.missingPunches.every((row) => row.amazonTimes.startsWith("Block:")));
   assert.deepEqual(
     report.over12.map((row) => `${row.date} ${row.adpName} ${row.hoursLabel}`),
     [

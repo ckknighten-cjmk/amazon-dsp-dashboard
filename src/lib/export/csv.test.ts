@@ -122,7 +122,7 @@ test("other dataset exports stay on seeded values", () => {
   const week39 = getComplianceReport(39);
   const missing = complianceViewCsv(week39, "missing");
   assert.equal(missing.filename, "compliance-missing-punches-week-39.csv");
-  assert.equal(week39.missingPunches.length, 74);
+  assert.equal(week39.missingPunches.length, 16);
   const sample = week39.missingPunches[0];
   assert.ok(sample);
   assert.match(missing.csv, new RegExp(sample.associate.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));

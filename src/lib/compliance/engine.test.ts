@@ -97,7 +97,7 @@ test("matches fuzzy Amazon names and leaves true strangers unmatched", () => {
   assert.equal(matchAmazonName("Alexis Marrie Hutchison", adp).status, "unmatched");
 });
 
-test("flags a scheduled day with no ADP in/out and ignores uncovered days", () => {
+test("a Group Timecard day without a rostered work block is not a missing punch", () => {
   const result = evaluateTimecards(
     base({
       associates: [
@@ -109,9 +109,31 @@ test("flags a scheduled day with no ADP in/out and ignores uncovered days", () =
       punches: [punch({ name: "EXAMPLE, ADA", date: "2026-09-20" })],
     })
   );
-  assert.equal(result.missingPunches.length, 1);
-  assert.equal(result.missingPunches[0]?.date, "2026-09-20");
+  assert.equal(result.missingPunches.length, 0);
+});
+
+test("a rostered work block with no ADP punch is still a missing punch", () => {
+  const result = evaluateTimecards(
+    base({
+      associates: [
+        associate("Ada Example", "T1", {
+          "2026-09-20": { shift: "10h" },
+          "2026-09-21": { block: 10, shift: "10h" },
+          "2026-09-22": { block: 10, shift: "10h" },
+        }),
+      ],
+      punches: [
+        punch({ name: "EXAMPLE, ADA", date: "2026-09-20" }),
+        punch({ name: "EXAMPLE, ADA", date: "2026-09-21" }),
+      ],
+    })
+  );
+  assert.deepEqual(
+    result.missingPunches.map((row) => row.date),
+    ["2026-09-21"]
+  );
   assert.match(result.missingPunches[0]?.rule ?? "", /No ADP in\/out/);
+  assert.match(result.missingPunches[0]?.amazonTimes ?? "", /Block:/);
   assert.equal(result.over12.length, 0);
 });
 
@@ -120,7 +142,7 @@ test("a complete in/out is not a missing punch; an in-only punch is", () => {
     base({
       associates: [
         associate("Ada Example", "T1", { "2026-09-20": { block: 10, shift: "10h" } }),
-        associate("Bea Example", "T2", { "2026-09-21": { shift: "10h" } }),
+        associate("Bea Example", "T2", { "2026-09-21": { block: 10, shift: "10h" } }),
       ],
       punches: [
         punch({
