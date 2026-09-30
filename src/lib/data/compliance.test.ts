@@ -41,7 +41,8 @@ test("Week 39 seed flags the full Group Timecard and does not invent meal clocks
     )
   );
   assert.ok(report.coverageDates.includes("2026-09-26"));
-  for (const date of ["2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26"]) {
+  const shiftOnlyDates = ["2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26"] as const;
+  for (const date of shiftOnlyDates) {
     assert.equal(scheduleWeek39.rosteredTotals[date], 0);
     assert.ok(scheduleWeek39.scheduledTotals[date] > 0);
     assert.equal(report.missingPunches.some((row) => row.date === date), false);
