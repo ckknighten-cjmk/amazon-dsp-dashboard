@@ -52,7 +52,7 @@ export default function OverviewPage() {
           <div className="grid gap-4 lg:grid-cols-5">
             <Card className="lg:col-span-3">
               <CardHeader>
-                <CardTitle>Volume · Sep 28</CardTitle>
+                <CardTitle>Volume · Sep 30</CardTitle>
                 <CardDescription>
                   Console Delivery Execution planned vs delivered. {DELIVERY_COVERAGE.label}. Other
                   days were not in this pull.
@@ -64,9 +64,9 @@ export default function OverviewPage() {
             </Card>
             <Card className="lg:col-span-2">
               <CardHeader>
-                <CardTitle>Sep 28 routes</CardTitle>
+                <CardTitle>Sep 30 routes</CardTitle>
                 <CardDescription>
-                  Status mix from the {station.stationCode} Console board (33 routes).{" "}
+                  Status mix from the {station.stationCode} Console board (36 routes).{" "}
                   {DELIVERY_COVERAGE.label}.
                 </CardDescription>
               </CardHeader>
