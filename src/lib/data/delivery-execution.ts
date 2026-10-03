@@ -1,9 +1,10 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-09-28, ~8:09 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-10-02, ~8:01 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-09-28.csv`). Vehicle and on-time % stay null.
- * Execution gauge percentages were not exposed in this capture and stay null.
+ * `packages-exceptions-2026-10-02.csv`). Vehicle and on-time % stay null.
+ * Execution gauges in this capture are locations 99%, stops 99%, packages 99%,
+ * and attempt success 99%.
  */
 import type {
   DeliveryExecutionBoard,
@@ -13,7 +14,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-09-28.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-10-02.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];
@@ -242,7 +243,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Sep 28 publishes rescueActions as 0, so this column is still not
+ * Oct 2 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =
