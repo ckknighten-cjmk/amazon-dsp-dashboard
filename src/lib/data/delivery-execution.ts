@@ -1,9 +1,12 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-09-28, ~8:09 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-10-09, ~8:08 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-09-28.csv`). Vehicle and on-time % stay null.
- * Execution gauge percentages were not exposed in this capture and stay null.
+ * `packages-exceptions-2026-10-09.csv`). This capture stores those rows with the
+ * CSV column names; earlier seeds used camelCase. Vehicle and on-time % stay null.
+ * Execution gauges in this capture are locations 99%, stops 98%, packages 98%,
+ * and attempt success 99%. Status inferred: the board shows 7 in progress
+ * (CX261, CX251, CX270, CX259, CX255, CX253, CX272); the other 27 routes are complete.
  */
 import type {
   DeliveryExecutionBoard,
@@ -13,7 +16,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-09-28.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-10-09.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];
@@ -88,8 +91,28 @@ function titleStatus(raw: string): PackageExceptionStatus {
   return "Undeliverable";
 }
 
+/** Earlier seeds use camelCase. This scrape uses the Packages CSV column names. */
+function exceptionText(row: object, camel: string, header: string) {
+  const record = row as Record<string, unknown>;
+  const value = record[camel] ?? record[header];
+  return typeof value === "string" ? value : "";
+}
+
+function readException(row: SeedException) {
+  return {
+    scannableId: exceptionText(row, "scannableId", "Scannable Id"),
+    routeCode: exceptionText(row, "routeCode", "Route Code"),
+    transporterName: exceptionText(row, "transporterName", "Transporter Name"),
+    transporterId: exceptionText(row, "transporterId", "Transporter Id"),
+    address: exceptionText(row, "address", "Address"),
+    packageStatus: exceptionText(row, "packageStatus", "Package Status"),
+    reasonCode: exceptionText(row, "reasonCode", "Reason Code"),
+    lastScan: exceptionText(row, "lastScan", "Time of last scan"),
+  };
+}
+
 const transporterByName = new Map<string, string>();
-for (const row of seed.exceptionPackages as SeedException[]) {
+for (const row of (seed.exceptionPackages as SeedException[]).map(readException)) {
   if (row.transporterName && row.transporterId) {
     transporterByName.set(row.transporterName, row.transporterId);
   }
@@ -172,18 +195,21 @@ const routeIdByCode = new Map(routes.map((r) => [r.code, r.id]));
 
 export const exceptions: PackageException[] = (
   seed.exceptionPackages as SeedException[]
-).map((row) => ({
-  id: row.scannableId,
-  scannableId: row.scannableId,
-  routeCode: row.routeCode,
-  routeId: routeIdByCode.get(row.routeCode) ?? slugRoute(row.routeCode),
-  transporterName: row.transporterName,
-  transporterId: row.transporterId,
-  address: row.address,
-  status: titleStatus(row.packageStatus),
-  reasonCode: row.reasonCode,
-  lastScan: row.lastScan ? row.lastScan.replace(" ", "T") : null,
-}));
+).map((raw) => {
+  const row = readException(raw);
+  return {
+    id: row.scannableId,
+    scannableId: row.scannableId,
+    routeCode: row.routeCode,
+    routeId: routeIdByCode.get(row.routeCode) ?? slugRoute(row.routeCode),
+    transporterName: row.transporterName,
+    transporterId: row.transporterId,
+    address: row.address,
+    status: titleStatus(row.packageStatus),
+    reasonCode: row.reasonCode,
+    lastScan: row.lastScan ? row.lastScan.replace(" ", "T") : null,
+  };
+});
 
 const routesByAssociate = new Map<string, Route[]>();
 for (const route of routes) {
@@ -242,7 +268,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Sep 28 publishes rescueActions as 0, so this column is still not
+ * Oct 9 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =

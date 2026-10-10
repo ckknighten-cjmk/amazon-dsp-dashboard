@@ -119,7 +119,7 @@ export default function RoutesPage() {
     <div>
       <PageHeader
         title="Delivery Execution"
-        description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Sep 28, 2026. Vehicle, on-time %, and execution gauges were not on the Console — shown as unavailable."
+        description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Oct 9, 2026. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 98%, packages 98%, attempt success 99%). Status inferred: the board shows 7 in progress (CX261, CX251, CX270, CX259, CX255, CX253, CX272); the other 27 routes are complete."
         updatedLabel={seedCapturedLabel(board.capturedAt)}
       />
 
