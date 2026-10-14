@@ -142,4 +142,8 @@ test("other dataset exports stay on seeded values", () => {
     complianceViewCsv(getComplianceReport(38), "missing").filename,
     "compliance-missing-punches-week-38.csv"
   );
+  const week41 = getComplianceReport(41);
+  assert.equal(complianceViewCsv(week41, "missing").filename, "compliance-missing-punches-week-41.csv");
+  assert.equal(complianceCombinedCsv(week41).filename, "compliance-week-41.csv");
+  assert.match(complianceCombinedCsv(week41).csv, /Meal rows/);
 });

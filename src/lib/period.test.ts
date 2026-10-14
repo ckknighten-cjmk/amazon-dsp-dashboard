@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import paymentsSeed from "./data/seed/payments-settlements-2026-09-21.json";
 import scheduleWeek38 from "./data/seed/week38-amazon-schedule.json";
 import scheduleWeek39 from "./data/seed/week39-amazon-schedule.json";
+import scheduleWeek41 from "./data/seed/week41-amazon-schedule.json";
 import {
   BONUS_COVERAGE,
   boundsOf,
@@ -137,8 +138,8 @@ describe("seed coverage", () => {
     assert.equal(workSummaryWeekForRange({ kind: "week" }), 39);
     assert.equal(workSummaryWeekForRange({ kind: "today" }), null);
 
-    for (const week of [38, 39] as const) {
-      const schedule = week === 38 ? scheduleWeek38 : scheduleWeek39;
+    for (const week of [38, 39, 41] as const) {
+      const schedule = week === 38 ? scheduleWeek38 : week === 39 ? scheduleWeek39 : scheduleWeek41;
       const dates = schedule.associates[0]?.days.map((day) => day.date) ?? [];
       assert.equal(dates[0], COMPLIANCE_COVERAGE[week].start);
       assert.equal(dates[dates.length - 1], COMPLIANCE_COVERAGE[week].end);

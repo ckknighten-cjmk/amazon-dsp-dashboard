@@ -5,10 +5,13 @@
  */
 import adpWeek38 from "@/lib/data/seed/adp-timecards-week38.json";
 import adpWeek39 from "@/lib/data/seed/adp-timecards-week39.json";
+import adpWeek41 from "@/lib/data/seed/adp-timecards-week41.json";
 import breaksWeek38 from "@/lib/data/seed/week38-amazon-breaks.json";
 import breaksWeek39 from "@/lib/data/seed/week39-amazon-breaks.json";
+import breaksWeek41 from "@/lib/data/seed/week41-amazon-breaks.json";
 import scheduleWeek38 from "@/lib/data/seed/week38-amazon-schedule.json";
 import scheduleWeek39 from "@/lib/data/seed/week39-amazon-schedule.json";
+import scheduleWeek41 from "@/lib/data/seed/week41-amazon-schedule.json";
 import { dateLabel, evaluateTimecards } from "@/lib/compliance/engine";
 import type {
   AdpPunchRow,
@@ -20,7 +23,7 @@ import type {
   WorkHoursSummary,
 } from "@/lib/compliance/types";
 
-export const COMPLIANCE_WEEKS = [38, 39] as const;
+export const COMPLIANCE_WEEKS = [38, 39, 41] as const;
 export type ComplianceWeek = (typeof COMPLIANCE_WEEKS)[number];
 
 const SCHEDULE_TEMPLATE_NOTE =
@@ -118,6 +121,13 @@ const WEEK_COPY: Record<ComplianceWeek, WeekCopy> = {
     adpPreface: [],
     outsideCoverageNote: null,
   },
+  41: {
+    sourceNote:
+      "Punches are the read-only Group Timecard for Sun–Sat, bucketed by the displayed Date column. No individual Timecard Detail views were captured.",
+    coverageDetail: "Group Timecard · Sun–Sat",
+    adpPreface: [],
+    outsideCoverageNote: null,
+  },
 };
 
 const SEEDS: Record<ComplianceWeek, { adp: AdpSeed; breaks: BreaksSeed; schedule: ScheduleSeed }> = {
@@ -130,6 +140,11 @@ const SEEDS: Record<ComplianceWeek, { adp: AdpSeed; breaks: BreaksSeed; schedule
     adp: adpWeek39 as AdpSeed,
     breaks: breaksWeek39 as BreaksSeed,
     schedule: scheduleWeek39 as ScheduleSeed,
+  },
+  41: {
+    adp: adpWeek41 as AdpSeed,
+    breaks: breaksWeek41 as BreaksSeed,
+    schedule: scheduleWeek41 as ScheduleSeed,
   },
 };
 
@@ -311,10 +326,12 @@ const cached = new Map<ComplianceWeek, ComplianceReport>();
 
 export function parseComplianceWeek(value: string | string[] | undefined): ComplianceWeek {
   const raw = Array.isArray(value) ? value[0] : value;
-  return raw === "39" ? 39 : 38;
+  if (raw === "38") return 38;
+  if (raw === "39") return 39;
+  return 41;
 }
 
-export function getComplianceReport(week: ComplianceWeek = 38) {
+export function getComplianceReport(week: ComplianceWeek = 41) {
   const existing = cached.get(week);
   if (existing) return existing;
   const report = buildReport(week);
