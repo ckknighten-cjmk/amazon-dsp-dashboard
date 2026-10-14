@@ -31,8 +31,9 @@ import type {
 import { cn } from "@/lib/utils";
 
 const WEEKS = [
-  { week: 38, href: "/compliance", label: "Week 38" },
+  { week: 38, href: "/compliance?week=38", label: "Week 38" },
   { week: 39, href: "/compliance?week=39", label: "Week 39" },
+  { week: 41, href: "/compliance", label: "Week 41" },
 ] as const;
 
 type View = "missing" | "over12" | "over60" | "meals" | "unmatched";
