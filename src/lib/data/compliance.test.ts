@@ -115,16 +115,16 @@ test("Week 41 seed is the default and flags rostered blocks against the full Gro
     "2026-10-10",
   ]);
   assert.deepEqual(report.counts, {
-    missingPunchDays: 16,
-    missingPunchAssociates: 7,
-    over12Days: 9,
+    missingPunchDays: 1,
+    missingPunchAssociates: 1,
+    over12Days: 0,
     over60Associates: 0,
-    mealMismatches: 45,
+    mealMismatches: 52,
     mealRowsJoined: 95,
   });
   assert.equal(
     Object.values(adpWeek41.groupTimecard).reduce((sum, rows) => sum + rows.length, 0),
-    1173
+    1196
   );
   assert.equal(scheduleWeek41.associates.length, 101);
   assert.equal(scheduleWeek41.serviceDates.start, "2026-10-04");
@@ -140,8 +140,8 @@ test("Week 41 seed is the default and flags rostered blocks against the full Gro
   assert.ok(
     report.missingPunches.some(
       (row) =>
-        row.associate === "Draem Thomarcus Hines" &&
-        row.date === "2026-10-04" &&
+        row.associate === "Michael Neal" &&
+        row.date === "2026-10-08" &&
         row.adpTimes === "No ADP punch"
     )
   );
@@ -161,17 +161,7 @@ test("Week 41 seed is the default and flags rostered blocks against the full Gro
   }
   assert.deepEqual(
     report.over12.map((row) => `${row.date} ${row.adpName} ${row.hoursLabel}`),
-    [
-      "2026-10-04 LOWERY, GREGORY 12.16 ADP",
-      "2026-10-04 WILLIAMS, JAYDEN 12.92 ADP",
-      "2026-10-05 WILLIAMS, JAYDEN 12.83 ADP",
-      "2026-10-06 LEWIS, CEDRIC 14.41 ADP",
-      "2026-10-06 ARMSTRONG, DIBRELL 12.10 ADP",
-      "2026-10-06 LOWERY, GREGORY 12.18 ADP",
-      "2026-10-07 LEWIS, CEDRIC 13.33 ADP",
-      "2026-10-09 HARRIS, ARLANDO 12.02 ADP",
-      "2026-10-09 WILLIAMS, JAYDEN 13.55 ADP",
-    ]
+    []
   );
   assert.equal(report.over60.length, 0);
   assert.equal(report.over60Peak?.adpName, "PICKENS, LARRICO");
@@ -187,7 +177,7 @@ test("Week 41 seed is the default and flags rostered blocks against the full Gro
   );
 
   const mismatches = report.mealRows.filter((row) => row.mismatch);
-  assert.equal(mismatches.length, 45);
+  assert.equal(mismatches.length, 52);
   assert.deepEqual(
     [...new Set(mismatches.map((row) => `${row.amazonStatus} | ${row.adpMeal}`))].sort(),
     ["Missing Punch | Meal Punch", "Non-compliant | Meal Punch"]

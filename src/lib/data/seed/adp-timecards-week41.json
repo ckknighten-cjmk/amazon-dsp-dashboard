@@ -162,8 +162,8 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
+        "name": "BYRD, JOHN",
+        "positionId": "00G000569",
         "date": "10/04/2026",
         "timeIn": "",
         "timeOut": "",
@@ -173,8 +173,8 @@
         "department": "000004"
       },
       {
-        "name": "BYRD, JOHN",
-        "positionId": "00G000569",
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
         "date": "10/04/2026",
         "timeIn": "",
         "timeOut": "",
@@ -561,20 +561,20 @@
         "name": "GROSS, KEON",
         "positionId": "00G000505",
         "date": "10/04/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:23 PM",
+        "hours": "5.13",
         "outType": "",
         "payCode": "",
         "department": "000004"
       },
       {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
+        "name": "GROSS, KEON",
+        "positionId": "00G000505",
         "date": "10/04/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "02:53 PM",
+        "timeOut": "08:20 PM",
+        "hours": "5.45",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -671,10 +671,21 @@
         "name": "HINES, DRAEM",
         "positionId": "00G000195",
         "date": "10/04/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "11:07 AM",
+        "hours": "1.87",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "HINES, DRAEM",
+        "positionId": "00G000195",
+        "date": "10/04/2026",
+        "timeIn": "11:38 AM",
+        "timeOut": "09:17 PM",
+        "hours": "9.65",
+        "outType": "No Meal",
         "payCode": "",
         "department": "000004"
       },
@@ -769,6 +780,17 @@
       {
         "name": "HUTCHINSON, JORDAN",
         "positionId": "00G000486",
+        "date": "10/04/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
         "date": "10/04/2026",
         "timeIn": "",
         "timeOut": "",
@@ -998,17 +1020,6 @@
         "department": "000004"
       },
       {
-        "name": "Lexie",
-        "positionId": "00G000577",
-        "date": "10/04/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "LOWERY, GREGORY",
         "positionId": "00G000393",
         "date": "10/04/2026",
@@ -1024,8 +1035,19 @@
         "positionId": "00G000393",
         "date": "10/04/2026",
         "timeIn": "04:11 PM",
-        "timeOut": "07:40 PM",
-        "hours": "3.48",
+        "timeOut": "06:40 PM",
+        "hours": "2.48",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Lexie",
+        "positionId": "00G000577",
+        "date": "10/04/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -1695,8 +1717,8 @@
         "positionId": "00G000122",
         "date": "10/04/2026",
         "timeIn": "02:30 PM",
-        "timeOut": "09:10 PM",
-        "hours": "6.67",
+        "timeOut": "08:10 PM",
+        "hours": "5.67",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -1902,8 +1924,19 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
+        "name": "BUTLER, ANTONIE",
+        "positionId": "00G000590",
+        "date": "10/05/2026",
+        "timeIn": "08:00 AM",
+        "timeOut": "04:10 PM",
+        "hours": "8.17",
+        "outType": "No Meal",
+        "payCode": "TRAINING",
+        "department": "000004"
+      },
+      {
+        "name": "BYRD, JOHN",
+        "positionId": "00G000569",
         "date": "10/05/2026",
         "timeIn": "",
         "timeOut": "",
@@ -1913,19 +1946,8 @@
         "department": "000004"
       },
       {
-        "name": "BUTLER, ANTONIE",
-        "positionId": "00G000590",
-        "date": "10/05/2026",
-        "timeIn": "08:00 AM",
-        "timeOut": "04:10 PM",
-        "hours": "8.17",
-        "outType": "No Meal",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "BYRD, JOHN",
-        "positionId": "00G000569",
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
         "date": "10/05/2026",
         "timeIn": "",
         "timeOut": "",
@@ -2346,8 +2368,19 @@
         "positionId": "00G000289",
         "date": "10/05/2026",
         "timeIn": "09:14 AM",
+        "timeOut": "03:15 PM",
+        "hours": "6.02",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "GOLIDAY, NOLAN",
+        "positionId": "00G000289",
+        "date": "10/05/2026",
+        "timeIn": "03:45 PM",
         "timeOut": "08:51 PM",
-        "hours": "11.62",
+        "hours": "5.10",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -2359,28 +2392,6 @@
         "timeIn": "",
         "timeOut": "",
         "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/05/2026",
-        "timeIn": "09:15 AM",
-        "timeOut": "01:25 PM",
-        "hours": "4.17",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/05/2026",
-        "timeIn": "01:55 PM",
-        "timeOut": "07:45 PM",
-        "hours": "5.83",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -2477,10 +2488,21 @@
         "name": "HINES, DRAEM",
         "positionId": "00G000195",
         "date": "10/05/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:04 AM",
+        "hours": "0.82",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "HINES, DRAEM",
+        "positionId": "00G000195",
+        "date": "10/05/2026",
+        "timeIn": "10:37 AM",
+        "timeOut": "07:00 PM",
+        "hours": "8.38",
+        "outType": "No Meal",
         "payCode": "",
         "department": "000004"
       },
@@ -2579,6 +2601,28 @@
         "timeIn": "",
         "timeOut": "",
         "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/05/2026",
+        "timeIn": "09:15 AM",
+        "timeOut": "01:25 PM",
+        "hours": "4.17",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/05/2026",
+        "timeIn": "01:55 PM",
+        "timeOut": "07:45 PM",
+        "hours": "5.83",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -2782,8 +2826,8 @@
         "department": "000004"
       },
       {
-        "name": "Lexie",
-        "positionId": "00G000577",
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
         "date": "10/05/2026",
         "timeIn": "",
         "timeOut": "",
@@ -2793,8 +2837,8 @@
         "department": "000004"
       },
       {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
+        "name": "Lexie",
+        "positionId": "00G000577",
         "date": "10/05/2026",
         "timeIn": "",
         "timeOut": "",
@@ -2884,9 +2928,20 @@
         "name": "MOSELY, BRIANA",
         "positionId": "00G000392",
         "date": "10/05/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "01:59 PM",
+        "hours": "4.73",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "MOSELY, BRIANA",
+        "positionId": "00G000392",
+        "date": "10/05/2026",
+        "timeIn": "02:29 PM",
+        "timeOut": "06:00 PM",
+        "hours": "3.52",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -3160,8 +3215,19 @@
         "positionId": "00G000465",
         "date": "10/05/2026",
         "timeIn": "09:40 AM",
+        "timeOut": "03:02 PM",
+        "hours": "5.37",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "SINGLETON, SHAKIRA",
+        "positionId": "00G000465",
+        "date": "10/05/2026",
+        "timeIn": "03:32 PM",
         "timeOut": "08:25 PM",
-        "hours": "10.75",
+        "hours": "4.88",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -3380,8 +3446,8 @@
         "positionId": "00G000591",
         "date": "10/05/2026",
         "timeIn": "03:22 PM",
-        "timeOut": "08:45 PM",
-        "hours": "5.38",
+        "timeOut": "08:20 PM",
+        "hours": "4.97",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -3512,8 +3578,8 @@
         "positionId": "00G000122",
         "date": "10/05/2026",
         "timeIn": "02:30 PM",
-        "timeOut": "09:05 PM",
-        "hours": "6.58",
+        "timeOut": "08:05 PM",
+        "hours": "5.58",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -3657,8 +3723,8 @@
         "positionId": "00G000221",
         "date": "10/06/2026",
         "timeIn": "09:15 AM",
-        "timeOut": "02:30 PM",
-        "hours": "5.25",
+        "timeOut": "02:03 PM",
+        "hours": "4.80",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -3719,17 +3785,6 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
-        "date": "10/06/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "BUTLER, ANTONIE",
         "positionId": "00G000590",
         "date": "10/06/2026",
@@ -3737,7 +3792,7 @@
         "timeOut": "11:54 AM",
         "hours": "3.92",
         "outType": "Meal Punch",
-        "payCode": "",
+        "payCode": "TRAINING",
         "department": "000004"
       },
       {
@@ -3748,12 +3803,23 @@
         "timeOut": "04:15 PM",
         "hours": "3.38",
         "outType": "",
-        "payCode": "",
+        "payCode": "TRAINING",
         "department": "000004"
       },
       {
         "name": "BYRD, JOHN",
         "positionId": "00G000569",
+        "date": "10/06/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
         "date": "10/06/2026",
         "timeIn": "",
         "timeOut": "",
@@ -4203,28 +4269,6 @@
         "department": "000004"
       },
       {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/06/2026",
-        "timeIn": "09:15 AM",
-        "timeOut": "02:00 PM",
-        "hours": "4.75",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/06/2026",
-        "timeIn": "02:30 PM",
-        "timeOut": "08:25 PM",
-        "hours": "5.92",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "HARRIS, ARLANDO",
         "positionId": "00G000594",
         "date": "10/06/2026",
@@ -4434,6 +4478,28 @@
         "department": "000004"
       },
       {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/06/2026",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:00 PM",
+        "hours": "4.75",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/06/2026",
+        "timeIn": "02:30 PM",
+        "timeOut": "08:25 PM",
+        "hours": "5.92",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
         "name": "ISRAEL, SHACHANIAH",
         "positionId": "00G000340",
         "date": "10/06/2026",
@@ -4547,9 +4613,9 @@
         "name": "KYLES, CATERA",
         "positionId": "00G000102",
         "date": "10/06/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "08:45 AM",
+        "timeOut": "12:30 PM",
+        "hours": "3.75",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -4603,8 +4669,8 @@
         "positionId": "00G000064",
         "date": "10/06/2026",
         "timeIn": "02:30 PM",
-        "timeOut": "10:20 PM",
-        "hours": "7.83",
+        "timeOut": "07:20 PM",
+        "hours": "4.83",
         "outType": "No Meal",
         "payCode": "",
         "department": "000004"
@@ -4654,6 +4720,28 @@
         "department": "000004"
       },
       {
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
+        "date": "10/06/2026",
+        "timeIn": "07:00 AM",
+        "timeOut": "05:35 PM",
+        "hours": "10.58",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
+        "date": "10/06/2026",
+        "timeIn": "06:05 PM",
+        "timeOut": "06:41 PM",
+        "hours": "0.60",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
         "name": "Lexie",
         "positionId": "00G000577",
         "date": "10/06/2026",
@@ -4671,28 +4759,6 @@
         "timeIn": "06:57 PM",
         "timeOut": "08:18 PM",
         "hours": "1.35",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
-        "date": "10/06/2026",
-        "timeIn": "07:00 AM",
-        "timeOut": "05:35 PM",
-        "hours": "10.58",
-        "outType": "Meal Punch",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
-        "date": "10/06/2026",
-        "timeIn": "06:05 PM",
-        "timeOut": "07:41 PM",
-        "hours": "1.60",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -4789,9 +4855,20 @@
         "name": "MOSELY, BRIANA",
         "positionId": "00G000392",
         "date": "10/06/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:01 PM",
+        "hours": "4.77",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "MOSELY, BRIANA",
+        "positionId": "00G000392",
+        "date": "10/06/2026",
+        "timeIn": "02:31 PM",
+        "timeOut": "09:15 PM",
+        "hours": "6.73",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -5218,9 +5295,9 @@
         "name": "TATE, SHAQUILLE",
         "positionId": "00G000223",
         "date": "10/06/2026",
-        "timeIn": "03:00 PM",
+        "timeIn": "03:10 PM",
         "timeOut": "07:45 PM",
-        "hours": "4.75",
+        "hours": "4.58",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -5635,17 +5712,6 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
-        "date": "10/07/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "BUTLER, ANTONIE",
         "positionId": "00G000590",
         "date": "10/07/2026",
@@ -5659,6 +5725,17 @@
       {
         "name": "BYRD, JOHN",
         "positionId": "00G000569",
+        "date": "10/07/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
         "date": "10/07/2026",
         "timeIn": "",
         "timeOut": "",
@@ -6078,9 +6155,20 @@
         "name": "GOLIDAY, NOLAN",
         "positionId": "00G000289",
         "date": "10/07/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:37 PM",
+        "hours": "5.37",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "GOLIDAY, NOLAN",
+        "positionId": "00G000289",
+        "date": "10/07/2026",
+        "timeIn": "03:07 PM",
+        "timeOut": "08:07 PM",
+        "hours": "5.00",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -6103,28 +6191,6 @@
         "timeIn": "",
         "timeOut": "",
         "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/07/2026",
-        "timeIn": "09:15 AM",
-        "timeOut": "02:00 PM",
-        "hours": "4.75",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/07/2026",
-        "timeIn": "02:30 PM",
-        "timeOut": "08:05 PM",
-        "hours": "5.58",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -6350,6 +6416,28 @@
         "department": "000004"
       },
       {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/07/2026",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:00 PM",
+        "hours": "4.75",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/07/2026",
+        "timeIn": "02:30 PM",
+        "timeOut": "08:05 PM",
+        "hours": "5.58",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
         "name": "ISRAEL, SHACHANIAH",
         "positionId": "00G000340",
         "date": "10/07/2026",
@@ -6452,9 +6540,20 @@
         "name": "KYLES, CATERA",
         "positionId": "00G000102",
         "date": "10/07/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "08:45 AM",
+        "timeOut": "02:00 PM",
+        "hours": "5.25",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "KYLES, CATERA",
+        "positionId": "00G000102",
+        "date": "10/07/2026",
+        "timeIn": "02:30 PM",
+        "timeOut": "09:00 PM",
+        "hours": "6.50",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -6519,8 +6618,8 @@
         "positionId": "00G000064",
         "date": "10/07/2026",
         "timeIn": "02:30 PM",
-        "timeOut": "09:15 PM",
-        "hours": "6.75",
+        "timeOut": "07:15 PM",
+        "hours": "4.75",
         "outType": "No Meal",
         "payCode": "",
         "department": "000004"
@@ -6581,23 +6680,23 @@
         "department": "000004"
       },
       {
-        "name": "Lexie",
-        "positionId": "00G000577",
-        "date": "10/07/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "LOWERY, GREGORY",
         "positionId": "00G000393",
         "date": "10/07/2026",
         "timeIn": "07:00 AM",
         "timeOut": "05:45 PM",
         "hours": "10.75",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Lexie",
+        "positionId": "00G000577",
+        "date": "10/07/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -6694,9 +6793,9 @@
         "name": "MOSELY, BRIANA",
         "positionId": "00G000392",
         "date": "10/07/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "11:00 AM",
+        "hours": "1.75",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -6793,11 +6892,11 @@
         "name": "PHIPPS, MARQUEL",
         "positionId": "00G000276",
         "date": "10/07/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:15 PM",
+        "hours": "5.00",
         "outType": "",
-        "payCode": "",
+        "payCode": "PTO",
         "department": "000004"
       },
       {
@@ -6992,8 +7091,19 @@
         "positionId": "00G000465",
         "date": "10/07/2026",
         "timeIn": "09:15 AM",
+        "timeOut": "02:38 PM",
+        "hours": "5.38",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "SINGLETON, SHAKIRA",
+        "positionId": "00G000465",
+        "date": "10/07/2026",
+        "timeIn": "03:08 PM",
         "timeOut": "08:38 PM",
-        "hours": "11.38",
+        "hours": "5.50",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -7507,17 +7617,6 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
-        "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "BUTLER, ANTONIE",
         "positionId": "00G000590",
         "date": "10/08/2026",
@@ -7535,6 +7634,17 @@
         "timeIn": "09:15 AM",
         "timeOut": "10:56 AM",
         "hours": "1.68",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
+        "date": "10/08/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -7785,9 +7895,9 @@
         "name": "DOSS, DONOVAN",
         "positionId": "00G000292",
         "date": "10/08/2026",
-        "timeIn": "03:02 PM",
+        "timeIn": "03:01 PM",
         "timeOut": "05:26 PM",
-        "hours": "2.40",
+        "hours": "2.42",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -7852,8 +7962,8 @@
         "positionId": "00G000534",
         "date": "10/08/2026",
         "timeIn": "11:24 AM",
-        "timeOut": "",
-        "hours": "",
+        "timeOut": "06:26 PM",
+        "hours": "7.03",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -7962,8 +8072,8 @@
         "positionId": "00G000595",
         "date": "10/08/2026",
         "timeIn": "09:10 AM",
-        "timeOut": "07:16 PM",
-        "hours": "10.10",
+        "timeOut": "02:16 PM",
+        "hours": "5.10",
         "outType": "Meal Punch",
         "payCode": "",
         "department": "000004"
@@ -7972,9 +8082,9 @@
         "name": "GRAY, RONESHA",
         "positionId": "00G000595",
         "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "02:46 PM",
-        "hours": "",
+        "timeIn": "02:46 PM",
+        "timeOut": "07:16 PM",
+        "hours": "4.50",
         "outType": "Meal Punch",
         "payCode": "",
         "department": "000004"
@@ -7983,20 +8093,20 @@
         "name": "GROSS, KEON",
         "positionId": "00G000505",
         "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:23 PM",
+        "hours": "5.13",
         "outType": "",
         "payCode": "",
         "department": "000004"
       },
       {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
+        "name": "GROSS, KEON",
+        "positionId": "00G000505",
         "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "02:53 PM",
+        "timeOut": "08:23 PM",
+        "hours": "5.50",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -8104,10 +8214,21 @@
         "name": "HINES, DRAEM",
         "positionId": "00G000195",
         "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:04 AM",
+        "hours": "0.82",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "HINES, DRAEM",
+        "positionId": "00G000195",
+        "date": "10/08/2026",
+        "timeIn": "10:37 AM",
+        "timeOut": "06:15 PM",
+        "hours": "7.63",
+        "outType": "No Meal",
         "payCode": "",
         "department": "000004"
       },
@@ -8217,6 +8338,17 @@
         "timeIn": "10:53 AM",
         "timeOut": "07:01 PM",
         "hours": "8.13",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/08/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -8346,9 +8478,20 @@
         "name": "KYLES, CATERA",
         "positionId": "00G000102",
         "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "08:45 AM",
+        "timeOut": "02:00 PM",
+        "hours": "5.25",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "KYLES, CATERA",
+        "positionId": "00G000102",
+        "date": "10/08/2026",
+        "timeIn": "02:30 PM",
+        "timeOut": "09:15 PM",
+        "hours": "6.75",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -8383,7 +8526,7 @@
         "timeOut": "04:30 PM",
         "hours": "8.50",
         "outType": "",
-        "payCode": "",
+        "payCode": "TRAINING",
         "department": "000004"
       },
       {
@@ -8519,6 +8662,17 @@
         "department": "000004"
       },
       {
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
+        "date": "10/08/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
         "name": "Lexie",
         "positionId": "00G000577",
         "date": "10/08/2026",
@@ -8536,17 +8690,6 @@
         "timeIn": "10:47 AM",
         "timeOut": "07:49 PM",
         "hours": "9.03",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
-        "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -8676,9 +8819,20 @@
         "name": "PHIPPS, MARQUEL",
         "positionId": "00G000276",
         "date": "10/08/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:55 AM",
+        "hours": "1.67",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "PHIPPS, MARQUEL",
+        "positionId": "00G000276",
+        "date": "10/08/2026",
+        "timeIn": "11:25 AM",
+        "timeOut": "07:25 PM",
+        "hours": "8.00",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -9357,17 +9511,6 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
-        "date": "10/09/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "BUTLER, ANTONIE",
         "positionId": "00G000590",
         "date": "10/09/2026",
@@ -9385,6 +9528,17 @@
         "timeIn": "09:49 AM",
         "timeOut": "02:11 PM",
         "hours": "4.37",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
+        "date": "10/09/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -9613,9 +9767,9 @@
         "name": "DOSS, DONOVAN",
         "positionId": "00G000292",
         "date": "10/09/2026",
-        "timeIn": "04:13 PM",
+        "timeIn": "04:12 PM",
         "timeOut": "08:27 PM",
-        "hours": "4.23",
+        "hours": "4.25",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -9800,20 +9954,20 @@
         "name": "GROSS, KEON",
         "positionId": "00G000505",
         "date": "10/09/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "02:01 PM",
+        "hours": "4.77",
         "outType": "",
         "payCode": "",
         "department": "000004"
       },
       {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
+        "name": "GROSS, KEON",
+        "positionId": "00G000505",
         "date": "10/09/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "02:31 PM",
+        "timeOut": "08:40 PM",
+        "hours": "6.15",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -9822,9 +9976,9 @@
         "name": "HARRIS, ARLANDO",
         "positionId": "00G000594",
         "date": "10/09/2026",
-        "timeIn": "09:10 AM",
+        "timeIn": "09:14 AM",
         "timeOut": "02:17 PM",
-        "hours": "5.12",
+        "hours": "5.05",
         "outType": "Meal Punch",
         "payCode": "",
         "department": "000004"
@@ -9910,10 +10064,21 @@
         "name": "HINES, DRAEM",
         "positionId": "00G000195",
         "date": "10/09/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:41 AM",
+        "hours": "1.43",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "HINES, DRAEM",
+        "positionId": "00G000195",
+        "date": "10/09/2026",
+        "timeIn": "11:22 AM",
+        "timeOut": "07:30 PM",
+        "hours": "8.13",
+        "outType": "No Meal",
         "payCode": "",
         "department": "000004"
       },
@@ -10017,6 +10182,17 @@
         "department": "000004"
       },
       {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/09/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
         "name": "ISRAEL, SHACHANIAH",
         "positionId": "00G000340",
         "date": "10/09/2026",
@@ -10108,6 +10284,17 @@
         "name": "KNIGHT, KYLAN",
         "positionId": "00G000453",
         "date": "10/09/2026",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:34 AM",
+        "hours": "1.32",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "KNIGHT, KYLAN",
+        "positionId": "00G000453",
+        "date": "10/09/2026",
         "timeIn": "11:04 AM",
         "timeOut": "06:50 PM",
         "hours": "7.77",
@@ -10167,7 +10354,7 @@
         "timeOut": "10:31 AM",
         "hours": "2.88",
         "outType": "",
-        "payCode": "",
+        "payCode": "TRAINING",
         "department": "000004"
       },
       {
@@ -10270,6 +10457,28 @@
         "department": "000004"
       },
       {
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
+        "date": "10/09/2026",
+        "timeIn": "07:00 AM",
+        "timeOut": "02:17 PM",
+        "hours": "7.28",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
+        "date": "10/09/2026",
+        "timeIn": "02:47 PM",
+        "timeOut": "06:00 PM",
+        "hours": "3.22",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
         "name": "Lexie",
         "positionId": "00G000577",
         "date": "10/09/2026",
@@ -10287,28 +10496,6 @@
         "timeIn": "11:20 AM",
         "timeOut": "08:48 PM",
         "hours": "9.47",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
-        "date": "10/09/2026",
-        "timeIn": "07:00 AM",
-        "timeOut": "02:17 PM",
-        "hours": "7.28",
-        "outType": "Meal Punch",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
-        "date": "10/09/2026",
-        "timeIn": "02:47 PM",
-        "timeOut": "05:00 PM",
-        "hours": "2.22",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -10482,9 +10669,20 @@
         "name": "PHIPPS, MARQUEL",
         "positionId": "00G000276",
         "date": "10/09/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "11:01 AM",
+        "hours": "1.77",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "PHIPPS, MARQUEL",
+        "positionId": "00G000276",
+        "date": "10/09/2026",
+        "timeIn": "11:31 AM",
+        "timeOut": "08:07 PM",
+        "hours": "8.60",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -11000,8 +11198,8 @@
         "positionId": "00G000122",
         "date": "10/09/2026",
         "timeIn": "02:30 PM",
-        "timeOut": "09:48 PM",
-        "hours": "7.30",
+        "timeOut": "07:48 PM",
+        "hours": "5.30",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -11015,6 +11213,17 @@
         "hours": "",
         "outType": "",
         "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "WOODARD, ERIC",
+        "positionId": "00G000598",
+        "date": "10/09/2026",
+        "timeIn": "08:00 AM",
+        "timeOut": "10:00 AM",
+        "hours": "2.00",
+        "outType": "",
+        "payCode": "TRAINING",
         "department": "000004"
       },
       {
@@ -11218,17 +11427,6 @@
         "department": "000004"
       },
       {
-        "name": "Brooks, Tabitha",
-        "positionId": "00G000558",
-        "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "BUTLER, ANTONIE",
         "positionId": "00G000590",
         "date": "10/10/2026",
@@ -11242,6 +11440,17 @@
       {
         "name": "BYRD, JOHN",
         "positionId": "00G000569",
+        "date": "10/10/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Brooks, Tabitha",
+        "positionId": "00G000558",
         "date": "10/10/2026",
         "timeIn": "",
         "timeOut": "",
@@ -11669,17 +11878,6 @@
         "department": "000004"
       },
       {
-        "name": "Hall, Denzel",
-        "positionId": "00G000298",
-        "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
-        "payCode": "",
-        "department": "000004"
-      },
-      {
         "name": "HARRIS, ARLANDO",
         "positionId": "00G000594",
         "date": "10/10/2026",
@@ -11771,10 +11969,21 @@
         "name": "HINES, DRAEM",
         "positionId": "00G000195",
         "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
-        "outType": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "01:55 PM",
+        "hours": "4.67",
+        "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "HINES, DRAEM",
+        "positionId": "00G000195",
+        "date": "10/10/2026",
+        "timeIn": "02:26 PM",
+        "timeOut": "05:11 PM",
+        "hours": "2.75",
+        "outType": "No Meal",
         "payCode": "",
         "department": "000004"
       },
@@ -11862,6 +12071,17 @@
         "timeIn": "10:38 AM",
         "timeOut": "06:21 PM",
         "hours": "7.72",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "Hall, Denzel",
+        "positionId": "00G000298",
+        "date": "10/10/2026",
+        "timeIn": "",
+        "timeOut": "",
+        "hours": "",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -11969,9 +12189,20 @@
         "name": "KYLES, CATERA",
         "positionId": "00G000102",
         "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "08:45 AM",
+        "timeOut": "02:00 PM",
+        "hours": "5.25",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "KYLES, CATERA",
+        "positionId": "00G000102",
+        "date": "10/10/2026",
+        "timeIn": "02:30 PM",
+        "timeOut": "08:45 PM",
+        "hours": "6.25",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -12025,8 +12256,8 @@
         "positionId": "00G000064",
         "date": "10/10/2026",
         "timeIn": "07:45 AM",
-        "timeOut": "12:00 PM",
-        "hours": "4.25",
+        "timeOut": "05:00 PM",
+        "hours": "9.25",
         "outType": "No Meal",
         "payCode": "",
         "department": "000004"
@@ -12098,19 +12329,19 @@
         "department": "000004"
       },
       {
-        "name": "Lexie",
-        "positionId": "00G000577",
+        "name": "LOWERY, GREGORY",
+        "positionId": "00G000393",
         "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:15 AM",
+        "hours": "1.00",
         "outType": "",
         "payCode": "",
         "department": "000004"
       },
       {
-        "name": "LOWERY, GREGORY",
-        "positionId": "00G000393",
+        "name": "Lexie",
+        "positionId": "00G000577",
         "date": "10/10/2026",
         "timeIn": "",
         "timeOut": "",
@@ -12168,8 +12399,8 @@
         "positionId": "00G000571",
         "date": "10/10/2026",
         "timeIn": "01:30 PM",
-        "timeOut": "08:00 PM",
-        "hours": "6.50",
+        "timeOut": "07:20 PM",
+        "hours": "5.83",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -12288,9 +12519,20 @@
         "name": "PHIPPS, MARQUEL",
         "positionId": "00G000276",
         "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:15 AM",
+        "timeOut": "10:45 AM",
+        "hours": "1.50",
+        "outType": "",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "PHIPPS, MARQUEL",
+        "positionId": "00G000276",
+        "date": "10/10/2026",
+        "timeIn": "11:15 AM",
+        "timeOut": "05:35 PM",
+        "hours": "6.33",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -12343,9 +12585,9 @@
         "name": "RANDOLPH, DARIUS",
         "positionId": "00G000464",
         "date": "10/10/2026",
-        "timeIn": "",
-        "timeOut": "",
-        "hours": "",
+        "timeIn": "09:10 AM",
+        "timeOut": "11:08 AM",
+        "hours": "1.97",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -12629,9 +12871,9 @@
         "name": "TATE, SHAQUILLE",
         "positionId": "00G000223",
         "date": "10/10/2026",
-        "timeIn": "03:30 PM",
+        "timeIn": "03:40 PM",
         "timeOut": "07:42 PM",
-        "hours": "4.20",
+        "hours": "4.03",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -12795,9 +13037,20 @@
         "positionId": "00G000600",
         "date": "10/10/2026",
         "timeIn": "09:15 AM",
-        "timeOut": "07:30 PM",
-        "hours": "10.25",
+        "timeOut": "02:29 PM",
+        "hours": "5.23",
         "outType": "Meal Punch",
+        "payCode": "",
+        "department": "000004"
+      },
+      {
+        "name": "WILKINS, MARTEZ",
+        "positionId": "00G000600",
+        "date": "10/10/2026",
+        "timeIn": "02:59 PM",
+        "timeOut": "07:30 PM",
+        "hours": "4.52",
+        "outType": "",
         "payCode": "",
         "department": "000004"
       },
@@ -12817,8 +13070,8 @@
         "positionId": "00G000122",
         "date": "10/10/2026",
         "timeIn": "07:45 AM",
-        "timeOut": "11:30 AM",
-        "hours": "3.75",
+        "timeOut": "03:30 PM",
+        "hours": "7.75",
         "outType": "",
         "payCode": "",
         "department": "000004"
@@ -12926,9 +13179,10 @@
   },
   "individualTimecards": {},
   "notes": [
-    "Scraped one Pay Date at a time (10/04/2026 through 10/10/2026) from the Group Timecard grid.",
-    "Every row's Date In column was verified to match the selected day; 0 mismatches across all 7 days.",
+    "Rescraped 2026-10-15 one Pay Date at a time (10/04/2026 through 10/10/2026) from the ADP Workforce Now Group Timecard grid with the Date column checked; read-only.",
+    "Every row's Date column was verified to match the selected day; 0 mismatches across all 7 days.",
+    "Blank no-punch rows were carried over from the 2026-10-13 pull only for associates with no punch row that day in the new pull, so the roster and missing-punch logic are preserved.",
     "No ADP edits, approvals, schedule template changes, or invented punches.",
-    "Row counts per day: 2026-10-04: 160, 2026-10-05: 165, 2026-10-06: 175, 2026-10-07: 169, 2026-10-08: 168, 2026-10-09: 167, 2026-10-10: 169"
+    "Row counts per day: 2026-10-04: 162, 2026-10-05: 169, 2026-10-06: 176, 2026-10-07: 172, 2026-10-08: 172, 2026-10-09: 172, 2026-10-10: 173"
   ]
 }
