@@ -3,24 +3,172 @@
   "serviceArea": "Memphis (DNA4)- Amazon.com",
   "week": 39,
   "period": "Sep 20 - Sep 26, 2026",
-  "capturedAt": "2026-09-23T06:46:51.183332Z",
-  "sourceUrl": "https://logistics.amazon.com/harmony/v2/#!/dsp-portal?serviceAreaId=e28a313f-a022-4f6f-9295-11641bebe616&providerId=amzn1.flex.provider.v1.f2d1e302-53ae-44ba-8c78-8feaac249398&localDate=2026-09-20",
-  "navPath": "Work Summary Tool > Memphis (DNA4)- Amazon.com > weekly view",
+  "capturedAt": "2026-10-15T03:39:28Z",
+  "sourceUrl": "https://logistics.amazon.com/harmony/v2/?localDate=2026-09-20&serviceAreaId=e28a313f-a022-4f6f-9295-11641bebe616",
+  "navPath": "Work Summary Tool > Memphis (DNA4)- Amazon.com > Weekly report (export)",
   "exportFiles": {
-    "zip": "/workspace/dsp-live/payments/work-summary-week39.zip",
-    "weeklyCsv": "/workspace/dsp-live/payments/work-summary-week39.csv",
-    "serviceDetailsCsv": "/workspace/dsp-live/payments/work-summary-week39-service-details.csv",
-    "packagesCsv": "/workspace/dsp-live/payments/work-summary-week39-packages.csv"
+    "zip": "/workspace/dsp-live/payments/work-summary-week39-new.zip"
   },
   "summary": {
-    "totalPackages": 0,
-    "deliveredPackages": 0,
-    "pickupPackages": 0,
-    "completedRoutes": 0,
-    "miles": 0,
-    "unplannedDelayCount": 0
+    "totalPackages": 70226,
+    "deliveredPackages": 69975,
+    "pickupPackages": 251,
+    "completedRoutes": 237,
+    "miles": 10205,
+    "unplannedDelayCount": 3
   },
-  "routeSummaries": [],
-  "rates": "Work Summary UI does not expose dollar rates in the weekly summary; route/service labels include block duration. See variable-invoice-week37.json for invoice rates.",
-  "notes": "Week 39 was present in Work Summary, but the captured view returned no route rows and all displayed summary metrics were zero (week in progress)."
+  "routeSummaries": [
+    {
+      "label": "Standard Parcel - Custom Delivery Van 14ft - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 5
+    },
+    {
+      "label": "Standard Parcel Electric - Rivian MEDIUM - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 13,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 184
+    },
+    {
+      "label": "Nursery Route Level 2 - Electric Vehicle - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 7
+    },
+    {
+      "label": "Standard Parcel - Custom Delivery Van 12ft - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 6
+    },
+    {
+      "label": "Nursery Route Level 2 - Electric Vehicle - 8 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 2
+    },
+    {
+      "label": "Standard Parcel Electric - Rivian MEDIUM - Recycle - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 0
+    },
+    {
+      "label": "Standard Parcel - Custom Delivery Van 16ft - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 6
+    },
+    {
+      "label": "Standard Parcel - Extra Large Van - US - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 3,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 15
+    },
+    {
+      "label": "Standard Parcel - On-Road Experience: Driver - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 1
+    },
+    {
+      "label": "Nursery Route Level 1 - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 2
+    },
+    {
+      "label": "Nursery Route Level 3 - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 1
+    },
+    {
+      "label": "Nursery Route Level 1 - Electric Vehicle - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 3
+    },
+    {
+      "label": "Nursery Route Level 3 - Electric Vehicle - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 3
+    },
+    {
+      "label": "Nursery Route Level 1 - Electric Vehicle - 7 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 1
+    },
+    {
+      "label": "Standard Parcel - Extra Large Van - US - w/ Ride Along - 10 hr",
+      "deliveredPackages": 0,
+      "pickupPackages": 0,
+      "providerLateCancel": 0,
+      "amzlLateCancel": 0,
+      "quickCoverage": 0,
+      "accepted": 0,
+      "completedRoutes": 1
+    }
+  ],
+  "rates": "Work Summary UI does not expose dollar rates in the weekly summary; route/service labels include block duration. See variable-invoice-week39.json for invoice rates.",
+  "notes": "Weekly figures are summed from the Work Summary weekly CSV export. Miles are planned miles (Total Distance Allowance), 10,205. Per-service delivered and pickup package counts were not in the export; those route-summary fields are 0 and do not add up to the weekly package totals. Provider late cancel, quick coverage, and accepted were blank in the export and are 0. Unplanned delays: 3 late departures (2026-09-21, 148 minutes, 4 routes; 2026-09-22, 16 minutes, 1 route; 2026-09-26, 25 minutes, 1 route)."
 }

@@ -6,6 +6,7 @@
 import { formatNumber, formatUsd } from "../format";
 import invoiceWeek37 from "../data/seed/variable-invoice-week37.json";
 import invoiceWeek38 from "../data/seed/variable-invoice-week38.json";
+import invoiceWeek39 from "../data/seed/variable-invoice-week39.json";
 import workWeek37 from "../data/seed/work-summary-week37.json";
 import workWeek38 from "../data/seed/work-summary-week38.json";
 import workWeek39 from "../data/seed/work-summary-week39.json";
@@ -140,8 +141,13 @@ interface WorkModel {
   acceptedSum: number;
 }
 
-const invoiceSeed = invoiceWeek37 as SeedInvoice;
-const week38InvoiceStatus = invoiceWeek38 as { status?: string; total?: string };
+const invoiceByWeek = {
+  37: invoiceWeek37,
+  38: invoiceWeek38,
+  39: invoiceWeek39,
+};
+const invoiceSeed = invoiceByWeek[37] as SeedInvoice;
+const week38InvoiceStatus = invoiceByWeek[38] as { status?: string; total?: string };
 if (week38InvoiceStatus.status !== "not_listed" || week38InvoiceStatus.total) {
   throw new Error("Week 38 variable invoice capture changed; do not invent a total.");
 }
