@@ -1,0 +1,672 @@
+{
+  "station": "DNA4",
+  "invoiceType": "Variable invoice",
+  "invoiceId": "INV-GA6T0P-0000000619",
+  "invoiceKey": "003e1e21-30c8-43b6-b091-7f617116dfe9_3",
+  "period": "Sep 20 - Sep 26, 2026",
+  "week": "Week 39",
+  "status": "Paid",
+  "disputeWindowCloses": null,
+  "total": "$93,264.11",
+  "invoiceDate": "Sep 26, 2026",
+  "listTotal": "$93,264.00",
+  "capturedAt": "2026-10-15T03:39:28Z",
+  "sourceUrl": "https://logistics.amazon.com/flexpayments/simpson/flexpro/invoices/invoiceDocument/003e1e21-30c8-43b6-b091-7f617116dfe9_3?userRoleName=EXTERNAL_USER",
+  "navPath": "Payments > Invoices > Variable invoice > Week 39",
+  "pdfExport": "/workspace/dsp-live/payments/variable-invoice-week39.pdf",
+  "sections": [
+    {
+      "name": "Routes",
+      "quantityLabel": "routes",
+      "quantity": 237,
+      "total": "$80,154.70",
+      "lineItems": [
+        {
+          "date": "Sep 23, 2026",
+          "label": "Nursery Route Level 1 - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$337.00",
+          "amount": "$674.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Nursery Route Level 1 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$337.00",
+          "amount": "$674.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Nursery Route Level 1 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Nursery Route Level 1 - Electric Vehicle - Block of 7 Hours",
+          "quantity": 1,
+          "rate": "$227.50",
+          "amount": "$227.50"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$337.00",
+          "amount": "$674.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$337.00",
+          "amount": "$674.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 8 Hours",
+          "quantity": 1,
+          "rate": "$269.60",
+          "amount": "$269.60"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Nursery Route Level 2 - Electric Vehicle - Block of 8 Hours",
+          "quantity": 1,
+          "rate": "$269.60",
+          "amount": "$269.60"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Nursery Route Level 3 - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Nursery Route Level 3 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Nursery Route Level 3 - Electric Vehicle - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$337.00",
+          "amount": "$674.00"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 12ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 14ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Standard Parcel - Custom Delivery Van 16ft - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 3,
+          "rate": "$337.00",
+          "amount": "$1,011.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 5,
+          "rate": "$337.00",
+          "amount": "$1,685.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 3,
+          "rate": "$337.00",
+          "amount": "$1,011.00"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 2,
+          "rate": "$337.00",
+          "amount": "$674.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$337.00",
+          "amount": "$337.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Standard Parcel - Extra Large Van - US - w/ Ride Along - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$602.00",
+          "amount": "$602.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Standard Parcel - On-Road Experience: Driver - Block of 10 Hours",
+          "quantity": 1,
+          "rate": "$602.00",
+          "amount": "$602.00"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 27,
+          "rate": "$337.00",
+          "amount": "$9,099.00"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 27,
+          "rate": "$337.00",
+          "amount": "$9,099.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 28,
+          "rate": "$337.00",
+          "amount": "$9,436.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 27,
+          "rate": "$337.00",
+          "amount": "$9,099.00"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 28,
+          "rate": "$337.00",
+          "amount": "$9,436.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 23,
+          "rate": "$337.00",
+          "amount": "$7,751.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Standard Parcel Electric - Rivian MEDIUM - Block of 10 Hours",
+          "quantity": 24,
+          "rate": "$337.00",
+          "amount": "$8,088.00"
+        }
+      ]
+    },
+    {
+      "name": "Training sessions",
+      "quantityLabel": "sessions",
+      "quantity": 6,
+      "total": "$1,396.80",
+      "lineItems": [
+        {
+          "date": "Sep 24, 2026",
+          "label": "Training - Block of 8 hours",
+          "quantity": 3,
+          "rate": "$232.80",
+          "amount": "$698.40"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Training - Block of 8 hours",
+          "quantity": 3,
+          "rate": "$232.80",
+          "amount": "$698.40"
+        }
+      ]
+    },
+    {
+      "name": "Late cancellations",
+      "quantityLabel": "cancellations",
+      "quantity": 16,
+      "total": "$3,200.00",
+      "lineItems": [
+        {
+          "date": "Sep 21, 2026",
+          "label": "AMZL Late Cancel- weekday",
+          "quantity": 1,
+          "rate": "$200.00",
+          "amount": "$200.00"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "AMZL Late Cancel- weekday",
+          "quantity": 1,
+          "rate": "$200.00",
+          "amount": "$200.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "AMZL Late Cancel- weekday",
+          "quantity": 4,
+          "rate": "$200.00",
+          "amount": "$800.00"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "AMZL Late Cancel- weekday",
+          "quantity": 2,
+          "rate": "$200.00",
+          "amount": "$400.00"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "AMZL Late Cancel- weekday",
+          "quantity": 3,
+          "rate": "$200.00",
+          "amount": "$600.00"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "AMZL Late Cancel- weekend",
+          "quantity": 3,
+          "rate": "$200.00",
+          "amount": "$600.00"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "AMZL Late Cancel- weekend",
+          "quantity": 2,
+          "rate": "$200.00",
+          "amount": "$400.00"
+        }
+      ]
+    },
+    {
+      "name": "Unplanned delay",
+      "quantityLabel": "hours",
+      "quantity": 3.16,
+      "total": "$102.71",
+      "lineItems": [
+        {
+          "date": "Sep 21, 2026",
+          "label": "Unplanned Delay",
+          "quantity": 2.47,
+          "rate": "$32.50",
+          "amount": "$80.28"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Unplanned Delay",
+          "quantity": 0.27,
+          "rate": "$32.52",
+          "amount": "$8.78"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Unplanned Delay",
+          "quantity": 0.42,
+          "rate": "$32.50",
+          "amount": "$13.65"
+        }
+      ]
+    },
+    {
+      "name": "Packages",
+      "quantityLabel": "packages",
+      "quantity": 140201,
+      "total": "$8,409.90",
+      "lineItems": [
+        {
+          "date": "Sep 20, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9057,
+          "rate": "$0.06",
+          "amount": "$543.42"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 10094,
+          "rate": "$0.06",
+          "amount": "$605.64"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 11424,
+          "rate": "$0.06",
+          "amount": "$685.44"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 10827,
+          "rate": "$0.06",
+          "amount": "$649.62"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9979,
+          "rate": "$0.06",
+          "amount": "$598.74"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9386,
+          "rate": "$0.06",
+          "amount": "$563.16"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Branding - Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9208,
+          "rate": "$0.06",
+          "amount": "$552.48"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9057,
+          "rate": "$0.06",
+          "amount": "$543.42"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 10094,
+          "rate": "$0.06",
+          "amount": "$605.64"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 11424,
+          "rate": "$0.06",
+          "amount": "$685.44"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 10827,
+          "rate": "$0.06",
+          "amount": "$649.62"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9979,
+          "rate": "$0.06",
+          "amount": "$598.74"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9386,
+          "rate": "$0.06",
+          "amount": "$563.16"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Variable Per Shipment - AMZL - Delivery Complete",
+          "quantity": 9208,
+          "rate": "$0.06",
+          "amount": "$552.48"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 1,
+          "rate": "$0.10",
+          "amount": "$0.10"
+        },
+        {
+          "date": "Sep 20, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 1,
+          "rate": "$0.05",
+          "amount": "$0.05"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 1,
+          "rate": "$0.10",
+          "amount": "$0.10"
+        },
+        {
+          "date": "Sep 21, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 14,
+          "rate": "$0.05",
+          "amount": "$0.70"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 2,
+          "rate": "$0.10",
+          "amount": "$0.20"
+        },
+        {
+          "date": "Sep 22, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 80,
+          "rate": "$0.05",
+          "amount": "$4.00"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 1,
+          "rate": "$0.10",
+          "amount": "$0.10"
+        },
+        {
+          "date": "Sep 23, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 62,
+          "rate": "$0.05",
+          "amount": "$3.10"
+        },
+        {
+          "date": "Sep 24, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 37,
+          "rate": "$0.05",
+          "amount": "$1.85"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 45,
+          "rate": "$0.05",
+          "amount": "$2.25"
+        },
+        {
+          "date": "Sep 25, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 1,
+          "rate": "$0.10",
+          "amount": "$0.10"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 5,
+          "rate": "$0.05",
+          "amount": "$0.25"
+        },
+        {
+          "date": "Sep 26, 2026",
+          "label": "Variable Per Shipment - AMZL - Pickup Complete",
+          "quantity": 1,
+          "rate": "$0.10",
+          "amount": "$0.10"
+        }
+      ]
+    }
+  ],
+  "reconciliation": {
+    "sectionTotalsSum": "$93,264.11",
+    "matchesInvoiceTotal": true,
+    "listTotal": "$93,264.00",
+    "workSummaryWeek39Packages": 70226,
+    "workSummaryWeek39DeliveredPackages": 69975,
+    "workSummaryWeek39PickupPackages": 251,
+    "workSummaryWeek39CompletedRoutes": 237,
+    "atAGlance": "Invoice section totals sum to the invoice total. Branding-delivery quantities sum to 69,975 and per-piece pickup quantities sum to 251, together 70,226, matching Work Summary packages. The Packages section quantity counts every line, including per-piece deliveries that repeat the branding quantities. Invoice route payments are 237. Work Summary routes completed are 237. This view does not treat package units and route payments as the same counts."
+  },
+  "invoiceListingObservation": {
+    "latestVariableListed": "Week 39",
+    "latestVariableAmount": "$93,264.11",
+    "otherVariableListed": "Week 37 ($88,556.70) remains the earlier settlements-list variable invoice. Week 38 was not in this capture.",
+    "week38OrWeek39VariableListed": true,
+    "note": "Week 39 variable invoice INV-GA6T0P-0000000619 was listed as Paid. The invoice list total was $93,264.00 and the PDF total is $93,264.11. Captured 2026-10-15T03:39:28Z."
+  },
+  "notes": "Invoice list (All invoices, page 2) shows status Paid. Web detail view did not open from list; data captured from the invoice PDF (Invoice Date Details). Section grouping applied by label; section totals summed from line items."
+}

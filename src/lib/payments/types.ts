@@ -88,7 +88,8 @@ export interface WeekReconcile {
     station: string;
     period: string;
     status: string;
-    disputeWindowCloses: string;
+    /** Null when a Paid invoice capture does not list a dispute-window close date. */
+    disputeWindowCloses: string | null;
     total: string;
     totalCents: number;
     capturedAt: string;

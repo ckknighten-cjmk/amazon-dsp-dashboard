@@ -160,7 +160,7 @@ function InvoicePanel({ report }: { report: WeekReconcile }) {
   }
 
   return (
-    <Card>
+    <Card data-invoice-id={invoice.invoiceId} data-invoice-status={invoice.status} data-invoice-total={invoice.total}>
       <CardHeader className="border-b">
         <div className="flex items-start justify-between gap-3">
           <div>
@@ -169,8 +169,11 @@ function InvoicePanel({ report }: { report: WeekReconcile }) {
             </p>
             <CardTitle className="font-mono text-sm">{invoice.invoiceId}</CardTitle>
             <CardDescription className="mt-1">
-              {invoice.station} · {invoice.period}. Dispute window closes {invoice.disputeWindowCloses}. Captured{" "}
-              {formatZonedDateTime(invoice.capturedAt)}.
+              {invoice.station} · {invoice.period}.{" "}
+              {invoice.disputeWindowCloses
+                ? `Dispute window closes ${invoice.disputeWindowCloses}. `
+                : "Paid invoice. The capture does not list a dispute-window close date. "}
+              Captured {formatZonedDateTime(invoice.capturedAt)}.
             </CardDescription>
           </div>
           {isInvoiceStatus(invoice.status) ? <InvoiceStatusBadge status={invoice.status} /> : null}

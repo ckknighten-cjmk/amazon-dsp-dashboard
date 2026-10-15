@@ -5,7 +5,7 @@
     "code": "DNA4",
     "name": "Memphis"
   },
-  "capturedAt": "2026-09-21T22:08:00-05:00",
+  "capturedAt": "2026-10-15T03:39:28Z",
   "timezone": "America/Chicago",
   "urls": {
     "latestIncentiveInvoice": "https://logistics.amazon.com/flexpayments/simpson/flexpro/invoices/US_FLEXPRO.CJMK.DNA4.INC.2026.37"
@@ -148,5 +148,5 @@
     "other": 131833,
     "disclaimer": "Year label is as displayed in Console YTD Insights; do not invent a 2026 YTD if Console showed 2025."
   },
-  "disclaimer": "Seeded from live DSP Console Flex Payments. No payment-method/deposit details were shown. PDF links existed but no payment export landed in Downloads."
+  "disclaimer": "Seeded from live DSP Console Flex Payments. No payment-method/deposit details were shown. PDF links existed but no payment export landed in Downloads. Week 39 variable invoice and Work Summary were captured 2026-10-15T03:39:28Z. This invoice table is still the 2026-09-21 list."
 }
