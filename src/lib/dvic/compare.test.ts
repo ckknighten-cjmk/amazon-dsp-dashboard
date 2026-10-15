@@ -17,16 +17,17 @@ function inspection(
   };
 }
 
-test("the Oct 14 capture totals come from dashboard counts when lists are empty", () => {
+test("the Oct 15 morning capture totals come from dashboard counts when lists are empty", () => {
   const report = getDvicReport();
-  assert.equal(report.serviceDate, "2026-10-14");
-  assert.deepEqual(report.totals, { preTrip: 44, postTrip: 44, aviPostTrip: 10 });
+  assert.equal(report.serviceDate, "2026-10-15");
+  assert.deepEqual(report.totals, { preTrip: 0, postTrip: 0, aviPostTrip: 0 });
   assert.equal(report.inspections.length, 0);
   assert.deepEqual(report.pairs, []);
   assert.deepEqual(report.newDamage, []);
   assert.match(report.nav, /Today's vehicle inspections/);
-  assert.match(report.disclaimer, /counts only/);
   assert.match(report.disclaimer, /DVIC missing 0/);
+  assert.match(report.disclaimer, /DVIC-Pre Trip 0/);
+  assert.match(report.disclaimer, /AVI-Post Trip 0/);
   assert.match(report.source, /Today's vehicle inspections/);
 });
 

@@ -9,7 +9,7 @@ test("DNA4 My vehicles replaces the mock yard", () => {
   assert.equal(yard.vehicles.length, 53);
   assert.equal(getVehicles().length, 53);
   assert.match(yard.nav, /My vehicles/);
-  assert.equal(yard.capturedAt, "2026-10-14T22:50:00-05:00");
+  assert.equal(yard.capturedAt, "2026-10-15T09:55:00-05:00");
 
   const unit11 = yard.vehicles.find((van) => van.unitId === "11");
   assert.ok(unit11);
