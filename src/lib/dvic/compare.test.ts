@@ -16,14 +16,16 @@ function inspection(
   };
 }
 
-test("the Sep 23 capture has no inspections and no invented damage", () => {
+test("the Oct 14 capture has counts only and no invented inspection rows", () => {
   const report = getDvicReport();
+  assert.equal(report.serviceDate, "2026-10-14");
   assert.deepEqual(report.totals, { preTrip: 0, postTrip: 0, aviPostTrip: 0 });
   assert.equal(report.inspections.length, 0);
   assert.deepEqual(report.pairs, []);
   assert.deepEqual(report.newDamage, []);
   assert.match(report.nav, /Today's vehicle inspections/);
-  assert.match(report.disclaimer, /0 DVIC-Pre Trip/);
+  assert.match(report.disclaimer, /counts only/);
+  assert.match(report.disclaimer, /DVIC missing 0/);
   assert.match(report.source, /Today's vehicle inspections/);
 });
 

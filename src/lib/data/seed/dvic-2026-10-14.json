@@ -1,0 +1,19 @@
+{
+  "source": "Amazon Logistics DSP Console > Administration > Fleet > Dashboard > Today's vehicle inspections",
+  "capturedAt": "2026-10-14T22:50:00-05:00",
+  "station": "DNA4 / Memphis (DNA4)- Amazon.com",
+  "date": "2026-10-14",
+  "preTrip": [],
+  "postTrip": [],
+  "aviPostTrip": [],
+  "counts": {
+    "dvicPreTrip": 44,
+    "dvicPostTrip": 44,
+    "aviPostTrip": 10
+  },
+  "note": "Dashboard shows counts only (no per-record list). DVIC missing 0, AVI missing 34, new defects 2, vehicles with inspection defects 5. Vehicle issue repair status: 56 needs repair, 9 under repair. Vehicle safety signals 13 (tire 10, engine 3). Health: 53 active, 39 operational, 14 grounded.",
+  "newDamageComparisonFields": "",
+  "navPath": [
+    "Administration > Fleet > Dashboard > Today's vehicle inspections"
+  ]
+}
