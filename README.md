@@ -39,7 +39,7 @@ No auth in v1. Dark theme is the default; toggle light/dark from the top bar or 
 
 Every dashboard page has a **Refresh** control in the page header, next to that page's seed as-of time. It does two things:
 
-1. `POST /api/refresh` with `{ page, week?, date? }` so an external job can pull a newer Console or ADP capture. The app does not call Amazon or ADP itself.
+1. `POST /api/refresh` with `{ page, station, week?, date? }` so an external job can pull a newer Console or ADP capture. `station` defaults to **DNA4** when it is omitted. The same page and station cannot start another pull for **10 minutes**; a different station is its own limit. The app does not call Amazon or ADP itself.
 2. `router.refresh()`, which re-reads the seed modules already in this build.
 
 The webhook key never goes to the browser. Set these on the server:
@@ -50,11 +50,48 @@ The webhook key never goes to the browser. Set these on the server:
 | `REFRESH_WEBHOOK_KEY` | yes | Secret sent with that request. |
 | `REFRESH_WEBHOOK_KEY_HEADER` | no | Header name for the key. Defaults to `Authorization`, and that header's value is `Bearer <key>`. Any other name sends the raw key. |
 
-If `REFRESH_WEBHOOK_URL` or `REFRESH_WEBHOOK_KEY` is missing, `POST /api/refresh` returns **503** and the button only re-reads the current seeds. The same page cannot start another pull for **10 minutes**; a repeat returns **429** with `lastRequestedAt`. Copy `.env.example` for placeholders. Do not commit a real key.
+If `REFRESH_WEBHOOK_URL` or `REFRESH_WEBHOOK_KEY` is missing, `POST /api/refresh` returns **503** and the button only re-reads the current seeds. The same page and station cannot start another pull for **10 minutes**; a repeat returns **429** with `lastRequestedAt`. Copy `.env.example` for placeholders. Do not commit a real key.
 
 After a pull is accepted the header says **Pulling fresh data… usually 5–15 min**. That note stays across reloads until the page's seed as-of time is newer than the request, which then shows **Updated** and that time. If 30 minutes pass with no newer seed, it shows **Still waiting. Sign-in may be needed.**
 
 Page keys: `overview` (also Settings), `routes` (also a route detail page), `drivers`, `fleet`, `scorecard`, `payments`, `compliance`, `bonus`, `incidents`. `week` and `date` are sent when that page already has them.
+
+### Stations
+
+The station list is [`src/lib/stations.ts`](src/lib/stations.ts). Each entry has a **code**, **display name**, and **region**. **DNA4** (Memphis) is the default. **WTN2** (West Tennessee) is the station opening soon.
+
+The header **Station** menu is on every page. The choice is stored in the `station` query (`?station=WTN2`), the `cjmk-ops-station` cookie, and the `localStorage` key of the same name. Sidebar links, the period control, the scorecard week menu, and Refresh keep it. A missing or unknown value falls back to DNA4.
+
+WTN2 has no capture. Every page shows **No data for WTN2 yet**, and the as-of line says **No capture yet**. DNA4 figures are not copied onto that station.
+
+#### Add a station's first seed files
+
+DNA4 files stay in [`src/lib/data/seed/`](src/lib/data/seed/). Put a new station's files in `src/lib/data/seed/<code-lowercase>/` (WTN2 is [`src/lib/data/seed/wtn2/`](src/lib/data/seed/wtn2/)) and register one loader per dataset on `STATION_LOADERS` in [`src/lib/data/station-seeds.ts`](src/lib/data/station-seeds.ts). Pages call `loadStationDataset`. Until that loader exists, the page stays on the empty state.
+
+```ts
+WTN2: {
+  routes: () => buildWtn2Routes(),
+}
+```
+
+The DNA4 callback already receives the page's week when a dataset has one (`{ week }`). A WTN2 loader receives the same argument.
+
+| Dataset | Loader key | What to add under `src/lib/data/seed/wtn2/` |
+| --- | --- | --- |
+| Overview | `overview` | `delivery-execution.json` in the same shape as `delivery-execution-2026-10-14.json` |
+| Routes and route detail | `routes` | that delivery execution file, plus the packages-exceptions CSV |
+| Scorecard | `scorecard` | `scorecard/weeks.json` (the loader receives `{ week }`) |
+| 10 Hour Bonus | `bonus` | `10hr-bonus.json` (and the by-DA CSV if you keep one) |
+| Drivers | `drivers` | Amazon schedule, ADP timecards, and the census file the roster reads |
+| Fleet | `fleet` | `amazon-fleet.json` and `dvic.json` |
+| Incidents | `incidents` | `incidents.json` |
+| Compliance | `compliance` | weekly Amazon schedule, ADP timecard, and breaks JSON (`{ week }`) |
+| Payments | `payments` | settlements, variable invoice, and work summary JSON (`{ week }` for reconcile) |
+| Settings | `settings` | no file; register when the settings form should use `stationSettings` for this station |
+
+Fleet is the exception. [`src/app/fleet/page.tsx`](src/app/fleet/page.tsx) still reads the DNA4 fleet modules so an in-progress fleet change can rebase. [`src/app/fleet/layout.tsx`](src/app/fleet/layout.tsx) shows the empty state while `fleet` is unregistered. Wire that page to `loadStationDataset` in the same change that registers `fleet`. Registering it earlier would show the DNA4 yard on WTN2.
+
+CSV and Excel downloads put the station code in the filename and in a **Station** column. `POST /api/refresh` includes `station`.
 
 ### Seeded data
 

@@ -1,4 +1,5 @@
 import { getDrivers, getDvicReport, getExceptions, getPayments, getRoutes, getScorecard, getVehicles } from "@/lib/data";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { DEFAULT_SCORECARD_WEEK, type ScorecardWeek } from "@/lib/data/scorecard";
 import { employmentLabel } from "@/lib/data/census";
 import { rosterSourceLabel } from "@/lib/data/roster";
@@ -14,7 +15,8 @@ import {
 } from "@/lib/format";
 import { gradeMetric } from "@/lib/scorecard";
 import type { Driver, Route, ScorecardMetric } from "@/lib/types";
-import { datasetFilename, toCsv, toSectionedCsv, type CsvValue } from "@/lib/export/csv";
+import { datasetFilename, toCsv, toSectionedCsv, withStationColumn, withStationSections, type CsvValue } from "@/lib/export/csv";
+import type { StationCode } from "@/lib/stations";
 import { damageSummary } from "@/lib/dvic/compare";
 
 const ROSTER_STAMP = "weeks-38-39";
@@ -35,9 +37,9 @@ function rescuerNames(route: Route, nameOf: (id: string) => string | undefined) 
   return route.rescueDriverIds.map((id) => nameOf(id) ?? id).join("; ");
 }
 
-export function associatesCsv(): CsvFile {
-  const drivers = getDrivers();
-  const routes = getRoutes();
+export function associatesCsv(station: StationCode = "DNA4"): CsvFile {
+  const drivers = loadStationDataset(station, "drivers", () => getDrivers()) ?? [];
+  const routes = loadStationDataset(station, "routes", () => getRoutes()) ?? [];
   const headers = [
     "Name",
     "Transporter ID",
@@ -72,15 +74,16 @@ export function associatesCsv(): CsvFile {
     driverRouteCodes(driver, routes).join("; "),
     driver.routeIds.length > 0 ? "Yes" : "No",
   ]);
+  const stamped = withStationColumn(station, headers, rows);
   return {
-    filename: datasetFilename("associates-roster", ROSTER_STAMP),
-    csv: toCsv(headers, rows),
+    filename: datasetFilename("associates-roster", ROSTER_STAMP, station),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
-export function routesCsv(): CsvFile {
-  const routes = getRoutes();
-  const drivers = getDrivers();
+export function routesCsv(station: StationCode = "DNA4"): CsvFile {
+  const routes = loadStationDataset(station, "routes", () => getRoutes()) ?? [];
+  const drivers = loadStationDataset(station, "drivers", () => getDrivers()) ?? [];
   const nameOf = (id: string) => drivers.find((driver) => driver.id === id || driver.aliasIds?.includes(id))?.name;
   const headers = [
     "Route",
@@ -117,13 +120,14 @@ export function routesCsv(): CsvFile {
       route.notes ?? "",
     ];
   });
+  const stamped = withStationColumn(station, headers, rows);
   return {
-    filename: datasetFilename("routes", SERVICE_DAY),
-    csv: toCsv(headers, rows),
+    filename: datasetFilename("routes", SERVICE_DAY, station),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
-export function vehiclesCsv(): CsvFile {
+export function vehiclesCsv(station: StationCode = "DNA4"): CsvFile {
   const headers = [
     "Unit",
     "Plate",
@@ -144,7 +148,8 @@ export function vehiclesCsv(): CsvFile {
     "Notes",
     "Source",
   ];
-  const rows = getVehicles().map((van) => [
+  const vehicles = loadStationDataset(station, "fleet", () => getVehicles()) ?? [];
+  const rows = vehicles.map((van) => [
     van.unitId,
     van.plate,
     van.vin ?? "",
@@ -164,15 +169,22 @@ export function vehiclesCsv(): CsvFile {
     van.notes ?? "",
     van.origin === "console" ? "Amazon DSP Console My vehicles" : "Mock yard roster",
   ]);
-  const stamp = getVehicles().some((van) => van.origin === "console") ? "dna4" : "mock";
+  const stamp = vehicles.some((van) => van.origin === "console") ? "console" : "mock";
+  const stamped = withStationColumn(station, headers, rows);
   return {
-    filename: datasetFilename("fleet-vehicles", stamp),
-    csv: toCsv(headers, rows),
+    filename: datasetFilename("fleet-vehicles", stamp, station),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
-export function dvicCsv(): CsvFile {
-  const report = getDvicReport();
+export function dvicCsv(station: StationCode = "DNA4"): CsvFile {
+  const report = loadStationDataset(station, "fleet", () => getDvicReport());
+  if (!report) {
+    return {
+      filename: datasetFilename("dvic", "none", station),
+      csv: toCsv(["Station"], []),
+    };
+  }
   const headers = [
     "Vehicle",
     "Service date",
@@ -199,13 +211,14 @@ export function dvicCsv(): CsvFile {
     damageSummary(pair.newDamage),
     pair.newDamage.length > 0 ? "Yes" : "No",
   ]);
+  const stamped = withStationColumn(station, headers, rows);
   return {
-    filename: datasetFilename("dvic", report.serviceDate),
-    csv: toCsv(headers, rows),
+    filename: datasetFilename("dvic", report.serviceDate, station),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
-export function exceptionsCsv(): CsvFile {
+export function exceptionsCsv(station: StationCode = "DNA4"): CsvFile {
   const headers = [
     "Scannable ID",
     "Route",
@@ -216,7 +229,7 @@ export function exceptionsCsv(): CsvFile {
     "Reason",
     "Last scan",
   ];
-  const rows = getExceptions().map((row) => [
+  const rows = (loadStationDataset(station, "routes", () => getExceptions()) ?? []).map((row) => [
     row.scannableId,
     row.routeCode,
     row.transporterName,
@@ -226,9 +239,10 @@ export function exceptionsCsv(): CsvFile {
     row.reasonCode,
     row.lastScan ?? "",
   ]);
+  const stamped = withStationColumn(station, headers, rows);
   return {
-    filename: datasetFilename("package-exceptions", SERVICE_DAY),
-    csv: toCsv(headers, rows),
+    filename: datasetFilename("package-exceptions", SERVICE_DAY, station),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
@@ -243,8 +257,14 @@ function standingLabel(metric: ScorecardMetric) {
   return tier ? scorecardTierLabel[tier] : "No data";
 }
 
-export function scorecardCsv(week: ScorecardWeek = DEFAULT_SCORECARD_WEEK): CsvFile {
-  const scorecard = getScorecard(week);
+export function scorecardCsv(week: ScorecardWeek = DEFAULT_SCORECARD_WEEK, station: StationCode = "DNA4"): CsvFile {
+  const scorecard = loadStationDataset(station, "scorecard", () => getScorecard(week), { week });
+  if (!scorecard) {
+    return {
+      filename: datasetFilename("scorecard", `week-${week}`, station),
+      csv: toCsv(["Station"], []),
+    };
+  }
   const headers = ["Row", "Name", "Category", "Value", "Standing", "Prior week"];
   const rows: CsvValue[][] = [
     [
@@ -272,20 +292,27 @@ export function scorecardCsv(week: ScorecardWeek = DEFAULT_SCORECARD_WEEK): CsvF
       "Not shown in Console",
     ]),
   ];
+  const stamped = withStationColumn(station, headers, rows);
   return {
-    filename: datasetFilename("scorecard", `week-${week}`),
-    csv: toCsv(headers, rows),
+    filename: datasetFilename("scorecard", `week-${week}`, station),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
-export function paymentsCsv(): CsvFile {
-  const payments = getPayments();
+export function paymentsCsv(station: StationCode = "DNA4"): CsvFile {
+  const payments = loadStationDataset(station, "payments", () => getPayments());
+  if (!payments) {
+    return {
+      filename: datasetFilename("payments-settlements", "none", station),
+      csv: toCsv(["Station"], []),
+    };
+  }
   const ytd = payments.ytdInsights;
   const variable = payments.week37Variable;
   const incentive = payments.week37Incentive;
   return {
-    filename: datasetFilename("payments-settlements", PAYMENTS_STAMP),
-    csv: toSectionedCsv([
+    filename: datasetFilename("payments-settlements", PAYMENTS_STAMP, station),
+    csv: toSectionedCsv(withStationSections(station, [
       {
         title: "Invoices",
         headers: ["Invoice", "Period", "Week", "Type", "Status", "Amount"],
@@ -325,6 +352,6 @@ export function paymentsCsv(): CsvFile {
           [ytd.station, ytd.yearAsShownInConsole, "Other", formatUsd(ytd.other, 0)],
         ],
       },
-    ]),
+    ])),
   };
 }

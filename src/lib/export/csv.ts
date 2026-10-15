@@ -26,14 +26,39 @@ export function toSectionedCsv(
   return `${blocks.join("\r\n\r\n")}\r\n`;
 }
 
-export function datasetFilename(dataset: string, stamp: string) {
+export function withStationColumn(
+  station: string,
+  headers: readonly string[],
+  rows: readonly (readonly CsvValue[])[],
+) {
+  return {
+    headers: ["Station", ...headers],
+    rows: rows.map((row) => [station, ...row]),
+  };
+}
+
+export function withStationSections(
+  station: string,
+  sections: readonly {
+    title: string;
+    headers: readonly string[];
+    rows: readonly (readonly CsvValue[])[];
+  }[],
+) {
+  return sections.map((section) => {
+    const stamped = withStationColumn(station, section.headers, section.rows);
+    return { title: section.title, headers: stamped.headers, rows: stamped.rows };
+  });
+}
+
+export function datasetFilename(dataset: string, stamp: string, station = "DNA4") {
   const slug = (value: string) =>
     value
       .trim()
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/^-|-$/g, "");
-  return `${slug(dataset)}-${slug(stamp)}.csv`;
+  return `${slug(dataset)}-${slug(station)}-${slug(stamp)}.csv`;
 }
 
 /** Drop a leading Excel BOM so tests can read the header row. */

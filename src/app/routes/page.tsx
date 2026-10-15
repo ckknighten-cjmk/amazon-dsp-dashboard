@@ -33,6 +33,9 @@ import {
 } from "@/lib/data";
 import { exceptionExportNote, rescueBoardNote } from "@/lib/data/delivery-execution";
 import { useDateRange } from "@/components/layout/date-range-context";
+import { useStation } from "@/components/layout/station-context";
+import { StationEmptyPage } from "@/components/station-empty";
+import { hasStationDataset } from "@/lib/data/station-seeds";
 import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { exceptionsCsv, routesCsv } from "@/lib/export/datasets";
@@ -73,19 +76,19 @@ function associateNames(route: Route) {
 }
 
 export default function RoutesPage() {
+  const { code } = useStation();
   const { range } = useDateRange();
+  const ready = hasStationDataset(code, "routes");
   const covered = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
-  const routes = getRoutes();
-  const board = getDeliveryBoard();
-  const exceptions = getExceptions();
+  const routes = ready ? getRoutes() : [];
+  const board = ready ? getDeliveryBoard() : null;
+  const exceptions = ready ? getExceptions() : [];
   const [tab, setTab] = useState<"routes" | "exceptions">("routes");
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<RouteStatus | "all">("all");
   const [exStatus, setExStatus] = useState<PackageExceptionStatus | "all">("all");
   const [rescue, setRescue] = useState<"all" | "yes" | "no">("all");
   const [selected, setSelected] = useState<Route | null>(null);
-  const routesExport = routesCsv();
-  const exceptionsExport = exceptionsCsv();
   const rescuedCount = routes.filter((route) => route.receivedRescue).length;
 
   const filtered = useMemo(() => {
@@ -114,6 +117,12 @@ export default function RoutesPage() {
         .includes(q);
     });
   }, [exceptions, query, exStatus]);
+
+  if (!ready || !board) {
+    return <StationEmptyPage title="Delivery Execution" station={code} />;
+  }
+  const routesExport = routesCsv(code);
+  const exceptionsExport = exceptionsCsv(code);
 
   return (
     <div>

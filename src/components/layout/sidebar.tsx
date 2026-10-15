@@ -16,8 +16,8 @@ import {
   Waypoints,
 } from "lucide-react";
 import { useDateRange } from "@/components/layout/date-range-context";
+import { useStation } from "@/components/layout/station-context";
 import { cn } from "@/lib/utils";
-import { getStation } from "@/lib/data";
 
 const NAV = [
   { href: "/", label: "Overview", icon: LayoutDashboard },
@@ -35,7 +35,7 @@ const NAV = [
 export function Sidebar({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
   const { hrefWithPeriod } = useDateRange();
-  const station = getStation();
+  const { settings: station } = useStation();
 
   return (
     <div className="flex h-full flex-col bg-sidebar text-sidebar-foreground">

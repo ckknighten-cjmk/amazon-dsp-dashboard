@@ -4,6 +4,9 @@ import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { useDateRange } from "@/components/layout/date-range-context";
+import { useStation } from "@/components/layout/station-context";
+import { StationEmptyPage } from "@/components/station-empty";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { CoverageNote } from "@/components/period-coverage";
 import { InvoiceStatusBadge } from "@/components/ops-badges";
 import { EmptyState, PageHeader } from "@/components/page-header";
@@ -49,13 +52,17 @@ export default function PaymentsPage() {
 }
 
 function PaymentsBody() {
+  const { code } = useStation();
   const { range } = useDateRange();
   const weekParam = useSearchParams().get("week");
   const weekFromPeriod = range.kind === "custom" ? workSummaryWeekForRange(range) : null;
   const week = weekParam ? parseReconcileWeek(weekParam) : (weekFromPeriod ?? 37);
-  const reconcile = getReconcile(week);
-  const payments = getPayments();
-  const paymentsExport = paymentsCsv();
+  const payments = loadStationDataset(code, "payments", () => getPayments(), { week });
+  const reconcile = loadStationDataset(code, "payments", () => getReconcile(week), { week });
+  if (!payments || !reconcile) {
+    return <StationEmptyPage title="Payments" station={code} week={week} />;
+  }
+  const paymentsExport = paymentsCsv(code);
   const ytd = payments.ytdInsights;
   const variable = payments.week37Variable;
   const incentive = payments.week37Incentive;

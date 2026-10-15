@@ -4,17 +4,24 @@ import { AlertsStrip } from "@/components/alerts-strip";
 import { RouteStatusChart, VolumeChart } from "@/components/charts";
 import { KpiCard } from "@/components/kpi-card";
 import { useDateRange } from "@/components/layout/date-range-context";
+import { useStation } from "@/components/layout/station-context";
 import { PageHeader, EmptyState } from "@/components/page-header";
+import { StationEmptyPage } from "@/components/station-empty";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDeliveryBoard, getOverview, getStation } from "@/lib/data";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { seedCapturedLabel } from "@/lib/format";
 import { DELIVERY_COVERAGE } from "@/lib/period";
 
 export default function OverviewPage() {
+  const { code } = useStation();
   const { range } = useDateRange();
-  const snapshot = getOverview(range);
-  const station = getStation();
-  const board = getDeliveryBoard();
+  const snapshot = loadStationDataset(code, "overview", () => getOverview(range));
+  const station = loadStationDataset(code, "overview", () => getStation());
+  const board = loadStationDataset(code, "overview", () => getDeliveryBoard());
+  if (!snapshot || !station || !board) {
+    return <StationEmptyPage title="Station overview" station={code} />;
+  }
   const captured = seedCapturedLabel(board.capturedAt);
 
   return (

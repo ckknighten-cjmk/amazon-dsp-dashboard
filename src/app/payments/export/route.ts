@@ -1,11 +1,18 @@
 import { getReconcile, parseReconcileWeek } from "@/lib/data";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { reconcileExportFilename, reconcileToCsv, reconcileToExcel } from "@/lib/payments/reconcile-export";
+import { currentStation } from "@/lib/station-request";
+import { stationEmptyTitle } from "@/lib/stations";
 
-export function GET(request: Request) {
+export async function GET(request: Request) {
   const url = new URL(request.url);
   const week = parseReconcileWeek(url.searchParams.get("week"));
   const format = url.searchParams.get("format");
-  const report = getReconcile(week);
+  const station = await currentStation(url.searchParams.get("station"));
+  const report = loadStationDataset(station, "payments", () => getReconcile(week), { week });
+  if (!report) {
+    return new Response(stationEmptyTitle(station), { status: 404 });
+  }
 
   if (format === "csv") {
     return new Response(reconcileToCsv(report), {

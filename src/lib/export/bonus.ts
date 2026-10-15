@@ -1,5 +1,5 @@
 import { bonusCoDriverLabel, type BonusList } from "@/lib/data/bonus";
-import { toCsv, type CsvValue } from "@/lib/export/csv";
+import { toCsv, withStationColumn, type CsvValue } from "@/lib/export/csv";
 import { toExcelXml } from "@/lib/export/excel";
 
 const HEADERS = [
@@ -22,16 +22,26 @@ export function bonusRows(list: BonusList): CsvValue[][] {
   ]);
 }
 
+function bonusFilename(list: BonusList, extension: "csv" | "xls") {
+  return `10-hour-bonus-${list.station.toLowerCase()}-week-${list.week}-by-da.${extension}`;
+}
+
+function bonusExport(list: BonusList) {
+  return withStationColumn(list.station, HEADERS, bonusRows(list));
+}
+
 export function bonusCsv(list: BonusList) {
+  const stamped = bonusExport(list);
   return {
-    filename: "10-hour-bonus-week-38-by-da.csv",
-    csv: toCsv(HEADERS, bonusRows(list)),
+    filename: bonusFilename(list, "csv"),
+    csv: toCsv(stamped.headers, stamped.rows),
   };
 }
 
 export function bonusExcel(list: BonusList) {
+  const stamped = bonusExport(list);
   return {
-    filename: "10-hour-bonus-week-38-by-da.xls",
-    xml: toExcelXml("10 Hour Bonus", HEADERS, bonusRows(list)),
+    filename: bonusFilename(list, "xls"),
+    xml: toExcelXml("10 Hour Bonus", stamped.headers, stamped.rows),
   };
 }

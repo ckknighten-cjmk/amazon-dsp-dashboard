@@ -8,7 +8,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useStation } from "@/components/layout/station-context";
+import { StationEmptyPage } from "@/components/station-empty";
 import { getDeliveryBoard, getStation } from "@/lib/data";
+import { hasStationDataset } from "@/lib/data/station-seeds";
 import { formatClock, OPS_TIMEZONE, seedCapturedLabel } from "@/lib/format";
 
 const STORAGE_KEY = "cjmk-ops-settings";
@@ -29,6 +32,8 @@ type LocalSettings = {
 };
 
 export default function SettingsPage() {
+  const { code } = useStation();
+  const ready = hasStationDataset(code, "settings");
   const seed = getStation();
   const overviewSeed = getDeliveryBoard().capturedAt;
   const { theme, setTheme, resolvedTheme } = useTheme();
@@ -41,6 +46,7 @@ export default function SettingsPage() {
   });
 
   useEffect(() => {
+    if (!ready) return;
     setMounted(true);
     try {
       const raw =
@@ -74,7 +80,11 @@ export default function SettingsPage() {
     } catch {
       /* ignore */
     }
-  }, [seed.companyName, seed.stationCode, seed.stationName, seed.timezone]);
+  }, [ready, seed.companyName, seed.stationCode, seed.stationName, seed.timezone]);
+
+  if (!ready) {
+    return <StationEmptyPage title="Station settings" station={code} />;
+  }
 
   const isDark = (resolvedTheme ?? theme) === "dark";
 

@@ -3,16 +3,18 @@
 import { Menu, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { useStation } from "@/components/layout/station-context";
+import { StationSwitcher } from "@/components/station-switcher";
 import { Button } from "@/components/ui/button";
 import { formatClock } from "@/lib/format";
-import { getStation } from "@/lib/data";
 
 export function TopBar({
   onOpenNav,
 }: {
   onOpenNav?: () => void;
 }) {
-  const station = getStation();
+  const { settings } = useStation();
+  const station = settings;
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -31,10 +33,12 @@ export function TopBar({
         <Menu className="size-4" />
       </Button>
 
-      <div className="min-w-0 flex-1">
+      <div className="min-w-0 flex-1" data-station={station.stationCode}>
         <p className="truncate text-sm font-semibold">{station.stationCode} operations</p>
         <p className="truncate text-xs text-muted-foreground">{formatClock()} CT</p>
       </div>
+
+      <StationSwitcher />
 
       <Button
         variant="ghost"

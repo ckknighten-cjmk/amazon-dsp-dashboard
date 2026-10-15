@@ -5,8 +5,8 @@ export const FRESH_WAIT_MS = 30 * 60 * 1000;
 
 export type RefreshPhase = "idle" | "pulling" | "updated" | "waiting" | "current";
 
-export function refreshStorageKey(page: string) {
-  return `cjmk-ops-refresh:${page}`;
+export function refreshStorageKey(page: string, station = "DNA4") {
+  return `cjmk-ops-refresh:${station}:${page}`;
 }
 
 export type RefreshRequest = {

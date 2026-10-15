@@ -3,10 +3,14 @@ import { PeriodCoverage } from "@/components/period-coverage";
 import { PageHeader } from "@/components/page-header";
 import { ScoreStatusBadge, ScoreTierBadge } from "@/components/ops-badges";
 import { ScorecardWeekSwitcher } from "@/components/scorecard-week-switcher";
+import { StationEmptyPage } from "@/components/station-empty";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getScorecard, parseScorecardWeek } from "@/lib/data";
 import { newestScorecardCapturedAt, scorecardWeekOptions } from "@/lib/data/scorecard";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { scorecardCsv } from "@/lib/export/datasets";
+import { currentStation } from "@/lib/station-request";
+import { stationProfile } from "@/lib/stations";
 import { formatOverallScore, formatScorecardValue, scorecardTierLabel, seedAsOfLabel } from "@/lib/format";
 import { SCORECARD_COVERAGE } from "@/lib/period";
 import { gradeMetric } from "@/lib/scorecard";
@@ -29,28 +33,43 @@ function formatBound(metric: ScorecardMetric, value: number) {
 export default async function ScorecardPage({
   searchParams,
 }: {
-  searchParams: Promise<{ week?: string | string[] }>;
+  searchParams: Promise<{ week?: string | string[]; station?: string | string[] }>;
 }) {
-  const week = parseScorecardWeek((await searchParams).week);
-  const scorecard = getScorecard(week);
+  const params = await searchParams;
+  const station = await currentStation(params.station);
+  const week = parseScorecardWeek(params.week);
+  const weekSwitcher = (
+    <ScorecardWeekSwitcher
+      week={week}
+      options={scorecardWeekOptions().map((option) => ({
+        week: option.week,
+        label: option.label,
+      }))}
+    />
+  );
+  const scorecard = loadStationDataset(station, "scorecard", () => getScorecard(week), { week });
+  if (!scorecard) {
+    return (
+      <StationEmptyPage
+        title="Amazon DSP scorecard"
+        station={station}
+        week={week}
+        actions={weekSwitcher}
+      />
+    );
+  }
   const coverage = SCORECARD_COVERAGE[week];
-  const scorecardExport = scorecardCsv(week);
+  const scorecardExport = scorecardCsv(week, station);
   const capturedLabel = seedAsOfLabel(scorecard.asOf);
 
   return (
     <div>
       <PageHeader
         title="Amazon DSP scorecard"
-        description={`${scorecard.weekLabel} · ${scorecard.periodLabel} · CJMK Inc. / DNA4 Memphis. Prior week was not shown in Console.`}
+        description={`${scorecard.weekLabel} · ${scorecard.periodLabel} · CJMK Inc. / ${stationProfile(station).displayName} ${stationProfile(station).region}. Prior week was not shown in Console.`}
         actions={
           <>
-            <ScorecardWeekSwitcher
-              week={week}
-              options={scorecardWeekOptions().map((option) => ({
-                week: option.week,
-                label: option.label,
-              }))}
-            />
+            {weekSwitcher}
             <ExportCsvButton
               filename={scorecardExport.filename}
               csv={scorecardExport.csv}
