@@ -110,7 +110,7 @@ test("routes export marks multi-associate routes as rescued without replacing Co
 
 test("other dataset exports stay on seeded values", () => {
   const dvic = dvicCsv();
-  assert.equal(dvic.filename, "dvic-dna4-2026-10-14.csv");
+  assert.equal(dvic.filename, "dvic-dna4-2026-10-15.csv");
   assert.match(dvic.csv, /^Station,/);
   assert.equal(csvLines(dvic.csv).length, 1);
   assert.match(dvic.csv, /Pre-trip damage/);

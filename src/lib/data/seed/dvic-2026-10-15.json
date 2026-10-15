@@ -1,0 +1,17 @@
+{
+ "source": "Amazon Logistics DSP Console > Administration > Fleet > Dashboard > Today's vehicle inspections",
+ "capturedAt": "2026-10-15T09:55:00-05:00",
+ "station": "DNA4 / Memphis (DNA4)- Amazon.com",
+ "date": "2026-10-15",
+ "preTrip": [],
+ "postTrip": [],
+ "aviPostTrip": [],
+ "counts": {
+  "dvicPreTrip": 0,
+  "dvicPostTrip": 0,
+  "aviPostTrip": 0,
+  "dvicMissing": 0,
+  "aviMissing": 0
+ },
+ "note": "Today's vehicle inspections: DVIC missing 0, AVI missing 0, DVIC-Pre Trip 0, DVIC-Post Trip 0, AVI-Post Trip 0 (as of ~9:50 AM CT). Vehicles with inspection defects: New defects 0, All defects 4, Repairs due within 2 days 1, Vehicle(s) grounded 5. Health: 53 total active, 39 operational, 14 grounded (inspection defect 5, PM 1, issue reported by you 10, DOT annual 0). Repair status: needs repair 55, under repair 9, cancelled 0, completed 0. Registration: 1 expired, 0 expiring soon. Registered vehicles 53 (Amazon branded 45, Rentals 6, ABLMR 2)."
+}

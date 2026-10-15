@@ -7,9 +7,11 @@ import { newDamageCsv, newDamageExcel } from "./fleet-issues";
 
 test("new-damage CSV and Excel list the Oct 14 inspection defects apart from maintenance", () => {
   const catalog = loadFleetIssueCatalog();
-  assert.ok(catalog.newest);
+  const october14 = catalog.previous;
+  assert.ok(october14);
+  assert.equal(october14.date, "2026-10-14");
   const report = buildFleetIssueDayReport({
-    current: catalog.newest.issues,
+    current: october14.issues,
     previous: null,
     day: "2026-10-14",
   });

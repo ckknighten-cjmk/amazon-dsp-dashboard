@@ -1,4 +1,4 @@
-import seed from "@/lib/data/seed/dvic-2026-10-14.json";
+import seed from "@/lib/data/seed/dvic-2026-10-15.json";
 import { findNewDamage, pairInspections } from "@/lib/dvic/compare";
 import type { DvicCapture, DvicDamage, DvicDayPair, DvicInspection, DvicPhase, NewDamageAlert } from "@/lib/dvic/types";
 
