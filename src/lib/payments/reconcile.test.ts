@@ -122,8 +122,8 @@ test("Week 38 keeps Work Summary and leaves the variable invoice unlisted", () =
 test("Week 39 reconcile uses the captured Work Summary and variable invoice", () => {
   const week37 = getWeekReconcile(37);
   assert.equal(week37.invoice?.total, "$88,556.70");
-  assert.equal(week37.invoice?.status, "New");
-  assert.equal(week37.invoice?.disputeWindowCloses, "Sep 30, 2026 at 09:37 AM CDT");
+  assert.equal(week37.invoice?.status, "Paid");
+  assert.equal(week37.invoice?.disputeWindowCloses, null);
   assert.deepEqual(week37.counts, { match: 1, mismatch: 1, notComparable: 10 });
 
   const week39 = getWeekReconcile(39);

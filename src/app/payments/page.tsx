@@ -43,6 +43,11 @@ function sumAmount(invoices: SettlementInvoice[]) {
   return invoices.reduce((total, invoice) => total + invoice.amount, 0);
 }
 
+function disputeWindowHint(closes: string | null) {
+  if (!closes) return "Dispute window closed";
+  return `Dispute window closes ${formatZonedDateTime(closes)}`;
+}
+
 export default function PaymentsPage() {
   return (
     <Suspense fallback={null}>
@@ -118,7 +123,7 @@ function PaymentsBody() {
             value={showWeek37 ? formatUsd(variable.total) : "—"}
             hint={
               showWeek37
-                ? `Dispute window closes ${formatZonedDateTime(variable.disputeWindowCloses)}`
+                ? disputeWindowHint(variable.disputeWindowCloses)
                 : `${week37Coverage.label}. Not in this period.`
             }
           />
@@ -127,7 +132,7 @@ function PaymentsBody() {
             value={showWeek37 ? formatUsd(incentive.total) : "—"}
             hint={
               showWeek37
-                ? `Dispute window closes ${formatZonedDateTime(incentive.disputeWindowCloses)}`
+                ? disputeWindowHint(incentive.disputeWindowCloses)
                 : `${week37Coverage.label}. Not in this period.`
             }
           />
@@ -208,7 +213,7 @@ function PaymentsBody() {
                   </p>
                   <CardTitle className="font-mono text-sm">{variable.invoiceId}</CardTitle>
                   <CardDescription className="mt-1">
-                    Dispute window closes {formatZonedDateTime(variable.disputeWindowCloses)}
+                    {disputeWindowHint(variable.disputeWindowCloses)}
                   </CardDescription>
                 </div>
                 <InvoiceStatusBadge status={variable.status} />
@@ -258,7 +263,7 @@ function PaymentsBody() {
                   </p>
                   <CardTitle className="font-mono text-sm">{incentive.invoiceId}</CardTitle>
                   <CardDescription className="mt-1">
-                    Dispute window closes {formatZonedDateTime(incentive.disputeWindowCloses)}
+                    {disputeWindowHint(incentive.disputeWindowCloses)}
                   </CardDescription>
                 </div>
                 <InvoiceStatusBadge status={incentive.status} />

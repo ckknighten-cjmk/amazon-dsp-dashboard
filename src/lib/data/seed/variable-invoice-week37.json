@@ -5,10 +5,10 @@
   "invoiceKey": "45af43cf-b497-4028-99be-c9814f01070c",
   "period": "Sep 6 - Sep 12, 2026",
   "week": "Week 37",
-  "status": "New",
-  "disputeWindowCloses": "Sep 30, 2026 at 09:37 AM CDT",
+  "status": "Paid",
+  "disputeWindowCloses": null,
   "total": "$88,556.70",
-  "capturedAt": "2026-09-23T06:46:51.183332Z",
+  "capturedAt": "2026-10-15T14:49:10.961491Z",
   "sourceUrl": "https://logistics.amazon.com/flexpayments/simpson/flexpro/invoices/45af43cf-b497-4028-99be-c9814f01070c",
   "navPath": "Payments > Invoices > Variable invoice > Week 37",
   "pdfExport": "/workspace/dsp-live/payments/variable-invoice-week37.pdf",
@@ -559,5 +559,8 @@
     "otherVariableListed": "Week 36 ($88,073.23)",
     "week38OrWeek39VariableListed": false,
     "note": "Payments invoice list showed Week 37 as the latest variable weekly invoice; Week 38 and Week 39 variable invoices were not listed at capture time."
-  }
+  },
+  "acceptedOn": "Sep 30, 2026",
+  "invoiceDate": "09/12/2026",
+  "notes": "Refreshed 2026-10-15 from live detail page (status Payment sent, accepted Sep 30, 2026, total $88,556.70) and re-downloaded Original PDF; sections/line items from prior capture, sums verified to total."
 }

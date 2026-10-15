@@ -364,7 +364,7 @@ export interface SettlementLine {
 export interface WeekSettlement {
   invoiceId: string;
   status: InvoiceStatus;
-  disputeWindowCloses: string;
+  disputeWindowCloses: string | null;
   total: number;
 }
 
