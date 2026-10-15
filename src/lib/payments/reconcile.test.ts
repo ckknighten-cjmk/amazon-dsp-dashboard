@@ -101,7 +101,7 @@ test("Week 37 reconcile keeps unit mismatches comparable only when the unit is s
   assert.match(report.insight, /does not convert/);
 });
 
-test("Weeks 38 and 39 keep Work Summary and leave the variable invoice unlisted", () => {
+test("Week 38 keeps Work Summary and leaves the variable invoice unlisted", () => {
   const week38 = getWeekReconcile(38);
   assert.equal(week38.invoiceListed, false);
   assert.equal(week38.invoice, null);
@@ -117,16 +117,105 @@ test("Weeks 38 and 39 keep Work Summary and leave the variable invoice unlisted"
   assert.equal(week38.serviceRows.length > 0, true);
   assert.equal(week38.serviceRows.every((item) => item.invoiceAmountCents == null), true);
   assert.equal(reconcileToCsv(week38).includes("$"), false);
+});
+
+test("Week 39 reconcile uses the captured Work Summary and variable invoice", () => {
+  const week37 = getWeekReconcile(37);
+  assert.equal(week37.invoice?.total, "$88,556.70");
+  assert.equal(week37.invoice?.status, "New");
+  assert.equal(week37.invoice?.disputeWindowCloses, "Sep 30, 2026 at 09:37 AM CDT");
+  assert.deepEqual(week37.counts, { match: 1, mismatch: 1, notComparable: 10 });
 
   const week39 = getWeekReconcile(39);
-  assert.equal(week39.invoice, null);
-  assert.equal(week39.workSummary.totalPackages, 0);
-  assert.equal(week39.workSummary.completedRoutes, 0);
-  assert.equal(week39.serviceRows.length, 0);
-  assert.match(week39.workSummary.notes, /week in progress/);
-  assert.equal(reconcileToCsv(week39).includes("$"), false);
+  assert.equal(week39.invoiceListed, true);
+  assert.equal(week39.invoice?.invoiceId, "INV-GA6T0P-0000000619");
+  assert.equal(week39.invoice?.status, "Paid");
+  assert.equal(week39.invoice?.disputeWindowCloses, null);
+  assert.equal(week39.invoice?.total, "$93,264.11");
+  assert.equal(week39.invoice?.totalCents, 9_326_411);
+  assert.deepEqual(
+    week39.invoice?.sections.map((section) => [section.name, section.quantity, section.total]),
+    [
+      ["Routes", 237, "$80,154.70"],
+      ["Training sessions", 6, "$1,396.80"],
+      ["Late cancellations", 16, "$3,200.00"],
+      ["Unplanned delay", 3.16, "$102.71"],
+      ["Packages", 140201, "$8,409.90"],
+    ]
+  );
+  assert.equal(
+    week39.invoice?.sections
+      .flatMap((section) => section.lines)
+      .some((line) => line.label === "Branding - Variable Per Shipment - AMZL - Delivery Complete"),
+    true
+  );
+  assert.equal(
+    week39.invoice?.sections
+      .find((section) => section.name === "Unplanned delay")
+      ?.lines.length,
+    3
+  );
+
+  assert.equal(week39.workSummary.totalPackages, 70226);
+  assert.equal(week39.workSummary.deliveredPackages, 69975);
+  assert.equal(week39.workSummary.pickupPackages, 251);
+  assert.equal(week39.workSummary.completedRoutes, 237);
+  assert.equal(week39.workSummary.miles, 10205);
+  assert.equal(week39.workSummary.unplannedDelayCount, 3);
+
+  const packages = row(week39, "packages");
+  assert.equal(packages.status, "not_comparable");
+  assert.equal(packages.variance, null);
+  assert.match(packages.invoice.text, /140,201 package units/);
+  assert.match(packages.workSummary.text, /70,226 packages/);
+
+  const routes = row(week39, "routes");
+  assert.equal(routes.status, "not_comparable");
+  assert.equal(routes.variance, null);
+  assert.match(routes.invoice.text, /237 route payments/);
+  assert.match(routes.workSummary.text, /237 routes completed/);
+
+  const delays = row(week39, "unplanned-delay-count");
+  assert.equal(delays.status, "not_comparable");
+  assert.equal(delays.variance, null);
+  assert.match(delays.invoice.text, /3\.16 hours/);
+  assert.match(delays.note, /2\.47/);
+  assert.match(delays.note, /0\.27/);
+  assert.match(delays.note, /0\.42/);
+
+  const delayLines = row(week39, "unplanned-delay-line-qty");
+  assert.equal(delayLines.status, "not_comparable");
+  assert.match(delayLines.invoice.text, /2\.47, 0\.27, 0\.42/);
+
+  const late = row(week39, "amzl-late-cancels");
+  assert.equal(late.status, "not_comparable");
+  assert.equal(late.variance, null);
+  assert.equal(late.workSummary.text.includes("$"), false);
+
   assert.equal(
     week39.rows.some((item) => item.workSummary.text.includes("$")),
+    false
+  );
+  assert.equal(week39.checks.find((check) => check.id === "invoice-total")?.kind, "holds");
+  assert.equal(week39.checks.find((check) => check.id === "delay-qty")?.kind, "holds");
+  assert.equal(week39.checks.find((check) => check.id === "package-composition")?.kind, "gap");
+  assert.match(week39.checks.find((check) => check.id === "package-composition")?.detail ?? "", /69,975/);
+  assert.match(week39.checks.find((check) => check.id === "package-composition")?.detail ?? "", /140,201/);
+
+  const rivian = week39.serviceRows.find(
+    (item) => item.id.includes("rivian medium - 10 hr") && !item.id.includes("recycle")
+  );
+  assert.ok(rivian);
+  assert.equal(rivian.invoiceRoutePayments, 184);
+  assert.equal(rivian.completedRoutes, 184);
+  assert.equal(rivian.status, "not_comparable");
+  assert.equal(week39.serviceRows.length > 0, true);
+
+  const csv = reconcileToCsv(week39);
+  const table = parseCsv(csv);
+  const workSummaryColumn = table[0].indexOf("Work Summary");
+  assert.equal(
+    table.slice(1).some((cells) => cells[workSummaryColumn]?.includes("$")),
     false
   );
 });

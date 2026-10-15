@@ -29,9 +29,14 @@ const NOT_IN_WORK_SUMMARY = "Not in Work Summary";
 const NOT_ON_INVOICE = "Not on invoice";
 const NOT_YET_LISTED = "Not yet listed";
 
-const PACKAGE_BRANDING = "Payment for branding - deliveries";
-const PACKAGE_DELIVERIES = "Per piece payment - deliveries";
-const PACKAGE_PICKUPS = "Per piece payment - pickups";
+/** Captured package-line labels. Week 37 and the Week 39 PDF use different wording for the same three roles. */
+const PACKAGE_ROLES = {
+  branding: ["Payment for branding - deliveries", "Branding - Variable Per Shipment - AMZL - Delivery Complete"],
+  delivery: ["Per piece payment - deliveries", "Variable Per Shipment - AMZL - Delivery Complete"],
+  pickup: ["Per piece payment - pickups", "Variable Per Shipment - AMZL - Pickup Complete"],
+} as const;
+
+type PackageRole = keyof typeof PACKAGE_ROLES;
 
 interface SeedLine {
   label: string;
@@ -57,7 +62,7 @@ interface SeedInvoice {
   period: string;
   week: string;
   status: string;
-  disputeWindowCloses: string;
+  disputeWindowCloses: string | null;
   total: string;
   capturedAt: string;
   navPath: string;
@@ -107,7 +112,7 @@ interface InvoiceModel {
   period: string;
   weekLabel: string;
   status: string;
-  disputeWindowCloses: string;
+  disputeWindowCloses: string | null;
   total: string;
   totalCents: number;
   capturedAt: string;
@@ -166,8 +171,9 @@ export function parseReconcileWeek(value: string | string[] | undefined | null):
 
 export function getWeekReconcile(week: ReconcileWeek): WeekReconcile {
   const work = readWorkSummary(workSeeds[week]);
-  const invoice = week === 37 ? readInvoice(invoiceSeed) : null;
-  if (invoice && invoiceSeed.invoiceListingObservation.week38OrWeek39VariableListed) {
+  const rawInvoice = week === 37 || week === 39 ? (invoiceByWeek[week] as SeedInvoice) : null;
+  const invoice = rawInvoice ? readInvoice(rawInvoice) : null;
+  if (week === 37 && invoiceSeed.invoiceListingObservation.week38OrWeek39VariableListed) {
     throw new Error("Week 38/39 listing flag changed; reconcile empty state needs a review.");
   }
   const rows = invoice ? rowsWithInvoice(invoice, work) : rowsWithoutInvoice(work);
@@ -179,7 +185,7 @@ export function getWeekReconcile(week: ReconcileWeek): WeekReconcile {
     period: work.period,
     invoiceListed: invoice != null,
     insight: insightFor(invoice, work),
-    listingNote: invoiceSeed.invoiceListingObservation.note,
+    listingNote: invoice?.listingNote ?? invoiceSeed.invoiceListingObservation.note,
     counts: {
       match: rows.filter((row) => row.status === "match").length,
       mismatch: rows.filter((row) => row.status === "mismatch").length,
@@ -236,6 +242,13 @@ export function headlineCompares(report: WeekReconcile): HeadlineCompare[] {
   );
 }
 
+function packageRole(label: string): PackageRole | null {
+  for (const role of Object.keys(PACKAGE_ROLES) as PackageRole[]) {
+    if ((PACKAGE_ROLES[role] as readonly string[]).includes(label)) return role;
+  }
+  return null;
+}
+
 export function normalizeServiceLabel(label: string) {
   return label
     .toLowerCase()
@@ -246,6 +259,9 @@ export function normalizeServiceLabel(label: string) {
 }
 
 function readInvoice(raw: SeedInvoice): InvoiceModel {
+  if (raw.disputeWindowCloses == null && raw.status !== "Paid") {
+    throw new Error(`${raw.invoiceId} is ${raw.status} and has no dispute window close date.`);
+  }
   const sections = raw.sections.map((section) => {
     const lines: InvoiceLineView[] = section.lineItems.map((line) => ({
       date: line.date ?? null,
@@ -325,11 +341,10 @@ function rowsWithInvoice(invoice: InvoiceModel, work: WorkModel): ReconcileRow[]
   const late = section(invoice, "Late cancellations");
   const delay = section(invoice, "Unplanned delay");
   const packages = section(invoice, "Packages");
-  const branding = packages.lines.filter((line) => line.label === PACKAGE_BRANDING);
-  const deliveries = packages.lines.filter((line) => line.label === PACKAGE_DELIVERIES);
-  const pickups = packages.lines.filter((line) => line.label === PACKAGE_PICKUPS);
-  const known = new Set([PACKAGE_BRANDING, PACKAGE_DELIVERIES, PACKAGE_PICKUPS]);
-  const unknown = packages.lines.filter((line) => !known.has(line.label));
+  const branding = packages.lines.filter((line) => packageRole(line.label) === "branding");
+  const deliveries = packages.lines.filter((line) => packageRole(line.label) === "delivery");
+  const pickups = packages.lines.filter((line) => packageRole(line.label) === "pickup");
+  const unknown = packages.lines.filter((line) => packageRole(line.label) == null);
   if (unknown.length > 0) {
     throw new Error(`Unexpected package line label: ${unknown[0].label}`);
   }
@@ -338,9 +353,8 @@ function rowsWithInvoice(invoice: InvoiceModel, work: WorkModel): ReconcileRow[]
   const pickupQty = pickups.reduce((total, line) => total + line.quantity, 0);
   const sameDeliveryList =
     branding.map((line) => line.quantity).join(",") === deliveries.map((line) => line.quantity).join(",");
-  const delayLine = delay.lines[0];
-  if (!delayLine || delay.lines.length !== 1) {
-    throw new Error("Unplanned delay section did not have exactly one line.");
+  if (delay.lines.length === 0) {
+    throw new Error("Unplanned delay section did not have a line.");
   }
 
   const amzlLines = late.lines.filter((line) => line.label.toLowerCase().includes("amzl late cancel"));
@@ -414,34 +428,7 @@ function rowsWithInvoice(invoice: InvoiceModel, work: WorkModel): ReconcileRow[]
       status: "not_comparable",
       note: pickupNote(pickups, pickupQty, work.pickupPackages, pickupEcho),
     }),
-    row({
-      id: "unplanned-delay-count",
-      field: "Unplanned delay count",
-      invoice: side(countText(delay.quantity, "delay", "delays"), delay.quantity, "delays"),
-      workSummary: side(
-        countText(work.unplannedDelayCount, "delay", "delays"),
-        work.unplannedDelayCount,
-        "delays"
-      ),
-      status: delay.quantity === work.unplannedDelayCount ? "match" : "mismatch",
-      note: `Both fields are delay counts. The invoice section quantity is ${formatNumber(delay.quantity)}. Work Summary unplannedDelayCount is ${formatNumber(work.unplannedDelayCount)}. The invoice also has an Unplanned Delay line of ${formatNumber(delayLine.quantity)} at ${delayLine.rate} for ${delayLine.amount}. That line quantity is not a delay count, so it is not used in this variance.`,
-    }),
-    row({
-      id: "unplanned-delay-line-qty",
-      field: "Unplanned delay line quantity",
-      invoice: side(`${formatNumber(delayLine.quantity)} on the Unplanned Delay line`, delayLine.quantity, "line quantity"),
-      workSummary: side(NOT_IN_WORK_SUMMARY, null, null),
-      status: "not_comparable",
-      note: `The line is ${formatNumber(delayLine.quantity)} × ${delayLine.rate} = ${delayLine.amount}. Work Summary only publishes an unplanned-delay count (${formatNumber(work.unplannedDelayCount)}), not this line quantity.`,
-    }),
-    row({
-      id: "unplanned-delay-amount",
-      field: "Unplanned delay amount",
-      invoice: side(delay.total, parseUsdToCents(delay.total) / 100, "USD"),
-      workSummary: side(NOT_IN_WORK_SUMMARY, null, null),
-      status: "not_comparable",
-      note: work.ratesSentence,
-    }),
+    ...unplannedDelayRows(delay, work),
     amzlRow(amzlLines, otherLate, amzlQty, amzlCents, serviceTypes, matchingRoutes, amzlOnRoutes),
     row({
       id: "provider-late-cancels",
@@ -557,6 +544,91 @@ function metricRow(
     status: "not_comparable",
     note,
   });
+}
+
+function unplannedDelayRows(delay: InvoiceSectionView, work: WorkModel): ReconcileRow[] {
+  const amount = row({
+    id: "unplanned-delay-amount",
+    field: "Unplanned delay amount",
+    invoice: side(delay.total, parseUsdToCents(delay.total) / 100, "USD"),
+    workSummary: side(NOT_IN_WORK_SUMMARY, null, null),
+    status: "not_comparable",
+    note: work.ratesSentence,
+  });
+  if (delay.lines.length === 1) {
+    const delayLine = delay.lines[0];
+    return [
+      row({
+        id: "unplanned-delay-count",
+        field: "Unplanned delay count",
+        invoice: side(countText(delay.quantity, "delay", "delays"), delay.quantity, "delays"),
+        workSummary: side(
+          countText(work.unplannedDelayCount, "delay", "delays"),
+          work.unplannedDelayCount,
+          "delays"
+        ),
+        status: delay.quantity === work.unplannedDelayCount ? "match" : "mismatch",
+        note: `Both fields are delay counts. The invoice section quantity is ${formatNumber(delay.quantity)}. Work Summary unplannedDelayCount is ${formatNumber(work.unplannedDelayCount)}. The invoice also has an Unplanned Delay line of ${formatNumber(delayLine.quantity)} at ${delayLine.rate} for ${delayLine.amount}. That line quantity is not a delay count, so it is not used in this variance.`,
+      }),
+      row({
+        id: "unplanned-delay-line-qty",
+        field: "Unplanned delay line quantity",
+        invoice: side(`${formatNumber(delayLine.quantity)} on the Unplanned Delay line`, delayLine.quantity, "line quantity"),
+        workSummary: side(NOT_IN_WORK_SUMMARY, null, null),
+        status: "not_comparable",
+        note: `The line is ${formatNumber(delayLine.quantity)} × ${delayLine.rate} = ${delayLine.amount}. Work Summary only publishes an unplanned-delay count (${formatNumber(work.unplannedDelayCount)}), not this line quantity.`,
+      }),
+      amount,
+    ];
+  }
+
+  const comparable = delay.quantityLabel === "delays" || delay.quantityLabel === "delay";
+  const status: ReconcileStatus = !comparable
+    ? "not_comparable"
+    : delay.quantity === work.unplannedDelayCount
+      ? "match"
+      : "mismatch";
+  const lineFacts = delay.lines
+    .map((line) => `${formatNumber(line.quantity)} at ${line.rate} for ${line.amount}`)
+    .join("; ");
+  const lineMath = delay.lines
+    .map((line) => `${formatNumber(line.quantity)} × ${line.rate} = ${line.amount}`)
+    .join("; ");
+  return [
+    row({
+      id: "unplanned-delay-count",
+      field: "Unplanned delay count",
+      invoice: side(
+        comparable
+          ? countText(delay.quantity, "delay", "delays")
+          : `${formatNumber(delay.quantity)} ${delay.quantityLabel}`,
+        comparable ? delay.quantity : null,
+        comparable ? "delays" : null
+      ),
+      workSummary: side(
+        countText(work.unplannedDelayCount, "delay", "delays"),
+        work.unplannedDelayCount,
+        "delays"
+      ),
+      status,
+      note: comparable
+        ? `Both fields are delay counts. The invoice section quantity is ${formatNumber(delay.quantity)}. Work Summary unplannedDelayCount is ${formatNumber(work.unplannedDelayCount)}. The invoice has ${formatNumber(delay.lines.length)} Unplanned Delay lines (${lineFacts}). Those line quantities are not a delay count, so they are not used in this variance.`
+        : `The invoice section quantity is ${formatNumber(delay.quantity)} ${delay.quantityLabel}. Work Summary unplannedDelayCount is ${formatNumber(work.unplannedDelayCount)}. ${delay.quantityLabel[0].toUpperCase()}${delay.quantityLabel.slice(1)} and delay counts are different definitions, so this row has no variance. The invoice has ${formatNumber(delay.lines.length)} Unplanned Delay lines (${lineFacts}).`,
+    }),
+    row({
+      id: "unplanned-delay-line-qty",
+      field: "Unplanned delay line quantity",
+      invoice: side(
+        `${delay.lines.map((line) => formatNumber(line.quantity)).join(", ")} on the Unplanned Delay lines`,
+        null,
+        null
+      ),
+      workSummary: side(NOT_IN_WORK_SUMMARY, null, null),
+      status: "not_comparable",
+      note: `The lines are ${lineMath}. Work Summary only publishes an unplanned-delay count (${formatNumber(work.unplannedDelayCount)}), not these line quantities.`,
+    }),
+    amount,
+  ];
 }
 
 function amzlRow(
@@ -787,19 +859,32 @@ function buildChecks(invoice: InvoiceModel | null, work: WorkModel): SourceCheck
     }
     const delay = section(invoice, "Unplanned delay");
     const delayQty = delay.lines.reduce((total, line) => total + line.quantity, 0);
-    checks.push({
-      id: "delay-qty",
-      source: "invoice",
-      kind: "gap",
-      label: "Unplanned delay quantity",
-      detail: `Section quantity is ${formatNumber(delay.quantity)} ${delay.quantityLabel}. The line quantity is ${formatNumber(delayQty)}. Those are different fields. The line amount is still included in the section total ${delay.total}.`,
-    });
+    const delayAligned = Math.round(delayQty * 100) === Math.round(delay.quantity * 100);
+    checks.push(
+      delay.lines.length === 1
+        ? {
+            id: "delay-qty",
+            source: "invoice",
+            kind: "gap",
+            label: "Unplanned delay quantity",
+            detail: `Section quantity is ${formatNumber(delay.quantity)} ${delay.quantityLabel}. The line quantity is ${formatNumber(delayQty)}. Those are different fields. The line amount is still included in the section total ${delay.total}.`,
+          }
+        : {
+            id: "delay-qty",
+            source: "invoice",
+            kind: delayAligned ? "holds" : "gap",
+            label: "Unplanned delay quantity",
+            detail: delayAligned
+              ? `Section quantity is ${formatNumber(delay.quantity)} ${delay.quantityLabel}. The ${formatNumber(delay.lines.length)} line quantities sum to ${formatNumber(delayQty)}. The line amounts are included in the section total ${delay.total}.`
+              : `Section quantity is ${formatNumber(delay.quantity)} ${delay.quantityLabel}. The ${formatNumber(delay.lines.length)} line quantities sum to ${formatNumber(delayQty)}. Those are different fields. The line amounts are still included in the section total ${delay.total}.`,
+          }
+    );
     const packages = section(invoice, "Packages");
     const brandingQty = packages.lines
-      .filter((line) => line.label === PACKAGE_BRANDING)
+      .filter((line) => packageRole(line.label) === "branding")
       .reduce((total, line) => total + line.quantity, 0);
     const pickupQty = packages.lines
-      .filter((line) => line.label === PACKAGE_PICKUPS)
+      .filter((line) => packageRole(line.label) === "pickup")
       .reduce((total, line) => total + line.quantity, 0);
     const allQty = packages.lines.reduce((total, line) => total + line.quantity, 0);
     const composed = brandingQty + pickupQty;
