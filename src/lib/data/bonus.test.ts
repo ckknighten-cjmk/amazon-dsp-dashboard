@@ -19,6 +19,7 @@ const EXPECTED_SOLO_BY_DAY: Record<string, number> = {
 test("Week 38 bonus list is one row per delivery associate", () => {
   const list = getBonusList();
   assert.equal(list.week, 38);
+  assert.equal(list.capturedAt, routeSeed.capturedAt);
   assert.equal(list.thresholdStopsCompleted, 180);
   assert.equal(list.entries.length, 215);
   assert.equal(list.soloCount, 100);

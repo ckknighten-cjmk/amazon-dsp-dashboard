@@ -16,6 +16,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getFleetYard, getRoute, getVehicles } from "@/lib/data";
+import { getDvicReport } from "@/lib/data/dvic";
 import { vehiclesCsv } from "@/lib/export/datasets";
 import { CoverageNote } from "@/components/period-coverage";
 import { formatMileage, seedCapturedLabel, vehicleStatusLabel, vehicleTypeLabel } from "@/lib/format";
@@ -64,6 +65,8 @@ export default function FleetPage() {
         }
         actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
         updatedLabel={seedCapturedLabel(yard.capturedAt)}
+        seedAsOf={yard.capturedAt}
+        date={getDvicReport().serviceDate}
       />
 
       <CoverageNote>

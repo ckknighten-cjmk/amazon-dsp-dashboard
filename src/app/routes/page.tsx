@@ -121,6 +121,8 @@ export default function RoutesPage() {
         title="Delivery Execution"
         description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Sep 28, 2026. Vehicle, on-time %, and execution gauges were not on the Console — shown as unavailable."
         updatedLabel={seedCapturedLabel(board.capturedAt)}
+        seedAsOf={board.capturedAt}
+        date={board.serviceDate}
       />
 
       {!covered ? (

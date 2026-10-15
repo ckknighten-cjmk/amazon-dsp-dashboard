@@ -18,8 +18,8 @@ import { ExportCsvButton } from "@/components/export-csv-button";
 import { associatesCsv } from "@/lib/export/datasets";
 import { getDrivers, getRoute } from "@/lib/data";
 import { employmentLabel } from "@/lib/data/census";
-import { filterRoster, rosterSourceLabel } from "@/lib/data/roster";
-import { driverStatusLabel, formatNumber, formatTenure } from "@/lib/format";
+import { filterRoster, rosterSeedAsOf, rosterSourceLabel } from "@/lib/data/roster";
+import { driverStatusLabel, formatNumber, formatTenure, seedCapturedLabel } from "@/lib/format";
 import { useDateRange } from "@/components/layout/date-range-context";
 import { CoverageNote } from "@/components/period-coverage";
 import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
@@ -43,6 +43,7 @@ export default function DriversPage() {
       ),
     [drivers, query, status, role, source, employment]
   );
+  const seedAsOf = rosterSeedAsOf();
 
   return (
     <div>
@@ -50,6 +51,8 @@ export default function DriversPage() {
         title="Associates"
         description="Full roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID, plus ADP-only timecard names. Today’s packages and routes come from the Sep 28 Delivery Execution board when the name matches. Phone and email come from the ADP Employee Census when the name matches. The list opens on Active, including associates the census did not list. Terminated and deceased stay on the employment filter. Tenure and scorecard contribution were not in these exports."
         actions={<ExportCsvButton filename={rosterExport.filename} csv={rosterExport.csv} label="Export roster" />}
+        updatedLabel={seedCapturedLabel(seedAsOf)}
+        seedAsOf={seedAsOf}
       />
 
       <CoverageNote>

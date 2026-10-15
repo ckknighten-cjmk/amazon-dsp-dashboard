@@ -14,13 +14,15 @@ import week38Adp from "@/lib/data/seed/adp-timecards-week38.json";
 import week39Adp from "@/lib/data/seed/adp-timecards-week39.json";
 import { collapseSpaces, matchAmazonName, nameTokens } from "@/lib/compliance/names";
 import {
+  censusCapturedAt,
   employmentLabel,
   employmentStatus,
   matchCensusEmployee,
   publishedEmail,
   publishedPhone,
 } from "@/lib/data/census";
-import { associateId, consoleDrivers, initials, routes } from "@/lib/data/delivery-execution";
+import { associateId, consoleDrivers, deliveryBoard, initials, routes } from "@/lib/data/delivery-execution";
+import { latestZonedIso, parseStationExportStamp } from "@/lib/format";
 import type { Driver, DriverRole, DriverStatus, RosterSource } from "@/lib/types";
 
 interface SchedulePerson {
@@ -57,6 +59,16 @@ function displayTokens(value: string) {
     .split(/\s+/)
     .filter(Boolean)
     .map(displayToken);
+}
+
+/** Newest zoned capture among the roster, census, and Sep 28 board seeds. */
+export function rosterSeedAsOf() {
+  return latestZonedIso([
+    censusCapturedAt,
+    deliveryBoard.capturedAt,
+    parseStationExportStamp(week38Schedule.exportedAt),
+    parseStationExportStamp(week39Schedule.exportedAt),
+  ]);
 }
 
 /** ADP `LAST, FIRST` becomes `First Last`. Names without a comma stay as written. */

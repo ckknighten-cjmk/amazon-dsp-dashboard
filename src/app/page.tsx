@@ -14,7 +14,8 @@ export default function OverviewPage() {
   const { range } = useDateRange();
   const snapshot = getOverview(range);
   const station = getStation();
-  const captured = seedCapturedLabel(getDeliveryBoard().capturedAt);
+  const board = getDeliveryBoard();
+  const captured = seedCapturedLabel(board.capturedAt);
 
   return (
     <div>
@@ -22,6 +23,8 @@ export default function OverviewPage() {
         title="Station overview"
         description={`${station.companyName} · ${station.stationCode} ${station.stationName}. ${snapshot.asOfLabel}.`}
         updatedLabel={captured}
+        seedAsOf={board.capturedAt}
+        date={board.serviceDate}
       />
 
       {snapshot.kpis.length === 0 ? (

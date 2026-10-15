@@ -141,3 +141,20 @@ export const incidents: Incident[] = [
     routeId: "rt-cx12",
   },
 ];
+
+/** Calendar date of the newest fixture note. These rows have no Console capture time. */
+export function incidentNotesLabel(rows: Incident[] = incidents) {
+  let latest = "";
+  for (const row of rows) {
+    const day = row.occurredAt.slice(0, 10);
+    if (day > latest) latest = day;
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(latest)) return undefined;
+  const [year, month, day] = latest.split("-").map(Number);
+  const label = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(year, month - 1, day));
+  return `Notes through ${label}`;
+}

@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { associateId, consoleDrivers, routes } from "./delivery-execution";
+import { associateId, consoleDrivers, deliveryBoard, routes } from "./delivery-execution";
 import { getDriver, getDrivers } from "./index";
-import { adpDisplayName, filterRoster, matchSchedulePerson } from "./roster";
+import { adpDisplayName, filterRoster, matchSchedulePerson, rosterSeedAsOf } from "./roster";
 
 test("schedule name matching keeps a unique first and last name", () => {
   const people = [{ name: "Aaron Calvin Davis" }, { name: "Aaron marcellus Hines" }];
@@ -69,4 +69,8 @@ test("search and source filters run on the full roster", () => {
   assert.ok(narrowed.length > 0);
   assert.ok(narrowed.length < drivers.length);
   assert.ok(narrowed.every((driver) => driver.rosterSource === "amazon-schedule"));
+});
+
+test("drivers as-of is the newest zoned seed on the roster page", () => {
+  assert.equal(rosterSeedAsOf(), deliveryBoard.capturedAt);
 });

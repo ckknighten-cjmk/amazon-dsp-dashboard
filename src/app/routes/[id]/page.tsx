@@ -25,6 +25,7 @@ export default async function RoutePage({
     .map((associateId) => getDriver(associateId)?.name)
     .filter(Boolean)
     .join(", ");
+  const board = getDeliveryBoard();
 
   return (
     <div>
@@ -36,7 +37,9 @@ export default async function RoutePage({
             Back to board
           </Button>
         }
-        updatedLabel={seedCapturedLabel(getDeliveryBoard().capturedAt)}
+        updatedLabel={seedCapturedLabel(board.capturedAt)}
+        seedAsOf={board.capturedAt}
+        date={board.serviceDate}
       />
       <DeliveryPeriodNote />
       <div className="rounded-xl border bg-card p-5">
