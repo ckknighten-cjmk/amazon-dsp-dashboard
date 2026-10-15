@@ -19,7 +19,7 @@ test("ADP display names turn LAST, FIRST into First Last", () => {
   assert.equal(adpDisplayName("Lexie"), "Lexie");
 });
 
-test("active roster is the schedule union, not the Oct 13 board", () => {
+test("active roster is the schedule union, not the Oct 14 board", () => {
   const drivers = getDrivers();
   const scheduled = drivers.filter((driver) => driver.rosterSource === "amazon-schedule");
   const adpOnly = drivers.filter((driver) => driver.rosterSource === "adp-only");
@@ -28,7 +28,7 @@ test("active roster is the schedule union, not the Oct 13 board", () => {
   assert.ok(drivers.length > 40);
   assert.equal(scheduled.length, 96);
   assert.equal(onBoard.length, consoleDrivers.length);
-  assert.equal(consoleDrivers.length, 44);
+  assert.equal(consoleDrivers.length, 42);
   assert.ok(adpOnly.length > 0);
   assert.ok(adpOnly.every((driver) => !driver.transporterId));
   assert.equal(new Set(drivers.map((driver) => driver.id)).size, drivers.length);
@@ -42,7 +42,7 @@ test("active roster is the schedule union, not the Oct 13 board", () => {
   const aaron = getDriver(associateId("Aaron Davis"));
   assert.equal(aaron?.name, "Aaron Calvin Davis");
   assert.equal(aaron?.transporterId, "AD3O3G0B92UUS");
-  assert.ok(aaron?.routeIds.includes("rt-cx317"));
+  assert.ok(aaron?.routeIds.includes("rt-cx254"));
 
   for (const boardDriver of consoleDrivers) {
     const driver = getDriver(boardDriver.id);
