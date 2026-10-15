@@ -8,6 +8,9 @@ export function PageHeader({
   actions,
   refresh = true,
   updatedLabel,
+  seedAsOf,
+  week,
+  date,
 }: {
   title: string;
   description?: string;
@@ -16,11 +19,15 @@ export function PageHeader({
   refresh?: boolean;
   /** Existing seed capture label. Omit when the page has no single timestamp. */
   updatedLabel?: string;
+  /** Zoned seed instant used to notice when a fresh pull has landed. */
+  seedAsOf?: string | null;
+  week?: string | number | null;
+  date?: string | null;
 }) {
   const toolbar = Boolean(refresh || actions || updatedLabel);
 
   return (
-    <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
+    <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
       <div className="min-w-0">
         <h1 className="font-heading text-xl font-semibold tracking-tight md:text-2xl">
           {title}
@@ -30,11 +37,14 @@ export function PageHeader({
         ) : null}
       </div>
       {toolbar ? (
-        <div className="flex flex-wrap items-center gap-2" data-page-toolbar>
+        <div
+          className="flex w-full min-w-0 flex-wrap items-center gap-2 sm:w-auto sm:max-w-xl sm:justify-end"
+          data-page-toolbar
+        >
           {updatedLabel ? (
-            <p className="text-xs whitespace-nowrap text-muted-foreground">{updatedLabel}</p>
+            <p className="max-w-full text-xs text-muted-foreground sm:whitespace-nowrap">{updatedLabel}</p>
           ) : null}
-          {refresh ? <RefreshDataButton /> : null}
+          {refresh ? <RefreshDataButton seedAsOf={seedAsOf} week={week} date={date} /> : null}
           {actions}
         </div>
       ) : null}

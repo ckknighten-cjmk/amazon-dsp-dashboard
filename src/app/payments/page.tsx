@@ -74,6 +74,8 @@ function PaymentsBody() {
         title="Payments"
         description={`${payments.company} · ${payments.station.code} ${payments.station.name}. Settlements from ${DATA_SOURCE}, reconciled to the Work Summary Tool where both captures exist.`}
         updatedLabel={seedCapturedLabel(payments.capturedAt)}
+        seedAsOf={payments.capturedAt}
+        week={week}
       />
 
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">

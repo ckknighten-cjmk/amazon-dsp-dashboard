@@ -1,4 +1,5 @@
 import seed from "@/lib/data/seed/10hr-bonus-week38-by-da.json";
+import routeCapture from "@/lib/data/seed/10hr-bonus-week38.json";
 import type { DateRange } from "@/lib/types";
 import { dateInRange } from "@/lib/period";
 
@@ -152,7 +153,7 @@ function readSeed(raw: BonusSeed): BonusList {
     start: WEEK_START,
     end: WEEK_END,
     thresholdStopsCompleted: raw.thresholdStopsCompleted,
-    capturedAt: raw.capturedAt ?? null,
+    capturedAt: raw.capturedAt ?? routeCapture.capturedAt ?? null,
     source: raw.source ?? null,
     entries,
     dayCounts: [...counts.values()].sort((a, b) => a.date.localeCompare(b.date)),

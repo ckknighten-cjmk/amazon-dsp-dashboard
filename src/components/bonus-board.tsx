@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import { bonusCoDriverLabel, type BonusList } from "@/lib/data/bonus";
 import { bonusCsv, bonusExcel } from "@/lib/export/bonus";
-import { formatDate, formatRangeLabel, formatZonedDateTime } from "@/lib/format";
+import { formatDate, formatRangeLabel, formatZonedDateTime, seedCapturedLabel } from "@/lib/format";
 import { datesInRange } from "@/lib/period";
 import { cn } from "@/lib/utils";
 
@@ -70,6 +70,9 @@ export function BonusBoard({ list }: { list: BonusList }) {
             <ExportExcelButton filename={excel.filename} xml={excel.xml} label="Export Excel" />
           </>
         }
+        updatedLabel={seedCapturedLabel(list.capturedAt)}
+        seedAsOf={list.capturedAt}
+        week={list.week}
       />
 
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">

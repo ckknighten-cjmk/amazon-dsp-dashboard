@@ -18,6 +18,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getDriver, getIncidents, getRoute, getVehicle } from "@/lib/data";
+import { incidentNotesLabel } from "@/lib/data/incidents";
 import {
   formatDateTime,
   incidentStatusLabel,
@@ -66,6 +67,7 @@ export default function IncidentsPage() {
       <PageHeader
         title="Incidents & notes"
         description={`${openCount} open in this period. DVRs, customer complaints, vehicle issues, and safety events.`}
+        updatedLabel={incidentNotesLabel()}
       />
 
       <CoverageNote>

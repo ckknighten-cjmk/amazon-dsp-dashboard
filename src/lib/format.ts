@@ -97,6 +97,100 @@ export function seedCapturedLabel(iso: string | null | undefined): string | unde
   return `Seed captured ${formatZonedDateTime(value)}`;
 }
 
+/** Milliseconds for an ISO instant that already carries an offset or `Z`. */
+export function zonedInstant(iso: string | null | undefined): number | null {
+  const value = iso?.trim();
+  if (!value || !EXPLICIT_ZONE.test(value)) return null;
+  const time = Date.parse(value);
+  return Number.isFinite(time) ? time : null;
+}
+
+/** Newest zoned instant in the list. Naive timestamps are skipped. */
+export function latestZonedIso(values: Array<string | null | undefined>): string | undefined {
+  let best: { iso: string; time: number } | undefined;
+  for (const value of values) {
+    const iso = value?.trim();
+    const time = zonedInstant(iso);
+    if (!iso || time == null) continue;
+    if (!best || time > best.time) best = { iso, time };
+  }
+  return best?.iso;
+}
+
+const EXPORT_STAMP =
+  /^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4}),\s+(\d{1,2}):(\d{2}):(\d{2})\s*(AM|PM)$/i;
+
+function wallClockToUtc(
+  year: number,
+  month: number,
+  day: number,
+  hour: number,
+  minute: number,
+  second: number,
+  timeZone: string
+) {
+  const guess = Date.UTC(year, month - 1, day, hour, minute, second);
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    hourCycle: "h23",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  }).formatToParts(new Date(guess));
+  const pick = (type: Intl.DateTimeFormatPartTypes) =>
+    Number(parts.find((part) => part.type === type)?.value);
+  const asUtc = Date.UTC(
+    pick("year"),
+    pick("month") - 1,
+    pick("day"),
+    pick("hour") % 24,
+    pick("minute"),
+    pick("second")
+  );
+  return new Date(guess - (asUtc - guess)).toISOString();
+}
+
+/**
+ * Amazon schedule exports store a station wall time like `10/13/26, 7:51:45 PM`
+ * with no offset. Interpret that clock as America/Chicago. Returns undefined
+ * when the string is not that shape.
+ */
+export function parseStationExportStamp(value: string | null | undefined): string | undefined {
+  const match = value?.trim().match(EXPORT_STAMP);
+  if (!match) return undefined;
+  const [, monthRaw, dayRaw, yearRaw, hourRaw, minuteRaw, secondRaw, meridiem] = match;
+  const month = Number(monthRaw);
+  const day = Number(dayRaw);
+  const year = yearRaw.length === 2 ? 2000 + Number(yearRaw) : Number(yearRaw);
+  let hour = Number(hourRaw) % 12;
+  if (meridiem.toUpperCase() === "PM") hour += 12;
+  if (month < 1 || month > 12 || day < 1 || day > 31) return undefined;
+  return wallClockToUtc(year, month, day, hour, Number(minuteRaw), Number(secondRaw), OPS_TIMEZONE);
+}
+
+/**
+ * Visible as-of line. Zoned instants keep the clock. A date-only or naive
+ * timestamp keeps the calendar date and does not invent a timezone.
+ */
+export function seedAsOfLabel(iso: string | null | undefined): string | undefined {
+  const captured = seedCapturedLabel(iso);
+  if (captured) return captured;
+  const value = iso?.trim();
+  if (!value) return undefined;
+  const day = value.slice(0, 10);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day)) return undefined;
+  const [year, month, date] = day.split("-").map(Number);
+  const label = new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(year, month - 1, date));
+  return `Seed as of ${label}`;
+}
+
 export function formatPercent(value: number, digits = 1) {
   return `${value.toFixed(digits)}%`;
 }

@@ -19,6 +19,9 @@ export interface CensusEmployee {
 
 export const censusEmployees = census.employees as CensusEmployee[];
 
+export const censusCapturedAt =
+  typeof census.capturedAt === "string" && census.capturedAt.trim() ? census.capturedAt : null;
+
 export function employmentStatus(status: string): EmploymentStatus | null {
   if (status.startsWith("A")) return "active";
   if (status.startsWith("T")) return "terminated";

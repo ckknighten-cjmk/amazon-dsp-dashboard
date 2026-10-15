@@ -35,6 +35,27 @@ npm run dev
 
 No auth in v1. Dark theme is the default; toggle light/dark from the top bar or Settings.
 
+### Refresh
+
+Every dashboard page has a **Refresh** control in the page header, next to that page's seed as-of time. It does two things:
+
+1. `POST /api/refresh` with `{ page, week?, date? }` so an external job can pull a newer Console or ADP capture. The app does not call Amazon or ADP itself.
+2. `router.refresh()`, which re-reads the seed modules already in this build.
+
+The webhook key never goes to the browser. Set these on the server:
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `REFRESH_WEBHOOK_URL` | yes | URL that receives the JSON body. |
+| `REFRESH_WEBHOOK_KEY` | yes | Secret sent with that request. |
+| `REFRESH_WEBHOOK_KEY_HEADER` | no | Header name for the key. Defaults to `Authorization`, and that header's value is `Bearer <key>`. Any other name sends the raw key. |
+
+If `REFRESH_WEBHOOK_URL` or `REFRESH_WEBHOOK_KEY` is missing, `POST /api/refresh` returns **503** and the button only re-reads the current seeds. The same page cannot start another pull for **10 minutes**; a repeat returns **429** with `lastRequestedAt`. Copy `.env.example` for placeholders. Do not commit a real key.
+
+After a pull is accepted the header says **Pulling fresh data… usually 5–15 min**. That note stays across reloads until the page's seed as-of time is newer than the request, which then shows **Updated** and that time. If 30 minutes pass with no newer seed, it shows **Still waiting. Sign-in may be needed.**
+
+Page keys: `overview` (also Settings), `routes` (also a route detail page), `drivers`, `fleet`, `scorecard`, `payments`, `compliance`, `bonus`, `incidents`. `week` and `date` are sent when that page already has them.
+
 ### Seeded data
 
 | Surface | Source |

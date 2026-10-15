@@ -8,8 +8,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { getStation } from "@/lib/data";
-import { formatClock, OPS_TIMEZONE } from "@/lib/format";
+import { getDeliveryBoard, getStation } from "@/lib/data";
+import { formatClock, OPS_TIMEZONE, seedCapturedLabel } from "@/lib/format";
 
 const STORAGE_KEY = "cjmk-ops-settings";
 const LEGACY_STORAGE_KEY = "valiant-ops-settings";
@@ -30,6 +30,7 @@ type LocalSettings = {
 
 export default function SettingsPage() {
   const seed = getStation();
+  const overviewSeed = getDeliveryBoard().capturedAt;
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -88,7 +89,9 @@ export default function SettingsPage() {
     <div>
       <PageHeader
         title="Station settings"
-        description="Display name and timezone for this ops HQ. v1 is local-only and does not call Amazon APIs."
+        description="Display name and timezone for this ops HQ. v1 is local-only and does not call Amazon APIs. Refresh asks for a fresh overview seed."
+        updatedLabel={seedCapturedLabel(overviewSeed)}
+        seedAsOf={overviewSeed}
       />
 
       <div className="grid gap-4 lg:grid-cols-2">

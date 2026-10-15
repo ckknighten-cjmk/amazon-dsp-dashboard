@@ -28,6 +28,7 @@ import type {
   MealRow,
   UnmatchedRow,
 } from "@/lib/compliance/types";
+import { parseStationExportStamp } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
 const WEEKS = [
@@ -107,6 +108,8 @@ export function ComplianceBoard({ report }: { report: ComplianceReport }) {
         updatedLabel={
           report.exportedAt ? `Amazon schedule exported ${report.exportedAt}` : undefined
         }
+        seedAsOf={parseStationExportStamp(report.exportedAt)}
+        week={report.week}
       />
 
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100">
