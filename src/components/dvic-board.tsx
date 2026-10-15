@@ -26,7 +26,7 @@ export function DvicBoard() {
         </h2>
         <EmptyState
           title="No DVIC capture in this period"
-          description={`${DVIC_COVERAGE.label}. The Sep 23 dashboard listed zero inspections. Those zeros are not applied to other days.`}
+          description={`${DVIC_COVERAGE.label}. The Oct 14 dashboard counts are not applied to other days.`}
           className="py-8"
         />
       </section>
@@ -56,9 +56,9 @@ export function DvicBoard() {
       </div>
 
       <div className="mb-3 grid gap-3 sm:grid-cols-3">
-        <Count label="Pre-trip" value={totals.preTrip} />
-        <Count label="Post-trip" value={totals.postTrip} />
-        <Count label="AVI post-trip" value={totals.aviPostTrip} />
+        <Count label="Pre-trip" value={totals.preTrip} name="pre-trip" />
+        <Count label="Post-trip" value={totals.postTrip} name="post-trip" />
+        <Count label="AVI post-trip" value={totals.aviPostTrip} name="avi-post-trip" />
       </div>
 
       <p className="mb-3 text-xs leading-relaxed text-muted-foreground">{report.disclaimer}</p>
@@ -66,7 +66,12 @@ export function DvicBoard() {
       {report.pairs.length === 0 ? (
         <EmptyState
           title="No inspections to pair"
-          description="Today's vehicle inspections listed no pre-trip, post-trip, or AVI post-trip records, so no damage was compared."
+          description={
+            report.inspections.length === 0 &&
+            (totals.preTrip > 0 || totals.postTrip > 0 || totals.aviPostTrip > 0)
+              ? "The dashboard published inspection counts and no per-vehicle records, so no damage was compared."
+              : "Today's vehicle inspections listed no pre-trip, post-trip, or AVI post-trip records, so no damage was compared."
+          }
           className="py-8"
         />
       ) : (
@@ -162,12 +167,14 @@ function DamageList({
   );
 }
 
-function Count({ label, value }: { label: string; value: number }) {
+function Count({ label, value, name }: { label: string; value: number; name: string }) {
   return (
     <Card size="sm">
       <CardContent className="flex flex-col gap-1">
         <p className="text-xs font-medium text-muted-foreground">{label}</p>
-        <p className="font-heading text-2xl font-semibold tabular-nums tracking-tight">{value}</p>
+        <p className="font-heading text-2xl font-semibold tabular-nums tracking-tight" data-dvic-count={name}>
+          {value}
+        </p>
       </CardContent>
     </Card>
   );

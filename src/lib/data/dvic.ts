@@ -12,6 +12,25 @@ type SeedRow = {
   date?: unknown;
   damage?: unknown;
 };
+type SeedCounts = {
+  dvicPreTrip?: unknown;
+  dvicPostTrip?: unknown;
+  aviPostTrip?: unknown;
+};
+
+/** Either DVIC capture. `counts` is optional so the Sep 23 file stays valid. */
+export type DvicSeed = {
+  source: string;
+  station: string;
+  date: string;
+  preTrip?: unknown;
+  postTrip?: unknown;
+  aviPostTrip?: unknown;
+  counts?: SeedCounts;
+  note?: string;
+  newDamageComparisonFields?: string;
+  navPath?: readonly string[];
+};
 
 function text(value: unknown) {
   return typeof value === "string" ? value.trim() : "";
@@ -53,34 +72,52 @@ function stationCode(station: string) {
   return match?.[0] ?? station;
 }
 
+function listedCount(rows: unknown) {
+  return Array.isArray(rows) ? rows.length : 0;
+}
+
+/** Dashboard total used only when that phase published no inspection rows. */
+function phaseTotal(rows: unknown, published: unknown) {
+  const listed = listedCount(rows);
+  if (listed > 0) return listed;
+  if (typeof published === "number" && Number.isInteger(published) && published >= 0) return published;
+  return listed;
+}
+
 export interface DvicReport extends DvicCapture {
   pairs: DvicDayPair[];
   newDamage: NewDamageAlert[];
 }
 
-export function getDvicReport(): DvicReport {
-  const serviceDate = seed.date;
+export function dvicReportFromSeed(seedFile: DvicSeed): DvicReport {
+  const serviceDate = seedFile.date;
   const rows = [
-    ...phaseRows("pre_trip", seed.preTrip, serviceDate),
-    ...phaseRows("post_trip", seed.postTrip, serviceDate),
-    ...phaseRows("avi_post_trip", seed.aviPostTrip, serviceDate),
+    ...phaseRows("pre_trip", seedFile.preTrip, serviceDate),
+    ...phaseRows("post_trip", seedFile.postTrip, serviceDate),
+    ...phaseRows("avi_post_trip", seedFile.aviPostTrip, serviceDate),
   ];
-  const nav = seed.navPath[0] ?? "Administration → Fleet → Dashboard → Today's vehicle inspections";
-  const disclaimer = [seed.note, seed.newDamageComparisonFields].filter(Boolean).join(" ");
+  const nav =
+    seedFile.navPath?.[0] ?? "Administration → Fleet → Dashboard → Today's vehicle inspections";
+  const disclaimer = [seedFile.note, seedFile.newDamageComparisonFields].filter(Boolean).join(" ");
+  const counts = seedFile.counts;
   return {
-    source: seed.source,
+    source: seedFile.source,
     nav,
-    stationCode: stationCode(seed.station),
-    company: seed.station,
+    stationCode: stationCode(seedFile.station),
+    company: seedFile.station,
     serviceDate,
     totals: {
-      preTrip: seed.preTrip.length,
-      postTrip: seed.postTrip.length,
-      aviPostTrip: seed.aviPostTrip.length,
+      preTrip: phaseTotal(seedFile.preTrip, counts?.dvicPreTrip),
+      postTrip: phaseTotal(seedFile.postTrip, counts?.dvicPostTrip),
+      aviPostTrip: phaseTotal(seedFile.aviPostTrip, counts?.aviPostTrip),
     },
     inspections: rows,
     disclaimer,
     pairs: pairInspections(rows),
     newDamage: findNewDamage(rows),
   };
+}
+
+export function getDvicReport(): DvicReport {
+  return dvicReportFromSeed(seed);
 }

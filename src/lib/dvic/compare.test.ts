@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { getDvicReport } from "../data/dvic";
+import { dvicReportFromSeed, getDvicReport } from "../data/dvic";
+import sep23 from "../data/seed/dvic-2026-09-23.json";
 import { damageSummary, findNewDamage, pairInspections } from "./compare";
 import type { DvicInspection } from "./types";
 
@@ -16,10 +17,10 @@ function inspection(
   };
 }
 
-test("the Oct 14 capture has counts only and no invented inspection rows", () => {
+test("the Oct 14 capture totals come from dashboard counts when lists are empty", () => {
   const report = getDvicReport();
   assert.equal(report.serviceDate, "2026-10-14");
-  assert.deepEqual(report.totals, { preTrip: 0, postTrip: 0, aviPostTrip: 0 });
+  assert.deepEqual(report.totals, { preTrip: 44, postTrip: 44, aviPostTrip: 10 });
   assert.equal(report.inspections.length, 0);
   assert.deepEqual(report.pairs, []);
   assert.deepEqual(report.newDamage, []);
@@ -27,6 +28,32 @@ test("the Oct 14 capture has counts only and no invented inspection rows", () =>
   assert.match(report.disclaimer, /counts only/);
   assert.match(report.disclaimer, /DVIC missing 0/);
   assert.match(report.source, /Today's vehicle inspections/);
+});
+
+test("the Sep 23 capture stays at zero when it has no dashboard counts", () => {
+  const report = dvicReportFromSeed(sep23);
+  assert.equal(report.serviceDate, "2026-09-23");
+  assert.equal(sep23.preTrip.length, 0);
+  assert.equal(sep23.postTrip.length, 0);
+  assert.equal(sep23.aviPostTrip.length, 0);
+  assert.equal("counts" in sep23, false);
+  assert.deepEqual(report.totals, { preTrip: 0, postTrip: 0, aviPostTrip: 0 });
+  assert.equal(report.inspections.length, 0);
+  assert.deepEqual(report.pairs, []);
+});
+
+test("listed inspection rows win over dashboard counts", () => {
+  const report = dvicReportFromSeed({
+    source: "fixture",
+    station: "DNA4 / Memphis (DNA4)- Amazon.com",
+    date: "2026-10-14",
+    preTrip: [{ id: "pre-1", vehicleUnit: "11", damage: [] }],
+    postTrip: [],
+    aviPostTrip: [],
+    counts: { dvicPreTrip: 44, dvicPostTrip: 44, aviPostTrip: 10 },
+  });
+  assert.deepEqual(report.totals, { preTrip: 1, postTrip: 44, aviPostTrip: 10 });
+  assert.equal(report.inspections.length, 1);
 });
 
 test("new damage is post-trip detail missing from the pre-trip", () => {

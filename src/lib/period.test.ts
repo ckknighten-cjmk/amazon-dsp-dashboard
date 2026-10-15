@@ -11,6 +11,7 @@ import {
   dateInRange,
   datesInRange,
   DELIVERY_COVERAGE,
+  DVIC_COVERAGE,
   deserializePeriod,
   formatRangeLabel,
   hrefWithPeriod,
@@ -79,6 +80,17 @@ describe("period bounds", () => {
 });
 
 describe("seed coverage", () => {
+  it("shows the Oct 14 DVIC capture on the station clock", () => {
+    assert.equal(DVIC_COVERAGE.start, "2026-10-14");
+    assert.equal(DVIC_COVERAGE.end, "2026-10-14");
+    assert.match(DVIC_COVERAGE.label, /Oct 14/);
+    assert.equal(dateInRange(DVIC_COVERAGE.start, { kind: "today" }), true);
+    assert.equal(
+      dateInRange(DVIC_COVERAGE.start, { kind: "custom", start: "2026-09-23", end: "2026-09-23" }),
+      false
+    );
+  });
+
   it("shows delivery metrics only when the range includes Oct 14", () => {
     assert.equal(dateInRange(DELIVERY_COVERAGE.start, { kind: "today" }), true);
     assert.equal(rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, { kind: "week" }), true);
