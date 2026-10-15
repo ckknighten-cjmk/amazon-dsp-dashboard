@@ -19,18 +19,7 @@ export const DELIVERY_COVERAGE = {
   label: "Seeded data: Oct 14 only",
 } as const;
 
-export const SCORECARD_COVERAGE = {
-  37: {
-    start: "2026-09-06",
-    end: "2026-09-12",
-    label: "Seeded data: Week 37, Sep 6–12",
-  },
-  38: {
-    start: "2026-09-13",
-    end: "2026-09-19",
-    label: "Seeded data: Week 38, Sep 13–19",
-  },
-} as const;
+export { SCORECARD_COVERAGE } from "@/lib/data/scorecard";
 
 /** Week 38 10-hour bonus routes. Dates are the route service days, not a single blob. */
 export const BONUS_COVERAGE = {

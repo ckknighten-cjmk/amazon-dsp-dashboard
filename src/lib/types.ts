@@ -9,7 +9,7 @@ export type DateRange =
   | { kind: "week" }
   | { kind: "custom"; start: string; end: string };
 
-export type ScorecardTier = "fantastic" | "great" | "fair" | "poor";
+export type ScorecardTier = "fantastic_plus" | "fantastic" | "great" | "fair" | "poor";
 
 export type MetricUnit = "percent" | "count";
 
@@ -302,6 +302,8 @@ export interface ScorecardSnapshot {
   asOf: string;
   overallScore: number;
   overallTier: ScorecardTier;
+  /** Amazon's capped-standing note, when the Console capture included one. */
+  overallNote?: string | null;
   categories: ScorecardCategory[];
   metrics: ScorecardMetric[];
   disclaimer: string;

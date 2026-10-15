@@ -257,6 +257,8 @@ export function ScoreTierBadge({
   size?: "sm" | "md";
 }) {
   const styles: Record<ScorecardTier, string> = {
+    fantastic_plus:
+      "border-violet-400/60 bg-violet-500/15 text-violet-900 dark:border-violet-400/50 dark:text-violet-200",
     fantastic:
       "border-emerald-400/60 bg-emerald-500/15 text-emerald-800 dark:border-emerald-500/50 dark:text-emerald-300",
     great:

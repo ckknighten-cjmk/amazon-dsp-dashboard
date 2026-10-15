@@ -1,31 +1,50 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useDateRange } from "@/components/layout/date-range-context";
-import { buttonVariants } from "@/components/ui/button";
-import { SCORECARD_WEEKS, type ScorecardWeek } from "@/lib/data/scorecard";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-export function ScorecardWeekSwitcher({ week }: { week: ScorecardWeek }) {
+export function ScorecardWeekSwitcher({
+  week,
+  options,
+}: {
+  week: number;
+  options: ReadonlyArray<{ week: number; label: string }>;
+}) {
+  const router = useRouter();
   const { hrefWithPeriod } = useDateRange();
+  const items = options.map((option) => ({ value: String(option.week), label: option.label }));
 
   return (
-    <div className="flex gap-1" role="group" aria-label="Scorecard week">
-      {SCORECARD_WEEKS.map((item) => {
-        const href = item === 38 ? "/scorecard" : `/scorecard?week=${item}`;
-        return (
-          <Link
-            key={item}
-            href={hrefWithPeriod(href)}
-            aria-current={week === item ? "page" : undefined}
-            className={buttonVariants({
-              size: "sm",
-              variant: week === item ? "default" : "outline",
-            })}
-          >
-            Week {item}
-          </Link>
-        );
-      })}
-    </div>
+    <Select
+      value={String(week)}
+      items={items}
+      onValueChange={(value) => {
+        if (!value || value === String(week)) return;
+        router.push(hrefWithPeriod(`/scorecard?week=${value}`));
+      }}
+    >
+      <SelectTrigger
+        size="sm"
+        aria-label="Scorecard week"
+        className="w-[min(100%,24rem)]"
+        data-scorecard-week-select
+      >
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent align="end" className="max-h-80 w-[min(100vw-2rem,24rem)]">
+        {options.map((option) => (
+          <SelectItem key={option.week} value={String(option.week)}>
+            {option.label}
+          </SelectItem>
+        ))}
+      </SelectContent>
+    </Select>
   );
 }

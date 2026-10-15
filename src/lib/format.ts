@@ -307,6 +307,7 @@ export const exceptionStatusLabel: Record<PackageExceptionStatus, string> = {
 };
 
 export const scorecardTierLabel: Record<ScorecardTier, string> = {
+  fantastic_plus: "Fantastic Plus",
   fantastic: "Fantastic",
   great: "Great",
   fair: "Fair",

@@ -10,6 +10,7 @@ export function PeriodCoverage({
   coveredNote,
   emptyTitle,
   emptyDescription,
+  revealOutside = false,
   children,
 }: {
   start: string;
@@ -17,15 +18,26 @@ export function PeriodCoverage({
   coveredNote: string;
   emptyTitle: string;
   emptyDescription: string;
+  /** Keep the weekly summary visible when the station period does not overlap it. */
+  revealOutside?: boolean;
   children: React.ReactNode;
 }) {
   const { range } = useDateRange();
-  if (!rangesOverlap(start, end, range)) {
+  const overlaps = rangesOverlap(start, end, range);
+  if (!overlaps && !revealOutside) {
     return <EmptyState title={emptyTitle} description={emptyDescription} />;
   }
   return (
     <>
-      <p className="mb-4 text-xs leading-relaxed text-muted-foreground">{coveredNote}</p>
+      <p
+        className={
+          overlaps
+            ? "mb-4 text-xs leading-relaxed text-muted-foreground"
+            : "mb-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs leading-relaxed text-amber-950 dark:text-amber-100"
+        }
+      >
+        {overlaps ? coveredNote : emptyDescription}
+      </p>
       {children}
     </>
   );

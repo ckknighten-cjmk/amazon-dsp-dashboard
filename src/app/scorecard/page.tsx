@@ -5,6 +5,7 @@ import { ScoreStatusBadge, ScoreTierBadge } from "@/components/ops-badges";
 import { ScorecardWeekSwitcher } from "@/components/scorecard-week-switcher";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getScorecard, parseScorecardWeek } from "@/lib/data";
+import { newestScorecardCapturedAt, scorecardWeekOptions } from "@/lib/data/scorecard";
 import { scorecardCsv } from "@/lib/export/datasets";
 import { formatOverallScore, formatScorecardValue, scorecardTierLabel, seedAsOfLabel } from "@/lib/format";
 import { SCORECARD_COVERAGE } from "@/lib/period";
@@ -34,6 +35,7 @@ export default async function ScorecardPage({
   const scorecard = getScorecard(week);
   const coverage = SCORECARD_COVERAGE[week];
   const scorecardExport = scorecardCsv(week);
+  const capturedLabel = seedAsOfLabel(scorecard.asOf);
 
   return (
     <div>
@@ -42,7 +44,13 @@ export default async function ScorecardPage({
         description={`${scorecard.weekLabel} · ${scorecard.periodLabel} · CJMK Inc. / DNA4 Memphis. Prior week was not shown in Console.`}
         actions={
           <>
-            <ScorecardWeekSwitcher week={week} />
+            <ScorecardWeekSwitcher
+              week={week}
+              options={scorecardWeekOptions().map((option) => ({
+                week: option.week,
+                label: option.label,
+              }))}
+            />
             <ExportCsvButton
               filename={scorecardExport.filename}
               csv={scorecardExport.csv}
@@ -51,17 +59,18 @@ export default async function ScorecardPage({
             <ScoreTierBadge tier={scorecard.overallTier} />
           </>
         }
-        updatedLabel={seedAsOfLabel(scorecard.asOf)}
-        seedAsOf={scorecard.asOf}
+        updatedLabel={capturedLabel}
+        seedAsOf={newestScorecardCapturedAt()}
         week={week}
       />
 
       <PeriodCoverage
         start={coverage.start}
         end={coverage.end}
+        revealOutside
         coveredNote={`${coverage.label}. This is the weekly Console summary. It is shown whole when the selected period overlaps that week, and it is not split into days.`}
         emptyTitle="No scorecard in this period"
-        emptyDescription={`${coverage.label}. Switch weeks or choose a period that overlaps that Console week. The standing is not copied onto empty days.`}
+        emptyDescription={`${coverage.label} is outside the selected period. The weekly standing is still shown below. It is not copied onto empty days.`}
       >
       <p className="mb-5 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-950 dark:text-amber-100">
         {scorecard.disclaimer}
@@ -79,6 +88,16 @@ export default async function ScorecardPage({
             <p className="mt-1 text-sm text-muted-foreground">
               {scorecardTierLabel[scorecard.overallTier]} · {scorecard.weekLabel}
             </p>
+            {capturedLabel ? (
+              <p className="mt-1 text-xs text-muted-foreground" data-scorecard-captured>
+                {capturedLabel}
+              </p>
+            ) : null}
+            {scorecard.overallNote ? (
+              <p className="mt-2 max-w-xl text-xs leading-relaxed text-muted-foreground" data-scorecard-note>
+                {scorecard.overallNote}
+              </p>
+            ) : null}
           </div>
           <ul className="flex flex-wrap gap-2">
             {scorecard.categories.map((category) => (

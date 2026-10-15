@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { refreshPageKey } from "./pages";
-import { FRESH_WAIT_MS, refreshPhase } from "./status";
+import { FRESH_WAIT_MS, parseRefreshRequest, refreshPhase } from "./status";
 import { RATE_LIMIT_MS, requestFreshData, resetRefreshRateLimit } from "./webhook";
 import { POST } from "@/app/api/refresh/route";
 
@@ -166,6 +166,30 @@ test("page keys and pull status", () => {
   });
   assert.equal(updated.phase, "updated");
   assert.equal(updated.message, "Updated Sep 28, 2026, 8:09 PM CDT");
+
+  const checkedAt = "2026-10-15T12:00:00.000Z";
+  const checked = refreshPhase({
+    requestedAt: checkedAt,
+    seedAsOf: "2026-10-15T03:25:18Z",
+    now: Date.parse(checkedAt) + FRESH_WAIT_MS,
+    accepted: true,
+  });
+  assert.equal(checked.phase, "current");
+  assert.equal(checked.message, "Checked Oct 15, 2026, 7:00 AM CDT, already up to date");
+  assert.equal(
+    refreshPhase({
+      requestedAt: checkedAt,
+      seedAsOf: "2026-10-15T03:25:18Z",
+      now: Date.parse(checkedAt) + FRESH_WAIT_MS,
+      accepted: false,
+    }).message,
+    "Still waiting. Sign-in may be needed."
+  );
+  assert.deepEqual(parseRefreshRequest(requestedAt), { requestedAt, accepted: true });
+  assert.deepEqual(parseRefreshRequest(JSON.stringify({ requestedAt, accepted: false })), {
+    requestedAt,
+    accepted: false,
+  });
 });
 
 function postPage(page: string) {
