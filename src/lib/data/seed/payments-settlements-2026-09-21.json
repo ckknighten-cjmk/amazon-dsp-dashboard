@@ -5,17 +5,17 @@
     "code": "DNA4",
     "name": "Memphis"
   },
-  "capturedAt": "2026-10-15T03:39:28Z",
+  "capturedAt": "2026-10-15T14:49:10.961491Z",
   "timezone": "America/Chicago",
   "urls": {
     "latestIncentiveInvoice": "https://logistics.amazon.com/flexpayments/simpson/flexpro/invoices/US_FLEXPRO.CJMK.DNA4.INC.2026.37"
   },
   "pendingAction": {
-    "count": 6,
-    "totalExact": 192202.66,
+    "count": 5,
+    "totalExact": 103645.96,
     "currency": "USD"
   },
-  "visiblePaidTotal": 229557.0,
+  "visiblePaidTotal": 318113.7,
   "invoices": [
     {
       "id": "INV-GA6T0P-0000000615",
@@ -30,7 +30,7 @@
       "periodLabel": "Week 37 / Sep 06-12 / Sep 12, 2026",
       "week": 37,
       "kind": "variable",
-      "status": "New",
+      "status": "Paid",
       "amount": 88556.7
     },
     {
@@ -100,8 +100,8 @@
   ],
   "week37Variable": {
     "invoiceId": "INV-GA6T0P-0000000614",
-    "status": "New",
-    "disputeWindowCloses": "2026-09-30T09:37:00-05:00",
+    "status": "Paid",
+    "disputeWindowCloses": null,
     "total": 88556.7,
     "lines": [
       {
@@ -148,5 +148,5 @@
     "other": 131833,
     "disclaimer": "Year label is as displayed in Console YTD Insights; do not invent a 2026 YTD if Console showed 2025."
   },
-  "disclaimer": "Seeded from live DSP Console Flex Payments. No payment-method/deposit details were shown. PDF links existed but no payment export landed in Downloads. Week 39 variable invoice and Work Summary were captured 2026-10-15T03:39:28Z. This invoice table is still the 2026-09-21 list."
+  "disclaimer": "Seeded from live DSP Console Flex Payments. No payment-method/deposit details were shown. PDF links existed but no payment export landed in Downloads. Week 39 variable invoice and Work Summary were captured 2026-10-15T03:39:28Z. This invoice table is still the 2026-09-21 list. Week 37 variable invoice INV-GA6T0P-0000000614 status was refreshed from Console on 2026-10-15T14:49:10.961491Z (Paid; dispute window closed)."
 }
