@@ -13,6 +13,7 @@ import {
   useTransition,
   type ReactNode,
 } from "react";
+import { useStation } from "@/components/layout/station-context";
 import { Button } from "@/components/ui/button";
 import { refreshPageKey } from "@/lib/refresh/pages";
 import {
@@ -98,6 +99,7 @@ export function RefreshDataButton({
   date?: string | null;
 }) {
   const ctx = useContext(RefreshContext);
+  const { code: station } = useStation();
   const pathname = usePathname();
   const page = refreshPageKey(pathname);
   const [request, setRequest] = useState<RefreshRequest | null>(null);
@@ -106,11 +108,11 @@ export function RefreshDataButton({
 
   useEffect(() => {
     try {
-      setRequest(parseRefreshRequest(window.localStorage.getItem(refreshStorageKey(page))));
+      setRequest(parseRefreshRequest(window.localStorage.getItem(refreshStorageKey(page, station))));
     } catch {
       setRequest(null);
     }
-  }, [page]);
+  }, [page, station]);
 
   const phase = refreshPhase({
     requestedAt: request?.requestedAt,
@@ -134,12 +136,12 @@ export function RefreshDataButton({
       setRequest(next);
       setNow(Date.now());
       try {
-        window.localStorage.setItem(refreshStorageKey(page), JSON.stringify(next));
+        window.localStorage.setItem(refreshStorageKey(page, station), JSON.stringify(next));
       } catch {
         /* private mode */
       }
     },
-    [page]
+    [page, station]
   );
 
   const requestFresh = useCallback(() => {
@@ -147,7 +149,10 @@ export function RefreshDataButton({
     posting.current = true;
     ctx.refresh();
 
-    const payload: { page: string; week?: string; date?: string } = { page };
+    const payload: { page: string; station: string; week?: string; date?: string } = {
+      page,
+      station,
+    };
     if (week != null && String(week).trim()) payload.week = String(week).trim();
     if (date != null && date.trim()) payload.date = date.trim();
 
@@ -181,7 +186,7 @@ export function RefreshDataButton({
       .finally(() => {
         posting.current = false;
       });
-  }, [ctx, date, page, remember, week]);
+  }, [ctx, date, page, remember, station, week]);
 
   if (!ctx) return null;
 
@@ -200,6 +205,7 @@ export function RefreshDataButton({
         aria-label={label}
         data-refresh="seed"
         data-refresh-page={page}
+        data-refresh-station={station}
         data-refresh-phase={phase.phase}
         data-state={ctx.busy ? "refreshing" : "idle"}
       >

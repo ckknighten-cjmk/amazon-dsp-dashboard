@@ -1,4 +1,5 @@
 import { isRefreshPageKey, type RefreshPageKey } from "@/lib/refresh/pages";
+import { DEFAULT_STATION_CODE, parseStationParam, type StationCode } from "@/lib/stations";
 
 /** One fresh pull per page. A second fire inside this window is rejected. */
 export const RATE_LIMIT_MS = 10 * 60 * 1000;
@@ -46,17 +47,29 @@ export function refreshAuthHeader(env: RefreshEnv): { name: string; value: strin
   return { name, value };
 }
 
-type Payload = { page: RefreshPageKey; week?: string; date?: string };
+type Payload = { page: RefreshPageKey; station: StationCode; week?: string; date?: string };
+
+function readStation(value: unknown): StationCode | null {
+  if (value == null || value === "") return DEFAULT_STATION_CODE;
+  if (typeof value !== "string") return null;
+  return parseStationParam(value);
+}
+
+export function refreshRateKey(page: string, station: string) {
+  return `${station}:${page}`;
+}
 
 function readPayload(input: unknown): Payload | null {
   if (!input || typeof input !== "object") return null;
   const record = input as Record<string, unknown>;
   if (typeof record.page !== "string" || !isRefreshPageKey(record.page)) return null;
+  const station = readStation(record.station);
   const week = optionalToken(record.week, /^\d{1,2}$/);
   const date = optionalToken(record.date, /^\d{4}-\d{2}-\d{2}$/);
-  if (week === null || date === null) return null;
+  if (!station || week === null || date === null) return null;
   return {
     page: record.page,
+    station,
     ...(week ? { week } : {}),
     ...(date ? { date } : {}),
   };
@@ -93,7 +106,8 @@ export async function requestFreshData(
 
   const now = options.now ?? Date.now();
   const store = options.store ?? rateLimit;
-  const last = store.get(payload.page);
+  const rateKey = refreshRateKey(payload.page, payload.station);
+  const last = store.get(rateKey);
   if (last != null && now - last < RATE_LIMIT_MS) {
     return {
       status: 429,
@@ -101,7 +115,7 @@ export async function requestFreshData(
     };
   }
 
-  store.set(payload.page, now);
+  store.set(rateKey, now);
   const fetchImpl = options.fetchImpl ?? fetch;
   try {
     const response = await fetchImpl(env.url, {
@@ -114,11 +128,11 @@ export async function requestFreshData(
       signal: AbortSignal.timeout(15_000),
     });
     if (!response.ok) {
-      store.delete(payload.page);
+      store.delete(rateKey);
       return { status: 502, body: { error: "webhook_failed" } };
     }
   } catch {
-    store.delete(payload.page);
+    store.delete(rateKey);
     return { status: 502, body: { error: "webhook_failed" } };
   }
 

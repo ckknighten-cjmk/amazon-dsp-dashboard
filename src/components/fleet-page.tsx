@@ -4,8 +4,10 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { DvicBoard } from "@/components/dvic-board";
 import { ExportCsvButton } from "@/components/export-csv-button";
+import { useDateRange } from "@/components/layout/date-range-context";
 import { NewDamagePanel } from "@/components/new-damage-panel";
 import { PageHeader, EmptyState } from "@/components/page-header";
+import { StationEmptyPage } from "@/components/station-empty";
 import { VehicleStatusBadge } from "@/components/ops-badges";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
@@ -19,19 +21,29 @@ import {
 } from "@/components/ui/table";
 import { getFleetYard, getRoute, getVehicles } from "@/lib/data";
 import { getDvicReport } from "@/lib/data/dvic";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { vehiclesCsv } from "@/lib/export/datasets";
 import { CoverageNote } from "@/components/period-coverage";
 import { buildFleetIssueDayReport, vehicleHasNewDamage } from "@/lib/fleet-issues/detect";
 import type { FleetIssueCatalog } from "@/lib/fleet-issues/types";
 import { formatMileage, seedCapturedLabel, vehicleStatusLabel, vehicleTypeLabel } from "@/lib/format";
 import { DVIC_COVERAGE, STATION_TODAY } from "@/lib/period";
+import type { StationCode } from "@/lib/stations";
 import { cn } from "@/lib/utils";
 import type { VehicleStatus, VehicleType } from "@/lib/types";
 
-export function FleetPageClient({ catalog }: { catalog: FleetIssueCatalog }) {
-  const vehicles = getVehicles();
-  const yard = getFleetYard();
-  const fleetExport = vehiclesCsv();
+export function FleetPageClient({
+  catalog,
+  station,
+}: {
+  catalog: FleetIssueCatalog;
+  station: StationCode;
+}) {
+  const { hrefWithPeriod } = useDateRange();
+  const vehicles = loadStationDataset(station, "fleet", () => getVehicles());
+  const yard = loadStationDataset(station, "fleet", () => getFleetYard());
+  const dvic = loadStationDataset(station, "fleet", () => getDvicReport());
+  const fleetExport = vehicles ? vehiclesCsv(station) : null;
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<VehicleStatus | "all">("all");
   const [type, setType] = useState<VehicleType | "all">("all");
@@ -52,7 +64,7 @@ export function FleetPageClient({ catalog }: { catalog: FleetIssueCatalog }) {
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return vehicles.filter((v) => {
+    return (vehicles ?? []).filter((v) => {
       if (status !== "all" && v.status !== status) return false;
       if (type !== "all" && v.type !== type) return false;
       if (newDamageOnly && !vehicleHasNewDamage(v, newDamage)) return false;
@@ -74,22 +86,27 @@ export function FleetPageClient({ catalog }: { catalog: FleetIssueCatalog }) {
     });
   }, [vehicles, query, status, type, newDamageOnly, newDamage]);
 
+  if (!vehicles || !yard || !dvic || !fleetExport) {
+    return <StationEmptyPage title="Fleet" station={station} />;
+  }
+
   return (
     <div>
       <PageHeader
         title="Fleet"
         description={
           yard.origin === "console"
-            ? `DNA4 My vehicles from ${yard.nav}${yard.capturedAt ? `, captured ${yard.capturedAt}` : ""}. ${vehicles.length} vehicles. Year and mileage were blank in that export, so those cells stay empty. A blank unit is shown as an em dash; the plate is the identifier Console published.`
+            ? `${station} My vehicles from ${yard.nav}${yard.capturedAt ? `, captured ${yard.capturedAt}` : ""}. ${vehicles.length} vehicles. Year and mileage were blank in that export, so those cells stay empty. A blank unit is shown as an em dash; the plate is the identifier Console published.`
             : "This table is the mock yard. It is used only when amazon-fleet-dna4.json has no vehicles."
         }
         actions={<ExportCsvButton filename={fleetExport.filename} csv={fleetExport.csv} label="Export fleet" />}
         updatedLabel={seedCapturedLabel(yard.capturedAt)}
         seedAsOf={yard.capturedAt}
-        date={getDvicReport().serviceDate}
+        date={dvic.serviceDate}
       />
 
       <NewDamagePanel
+        station={station}
         newest={catalog.newest}
         previous={catalog.previous}
         snapshotCount={catalog.dates.length}
@@ -220,7 +237,7 @@ export function FleetPageClient({ catalog }: { catalog: FleetIssueCatalog }) {
                     <TableCell>{van.lastRouteCompleted ?? "—"}</TableCell>
                     <TableCell>
                       {route ? (
-                        <Link href={`/routes/${route.id}`} className="font-medium hover:underline">
+                        <Link href={hrefWithPeriod(`/routes/${route.id}`)} className="font-medium hover:underline">
                           {route.code}
                         </Link>
                       ) : (

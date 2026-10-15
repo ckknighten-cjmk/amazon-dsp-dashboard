@@ -4,23 +4,33 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet";
 import { DateRangeProvider } from "@/components/layout/date-range-context";
+import { StationProvider } from "@/components/layout/station-context";
 import { Sidebar } from "@/components/layout/sidebar";
 import { TopBar } from "@/components/layout/top-bar";
 import { PeriodSwitcher } from "@/components/period-switcher";
 import { RefreshProvider } from "@/components/refresh-data";
 import { routeUsesPeriod } from "@/lib/period";
+import type { StationCode } from "@/lib/stations";
 
-export function AppShell({ children }: { children: React.ReactNode }) {
+export function AppShell({
+  children,
+  initialStation,
+}: {
+  children: React.ReactNode;
+  initialStation: StationCode;
+}) {
   const [navOpen, setNavOpen] = useState(false);
 
   return (
-    <DateRangeProvider>
-      <RefreshProvider>
-        <ShellFrame navOpen={navOpen} setNavOpen={setNavOpen}>
-          {children}
-        </ShellFrame>
-      </RefreshProvider>
-    </DateRangeProvider>
+    <StationProvider initialStation={initialStation}>
+      <DateRangeProvider>
+        <RefreshProvider>
+          <ShellFrame navOpen={navOpen} setNavOpen={setNavOpen}>
+            {children}
+          </ShellFrame>
+        </RefreshProvider>
+      </DateRangeProvider>
+    </StationProvider>
   );
 }
 

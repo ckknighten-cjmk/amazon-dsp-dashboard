@@ -14,9 +14,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useStation } from "@/components/layout/station-context";
+import { StationEmptyPage } from "@/components/station-empty";
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { associatesCsv } from "@/lib/export/datasets";
 import { getDrivers, getRoute } from "@/lib/data";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { employmentLabel } from "@/lib/data/census";
 import { filterRoster, rosterSeedAsOf, rosterSourceLabel } from "@/lib/data/roster";
 import { driverStatusLabel, formatNumber, formatTenure, seedCapturedLabel } from "@/lib/format";
@@ -26,10 +29,11 @@ import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
 import type { Driver, DriverRole, DriverStatus, RosterSource } from "@/lib/types";
 
 export default function DriversPage() {
+  const { code } = useStation();
   const { range } = useDateRange();
   const activity = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
-  const drivers = getDrivers();
-  const rosterExport = associatesCsv();
+  const drivers = loadStationDataset(code, "drivers", () => getDrivers());
+  const rosterExport = drivers ? associatesCsv(code) : null;
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<DriverStatus | "all">("all");
   const [role, setRole] = useState<DriverRole | "all">("all");
@@ -38,12 +42,15 @@ export default function DriversPage() {
 
   const filtered = useMemo(
     () =>
-      filterRoster(drivers, { query, status, role, source, employment }, (driver) =>
+      filterRoster(drivers ?? [], { query, status, role, source, employment }, (driver) =>
         driver.routeIds.map((id) => getRoute(id)?.code ?? "")
       ),
     [drivers, query, status, role, source, employment]
   );
-  const seedAsOf = rosterSeedAsOf();
+  const seedAsOf = drivers ? rosterSeedAsOf() : null;
+  if (!drivers || !rosterExport) {
+    return <StationEmptyPage title="Associates" station={code} />;
+  }
 
   return (
     <div>

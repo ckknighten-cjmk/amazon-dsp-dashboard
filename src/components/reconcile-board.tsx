@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Download } from "lucide-react";
 import { useDateRange } from "@/components/layout/date-range-context";
+import { useStation } from "@/components/layout/station-context";
 import { EmptyState } from "@/components/page-header";
 import { InvoiceStatusBadge, ReconcileStatusBadge } from "@/components/ops-badges";
 import { buttonVariants } from "@/components/ui/button";
@@ -24,6 +25,7 @@ import {
   rangesOverlap,
   WORK_SUMMARY_COVERAGE,
 } from "@/lib/period";
+import { hrefWithStation } from "@/lib/stations";
 import { headlineCompares } from "@/lib/payments/reconcile";
 import type { InvoiceStatus } from "@/lib/types";
 import type {
@@ -42,6 +44,7 @@ const WEEKS = RECONCILE_WEEKS.map((week) => ({
 
 export function ReconcileBoard({ report }: { report: WeekReconcile }) {
   const params = useSearchParams();
+  const { code } = useStation();
   const { range } = useDateRange();
   const period = parsePeriodParam(params.get("period"), params.get("start"), params.get("end")) ?? range;
   const workCoverage = WORK_SUMMARY_COVERAGE[report.week];
@@ -49,7 +52,7 @@ export function ReconcileBoard({ report }: { report: WeekReconcile }) {
   const headline = headlineCompares(report);
   const holds = report.checks.filter((check) => check.kind === "holds");
   const gaps = report.checks.filter((check) => check.kind === "gap");
-  const exportBase = `/payments/export?week=${report.week}`;
+  const exportBase = `/payments/export?week=${report.week}&station=${code}`;
 
   return (
     <section id="reconcile" aria-labelledby="reconcile-heading" data-reconcile-week={report.week} data-invoice-listed={report.invoiceListed ? "yes" : "no"} className="mb-6">
@@ -72,7 +75,7 @@ export function ReconcileBoard({ report }: { report: WeekReconcile }) {
             {WEEKS.map((item) => (
               <Link
                 key={item.week}
-                href={`${withPeriod(item.href, period)}#reconcile`}
+                href={`${hrefWithStation(withPeriod(item.href, period), code)}#reconcile`}
                 aria-current={report.week === item.week ? "page" : undefined}
                 className={buttonVariants({
                   size: "sm",

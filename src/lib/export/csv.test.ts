@@ -19,8 +19,10 @@ test("csv cells quote commas, quotes, and newlines", () => {
 test("associates export is the full roster", () => {
   const file = associatesCsv();
   const lines = csvLines(file.csv);
-  assert.equal(file.filename, "associates-roster-weeks-38-39.csv");
+  assert.equal(file.filename, "associates-roster-dna4-weeks-38-39.csv");
+  assert.match(lines[0], /^Station,/);
   assert.match(lines[0], /Transporter ID/);
+  assert.match(lines[1], /^DNA4,/);
   assert.equal(lines.length - 1, getDrivers().length);
   assert.ok(lines.length - 1 > 40);
   assert.match(file.csv, /Aaron Calvin Davis/);
@@ -94,8 +96,9 @@ test("routes export marks multi-associate routes as rescued without replacing Co
   assert.equal(live.notes, null);
 
   const file = routesCsv();
-  assert.equal(file.filename, "routes-2026-10-14.csv");
+  assert.equal(file.filename, "routes-dna4-2026-10-14.csv");
   const lines = csvLines(file.csv);
+  assert.match(lines[0], /^Station,/);
   const header = lines[0].split(",");
   const rescueCol = header.indexOf("Rescue");
   assert.ok(rescueCol >= 0);
@@ -107,13 +110,15 @@ test("routes export marks multi-associate routes as rescued without replacing Co
 
 test("other dataset exports stay on seeded values", () => {
   const dvic = dvicCsv();
-  assert.equal(dvic.filename, "dvic-2026-10-14.csv");
+  assert.equal(dvic.filename, "dvic-dna4-2026-10-14.csv");
+  assert.match(dvic.csv, /^Station,/);
   assert.equal(csvLines(dvic.csv).length, 1);
   assert.match(dvic.csv, /Pre-trip damage/);
   assert.doesNotMatch(dvic.csv, /dent|scratch|VIN/i);
 
   const fleet = vehiclesCsv();
-  assert.equal(fleet.filename, "fleet-vehicles-dna4.csv");
+  assert.equal(fleet.filename, "fleet-vehicles-dna4-console.csv");
+  assert.match(fleet.csv, /^Station,Unit/);
   assert.equal(csvLines(fleet.csv).length - 1, 53);
   assert.match(fleet.csv, /Amazon DSP Console My vehicles/);
   assert.match(fleet.csv, /3C6MRVJG5ME549360/);
@@ -121,7 +126,7 @@ test("other dataset exports stay on seeded values", () => {
   assert.doesNotMatch(fleet.csv, /EDV-4401|TN 441-CJM|Mock yard roster/);
 
   const exceptionFile = exceptionsCsv();
-  assert.equal(exceptionFile.filename, "package-exceptions-2026-10-14.csv");
+  assert.equal(exceptionFile.filename, "package-exceptions-dna4-2026-10-14.csv");
   assert.equal(csvLines(exceptionFile.csv).length - 1, 127);
   assert.equal(exceptions.length, 127);
   assert.equal(exceptions.filter((row) => row.status === "Reattemptable").length, 0);
@@ -131,7 +136,7 @@ test("other dataset exports stay on seeded values", () => {
   assert.equal(exceptions.filter((row) => row.status === "Pickup failed").length, 76);
 
   const scorecard = scorecardCsv(38);
-  assert.equal(scorecard.filename, "scorecard-week-38.csv");
+  assert.equal(scorecard.filename, "scorecard-dna4-week-38.csv");
   assert.match(scorecard.csv, /,84,/);
   assert.match(scorecard.csv, /4,166\.9 DPMO/);
   assert.match(scorecard.csv, /99\.46%/);
@@ -140,23 +145,23 @@ test("other dataset exports stay on seeded values", () => {
   assert.match(scorecard.csv, /Not shown in Console/);
   assert.doesNotMatch(scorecard.csv, /85\.8/);
   const week37 = scorecardCsv(37);
-  assert.equal(week37.filename, "scorecard-week-37.csv");
+  assert.equal(week37.filename, "scorecard-dna4-week-37.csv");
   assert.match(week37.csv, /85\.8/);
   assert.doesNotMatch(scorecard.csv, /prior week was \d/i);
   const scorecardWeek41 = scorecardCsv();
-  assert.equal(scorecardWeek41.filename, "scorecard-week-41.csv");
+  assert.equal(scorecardWeek41.filename, "scorecard-dna4-week-41.csv");
   assert.match(scorecardWeek41.csv, /82\.7/);
   assert.match(scorecardWeek41.csv, /No data/);
 
   const payments = paymentsCsv();
-  assert.equal(payments.filename, "payments-settlements-2026-09-21.csv");
+  assert.equal(payments.filename, "payments-settlements-dna4-2026-09-21.csv");
   assert.match(payments.csv, /\$3,878\.88/);
   assert.match(payments.csv, /\$88,556\.70/);
   assert.match(payments.csv, /Invoices/);
 
   const week39 = getComplianceReport(39);
   const missing = complianceViewCsv(week39, "missing");
-  assert.equal(missing.filename, "compliance-missing-punches-week-39.csv");
+  assert.equal(missing.filename, "compliance-missing-punches-dna4-week-39.csv");
   assert.equal(week39.missingPunches.length, 16);
   const sample = week39.missingPunches[0];
   assert.ok(sample);
@@ -168,17 +173,17 @@ test("other dataset exports stay on seeded values", () => {
   assert.match(meals.csv, /Mismatch/);
 
   const combined = complianceCombinedCsv(week39);
-  assert.equal(combined.filename, "compliance-week-39.csv");
+  assert.equal(combined.filename, "compliance-dna4-week-39.csv");
   assert.match(combined.csv, /Missing punches/);
   assert.match(combined.csv, /Over 12 hours/);
   assert.match(combined.csv, /Over 60 hours/);
   assert.match(combined.csv, /Meal rows/);
   assert.equal(
     complianceViewCsv(getComplianceReport(38), "missing").filename,
-    "compliance-missing-punches-week-38.csv"
+    "compliance-missing-punches-dna4-week-38.csv"
   );
   const week41 = getComplianceReport(41);
-  assert.equal(complianceViewCsv(week41, "missing").filename, "compliance-missing-punches-week-41.csv");
-  assert.equal(complianceCombinedCsv(week41).filename, "compliance-week-41.csv");
+  assert.equal(complianceViewCsv(week41, "missing").filename, "compliance-missing-punches-dna4-week-41.csv");
+  assert.equal(complianceCombinedCsv(week41).filename, "compliance-dna4-week-41.csv");
   assert.match(complianceCombinedCsv(week41).csv, /Meal rows/);
 });

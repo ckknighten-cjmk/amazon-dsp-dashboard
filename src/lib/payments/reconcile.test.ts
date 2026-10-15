@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { getPaymentsSnapshot } from "../data/payments";
-import { reconcileToCsv, reconcileToExcel } from "./reconcile-export";
+import { reconcileExportFilename, reconcileToCsv, reconcileToExcel } from "./reconcile-export";
 import { getWeekReconcile, normalizeServiceLabel, parseReconcileWeek } from "./reconcile";
 
 test("parseReconcileWeek defaults to 37 and accepts 38 and 39", () => {
@@ -226,6 +226,7 @@ test("CSV and Excel exports use the reconcile rows and do not price Work Summary
   const table = parseCsv(csv);
   const header = table[0];
   assert.deepEqual(header, [
+    "Station",
     "Week",
     "Period",
     "Group",
@@ -236,17 +237,19 @@ test("CSV and Excel exports use the reconcile rows and do not price Work Summary
     "Variance",
     "Note",
   ]);
-  const routes = table.find((cells) => cells[2] === "Summary" && cells[3] === "Routes");
+  assert.equal(reconcileExportFilename(report, "csv"), "reconcile-dna4-week-37.csv");
+  const routes = table.find((cells) => cells[3] === "Summary" && cells[4] === "Routes");
   assert.ok(routes);
-  assert.match(routes[4], /240 route payments/);
-  assert.match(routes[5], /31 routes completed/);
-  assert.equal(routes[6], "Not comparable");
-  assert.equal(routes[7], "");
-  assert.equal(routes[5].includes("$"), false);
+  assert.equal(routes[0], "DNA4");
+  assert.match(routes[5], /240 route payments/);
+  assert.match(routes[6], /31 routes completed/);
+  assert.equal(routes[7], "Not comparable");
+  assert.equal(routes[8], "");
+  assert.equal(routes[6].includes("$"), false);
 
-  const late = table.find((cells) => cells[2] === "Summary" && cells[3] === "AMZL late cancels");
-  assert.equal(late?.[6], "Mismatch");
-  assert.match(late?.[7] ?? "", /^\+4 /);
+  const late = table.find((cells) => cells[3] === "Summary" && cells[4] === "AMZL late cancels");
+  assert.equal(late?.[7], "Mismatch");
+  assert.match(late?.[8] ?? "", /^\+4 /);
 
   const workSummaryColumn = header.indexOf("Work Summary");
   assert.equal(
@@ -256,6 +259,7 @@ test("CSV and Excel exports use the reconcile rows and do not price Work Summary
 
   const excel = reconcileToExcel(report);
   assert.match(excel, /<Worksheet ss:Name="Reconcile">/);
+  assert.match(excel, />Station</);
   assert.match(excel, /240 route payments/);
   assert.match(excel, /31 routes completed/);
   assert.equal(excel.includes("66,300"), true);

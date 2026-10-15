@@ -2,6 +2,7 @@
 
 import { createContext, Suspense, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useStation } from "@/components/layout/station-context";
 import type { DateRange } from "@/lib/types";
 import {
   deserializePeriod,
@@ -13,6 +14,7 @@ import {
   TODAY_RANGE,
   writePeriodParams,
 } from "@/lib/period";
+import { hrefWithStation, STATION_QUERY } from "@/lib/stations";
 
 type DateRangeContextValue = {
   range: DateRange;
@@ -23,6 +25,7 @@ type DateRangeContextValue = {
 const DateRangeContext = createContext<DateRangeContextValue | null>(null);
 
 export function DateRangeProvider({ children }: { children: React.ReactNode }) {
+  const { code } = useStation();
   const router = useRouter();
   const pathname = usePathname();
   const [range, setRangeState] = useState<DateRange>(TODAY_RANGE);
@@ -34,12 +37,13 @@ export function DateRangeProvider({ children }: { children: React.ReactNode }) {
       if (!url) return;
       const params = new URLSearchParams(window.location.search);
       writePeriodParams(params, next);
+      params.set(STATION_QUERY, code);
       const serialized = params.toString();
       const target = serialized ? `${pathname}?${serialized}` : pathname;
       const current = `${window.location.pathname}${window.location.search}`;
       if (current !== target) router.replace(target, { scroll: false });
     },
-    [pathname, router]
+    [code, pathname, router]
   );
 
   const setRange = useCallback((next: DateRange) => commit(next, true), [commit]);
@@ -48,9 +52,9 @@ export function DateRangeProvider({ children }: { children: React.ReactNode }) {
     () => ({
       range,
       setRange,
-      hrefWithPeriod: (href: string) => periodHref(href, range),
+      hrefWithPeriod: (href: string) => hrefWithStation(periodHref(href, range), code),
     }),
-    [range, setRange]
+    [code, range, setRange]
   );
 
   return (

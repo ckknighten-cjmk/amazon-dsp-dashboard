@@ -1,12 +1,14 @@
 import { PageHeader, TableSkeleton } from "@/components/page-header";
 import { Skeleton } from "@/components/ui/skeleton";
+import { currentStation } from "@/lib/station-request";
 
-export default function Loading() {
+export default async function Loading() {
+  const station = await currentStation();
   return (
     <div>
       <PageHeader
         title="Loading station…"
-        description="Loading DNA4 Delivery Execution."
+        description={`Loading ${station} Delivery Execution.`}
         refresh={false}
       />
       <div className="mb-5 grid gap-2 lg:grid-cols-2">

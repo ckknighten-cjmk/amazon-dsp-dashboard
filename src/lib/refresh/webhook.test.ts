@@ -70,7 +70,44 @@ test("the same page cannot fire again for 10 minutes", async () => {
   const header = new Headers(calls[0]?.init.headers);
   assert.equal(header.get("Authorization"), "Bearer secret-key");
   assert.equal(calls[0]?.url, ENV.url);
-  assert.deepEqual(JSON.parse(String(calls[0]?.init.body)), { page: "fleet", week: "38" });
+  assert.deepEqual(JSON.parse(String(calls[0]?.init.body)), {
+    page: "fleet",
+    station: "DNA4",
+    week: "38",
+  });
+});
+
+test("refresh rate limit is per page and station, and the body defaults station to DNA4", async () => {
+  const store = new Map<string, number>();
+  const bodies: unknown[] = [];
+  const fetchImpl: typeof fetch = async (_url, init) => {
+    bodies.push(JSON.parse(String(init?.body)));
+    return new Response("accepted", { status: 202 });
+  };
+
+  const dna4 = await requestFreshData(
+    { page: "drivers" },
+    { env: ENV, fetchImpl, store, now: 2_000 }
+  );
+  const wtn2 = await requestFreshData(
+    { page: "drivers", station: "WTN2" },
+    { env: ENV, fetchImpl, store, now: 2_000 }
+  );
+  const blocked = await requestFreshData(
+    { page: "drivers", station: "DNA4" },
+    { env: ENV, fetchImpl, store, now: 2_000 }
+  );
+  const invalid = await requestFreshData(
+    { page: "drivers", station: "NOPE" },
+    { env: ENV, fetchImpl, store, now: 2_000 }
+  );
+
+  assert.equal(dna4.status, 200);
+  assert.equal(wtn2.status, 200);
+  assert.equal(blocked.status, 429);
+  assert.equal(invalid.status, 400);
+  assert.deepEqual(bodies[0], { page: "drivers", station: "DNA4" });
+  assert.deepEqual(bodies[1], { page: "drivers", station: "WTN2" });
 });
 
 test("REFRESH_WEBHOOK_KEY_HEADER overrides the header name and sends the raw key", async () => {

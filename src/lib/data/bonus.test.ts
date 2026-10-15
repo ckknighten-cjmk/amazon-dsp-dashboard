@@ -116,20 +116,22 @@ test("multi-transporter rows keep the route total and do not invent a split", ()
 test("10-hour bonus CSV and Excel are delivery-associate first", () => {
   const list = getBonusList();
   const csv = bonusCsv(list);
-  assert.equal(csv.filename, "10-hour-bonus-week-38-by-da.csv");
+  assert.equal(csv.filename, "10-hour-bonus-dna4-week-38-by-da.csv");
   const lines = csvLines(csv.csv);
   assert.equal(lines.length - 1, 215);
-  assert.equal(lines[0], "date,deliveryAssociate,stopsCompleted,route,multiTransporter,coDrivers");
-  assert.match(csv.csv, /2026-09-13,Makayla Cooper,199,CX1,no,/);
-  assert.match(csv.csv, /2026-09-13,DeAndre Adams,183,CX2,yes,Jayden Williams/);
-  assert.match(csv.csv, /2026-09-13,Chance Stupp,199,CX25,yes,"Jessica Davis, Mary Acker"/);
+  assert.equal(lines[0], "Station,date,deliveryAssociate,stopsCompleted,route,multiTransporter,coDrivers");
+  assert.match(csv.csv, /DNA4,2026-09-13,Makayla Cooper,199,CX1,no,/);
+  assert.match(csv.csv, /DNA4,2026-09-13,DeAndre Adams,183,CX2,yes,Jayden Williams/);
+  assert.match(csv.csv, /DNA4,2026-09-13,Chance Stupp,199,CX25,yes,"Jessica Davis, Mary Acker"/);
   assert.match(csv.csv, /darome boyland/);
   assert.doesNotMatch(csv.csv, /\$/);
   const published = readFileSync("src/lib/data/seed/10hr-bonus-week38-by-da.csv", "utf8");
-  assert.deepEqual(csvLines(csv.csv), csvLines(published));
+  const withoutStation = csvLines(csv.csv).map((line) => line.replace(/^Station,/, "").replace(/^DNA4,/, ""));
+  assert.deepEqual(withoutStation, csvLines(published));
 
   const excel = bonusExcel(list);
-  assert.equal(excel.filename, "10-hour-bonus-week-38-by-da.xls");
+  assert.equal(excel.filename, "10-hour-bonus-dna4-week-38-by-da.xls");
+  assert.match(excel.xml, />Station</);
   assert.match(excel.xml, /<Worksheet ss:Name="10 Hour Bonus">/);
   assert.match(excel.xml, /deliveryAssociate/);
   assert.match(excel.xml, /DeAndre Adams/);

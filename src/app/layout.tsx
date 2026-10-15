@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { AppShell } from "@/components/layout/app-shell";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { currentStation } from "@/lib/station-request";
+import { stationProfile } from "@/lib/stations";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,16 +17,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "CJMK Ops · DNA4",
-    template: "%s · CJMK Ops",
-  },
-  description:
-    "Last-mile operations HQ for CJMK Inc., an SDVOSB Amazon DSP at station DNA4 Memphis.",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const code = await currentStation();
+  const profile = stationProfile(code);
+  return {
+    title: {
+      default: `CJMK Ops · ${profile.code}`,
+      template: `%s · CJMK Ops · ${profile.code}`,
+    },
+    description: `Last-mile operations HQ for CJMK Inc., an SDVOSB Amazon DSP at station ${profile.code} (${profile.region}).`,
+  };
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const station = await currentStation();
   return (
     <html
       lang="en"
@@ -34,7 +40,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className={`${geistSans.className} flex min-h-full flex-col`}>
         <ThemeProvider>
           <TooltipProvider>
-            <AppShell>{children}</AppShell>
+            <AppShell initialStation={station}>{children}</AppShell>
           </TooltipProvider>
         </ThemeProvider>
       </body>

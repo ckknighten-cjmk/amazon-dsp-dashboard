@@ -25,13 +25,18 @@ import {
   incidentTypeLabel,
 } from "@/lib/format";
 import { useDateRange } from "@/components/layout/date-range-context";
+import { useStation } from "@/components/layout/station-context";
+import { StationEmptyPage } from "@/components/station-empty";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { CoverageNote } from "@/components/period-coverage";
 import { dateInRange, formatSpanLabel, spanOfDates } from "@/lib/period";
 import type { IncidentStatus, IncidentType } from "@/lib/types";
 
 export default function IncidentsPage() {
+  const { code } = useStation();
   const { range } = useDateRange();
-  const incidents = getIncidents();
+  const incidents = loadStationDataset(code, "incidents", () => getIncidents()) ?? [];
+  const seeded = loadStationDataset(code, "incidents", () => true);
   const inPeriod = useMemo(
     () => incidents.filter((incident) => dateInRange(incident.occurredAt, range)),
     [incidents, range]
@@ -61,6 +66,9 @@ export default function IncidentsPage() {
   }, [inPeriod, query, type, status]);
 
   const openCount = inPeriod.filter((i) => i.status === "open").length;
+  if (!seeded) {
+    return <StationEmptyPage title="Incidents & notes" station={code} />;
+  }
 
   return (
     <div>

@@ -3,6 +3,7 @@ import type { ReconcileRow, ServiceCompareRow, WeekReconcile } from "./types";
 import { RECONCILE_STATUS_LABEL } from "./types";
 
 const COLUMNS = [
+  "Station",
   "Week",
   "Period",
   "Group",
@@ -40,7 +41,8 @@ ${body}
 }
 
 export function reconcileExportFilename(report: WeekReconcile, extension: "csv" | "xls") {
-  return `reconcile-week-${report.week}.${extension}`;
+  const station = (report.invoice?.station || report.workSummary.station || "DNA4").toLowerCase();
+  return `reconcile-${station}-week-${report.week}.${extension}`;
 }
 
 function exportRecords(report: WeekReconcile) {
@@ -72,6 +74,7 @@ function record(
   note: string
 ): Record<(typeof COLUMNS)[number], string> {
   return {
+    Station: report.invoice?.station || report.workSummary.station || "DNA4",
     Week: String(report.week),
     Period: report.period,
     Group: group,

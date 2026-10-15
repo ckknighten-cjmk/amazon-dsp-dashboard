@@ -39,7 +39,7 @@ No auth in v1. Dark theme is the default; toggle light/dark from the top bar or 
 
 Every dashboard page has a **Refresh** control in the page header, next to that page's seed as-of time. It does two things:
 
-1. `POST /api/refresh` with `{ page, week?, date? }` so an external job can pull a newer Console or ADP capture. The app does not call Amazon or ADP itself.
+1. `POST /api/refresh` with `{ page, station, week?, date? }` so an external job can pull a newer Console or ADP capture. `station` defaults to **DNA4** when it is omitted. The same page and station cannot start another pull for **10 minutes**; a different station is its own limit. The app does not call Amazon or ADP itself.
 2. `router.refresh()`, which re-reads the seed modules already in this build.
 
 The webhook key never goes to the browser. Set these on the server:
@@ -50,11 +50,48 @@ The webhook key never goes to the browser. Set these on the server:
 | `REFRESH_WEBHOOK_KEY` | yes | Secret sent with that request. |
 | `REFRESH_WEBHOOK_KEY_HEADER` | no | Header name for the key. Defaults to `Authorization`, and that header's value is `Bearer <key>`. Any other name sends the raw key. |
 
-If `REFRESH_WEBHOOK_URL` or `REFRESH_WEBHOOK_KEY` is missing, `POST /api/refresh` returns **503** and the button only re-reads the current seeds. The same page cannot start another pull for **10 minutes**; a repeat returns **429** with `lastRequestedAt`. Copy `.env.example` for placeholders. Do not commit a real key.
+If `REFRESH_WEBHOOK_URL` or `REFRESH_WEBHOOK_KEY` is missing, `POST /api/refresh` returns **503** and the button only re-reads the current seeds. The same page and station cannot start another pull for **10 minutes**; a repeat returns **429** with `lastRequestedAt`. Copy `.env.example` for placeholders. Do not commit a real key.
 
 After a pull is accepted the header says **Pulling fresh data… usually 5–15 min**. That note stays across reloads until the page's seed as-of time is newer than the request, which then shows **Updated** and that time. If 30 minutes pass with no newer seed, it shows **Still waiting. Sign-in may be needed.**
 
 Page keys: `overview` (also Settings), `routes` (also a route detail page), `drivers`, `fleet`, `scorecard`, `payments`, `compliance`, `bonus`, `incidents`. `week` and `date` are sent when that page already has them.
+
+### Stations
+
+The station list is [`src/lib/stations.ts`](src/lib/stations.ts). Each entry has a **code**, **display name**, and **region**. **DNA4** (Memphis) is the default. **WTN2** (West Tennessee) is the station opening soon.
+
+The header **Station** menu is on every page. The choice is stored in the `station` query (`?station=WTN2`), the `cjmk-ops-station` cookie, and the `localStorage` key of the same name. Sidebar links, the period control, the scorecard week menu, and Refresh keep it. A missing or unknown value falls back to DNA4.
+
+WTN2 has no capture. Every page shows **No data for WTN2 yet**, and the as-of line says **No capture yet**. DNA4 figures are not copied onto that station.
+
+#### Add a station's first seed files
+
+DNA4 files stay in [`src/lib/data/seed/`](src/lib/data/seed/). Put a new station's files in `src/lib/data/seed/<code-lowercase>/` (WTN2 is [`src/lib/data/seed/wtn2/`](src/lib/data/seed/wtn2/)) and register one loader per dataset on `STATION_LOADERS` in [`src/lib/data/station-seeds.ts`](src/lib/data/station-seeds.ts). Pages call `loadStationDataset`. Until that loader exists, the page stays on the empty state.
+
+```ts
+WTN2: {
+  routes: () => buildWtn2Routes(),
+}
+```
+
+The DNA4 callback already receives the page's week when a dataset has one (`{ week }`). A WTN2 loader receives the same argument.
+
+| Dataset | Loader key | What to add under `src/lib/data/seed/wtn2/` |
+| --- | --- | --- |
+| Overview | `overview` | `delivery-execution.json` in the same shape as `delivery-execution-2026-10-14.json` |
+| Routes and route detail | `routes` | that delivery execution file, plus the packages-exceptions CSV |
+| Scorecard | `scorecard` | `scorecard/weeks.json` (the loader receives `{ week }`) |
+| 10 Hour Bonus | `bonus` | `10hr-bonus.json` (and the by-DA CSV if you keep one) |
+| Drivers | `drivers` | Amazon schedule, ADP timecards, and the census file the roster reads |
+| Fleet | `fleet` | `amazon-fleet.json`, `dvic.json`, and `fleet-issues/issues-YYYY-MM-DD.json` |
+| Incidents | `incidents` | `incidents.json` |
+| Compliance | `compliance` | weekly Amazon schedule, ADP timecard, and breaks JSON (`{ week }`) |
+| Payments | `payments` | settlements, variable invoice, and work summary JSON (`{ week }` for reconcile) |
+| Settings | `settings` | no file; register when the settings form should use `stationSettings` for this station |
+
+DNA4 fleet issues stay in [`src/lib/data/seed/fleet-issues/`](src/lib/data/seed/fleet-issues/). The Fleet page loads that catalog with `loadStationDataset`, and the New damage CSV and Excel include the station in the filename and a Station column. For WTN2, put the same dated files in `src/lib/data/seed/wtn2/fleet-issues/` and register a `fleet` loader that calls `loadFleetIssueCatalog` on that directory. Until that loader exists, Fleet shows **No data for WTN2 yet** and does not read the DNA4 yard or the DNA4 issues snapshot.
+
+CSV and Excel downloads put the station code in the filename and in a **Station** column. `POST /api/refresh` includes `station`.
 
 ### Seeded data
 
@@ -76,7 +113,7 @@ Station clock is frozen at **Wed Oct 14, 2026 · 8:10 p.m. CT** (the evening-wra
 - **10 Hour Bonus** — Week 38 delivery associates on routes with **180 or more completed stops**. **100** solo DAs have a clear route total. **115** multi-transporter rows stay flagged: the stop count is the route total, and Amazon did not say which DA completed those stops, so it is not split. CSV and Excel are associate-first (`date`, `deliveryAssociate`, `stopsCompleted`, then route). The table hides days outside the selected period.
 - **Routes** — Evening-wrap Delivery Execution board: 36 routes, gauges 99/99/99/100%, package-status chips (remaining 30, reattemptable 0, undeliverable 3, missing 15, RTS 33, pickup failed 76), work-hour risk 0, on-road pickups 6/6, the 127-row exception-package export, and a Rescue column for 15 multi-associate routes. CSV downloads sit next to the routes and exceptions tables.
 - **Drivers** — Full Weeks 38–39 schedule roster, plus ADP-only names, with Oct 14 route activity merged by name. Census phone and email attach on a unique name match. The page opens on Active. CSV export downloads the full roster, including blank phones.
-- **Fleet** — 53 DNA4 vehicles from Console My vehicles. CSV export is `fleet-vehicles-dna4.csv`. Year and mileage stay blank. DVIC pairs pre-trip and post-trip for the same vehicle and service day and marks post-trip damage the pre-trip did not list. The Oct 14 dashboard capture publishes counts only: **44** pre-trip, **44** post-trip, **10** AVI post-trip, with empty inspection lists, so the count cards show those totals and no vehicle pairs are compared. The Sep 23 file remains 0 / 0 / 0. CSV export downloads the pairs (header only on this capture).
+- **Fleet** — 53 DNA4 vehicles from Console My vehicles. CSV export is `fleet-vehicles-dna4-console.csv`. Year and mileage stay blank. DVIC pairs pre-trip and post-trip for the same vehicle and service day and marks post-trip damage the pre-trip did not list. The Oct 14 dashboard capture publishes counts only: **44** pre-trip, **44** post-trip, **10** AVI post-trip, with empty inspection lists, so the count cards show those totals and no vehicle pairs are compared. The Sep 23 file remains 0 / 0 / 0. CSV export downloads the pairs (header only on this capture). New damage reads [`src/lib/data/seed/fleet-issues/issues-2026-10-14.json`](src/lib/data/seed/fleet-issues/issues-2026-10-14.json) and exports `new-damage-dna4-2026-10-14.csv`. WTN2 has no fleet capture, so that page stays on the empty state.
 - **Incidents** — Mock DVR, complaint, vehicle, and safety log
 - **Payments** — Flex Payments settlements seeded **2026-09-21**: pending action, paid total, invoice table, Week 37 breakdowns, and 2025 YTD Insights. The invoice list follows the top-bar period. CSV export includes the full Console list. The reconcile compares the Week 37 variable invoice with the Work Summary Tool for Weeks 37–39. Weeks 38 and 39 have Work Summary captures and no variable invoice on the list. A Sep 13–19 period overlaps the Week 38 Work Summary; the Week 38 invoice panel stays “not yet listed.” Package units and route payments are not treated as the same counts as Work Summary packages and routes completed.
 - **Compliance** — Week 41 (default), Week 38, and Week 39 ADP vs Amazon timecard exceptions: missing punches, days over 12 hours, rolling 7-day totals over 60 hours (captured ADP days only), and meal-status disagreements when per-DA break rows exist. A missing punch requires a rostered Amazon work block and no corresponding ADP punch that day. A Group Timecard row or scheduled shift without a rostered work block is not a missing punch. Week 41 ADP is the full Sun–Sat Group Timecard (Oct 4–10, 1,173 Date-column rows). Unmatched Amazon and ADP names are listed separately. Each table can be exported, and “Export week” combines missing punches, over 12, over 60, and meal rows for the selected week. ADP schedule template load is **coming later** and is not implemented.
