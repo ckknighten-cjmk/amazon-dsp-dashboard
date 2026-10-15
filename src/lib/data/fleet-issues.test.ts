@@ -3,6 +3,7 @@ import { mkdtempSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 import test from "node:test";
+import { loadStationDataset } from "@/lib/data/station-seeds";
 import { buildFleetIssueDayReport } from "@/lib/fleet-issues/detect";
 import { loadFleetIssueCatalog } from "./fleet-issues";
 import type { FleetIssueSnapshot } from "@/lib/fleet-issues/types";
@@ -75,6 +76,14 @@ test("the DNA4 2026-10-14 snapshot is the newest capture and keeps every open is
 
   const winter = newest.issues.find((row) => row.createdAt.endsWith("-06:00"));
   assert.ok(winter);
+});
+
+test("WTN2 has no fleet issues snapshot and DNA4 keeps the Oct 14 catalog", () => {
+  assert.equal(loadStationDataset("WTN2", "fleet", () => loadFleetIssueCatalog()), null);
+  const catalog = loadStationDataset("DNA4", "fleet", () => loadFleetIssueCatalog());
+  assert.ok(catalog?.newest);
+  assert.equal(catalog.newest.issues.length, 1247);
+  assert.deepEqual(catalog.dates, ["2026-10-14"]);
 });
 
 test("a newer dated file becomes the snapshot and the older file is the comparison", () => {

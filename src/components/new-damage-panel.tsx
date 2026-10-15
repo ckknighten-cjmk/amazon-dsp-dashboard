@@ -15,6 +15,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { newDamageCsv, newDamageExcel } from "@/lib/export/fleet-issues";
+import type { StationCode } from "@/lib/stations";
 import { formatZonedDateTime, seedCapturedLabel } from "@/lib/format";
 import {
   DRIVER_CHECKS_PASSED_FLAG,
@@ -29,6 +30,7 @@ import { cn } from "@/lib/utils";
 const YESTERDAY = shiftIsoDate(STATION_TODAY, -1);
 
 export function NewDamagePanel({
+  station,
   newest,
   previous,
   snapshotCount,
@@ -36,6 +38,7 @@ export function NewDamagePanel({
   selectedDay,
   onSelectedDayChange,
 }: {
+  station: StationCode;
   newest: FleetIssueSnapshot | null;
   previous: FleetIssueSnapshot | null;
   snapshotCount: number;
@@ -55,7 +58,7 @@ export function NewDamagePanel({
             maintenance, safety signals, and odometer defects stay in their own counts.
           </p>
         </div>
-        {report ? <DamageExports report={report} /> : null}
+        {report ? <DamageExports report={report} station={station} /> : null}
       </div>
 
       <DaySelector selectedDay={selectedDay} onSelectedDayChange={onSelectedDayChange} />
@@ -303,9 +306,9 @@ function checkPhrase(label: string, passed: boolean | null) {
   return passed ? `${label} passed` : `${label} failed`;
 }
 
-function DamageExports({ report }: { report: FleetIssueDayReport }) {
-  const csv = newDamageCsv(report);
-  const excel = newDamageExcel(report);
+function DamageExports({ report, station }: { report: FleetIssueDayReport; station: StationCode }) {
+  const csv = newDamageCsv(report, station);
+  const excel = newDamageExcel(report, station);
   return (
     <div className="flex flex-wrap gap-2">
       <ExportCsvButton filename={csv.filename} csv={csv.csv} label="Export new damage" />

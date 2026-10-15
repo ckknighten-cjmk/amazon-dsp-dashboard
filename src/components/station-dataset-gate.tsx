@@ -4,7 +4,7 @@ import { StationEmptyPage } from "@/components/station-empty";
 import { useStation } from "@/components/layout/station-context";
 import { hasStationDataset, type DatasetId } from "@/lib/data/station-seeds";
 
-/** Hides a page that still reads DNA4 modules directly. Used by Fleet. */
+/** Hides Fleet while that station has no `fleet` loader. DNA4 always passes. */
 export function StationDatasetGate({
   dataset,
   title,

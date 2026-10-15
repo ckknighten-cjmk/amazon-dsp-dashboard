@@ -31,8 +31,9 @@ export type StationLoader = (args?: StationLoadArgs) => unknown;
 
 /**
  * WTN2 has no capture. Leave a dataset out until its files exist.
- * Fleet: do not register `fleet` until `src/app/fleet/page.tsx` reads
- * `loadStationDataset`. That page still calls the DNA4 fleet modules.
+ * DNA4 fleet issues stay in `src/lib/data/seed/fleet-issues/`.
+ * A WTN2 `fleet` loader must read `src/lib/data/seed/wtn2/fleet-issues/`
+ * and return that station's catalog. The DNA4 directory is not a fallback.
  */
 export const STATION_LOADERS: Partial<Record<StationCode, Partial<Record<DatasetId, StationLoader>>>> = {
   WTN2: {},

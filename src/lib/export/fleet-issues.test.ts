@@ -13,16 +13,18 @@ test("new-damage CSV and Excel list the Oct 14 inspection defects apart from mai
     previous: null,
     day: "2026-10-14",
   });
-  const csv = newDamageCsv(report);
-  const excel = newDamageExcel(report);
-  assert.equal(csv.filename, "new-damage-2026-10-14.csv");
-  assert.equal(excel.filename, "new-damage-2026-10-14.xls");
+  const csv = newDamageCsv(report, "DNA4");
+  const excel = newDamageExcel(report, "DNA4");
+  assert.equal(csv.filename, "new-damage-dna4-2026-10-14.csv");
+  assert.equal(excel.filename, "new-damage-dna4-2026-10-14.xls");
 
   const damageTitle = csv.csv.indexOf("New inspection damage");
   const otherTitle = csv.csv.indexOf("Other issues created this day");
   assert.ok(damageTitle >= 0 && otherTitle > damageTitle);
   const damageSection = csv.csv.slice(damageTitle, otherTitle);
   const otherSection = csv.csv.slice(otherTitle);
+  assert.match(damageSection, /Station,Row,Vehicle/);
+  assert.match(damageSection, /DNA4,.*EDV 20/);
   assert.match(damageSection, /EDV 20/);
   assert.match(damageSection, /Y142870/);
   assert.match(damageSection, /Van 24/);
@@ -41,6 +43,8 @@ test("new-damage CSV and Excel list the Oct 14 inspection defects apart from mai
   assert.match(excel.xml, /<Worksheet ss:Name="Other issues">/);
   const newSheet = excel.xml.slice(excel.xml.indexOf('ss:Name="New damage"'), excel.xml.indexOf('ss:Name="Other issues"'));
   const otherSheet = excel.xml.slice(excel.xml.indexOf('ss:Name="Other issues"'));
+  assert.match(newSheet, />Station</);
+  assert.match(newSheet, />DNA4</);
   assert.match(newSheet, /Y142870/);
   assert.match(newSheet, /15DLEA/);
   assert.match(newSheet, /7FCEHEB23SN031818/);

@@ -1,11 +1,12 @@
 import type { CsvValue } from "@/lib/export/csv";
-import { datasetFilename, toSectionedCsv } from "@/lib/export/csv";
+import { datasetFilename, toSectionedCsv, withStationColumn, withStationSections } from "@/lib/export/csv";
 import {
   driverCheckNote,
   defectText,
   type FleetIssueDayReport,
 } from "@/lib/fleet-issues/detect";
 import { OTHER_ISSUE_TYPES, type FleetIssue } from "@/lib/fleet-issues/types";
+import type { StationCode } from "@/lib/stations";
 
 const DAMAGE_HEADERS = [
   "Row",
@@ -26,46 +27,55 @@ const DAMAGE_HEADERS = [
 
 const OTHER_HEADERS = ["Issue type", ...DAMAGE_HEADERS] as const;
 
-export function newDamageCsv(report: FleetIssueDayReport) {
+export function newDamageCsv(report: FleetIssueDayReport, station: StationCode = "DNA4") {
   const otherRows = OTHER_ISSUE_TYPES.flatMap((issueType) =>
     report.created.other[issueType].map((issue) => [issueType, ...damageCells(issue)])
   );
   return {
-    filename: datasetFilename("new-damage", report.day),
-    csv: toSectionedCsv([
-      {
-        title: "New inspection damage",
-        headers: DAMAGE_HEADERS,
-        rows: report.created.damage.map((issue) => damageCells(issue)),
-      },
-      {
-        title: "Other issues created this day",
-        headers: OTHER_HEADERS,
-        rows: otherRows,
-      },
+    filename: datasetFilename("new-damage", report.day, station),
+    csv: toSectionedCsv(
+      withStationSections(station, [
+        {
+          title: "New inspection damage",
+          headers: DAMAGE_HEADERS,
+          rows: report.created.damage.map((issue) => damageCells(issue)),
+        },
+        {
+          title: "Other issues created this day",
+          headers: OTHER_HEADERS,
+          rows: otherRows,
+        },
+      ]),
+    ),
+  };
+}
+
+export function newDamageExcel(report: FleetIssueDayReport, station: StationCode = "DNA4") {
+  const otherRows = OTHER_ISSUE_TYPES.flatMap((issueType) =>
+    report.created.other[issueType].map((issue) => [issueType, ...damageCells(issue)])
+  );
+  return {
+    filename: datasetFilename("new-damage", report.day, station).replace(/\.csv$/, ".xls"),
+    xml: workbookXml([
+      stampedSheet(
+        "New damage",
+        DAMAGE_HEADERS,
+        report.created.damage.map((issue) => damageCells(issue)),
+        station,
+      ),
+      stampedSheet("Other issues", OTHER_HEADERS, otherRows, station),
     ]),
   };
 }
 
-export function newDamageExcel(report: FleetIssueDayReport) {
-  const otherRows = OTHER_ISSUE_TYPES.flatMap((issueType) =>
-    report.created.other[issueType].map((issue) => [issueType, ...damageCells(issue)])
-  );
-  return {
-    filename: datasetFilename("new-damage", report.day).replace(/\.csv$/, ".xls"),
-    xml: workbookXml([
-      {
-        name: "New damage",
-        headers: DAMAGE_HEADERS,
-        rows: report.created.damage.map((issue) => damageCells(issue)),
-      },
-      {
-        name: "Other issues",
-        headers: OTHER_HEADERS,
-        rows: otherRows,
-      },
-    ]),
-  };
+function stampedSheet(
+  name: string,
+  headers: readonly string[],
+  rows: readonly (readonly CsvValue[])[],
+  station: StationCode,
+) {
+  const stamped = withStationColumn(station, headers, rows);
+  return { name, headers: stamped.headers, rows: stamped.rows };
 }
 
 function damageCells(issue: FleetIssue): CsvValue[] {
