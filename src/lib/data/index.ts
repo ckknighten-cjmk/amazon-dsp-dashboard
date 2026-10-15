@@ -4,8 +4,9 @@
  * Routes and package exceptions for 2026-10-14 come from the DSP Console
  * evening-wrap Delivery Execution scrape in `src/lib/data/seed`. The associate
  * roster unions Amazon schedule Weeks 38 and 39, then merges that board and
- * ADP-only names. Scorecard default is the Week 38 Console Performance Summary;
- * Week 37 stays available. Payments are the 2026-09-21 Flex Payments scrape.
+ * ADP-only names. Scorecard default is the newest Console week (Week 41,
+ * Oct 4–10, 2026) with Weeks 42–52 of 2025 and Weeks 1–40 of 2026 on the
+ * week selector. Payments are the 2026-09-21 Flex Payments scrape.
  * Week 37 variable section totals are the Sep 23 variable invoice. Week 38's
  * variable invoice was not listed. Work Summary weeks 37–39 reconcile against
  * that invoice when it is listed. Compliance compares ADP Group Timecards to the

@@ -1,0 +1,7675 @@
+[
+  {
+    "week": "Week 42",
+    "period": "Oct 12 - Oct 18, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 69.9,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 5.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 15.9,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 163,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1348,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 98.28,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.45,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 43",
+    "period": "Oct 19 - Oct 25, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 78.5,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 8,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 171,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1598,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 98.08,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 5.55,
+        "tier": "Great"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 44",
+    "period": "Oct 26 - Nov 1, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 56.7,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 16.2,
+        "tier": "Poor",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 15.6,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 207,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 18,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2193,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 96.58,
+        "tier": "Fair",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 45",
+    "period": "Nov 2 - Nov 8, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 71.9,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 10.8,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 4.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 5.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 327,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1752,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.64,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 46",
+    "period": "Nov 9 - Nov 15, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 71.9,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 5.8,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 8.3,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 312,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1658,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.11,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 47",
+    "period": "Nov 16 - Nov 22, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 41.8,
+      "tier": "Fair",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 11.5,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 8.5,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 3.9,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 12.4,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 960,
+        "tier": "Poor"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2191,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 96.92,
+        "tier": "Fair",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 13.95,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 48",
+    "period": "Nov 23 - Nov 29, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 57.3,
+      "tier": "Great"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 8.2,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 6.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 5.1,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 297,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1945,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 96.24,
+        "tier": "Fair",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 23.8,
+        "tier": "Poor"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 49",
+    "period": "Nov 30 - Dec 6, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 56.9,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 6.8,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 6.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 8,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 2.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 332,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1826,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 96.82,
+        "tier": "Fair",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 11.9,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 50",
+    "period": "Dec 7 - Dec 13, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 56.5,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 6.9,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 10,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 4.9,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 10.2,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 826,
+        "tier": "Fair"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2116,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 96.88,
+        "tier": "Fair",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 4.76,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 51",
+    "period": "Dec 14 - Dec 20, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 52.5,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 11.4,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 12.4,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 4,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 5.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 1220,
+        "tier": "Poor"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2229,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.03,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 52",
+    "period": "Dec 21 - Dec 27, 2025",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 62.8,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 12.8,
+        "tier": "Fair",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 7.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 3.8,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 6.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 710,
+        "tier": "Fair"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2036,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 96.57,
+        "tier": "Fair",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 1",
+    "period": "Dec 28, 2025 - Jan 3, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 60.9,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 5.5,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 17,
+        "tier": "Poor",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 6.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 1315,
+        "tier": "Poor"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1531,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 98.18,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.53,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 2",
+    "period": "Jan 4 - Jan 10, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 75.1,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 5.3,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 5.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 183,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 18,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1387,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.59,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 77.77,
+        "tier": "Fair",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 3",
+    "period": "Jan 11 - Jan 17, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 86.5,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 139,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1442,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.47,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 84.88,
+        "tier": "Great",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 4",
+    "period": "Jan 18 - Jan 24, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 86.5,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 3.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 99,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 954,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.71,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 84.7,
+        "tier": "Great",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 5",
+    "period": "Jan 25 - Jan 31, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 64.3,
+      "tier": "Great",
+      "note": "Capped for Safety & Compliance: 'Fantastic' in Safety & Compliance is required for a 'Fantastic' or 'Fantastic Plus' Overall Standing."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 2.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 23.1,
+        "tier": "Poor",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 768,
+        "tier": "Fair"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2634,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 98.61,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 88.88,
+        "tier": "Great",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 6",
+    "period": "Feb 1 - Feb 7, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 84.7,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 6.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 153,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2296,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.73,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 90.68,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 7",
+    "period": "Feb 8 - Feb 14, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 81.9,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 6.4,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 149,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 2310,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.63,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 90.69,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 8",
+    "period": "Feb 15 - Feb 21, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 81,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 3.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 359,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1287,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 97.88,
+        "tier": "Great",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 4.65,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 94.04,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 9",
+    "period": "Feb 22 - Feb 28, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 79.7,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 9.7,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 2.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 224,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1550,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.25,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 4.65,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 96.25,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 10",
+    "period": "Mar 1 - Mar 7, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 72.9,
+      "tier": "Great",
+      "note": "Capped for Capacity Reliability: ≥95% daily reliability is required to earn Delivery Excellence Scorecard incentives. If any day falls below 95%, Overall Standing caps at 'Great' for that week."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 192,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1542,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.01,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 9.3,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 96,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 11",
+    "period": "Mar 8 - Mar 14, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 82.3,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 4.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 192,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1324,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.2,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 9.3,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.77,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 12",
+    "period": "Mar 15 - Mar 21, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 80.7,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 4.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 80,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1561,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.33,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 9.3,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 98.55,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 13",
+    "period": "Mar 22 - Mar 28, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 75.1,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 7.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 204,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1581,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.44,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 11.62,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 98.64,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 14",
+    "period": "Mar 29 - Apr 4, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 81.7,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 4.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 121,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1485,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.48,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fair",
+        "tier": "Fair"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 9.3,
+        "tier": "Fair"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.36,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 15",
+    "period": "Apr 5 - Apr 11, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 84.5,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 69,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1593,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.4,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 6.97,
+        "tier": "Great"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 16",
+    "period": "Apr 12 - Apr 18, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 84.9,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 177,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1314,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.48,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 6.97,
+        "tier": "Great"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 17",
+    "period": "Apr 19 - Apr 25, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 85,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 2.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 5.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 2.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 162,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1242,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.43,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 4.65,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 18",
+    "period": "Apr 26 - May 2, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 88.2,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 2.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 125,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1212,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.34,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 19",
+    "period": "May 3 - May 9, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 87.8,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 2.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 3.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 245,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1069,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.46,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 20",
+    "period": "May 10 - May 16, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 85.5,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 6.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 158,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1300,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.46,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.32,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 21",
+    "period": "May 17 - May 23, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 90.9,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 72,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1030,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 22",
+    "period": "May 24 - May 30, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 85,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 71,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 17,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1326,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.52,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 23",
+    "period": "May 31 - Jun 6, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 88.5,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 4.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 109,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1186,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 24",
+    "period": "Jun 7 - Jun 13, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 88.8,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 4.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1452.6,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 54,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1252,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.48,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 25",
+    "period": "Jun 14 - Jun 20, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 92,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 3.1,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 4.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 151.5,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 17,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 728,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.32,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.37,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 26",
+    "period": "Jun 21 - Jun 27, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 92.1,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 3.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1198.6,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 47,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 770,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.29,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.32,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 27",
+    "period": "Jun 28 - Jul 4, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 82.6,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 2.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1492.5,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 477,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 955,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.27,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.32,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 28",
+    "period": "Jul 5 - Jul 11, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 88,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 4.3,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 817.5,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 32,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1296,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.28,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 97.32,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 29",
+    "period": "Jul 12 - Jul 18, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 90.5,
+      "tier": "Fantastic Plus"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 7.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 272.8,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 17,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 977,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.45,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 96.68,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 30",
+    "period": "Jul 19 - Jul 25, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 84.6,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 6.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 6.7,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 620.1,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 135,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1313,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.28,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.95,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 31",
+    "period": "Jul 26 - Aug 1, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 74.8,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 7.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 6,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 4.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1268.3,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 323,
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1225,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.3,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.56,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.7,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 32",
+    "period": "Aug 2 - Aug 8, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 85.6,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 167.3,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 153,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 978,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.3,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 16.66,
+        "tier": "Great"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.56,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 95.35,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 33",
+    "period": "Aug 9 - Aug 15, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 86.8,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 5.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1063.3,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 199,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 980,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.27,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 8,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 88.09,
+        "tier": "Great",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 34",
+    "period": "Aug 16 - Aug 22, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 85.8,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 4.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 3.5,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 3.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 968.9,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 68,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1065,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.27,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 8.33,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.27,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 90.58,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 35",
+    "period": "Aug 23 - Aug 29, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 72.9,
+      "tier": "Great",
+      "note": "Capped for Quality: In order to earn a 'Fantastic' or 'Fantastic Plus' Overall Standing, you must achieve 'Fantastic' in both Delivery Quality and Pickup Quality and have less than 3 PSB Defects."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 4.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1818.2,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 123,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 49,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1191,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.43,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 9.09,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.27,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 91.46,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 36",
+    "period": "Aug 30 - Sep 5, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 86.7,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 2.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 3.3,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 940.9,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 36,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1203,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.22,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 4.16,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.27,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 94.4,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 37",
+    "period": "Sep 6 - Sep 12, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:34:55Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 85.8,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 1.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 5.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 1953.7,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 145,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1048,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.3,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.22,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 94.4,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 38",
+    "period": "Sep 13 - Sep 19, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-09-23T12:01:44.632799Z",
+    "overallStanding": {
+      "value": 84,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 3.6,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 2.3,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.8,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 4166.9,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 119,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1360,
+        "tier": "Great",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.46,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.22,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 94.01,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 39",
+    "period": "Sep 20 - Sep 26, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:25:18Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 48.9,
+      "tier": "Fair",
+      "note": "Capped for Quality: In order to earn a 'Fantastic' or 'Fantastic Plus' Overall Standing, you must achieve 'Fantastic' in both Delivery Quality and Pickup Quality and have less than 3 PSB Defects."
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 2.9,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Great",
+        "tier": "Great"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 2059.8,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 129,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Poor",
+        "tier": "Poor"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 107,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1920,
+        "tier": "Poor",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.54,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.22,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 93.69,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 40",
+    "period": "Sep 27 - Oct 3, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:25:18Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 84.4,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 0.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 2.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 1.5,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 5.2,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 2158,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 118,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1569,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.33,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 0,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.22,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 93.69,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  },
+  {
+    "week": "Week 41",
+    "period": "Oct 4 - Oct 10, 2026",
+    "station": "DNA4",
+    "capturedAt": "2026-10-15T03:25:18Z",
+    "loginRequired": false,
+    "overallStanding": {
+      "value": 82.7,
+      "tier": "Fantastic"
+    },
+    "metrics": [
+      {
+        "name": "Safety and Compliance",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Quality",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Service Reliability",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "On-Road Safety Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Safe Driving Metric",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Seatbelt-Off Rate",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Speeding Event Rate",
+        "value": 1.4,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Distractions Rate",
+        "value": 5.6,
+        "tier": "Great",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Following Distance Rate",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Sign/Signal Violations",
+        "value": 1,
+        "tier": "Fantastic",
+        "unit": "Events per 100 trips"
+      },
+      {
+        "name": "Working Device Metric (Preview)",
+        "value": "No Data",
+        "tier": "No Data"
+      },
+      {
+        "name": "Breach of Contract",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Comprehensive Audit",
+        "value": "Compliant",
+        "tier": "Compliant"
+      },
+      {
+        "name": "Overall Delivery Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Delivery Completion DPMO",
+        "value": 2010.1,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Delivery Success Behaviors",
+        "value": 102,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Delivery Experience",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Customer Escalation Defect DPMO",
+        "value": 0,
+        "tier": "Fantastic",
+        "unit": "DPMO"
+      },
+      {
+        "name": "Customer Delivery Feedback (CDF DPMO)",
+        "value": 1642,
+        "tier": "Fair",
+        "unit": "DPMO"
+      },
+      {
+        "name": "POD Acceptance Rate",
+        "value": 99.59,
+        "tier": "Fantastic",
+        "unit": "%"
+      },
+      {
+        "name": "Overall Pickup Quality Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Pickup Success Behaviors",
+        "value": 2.94,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Overall Service Reliability Score",
+        "value": "Fantastic",
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Fleet Execution",
+        "value": 2.22,
+        "tier": "Fantastic"
+      },
+      {
+        "name": "Tenured Workforce",
+        "value": 93.02,
+        "tier": "Fantastic",
+        "unit": "%"
+      }
+    ]
+  }
+]

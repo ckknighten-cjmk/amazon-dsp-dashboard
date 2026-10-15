@@ -15,7 +15,13 @@ import {
 } from "react";
 import { Button } from "@/components/ui/button";
 import { refreshPageKey } from "@/lib/refresh/pages";
-import { FRESH_WAIT_MS, refreshPhase, refreshStorageKey } from "@/lib/refresh/status";
+import {
+  FRESH_WAIT_MS,
+  parseRefreshRequest,
+  refreshPhase,
+  refreshStorageKey,
+  type RefreshRequest,
+} from "@/lib/refresh/status";
 
 /**
  * Refresh posts to /api/refresh so an external webhook can pull fresh seeds.
@@ -94,35 +100,41 @@ export function RefreshDataButton({
   const ctx = useContext(RefreshContext);
   const pathname = usePathname();
   const page = refreshPageKey(pathname);
-  const [requestedAt, setRequestedAt] = useState<string | null>(null);
+  const [request, setRequest] = useState<RefreshRequest | null>(null);
   const [now, setNow] = useState(() => Date.now());
   const posting = useRef(false);
 
   useEffect(() => {
     try {
-      setRequestedAt(window.localStorage.getItem(refreshStorageKey(page)));
+      setRequest(parseRefreshRequest(window.localStorage.getItem(refreshStorageKey(page))));
     } catch {
-      setRequestedAt(null);
+      setRequest(null);
     }
   }, [page]);
 
-  const phase = refreshPhase({ requestedAt, seedAsOf, now });
+  const phase = refreshPhase({
+    requestedAt: request?.requestedAt,
+    seedAsOf,
+    now,
+    accepted: request?.accepted,
+  });
 
   useEffect(() => {
-    if (phase.phase !== "pulling" || !requestedAt) return;
-    const requested = Date.parse(requestedAt);
+    if (phase.phase !== "pulling" || !request?.requestedAt) return;
+    const requested = Date.parse(request.requestedAt);
     if (!Number.isFinite(requested)) return;
     const wait = Math.max(0, requested + FRESH_WAIT_MS - Date.now());
     const timer = window.setTimeout(() => setNow(Date.now()), wait + 25);
     return () => window.clearTimeout(timer);
-  }, [phase.phase, requestedAt]);
+  }, [phase.phase, request]);
 
   const remember = useCallback(
-    (value: string) => {
-      setRequestedAt(value);
+    (value: string, accepted: boolean) => {
+      const next = { requestedAt: value, accepted };
+      setRequest(next);
       setNow(Date.now());
       try {
-        window.localStorage.setItem(refreshStorageKey(page), value);
+        window.localStorage.setItem(refreshStorageKey(page), JSON.stringify(next));
       } catch {
         /* private mode */
       }
@@ -152,15 +164,19 @@ export function RefreshDataButton({
           lastRequestedAt?: unknown;
         } | null;
         if (response.status === 429 && typeof body?.lastRequestedAt === "string") {
-          remember(body.lastRequestedAt);
+          remember(body.lastRequestedAt, true);
           return;
         }
         if (response.ok && typeof body?.requestedAt === "string") {
-          remember(body.requestedAt);
+          remember(body.requestedAt, true);
+          return;
+        }
+        if (response.status !== 503) {
+          remember(new Date().toISOString(), false);
         }
       })
       .catch(() => {
-        /* The seed re-read from router.refresh still runs. */
+        remember(new Date().toISOString(), false);
       })
       .finally(() => {
         posting.current = false;

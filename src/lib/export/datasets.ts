@@ -1,5 +1,5 @@
 import { getDrivers, getDvicReport, getExceptions, getPayments, getRoutes, getScorecard, getVehicles } from "@/lib/data";
-import type { ScorecardWeek } from "@/lib/data/scorecard";
+import { DEFAULT_SCORECARD_WEEK, type ScorecardWeek } from "@/lib/data/scorecard";
 import { employmentLabel } from "@/lib/data/census";
 import { rosterSourceLabel } from "@/lib/data/roster";
 import {
@@ -19,10 +19,6 @@ import { damageSummary } from "@/lib/dvic/compare";
 
 const ROSTER_STAMP = "weeks-38-39";
 const SERVICE_DAY = "2026-10-14";
-const SCORECARD_STAMP: Record<ScorecardWeek, string> = {
-  37: "week-37",
-  38: "week-38",
-};
 const PAYMENTS_STAMP = "2026-09-21";
 
 export interface CsvFile {
@@ -247,7 +243,7 @@ function standingLabel(metric: ScorecardMetric) {
   return tier ? scorecardTierLabel[tier] : "No data";
 }
 
-export function scorecardCsv(week: ScorecardWeek = 38): CsvFile {
+export function scorecardCsv(week: ScorecardWeek = DEFAULT_SCORECARD_WEEK): CsvFile {
   const scorecard = getScorecard(week);
   const headers = ["Row", "Name", "Category", "Value", "Standing", "Prior week"];
   const rows: CsvValue[][] = [
@@ -277,7 +273,7 @@ export function scorecardCsv(week: ScorecardWeek = 38): CsvFile {
     ]),
   ];
   return {
-    filename: datasetFilename("scorecard", SCORECARD_STAMP[week]),
+    filename: datasetFilename("scorecard", `week-${week}`),
     csv: toCsv(headers, rows),
   };
 }

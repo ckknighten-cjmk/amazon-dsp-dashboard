@@ -130,7 +130,7 @@ test("other dataset exports stay on seeded values", () => {
   assert.equal(exceptions.filter((row) => row.status === "Returned to station").length, 33);
   assert.equal(exceptions.filter((row) => row.status === "Pickup failed").length, 76);
 
-  const scorecard = scorecardCsv();
+  const scorecard = scorecardCsv(38);
   assert.equal(scorecard.filename, "scorecard-week-38.csv");
   assert.match(scorecard.csv, /,84,/);
   assert.match(scorecard.csv, /4,166\.9 DPMO/);
@@ -143,6 +143,10 @@ test("other dataset exports stay on seeded values", () => {
   assert.equal(week37.filename, "scorecard-week-37.csv");
   assert.match(week37.csv, /85\.8/);
   assert.doesNotMatch(scorecard.csv, /prior week was \d/i);
+  const scorecardWeek41 = scorecardCsv();
+  assert.equal(scorecardWeek41.filename, "scorecard-week-41.csv");
+  assert.match(scorecardWeek41.csv, /82\.7/);
+  assert.match(scorecardWeek41.csv, /No data/);
 
   const payments = paymentsCsv();
   assert.equal(payments.filename, "payments-settlements-2026-09-21.csv");
