@@ -1,8 +1,10 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import { getComplianceReport } from "../data/compliance";
 import { deliveryBoard, exceptions, routes } from "../data/delivery-execution";
 import { associateId } from "../data/delivery-execution";
+import october14 from "../data/seed/delivery-execution-2026-10-14.json";
 import seed from "../data/seed/delivery-execution-2026-10-16.json";
 import { getDrivers } from "../data";
 import { complianceCombinedCsv, complianceViewCsv } from "./compliance-csv";
@@ -186,4 +188,82 @@ test("other dataset exports stay on seeded values", () => {
   assert.equal(complianceViewCsv(week41, "missing").filename, "compliance-missing-punches-dna4-week-41.csv");
   assert.equal(complianceCombinedCsv(week41).filename, "compliance-dna4-week-41.csv");
   assert.match(complianceCombinedCsv(week41).csv, /Meal rows/);
+});
+
+test("Oct 14 refresh-final seed replaces the evening-wrap counts", () => {
+  assert.equal(october14.serviceDate, "2026-10-14");
+  assert.equal(october14.capturedAt, "2026-10-18T20:49:19-05:00");
+  assert.equal(october14.totals.routes, 38);
+  assert.equal(october14.routes.length, 38);
+  assert.equal(october14.totals.inProgress, 3);
+  assert.equal(october14.totals.complete, 35);
+  assert.equal(october14.totals.incomplete, 0);
+  assert.equal(october14.totals.executionGaugesPct.locations, null);
+  assert.equal(october14.totals.executionGaugesPct.stops, null);
+  assert.equal(october14.totals.executionGaugesPct.packages, null);
+  assert.equal(october14.totals.executionGaugesPct.attemptSuccess, null);
+  assert.equal(
+    october14.routes.reduce((sum, route) => sum + route.packagesDelivered, 0),
+    11395
+  );
+  assert.equal(
+    october14.routes.reduce((sum, route) => sum + route.packagesPlanned, 0),
+    11427
+  );
+  assert.equal(october14.totals.packageStatusCounts.remaining, 22);
+  assert.equal(october14.totals.packageStatusCounts.reattemptable, 0);
+  assert.equal(october14.totals.packageStatusCounts.undeliverable, 18);
+  assert.equal(october14.totals.packageStatusCounts.missing, 0);
+  assert.equal(october14.totals.packageStatusCounts.returned_to_station, 45);
+  assert.equal(october14.totals.packageStatusCounts.pickup_failed, 82);
+  assert.equal(october14.totals.workHourRisk, 0);
+  assert.equal(october14.totals.noBreaksTaken, 3);
+  assert.equal(october14.totals.inactive, 0);
+  assert.equal(october14.totals.unknownStops, 23);
+  assert.equal(october14.totals.onRoadPickups.total, 6);
+  assert.equal(october14.totals.onRoadPickups.remaining, 0);
+  assert.equal(october14.totals.onRoadPickups.complete, 6);
+  assert.equal(october14.totals.ahead, 1);
+  assert.equal(october14.totals.atRisk, 1);
+  assert.equal(october14.totals.behind, 1);
+  assert.equal(october14.totals.multiTransporter, 15);
+  assert.equal(october14.totals.rescueActions, 0);
+  assert.match(october14.disclaimer, /38 routes \/ 3 in progress/);
+  assert.match(october14.disclaimer, /Execution gauges not rendered/);
+  assert.deepEqual(
+    october14.routes.filter((route) => route.status === "in_progress").map((route) => route.routeCode),
+    ["AX110", "CX276", "CX255"]
+  );
+  const behind = october14.routes.find((route) => route.routeCode === "AX110");
+  assert.ok(behind);
+  assert.deepEqual(behind.associates, ["Gregory Lowery"]);
+  assert.equal(behind.stopsDone, 66);
+  assert.equal(behind.stopsPlanned, 84);
+  assert.deepEqual(behind.notes, ["17 stops behind"]);
+  const live = october14.routes.find((route) => route.routeCode === "CX255");
+  assert.ok(live);
+  assert.deepEqual(live.associates, ["Shameka Williams", "Donnell Jefferson"]);
+  assert.equal(live.stopsDone, 191);
+  assert.equal(live.stopsPlanned, 192);
+  assert.deepEqual(live.notes, ["4 stops ahead"]);
+  assert.equal(new Set(october14.routes.flatMap((route) => route.associates)).size, 43);
+  assert.ok(october14.routes.some((route) => route.routeCode === "CX254" && route.associates.includes("Aaron Davis")));
+
+  const byStatus = (status: string) =>
+    october14.exceptionPackages.filter((row) => row["Package Status"] === status).length;
+  assert.equal(october14.exceptionPackages.length, 134);
+  assert.equal(byStatus("Reattemptable"), 0);
+  assert.equal(byStatus("Undeliverable"), 15);
+  assert.equal(byStatus("Missing"), 0);
+  assert.equal(byStatus("Returned to station"), 45);
+  assert.equal(byStatus("Pickup failed"), 74);
+
+  const csv = readFileSync("src/lib/data/seed/packages-exceptions-2026-10-14.csv", "utf8");
+  const lines = csvLines(csv);
+  assert.match(lines[0], /^Scannable Id,/);
+  assert.equal(lines.length - 1, 134);
+  assert.deepEqual(
+    lines.slice(1).map((line) => line.split(",")[0]),
+    october14.exceptionPackages.map((row) => row["Scannable Id"])
+  );
 });
