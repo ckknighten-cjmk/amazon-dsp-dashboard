@@ -5,33 +5,34 @@ import path from "node:path";
 import test from "node:test";
 import { loadStationDataset } from "@/lib/data/station-seeds";
 import { buildFleetIssueDayReport } from "@/lib/fleet-issues/detect";
-import { loadFleetIssueCatalog } from "./fleet-issues";
+import { loadFleetIssueCatalog, loadFleetIssueSnapshots } from "./fleet-issues";
 import type { FleetIssueSnapshot } from "@/lib/fleet-issues/types";
 
-test("the DNA4 2026-10-15 snapshot is the newest capture and keeps every open issue", () => {
+test("the DNA4 2026-10-18 snapshot is the newest capture and keeps every open issue", () => {
   const catalog = loadFleetIssueCatalog();
-  assert.deepEqual(catalog.dates, ["2026-10-14", "2026-10-15"]);
+  assert.deepEqual(catalog.dates, ["2026-10-14", "2026-10-15", "2026-10-18"]);
   const newest = catalog.newest;
   assert.ok(newest);
-  assert.equal(newest.capturedAt, "2026-10-15T10:05:00-05:00");
-  assert.equal(newest.captureDay, "2026-10-15");
-  assert.equal(newest.totalResultsShown, "Total results: 1247");
-  assert.equal(newest.issues.length, 1247);
-  assert.equal(new Set(newest.issues.map((issue) => issue.rowId)).size, 1247);
+  assert.equal(newest.date, "2026-10-18");
+  assert.equal(newest.capturedAt, "2026-10-18T23:20:00-05:00");
+  assert.equal(newest.captureDay, "2026-10-18");
+  assert.equal(newest.totalResultsShown, "Total results: 1320");
+  assert.equal(newest.issues.length, 1320);
+  assert.equal(new Set(newest.issues.map((issue) => issue.rowId)).size, 1320);
 
   const today = buildFleetIssueDayReport({
     current: newest.issues,
     previous: null,
-    day: "2026-10-15",
+    day: "2026-10-18",
   });
   assert.equal(today.comparable, false);
-  assert.equal(today.created.damage.length, 0);
+  assert.equal(today.created.damage.length, 25);
   assert.equal(today.created.other["Self reported maintenance"].length, 0);
   assert.equal(today.created.other["Preventative maintenance"].length, 0);
   assert.equal(today.created.other["Vehicle safety signals"].length, 0);
   assert.equal(today.created.other["Odometer defects"].length, 0);
 
-  const october14 = catalog.previous;
+  const october14 = loadFleetIssueSnapshots().find((snapshot) => snapshot.date === "2026-10-14");
   assert.ok(october14);
   assert.equal(october14.date, "2026-10-14");
   assert.equal(october14.capturedAt, "2026-10-15T04:15:40Z");
@@ -95,14 +96,14 @@ test("the DNA4 2026-10-15 snapshot is the newest capture and keeps every open is
   assert.ok(winter);
 });
 
-test("WTN2 has no fleet issues snapshot and DNA4 keeps the Oct 14 and Oct 15 catalogs", () => {
+test("WTN2 has no fleet issues snapshot and DNA4 keeps the Oct 14, Oct 15, and Oct 18 catalogs", () => {
   assert.equal(loadStationDataset("WTN2", "fleet", () => loadFleetIssueCatalog()), null);
   const catalog = loadStationDataset("DNA4", "fleet", () => loadFleetIssueCatalog());
   assert.ok(catalog?.newest);
-  assert.equal(catalog.newest.date, "2026-10-15");
-  assert.equal(catalog.newest.issues.length, 1247);
-  assert.equal(catalog.previous?.date, "2026-10-14");
-  assert.deepEqual(catalog.dates, ["2026-10-14", "2026-10-15"]);
+  assert.equal(catalog.newest.date, "2026-10-18");
+  assert.equal(catalog.newest.issues.length, 1320);
+  assert.equal(catalog.previous?.date, "2026-10-15");
+  assert.deepEqual(catalog.dates, ["2026-10-14", "2026-10-15", "2026-10-18"]);
 });
 
 test("a newer dated file becomes the snapshot and the older file is the comparison", () => {

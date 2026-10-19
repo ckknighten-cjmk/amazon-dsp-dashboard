@@ -80,10 +80,10 @@ describe("period bounds", () => {
 });
 
 describe("seed coverage", () => {
-  it("keeps the Oct 14 DVIC coverage off the Oct 16 delivery clock", () => {
-    assert.equal(DVIC_COVERAGE.start, "2026-10-14");
-    assert.equal(DVIC_COVERAGE.end, "2026-10-14");
-    assert.match(DVIC_COVERAGE.label, /Oct 14/);
+  it("keeps the Oct 18 DVIC coverage off the Oct 16 delivery clock", () => {
+    assert.equal(DVIC_COVERAGE.start, "2026-10-18");
+    assert.equal(DVIC_COVERAGE.end, "2026-10-18");
+    assert.match(DVIC_COVERAGE.label, /Oct 18/);
     assert.equal(dateInRange(DVIC_COVERAGE.start, { kind: "today" }), false);
     assert.equal(
       dateInRange(DVIC_COVERAGE.start, { kind: "custom", start: "2026-09-23", end: "2026-09-23" }),

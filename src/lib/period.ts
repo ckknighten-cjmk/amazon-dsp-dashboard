@@ -47,9 +47,9 @@ export const WORK_SUMMARY_COVERAGE = {
 } as const;
 
 export const DVIC_COVERAGE = {
-  start: "2026-10-14",
-  end: "2026-10-14",
-  label: "Seeded data: Oct 14 only",
+  start: "2026-10-18",
+  end: "2026-10-18",
+  label: "Seeded data: Oct 18 only",
 } as const;
 
 export const COMPLIANCE_COVERAGE = {

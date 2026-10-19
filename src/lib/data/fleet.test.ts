@@ -6,10 +6,10 @@ import { mapConsoleFleet, mapConsoleStatus, mapConsoleType, yardFromSeed } from 
 test("DNA4 My vehicles replaces the mock yard", () => {
   const yard = getFleetYard();
   assert.equal(yard.origin, "console");
-  assert.equal(yard.vehicles.length, 53);
-  assert.equal(getVehicles().length, 53);
+  assert.equal(yard.vehicles.length, 56);
+  assert.equal(getVehicles().length, 56);
   assert.match(yard.nav, /My vehicles/);
-  assert.equal(yard.capturedAt, "2026-10-15T09:55:00-05:00");
+  assert.equal(yard.capturedAt, "2026-10-18T22:58:00-05:00");
 
   const unit11 = yard.vehicles.find((van) => van.unitId === "11");
   assert.ok(unit11);
@@ -29,8 +29,8 @@ test("DNA4 My vehicles replaces the mock yard", () => {
   assert.equal(edv.type, "edv");
   assert.equal(edv.makeModel, "Rivian, EDV 700");
 
-  assert.equal(yard.vehicles.filter((van) => van.type === "edv").length, 32);
-  assert.equal(yard.vehicles.filter((van) => van.status === "oos").length, 14);
+  assert.equal(yard.vehicles.filter((van) => van.type === "edv").length, 35);
+  assert.equal(yard.vehicles.filter((van) => van.status === "oos").length, 17);
   assert.ok(yard.vehicles.every((van) => van.year == null && van.mileage == null));
   assert.ok(yard.vehicles.every((van) => van.origin === "console"));
   assert.equal(
