@@ -1,12 +1,12 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-10-14, ~8:10 p.m. CT)
- * into domain models. Board chips come from seed totals. Exception rows are the
- * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-10-14.csv`). This capture stores those rows with the
- * CSV column names; earlier seeds used camelCase. Vehicle and on-time % stay null.
- * Execution gauges in this capture are locations 99%, stops 99%, packages 99%,
- * and attempt success 100%. Status derived from stops done versus planned
- * (in progress means stops remaining): 3 in progress; the other 33 routes are complete.
+ * Maps the DSP Console Delivery Execution refresh-final re-pull (2026-10-14,
+ * captured 2026-10-18 8:49 p.m. CT) into domain models. Board chips come from
+ * seed totals. Exception rows are the Packages CSV embedded as
+ * `exceptionPackages` (same file as `packages-exceptions-2026-10-14.csv`).
+ * This capture stores those rows with the CSV column names; earlier seeds used
+ * camelCase. Vehicle and on-time % stay null. Execution gauges were not visible
+ * on this pull and stay null. Status derived from stops done versus planned
+ * (in progress means stops remaining): 3 in progress; the other 35 routes are complete.
  */
 import type {
   DeliveryExecutionBoard,

@@ -76,7 +76,7 @@ export default function OverviewPage() {
               <CardHeader>
                 <CardTitle>Oct 14 routes</CardTitle>
                 <CardDescription>
-                  Status mix from the {station.stationCode} Console board (36 routes).{" "}
+                  Status mix from the {station.stationCode} Console board (38 routes).{" "}
                   {DELIVERY_COVERAGE.label}.
                 </CardDescription>
               </CardHeader>
