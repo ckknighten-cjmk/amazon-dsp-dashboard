@@ -170,7 +170,7 @@ export function getOverview(range: DateRange): OverviewSnapshot {
     range,
     asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
     kpis: todayKpis,
-    packagesByDay: [{ label: "Wed 14", delivered: deliveredToday, assigned: assignedToday }],
+    packagesByDay: [{ label: "Fri 16", delivered: deliveredToday, assigned: assignedToday }],
     routeStatusCounts: statusCounts(),
     alerts,
   };

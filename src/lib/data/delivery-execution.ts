@@ -1,12 +1,12 @@
 /**
- * Maps the DSP Console Delivery Execution refresh-final re-pull (2026-10-14,
- * captured 2026-10-18 8:49 p.m. CT) into domain models. Board chips come from
- * seed totals. Exception rows are the Packages CSV embedded as
- * `exceptionPackages` (same file as `packages-exceptions-2026-10-14.csv`).
- * This capture stores those rows with the CSV column names; earlier seeds used
- * camelCase. Vehicle and on-time % stay null. Execution gauges were not visible
- * on this pull and stay null. Status derived from stops done versus planned
- * (in progress means stops remaining): 3 in progress; the other 35 routes are complete.
+ * Maps the DSP Console Delivery Execution evening wrap (2026-10-16, ~8:07 p.m. CT)
+ * into domain models. Board chips come from seed totals. Exception rows are the
+ * Packages CSV embedded as `exceptionPackages` (same file as
+ * `packages-exceptions-2026-10-16.csv`, 257 rows). This capture stores those rows
+ * with the CSV column names; earlier seeds used camelCase. Vehicle and on-time %
+ * stay null. Execution gauges in this capture are 99/99/99/99 (locations, stops,
+ * packages, attempt success). Status is in progress per the board: 3 in progress
+ * and 36 complete.
  */
 import type {
   DeliveryExecutionBoard,
@@ -16,7 +16,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-10-14.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-10-16.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];
@@ -268,7 +268,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Oct 14 publishes rescueActions as 0, so this column is still not
+ * Oct 16 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =
