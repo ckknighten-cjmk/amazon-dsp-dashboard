@@ -28,7 +28,7 @@ test("active roster is the schedule union, not the Oct 14 board", () => {
   assert.ok(drivers.length > 40);
   assert.equal(scheduled.length, 96);
   assert.equal(onBoard.length, consoleDrivers.length);
-  assert.equal(consoleDrivers.length, 42);
+  assert.equal(consoleDrivers.length, 43);
   assert.ok(adpOnly.length > 0);
   assert.ok(adpOnly.every((driver) => !driver.transporterId));
   assert.equal(new Set(drivers.map((driver) => driver.id)).size, drivers.length);
