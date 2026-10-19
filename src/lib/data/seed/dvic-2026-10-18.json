@@ -1,0 +1,870 @@
+{
+ "source": "Amazon Logistics DSP Console > Administration > Fleet > Dashboard > Today's vehicle inspections",
+ "capturedAt": "2026-10-18T22:55:00-05:00",
+ "station": "DNA4 / Memphis (DNA4)- Amazon.com",
+ "date": "2026-10-18",
+ "preTrip": [
+  {
+   "vehicle": "43 M70UNY",
+   "plate": "M70UNY",
+   "vin": "3C6LRVDG9RE153785",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 01",
+   "plate": "4H20630",
+   "vin": "7FCEHEB29SN031306",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 02",
+   "plate": "4H20634",
+   "vin": "7FCEHEB29SN031354",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 03",
+   "plate": "Y142869",
+   "vin": "7FCEHEB20SN031825",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 04",
+   "plate": "Y142582",
+   "vin": "7FCEHEB26SN031425",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 05",
+   "plate": "Y142518",
+   "vin": "7FCEHEB26SN031537",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 06",
+   "plate": "N653130",
+   "vin": "7FCEHEB29SN031290",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 07",
+   "plate": "Y142592",
+   "vin": "7FCEHEB26SN031442",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 09",
+   "plate": "4H20631",
+   "vin": "7FCEHEB29SN031158",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 10",
+   "plate": "4H20633",
+   "vin": "7FCEHEB29SN031323",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 11",
+   "plate": "3H21436",
+   "vin": "7FCEHEB29SN031239",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 12",
+   "plate": "Y142540",
+   "vin": "7FCEHEB26SN031506",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "EDV 13",
+   "plate": "Y142516",
+   "vin": "7FCEHEB26SN031134",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 15",
+   "plate": "Y142576",
+   "vin": "7FCEHEB26SN031408",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 17",
+   "plate": "Y142864",
+   "vin": "7FCEHEB28SN031829",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 18",
+   "plate": "4H20632",
+   "vin": "7FCEHEB29SN031211",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 19",
+   "plate": "Y142867",
+   "vin": "7FCEHEB23SN031821",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 20",
+   "plate": "Y142870",
+   "vin": "7FCEHEB23SN031818",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 21",
+   "plate": "Y142865",
+   "vin": "7FCEHEB24SN031827",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "EDV 23",
+   "plate": "4H20628",
+   "vin": "7FCEHEB29SN029569",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 24",
+   "plate": "4H20627",
+   "vin": "7FCEHEB29SN029572",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 25",
+   "plate": "Y142871",
+   "vin": "7FCEHEB25SN031819",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 00",
+   "plate": "65863CP",
+   "vin": "1FTYR3XM1KKB33943",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 16",
+   "plate": "6CGJ37",
+   "vin": "1FTYR3XM7KKB49841",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 24",
+   "plate": "15DLEA",
+   "vin": "1FTBR1C88PKB49079",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 41",
+   "plate": "4BE UKU",
+   "vin": "3C6LRVDG4SE515964",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 44",
+   "plate": "Z777452",
+   "vin": "3C6LRVDG2RE125701",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 6",
+   "plate": "0H28241",
+   "vin": "1FTBR3X89LKA53168",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 7",
+   "plate": "2H20238",
+   "vin": "3C6MRVJG7ME536187",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016775A79",
+   "plate": "016775A79",
+   "vin": "7FCEHEB21TN050434",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016774A72",
+   "plate": "016774A72",
+   "vin": "7FCEHEB29TN050343",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016774A74",
+   "plate": "016774A74",
+   "vin": "7FCEHEB24TN050394",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "16279A39",
+   "plate": "16279A39",
+   "vin": "7FCEHEB20TN047301",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "016774A75",
+   "plate": "016774A75",
+   "vin": "7FCEHEB2XTN050397",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "017036A53",
+   "plate": "017036A53",
+   "vin": "7FCEHEB25TN053479",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "016774A73",
+   "plate": "016774A73",
+   "vin": "7FCEHEB25TN050355",
+   "type": "DVIC: Pre-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  }
+ ],
+ "postTrip": [
+  {
+   "vehicle": "43 M70UNY",
+   "plate": "M70UNY",
+   "vin": "3C6LRVDG9RE153785",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 01",
+   "plate": "4H20630",
+   "vin": "7FCEHEB29SN031306",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 02",
+   "plate": "4H20634",
+   "vin": "7FCEHEB29SN031354",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 03",
+   "plate": "Y142869",
+   "vin": "7FCEHEB20SN031825",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 04",
+   "plate": "Y142582",
+   "vin": "7FCEHEB26SN031425",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 05",
+   "plate": "Y142518",
+   "vin": "7FCEHEB26SN031537",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 06",
+   "plate": "N653130",
+   "vin": "7FCEHEB29SN031290",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 07",
+   "plate": "Y142592",
+   "vin": "7FCEHEB26SN031442",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 09",
+   "plate": "4H20631",
+   "vin": "7FCEHEB29SN031158",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 10",
+   "plate": "4H20633",
+   "vin": "7FCEHEB29SN031323",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 11",
+   "plate": "3H21436",
+   "vin": "7FCEHEB29SN031239",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 12",
+   "plate": "Y142540",
+   "vin": "7FCEHEB26SN031506",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "EDV 13",
+   "plate": "Y142516",
+   "vin": "7FCEHEB26SN031134",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 15",
+   "plate": "Y142576",
+   "vin": "7FCEHEB26SN031408",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 17",
+   "plate": "Y142864",
+   "vin": "7FCEHEB28SN031829",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 18",
+   "plate": "4H20632",
+   "vin": "7FCEHEB29SN031211",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 19",
+   "plate": "Y142867",
+   "vin": "7FCEHEB23SN031821",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 21",
+   "plate": "Y142865",
+   "vin": "7FCEHEB24SN031827",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "EDV 23",
+   "plate": "4H20628",
+   "vin": "7FCEHEB29SN029569",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 24",
+   "plate": "4H20627",
+   "vin": "7FCEHEB29SN029572",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 25",
+   "plate": "Y142871",
+   "vin": "7FCEHEB25SN031819",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 00",
+   "plate": "65863CP",
+   "vin": "1FTYR3XM1KKB33943",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 16",
+   "plate": "6CGJ37",
+   "vin": "1FTYR3XM7KKB49841",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 24",
+   "plate": "15DLEA",
+   "vin": "1FTBR1C88PKB49079",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 41",
+   "plate": "4BE UKU",
+   "vin": "3C6LRVDG4SE515964",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 44",
+   "plate": "Z777452",
+   "vin": "3C6LRVDG2RE125701",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 6",
+   "plate": "0H28241",
+   "vin": "1FTBR3X89LKA53168",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 7",
+   "plate": "2H20238",
+   "vin": "3C6MRVJG7ME536187",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016775A79",
+   "plate": "016775A79",
+   "vin": "7FCEHEB21TN050434",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016774A72",
+   "plate": "016774A72",
+   "vin": "7FCEHEB29TN050343",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016774A74",
+   "plate": "016774A74",
+   "vin": "7FCEHEB24TN050394",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "16279A39",
+   "plate": "16279A39",
+   "vin": "7FCEHEB20TN047301",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "016774A75",
+   "plate": "016774A75",
+   "vin": "7FCEHEB2XTN050397",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "017036A53",
+   "plate": "017036A53",
+   "vin": "7FCEHEB25TN053479",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "016774A73",
+   "plate": "016774A73",
+   "vin": "7FCEHEB25TN050355",
+   "type": "DVIC: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  }
+ ],
+ "aviPostTrip": [
+  {
+   "vehicle": "EDV 04",
+   "plate": "Y142582",
+   "vin": "7FCEHEB26SN031425",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 05",
+   "plate": "Y142518",
+   "vin": "7FCEHEB26SN031537",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 06",
+   "plate": "N653130",
+   "vin": "7FCEHEB29SN031290",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 12",
+   "plate": "Y142540",
+   "vin": "7FCEHEB26SN031506",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "EDV 13",
+   "plate": "Y142516",
+   "vin": "7FCEHEB26SN031134",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 19",
+   "plate": "Y142867",
+   "vin": "7FCEHEB23SN031821",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "EDV 21",
+   "plate": "Y142865",
+   "vin": "7FCEHEB24SN031827",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "EDV 24",
+   "plate": "4H20627",
+   "vin": "7FCEHEB29SN029572",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 16",
+   "plate": "6CGJ37",
+   "vin": "1FTYR3XM7KKB49841",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  },
+  {
+   "vehicle": "Van 7",
+   "plate": "2H20238",
+   "vin": "3C6MRVJG7ME536187",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016775A79",
+   "plate": "016775A79",
+   "vin": "7FCEHEB21TN050434",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016774A72",
+   "plate": "016774A72",
+   "vin": "7FCEHEB29TN050343",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "016774A74",
+   "plate": "016774A74",
+   "vin": "7FCEHEB24TN050394",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Grounded (Due to inspection defect)"
+  },
+  {
+   "vehicle": "16279A39",
+   "plate": "16279A39",
+   "vin": "7FCEHEB20TN047301",
+   "type": "AVI: Post-trip",
+   "time": null,
+   "inspector": null,
+   "result": null,
+   "operationalStatus": "Operational"
+  }
+ ],
+ "counts": {
+  "dvicPreTrip": 39,
+  "dvicPostTrip": 37,
+  "aviPostTrip": 15,
+  "dvicMissing": 2,
+  "aviMissing": 25
+ },
+ "note": "Dashboard 10/18/2026 ~10:55 PM CT. Vehicles with inspection defects: New defects 7, All defects 10, Repairs due within 2 days 0, Vehicle(s) grounded 10. Current vehicle health: 56 total active, 39 operational, 17 grounded (inspection defect 10, preventative maintenance 0, issue reported by you 9, DOT Annual/CA BIT 0). Today's inspections: DVIC missing 2, AVI missing 25, DVIC-Pre Trip 39, DVIC-Post Trip 37, AVI-Post Trip 15. Vehicle issue repair status: 64 needs repair, 9 under repair, 0 cancelled, 0 completed. Vehicle registration: 1 expired, 0 expiring soon. Registered vehicles: 56 total, 45 Amazon branded, 6 rentals, 5 Amazon Branded Last Mile Rental; paid off-site parking 0 spots. The drill-down lists (My vehicles filtered 'Today's inspections > Pre-trip DVIC' etc.) show only vehicles, not time/inspector/result, so those fields are null; the lists contained 36 pre-trip, 35 post-trip and 14 AVI vehicles vs card counts 39/37/15 (cards appear to count inspections, some vehicles inspected more than once). Per-inspection time/inspector/result for the 13 vehicles with new defects is in issues-2026-10-18.json newDefectDetails."
+}

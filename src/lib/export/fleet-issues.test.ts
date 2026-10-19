@@ -1,13 +1,14 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { loadFleetIssueCatalog } from "@/lib/data/fleet-issues";
+import { loadFleetIssueCatalog, loadFleetIssueSnapshots } from "@/lib/data/fleet-issues";
 import { csvLines } from "@/lib/export/csv";
 import { buildFleetIssueDayReport } from "@/lib/fleet-issues/detect";
 import { newDamageCsv, newDamageExcel } from "./fleet-issues";
 
 test("new-damage CSV and Excel list the Oct 14 inspection defects apart from maintenance", () => {
   const catalog = loadFleetIssueCatalog();
-  const october14 = catalog.previous;
+  assert.equal(catalog.previous?.date, "2026-10-15");
+  const october14 = loadFleetIssueSnapshots().find((snapshot) => snapshot.date === "2026-10-14");
   assert.ok(october14);
   assert.equal(october14.date, "2026-10-14");
   const report = buildFleetIssueDayReport({

@@ -26,7 +26,7 @@ export function DvicBoard() {
         </h2>
         <EmptyState
           title="No DVIC capture in this period"
-          description={`${DVIC_COVERAGE.label}. The Oct 14 dashboard counts are not applied to other days.`}
+          description={`${DVIC_COVERAGE.label}. The Oct 18 capture is not applied to other days.`}
           className="py-8"
         />
       </section>

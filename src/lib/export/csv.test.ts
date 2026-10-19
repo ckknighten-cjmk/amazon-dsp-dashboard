@@ -112,16 +112,16 @@ test("routes export marks multi-associate routes as rescued without replacing Co
 
 test("other dataset exports stay on seeded values", () => {
   const dvic = dvicCsv();
-  assert.equal(dvic.filename, "dvic-dna4-2026-10-15.csv");
+  assert.equal(dvic.filename, "dvic-dna4-2026-10-18.csv");
   assert.match(dvic.csv, /^Station,/);
-  assert.equal(csvLines(dvic.csv).length, 1);
+  assert.equal(csvLines(dvic.csv).length, 37);
   assert.match(dvic.csv, /Pre-trip damage/);
   assert.doesNotMatch(dvic.csv, /dent|scratch|VIN/i);
 
   const fleet = vehiclesCsv();
   assert.equal(fleet.filename, "fleet-vehicles-dna4-console.csv");
   assert.match(fleet.csv, /^Station,Unit/);
-  assert.equal(csvLines(fleet.csv).length - 1, 53);
+  assert.equal(csvLines(fleet.csv).length - 1, 56);
   assert.match(fleet.csv, /Amazon DSP Console My vehicles/);
   assert.match(fleet.csv, /3C6MRVJG5ME549360/);
   assert.match(fleet.csv, /CP81075/);
