@@ -37,39 +37,39 @@ test("associates export is the full roster", () => {
 test("routes export marks multi-associate routes as rescued without replacing Console status", () => {
   const rescued = routes.filter((route) => route.receivedRescue);
   assert.equal(deliveryBoard.serviceDate, "2026-10-16");
-  assert.equal(routes.length, 39);
-  assert.equal(deliveryBoard.totals.inProgress, 3);
+  assert.equal(routes.length, 41);
+  assert.equal(deliveryBoard.totals.inProgress, 2);
   assert.equal(deliveryBoard.totals.incomplete, 0);
-  assert.equal(routes.filter((route) => route.status === "in_progress").length, 3);
-  assert.equal(routes.filter((route) => route.status === "completed").length, 36);
+  assert.equal(routes.filter((route) => route.status === "in_progress").length, 2);
+  assert.equal(routes.filter((route) => route.status === "completed").length, 39);
   assert.equal(deliveryBoard.totals.executionGaugesPct.locations, 99);
   assert.equal(deliveryBoard.totals.executionGaugesPct.stops, 99);
   assert.equal(deliveryBoard.totals.executionGaugesPct.packages, 99);
   assert.equal(deliveryBoard.totals.executionGaugesPct.attemptSuccess, 99);
-  assert.equal(deliveryBoard.totals.packagesDelivered, 11423);
-  assert.equal(deliveryBoard.totals.packagesPlanned, 11448);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.remaining, 15);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.reattemptable, 1);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.undeliverable, 30);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.missing, 11);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.returnedToStation, 86);
+  assert.equal(deliveryBoard.totals.packagesDelivered, 11496);
+  assert.equal(deliveryBoard.totals.packagesPlanned, 11544);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.remaining, 2);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.reattemptable, 0);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.undeliverable, 45);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.missing, 0);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.returnedToStation, 92);
   assert.equal(deliveryBoard.totals.packageStatusCounts.pickupFailed, 165);
   assert.equal(deliveryBoard.totals.workHourRisk, 0);
-  assert.equal(deliveryBoard.totals.noBreaksTaken, 0);
+  assert.equal(deliveryBoard.totals.noBreaksTaken, 1);
   assert.equal(deliveryBoard.totals.inactive, 0);
-  assert.equal(deliveryBoard.totals.unknownStops, 25);
+  assert.equal(deliveryBoard.totals.unknownStops, 16);
   assert.equal(deliveryBoard.totals.onRoadPickups.total, 4);
-  assert.equal(deliveryBoard.totals.onRoadPickups.remaining, 1);
-  assert.equal(deliveryBoard.totals.onRoadPickups.complete, 3);
-  assert.equal(seed.totals.ahead, 2);
-  assert.equal(seed.totals.atRisk, 0);
+  assert.equal(deliveryBoard.totals.onRoadPickups.remaining, 0);
+  assert.equal(deliveryBoard.totals.onRoadPickups.complete, 4);
+  assert.equal(seed.totals.ahead, 0);
+  assert.equal(seed.totals.atRisk, 2);
   assert.equal(seed.totals.behind, 0);
   assert.equal(seed.totals.multiTransporter, 21);
-  assert.match(deliveryBoard.disclaimer, /stopsDone==stopsPlanned/);
-  assert.match(deliveryBoard.disclaimer, /RX17/);
+  assert.match(deliveryBoard.disclaimer, /AX69, AX76/);
+  assert.match(deliveryBoard.disclaimer, /259 rows/);
   assert.deepEqual(
     routes.filter((route) => route.status === "in_progress").map((route) => route.code),
-    ["AX76", "CX247", "CX245"]
+    ["AX69", "AX76"]
   );
   assert.equal(rescued.length, 21);
   assert.equal(rescued.length, deliveryBoard.totals.multiTransporter);
@@ -83,19 +83,19 @@ test("routes export marks multi-associate routes as rescued without replacing Co
   assert.equal(behind.receivedRescue, false);
   assert.equal(behind.status, "in_progress");
   assert.equal(behind.driverId, associateId("Caleb Spann"));
-  assert.equal(behind.completedStops, 37);
+  assert.equal(behind.completedStops, 45);
   assert.equal(behind.stopCount, 48);
-  assert.equal(behind.notes, "2 ahead");
+  assert.equal(behind.notes, "3 behind");
 
   const live = routes.find((route) => route.code === "CX247");
   assert.ok(live);
   assert.equal(live.receivedRescue, true);
-  assert.equal(live.status, "in_progress");
+  assert.equal(live.status, "completed");
   assert.equal(live.driverId, associateId("Mercedes Cherry"));
   assert.deepEqual(live.rescueDriverIds, [associateId("Michael Neal")]);
-  assert.equal(live.completedStops, 186);
+  assert.equal(live.completedStops, 187);
   assert.equal(live.stopCount, 187);
-  assert.equal(live.notes, "19 ahead");
+  assert.equal(live.notes, null);
 
   const file = routesCsv();
   assert.equal(file.filename, "routes-dna4-2026-10-16.csv");
@@ -129,13 +129,13 @@ test("other dataset exports stay on seeded values", () => {
 
   const exceptionFile = exceptionsCsv();
   assert.equal(exceptionFile.filename, "package-exceptions-dna4-2026-10-16.csv");
-  assert.equal(csvLines(exceptionFile.csv).length - 1, 257);
-  assert.equal(exceptions.length, 257);
-  assert.equal(exceptions.filter((row) => row.status === "Reattemptable").length, 1);
-  assert.equal(exceptions.filter((row) => row.status === "Undeliverable").length, 4);
-  assert.equal(exceptions.filter((row) => row.status === "Missing").length, 11);
-  assert.equal(exceptions.filter((row) => row.status === "Returned to station").length, 84);
-  assert.equal(exceptions.filter((row) => row.status === "Pickup failed").length, 157);
+  assert.equal(csvLines(exceptionFile.csv).length - 1, 259);
+  assert.equal(exceptions.length, 259);
+  assert.equal(exceptions.filter((row) => row.status === "Reattemptable").length, 0);
+  assert.equal(exceptions.filter((row) => row.status === "Undeliverable").length, 13);
+  assert.equal(exceptions.filter((row) => row.status === "Missing").length, 0);
+  assert.equal(exceptions.filter((row) => row.status === "Returned to station").length, 90);
+  assert.equal(exceptions.filter((row) => row.status === "Pickup failed").length, 156);
 
   const scorecard = scorecardCsv(38);
   assert.equal(scorecard.filename, "scorecard-dna4-week-38.csv");
