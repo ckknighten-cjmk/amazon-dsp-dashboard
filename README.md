@@ -119,7 +119,7 @@ Station clock is frozen at **Mon Oct 19, 2026 · 8:05 p.m. CT** (the evening-wra
 - **Compliance** — Week 41 (default), Week 38, and Week 39 ADP vs Amazon timecard exceptions: missing punches, days over 12 hours, rolling 7-day totals over 60 hours (captured ADP days only), and meal-status disagreements when per-DA break rows exist. A missing punch requires a rostered Amazon work block and no corresponding ADP punch that day. A Group Timecard row or scheduled shift without a rostered work block is not a missing punch. Week 41 ADP is the full Sun–Sat Group Timecard (Oct 4–10, 1,173 Date-column rows). Unmatched Amazon and ADP names are listed separately. Each table can be exported, and “Export week” combines missing punches, over 12, over 60, and meal rows for the selected week. ADP schedule template load is **coming later** and is not implemented.
 - **Settings** — Company display name, timezone (`America/Chicago` default), theme
 
-The sticky top bar **Today / This week** control drives Overview KPIs. The week toggle still only has Oct 19 in this Console pull.
+The sticky top bar **Today / This week** control drives Overview KPIs. Today stays the Oct 19 evening wrap. This week charts every seeded day in Oct 13–19 (Oct 13, Oct 14, Oct 15, Oct 16, and Oct 19). A custom period opens the seeded days inside that range. Days without a file stay blank.
 
 ### Swap mock / seed data for live sources later
 
@@ -141,6 +141,26 @@ Console snapshots used here live at:
 - [`src/lib/data/seed/packages-exceptions-2026-10-14.csv`](src/lib/data/seed/packages-exceptions-2026-10-14.csv) — Packages export for that re-pull (134 rows)
 - [`src/lib/data/seed/delivery-execution-2026-10-13.json`](src/lib/data/seed/delivery-execution-2026-10-13.json) — earlier Delivery Execution evening wrap, kept in the repo
 - [`src/lib/data/seed/packages-exceptions-2026-10-13.csv`](src/lib/data/seed/packages-exceptions-2026-10-13.csv) — Packages export for that earlier wrap (177 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-12.json`](src/lib/data/seed/delivery-execution-2026-10-12.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-12.csv`](src/lib/data/seed/packages-exceptions-2026-10-12.csv) — Packages export for that earlier wrap (168 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-09.json`](src/lib/data/seed/delivery-execution-2026-10-09.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-09.csv`](src/lib/data/seed/packages-exceptions-2026-10-09.csv) — Packages export for that earlier wrap (157 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-08.json`](src/lib/data/seed/delivery-execution-2026-10-08.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-08.csv`](src/lib/data/seed/packages-exceptions-2026-10-08.csv) — Packages export for that earlier wrap (145 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-07.json`](src/lib/data/seed/delivery-execution-2026-10-07.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-07.csv`](src/lib/data/seed/packages-exceptions-2026-10-07.csv) — Packages export for that earlier wrap (101 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-06.json`](src/lib/data/seed/delivery-execution-2026-10-06.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-06.csv`](src/lib/data/seed/packages-exceptions-2026-10-06.csv) — Packages export for that earlier wrap (181 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-05.json`](src/lib/data/seed/delivery-execution-2026-10-05.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-05.csv`](src/lib/data/seed/packages-exceptions-2026-10-05.csv) — Packages export for that earlier wrap (80 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-02.json`](src/lib/data/seed/delivery-execution-2026-10-02.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-02.csv`](src/lib/data/seed/packages-exceptions-2026-10-02.csv) — Packages export for that earlier wrap (215 rows)
+- [`src/lib/data/seed/delivery-execution-2026-10-01.json`](src/lib/data/seed/delivery-execution-2026-10-01.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-10-01.csv`](src/lib/data/seed/packages-exceptions-2026-10-01.csv) — Packages export for that earlier wrap (139 rows)
+- [`src/lib/data/seed/delivery-execution-2026-09-30.json`](src/lib/data/seed/delivery-execution-2026-09-30.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-09-30.csv`](src/lib/data/seed/packages-exceptions-2026-09-30.csv) — Packages export for that earlier wrap (167 rows)
+- [`src/lib/data/seed/delivery-execution-2026-09-29.json`](src/lib/data/seed/delivery-execution-2026-09-29.json) — earlier Delivery Execution evening wrap, kept in the repo
+- [`src/lib/data/seed/packages-exceptions-2026-09-29.csv`](src/lib/data/seed/packages-exceptions-2026-09-29.csv) — Packages export for that earlier wrap (81 rows)
 - [`src/lib/data/seed/delivery-execution-2026-09-28.json`](src/lib/data/seed/delivery-execution-2026-09-28.json) — earlier Delivery Execution evening wrap, kept in the repo
 - [`src/lib/data/seed/packages-exceptions-2026-09-28.csv`](src/lib/data/seed/packages-exceptions-2026-09-28.csv) — Packages export for that earlier wrap (147 rows)
 - [`src/lib/data/seed/delivery-execution-2026-09-25.json`](src/lib/data/seed/delivery-execution-2026-09-25.json) — earlier Delivery Execution evening wrap, kept in the repo

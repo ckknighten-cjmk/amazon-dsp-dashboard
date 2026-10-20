@@ -73,11 +73,6 @@ type SeedExtras = {
   exceptions?: { rescueActions?: unknown };
 };
 
-const seedExtras = seed as typeof seed & SeedExtras;
-const rescueActions = readCount(
-  seedExtras.exceptions?.rescueActions ?? seedExtras.totals.rescueActions
-);
-
 function titleStatus(raw: string): PackageExceptionStatus {
   const allowed: PackageExceptionStatus[] = [
     "Reattemptable",
@@ -112,143 +107,206 @@ function readException(row: SeedException) {
   };
 }
 
-const transporterByName = new Map<string, string>();
-for (const row of (seed.exceptionPackages as SeedException[]).map(readException)) {
-  if (row.transporterName && row.transporterId) {
-    transporterByName.set(row.transporterName, row.transporterId);
-  }
-}
-
 export function associateId(name: string) {
   return slugName(name);
 }
 
-export const routes: Route[] = (seed.routes as SeedRoute[]).map((row) => {
-  const associateIds = row.associates.map(associateId);
-  const receivedRescue = associateIds.length > 1;
-  const rescueDriverIds = receivedRescue ? associateIds.slice(1) : [];
-  return {
-    id: slugRoute(row.routeCode),
-    code: row.routeCode,
-    stationCode: seed.station.code,
-    wave: null,
-    driverId: associateIds[0] ?? null,
-    associateIds,
-    receivedRescue,
-    rescueDriverIds,
-    rescueDriverId: rescueDriverIds[0],
-    vehicleId: null,
-    packageCount: row.packagesPlanned,
-    packagesDelivered: row.packagesDelivered,
-    packagesRemaining: row.packagesRemaining,
-    stopCount: row.stopsPlanned,
-    completedStops: row.stopsDone,
-    status: STATUS_MAP[row.status] ?? "not_started",
-    progressPct: row.completionPct,
-    eta: null,
-    finishTime: null,
-    startedAt: null,
-    onTimePct: readOnTimePct(row),
-    notes: routeNotes(row.notes),
-    stops: [],
-  };
-});
-
-const packagesDelivered = routes.reduce((sum, route) => sum + route.packagesDelivered, 0);
-const packagesPlanned = routes.reduce((sum, route) => sum + route.packageCount, 0);
-const pkg = seed.totals.packageStatusCounts;
-
-export const deliveryBoard: DeliveryExecutionBoard = {
-  source: seed.source,
-  serviceDate: seed.serviceDate,
-  capturedAt: seed.capturedAt,
-  snapshot: seed.snapshot,
-  disclaimer: seed.disclaimer,
-  totals: {
-    routes: seed.totals.routes,
-    inProgress: seed.totals.inProgress,
-    incomplete: seed.totals.incomplete,
-    executionGaugesPct: seed.totals.executionGaugesPct,
-    packagesDelivered,
-    packagesPlanned,
-    packageStatusCounts: {
-      remaining: pkg.remaining,
-      reattemptable: pkg.reattemptable,
-      undeliverable: pkg.undeliverable,
-      missing: pkg.missing,
-      returnedToStation: pkg.returned_to_station,
-      pickupFailed: pkg.pickup_failed,
-      pendingContainersPickup: pkg.pending_containers_pickup,
-      pendingPackagesPickup: pkg.pending_packages_pickup,
-    },
-    workHourRisk: seed.totals.workHourRisk,
-    multiTransporter: seed.totals.multiTransporter,
-    rescueActions,
-    unknownStops: seed.totals.unknownStops,
-    onBreak: seed.totals.onBreak,
-    noBreaksTaken: seed.totals.noBreaksTaken,
-    inactive: seed.totals.inactive,
-    onRoadPickups: seed.totals.onRoadPickups,
-  },
+export type DeliveryDay = {
+  serviceDate: string;
+  board: DeliveryExecutionBoard;
+  routes: Route[];
+  exceptions: PackageException[];
+  drivers: Driver[];
 };
 
-const routeIdByCode = new Map(routes.map((r) => [r.code, r.id]));
-
-export const exceptions: PackageException[] = (
-  seed.exceptionPackages as SeedException[]
-).map((raw) => {
-  const row = readException(raw);
-  return {
-    id: row.scannableId,
-    scannableId: row.scannableId,
-    routeCode: row.routeCode,
-    routeId: routeIdByCode.get(row.routeCode) ?? slugRoute(row.routeCode),
-    transporterName: row.transporterName,
-    transporterId: row.transporterId,
-    address: row.address,
-    status: titleStatus(row.packageStatus),
-    reasonCode: row.reasonCode,
-    lastScan: row.lastScan ? row.lastScan.replace(" ", "T") : null,
+/** Loose shape shared by every dated Delivery Execution seed. */
+export type DeliverySeed = {
+  source: string;
+  serviceDate: string;
+  capturedAt: string;
+  snapshot: string;
+  disclaimer: string;
+  station: { code: string };
+  totals: {
+    routes: number;
+    inProgress: number;
+    incomplete: number;
+    executionGaugesPct: DeliveryExecutionBoard["totals"]["executionGaugesPct"];
+    packageStatusCounts: {
+      remaining: number;
+      reattemptable: number;
+      undeliverable: number;
+      missing: number;
+      returned_to_station: number;
+      pickup_failed: number;
+      pending_containers_pickup: number;
+      pending_packages_pickup: number;
+    };
+    workHourRisk: number;
+    multiTransporter: number;
+    rescueActions?: unknown;
+    unknownStops: number;
+    onBreak: number;
+    noBreaksTaken: number;
+    inactive: number;
+    onRoadPickups: DeliveryExecutionBoard["totals"]["onRoadPickups"];
   };
-});
+  exceptions?: { rescueActions?: unknown };
+  routes: SeedRoute[];
+  exceptionPackages: SeedException[];
+};
 
-const routesByAssociate = new Map<string, Route[]>();
-for (const route of routes) {
-  for (const id of route.associateIds) {
-    const list = routesByAssociate.get(id) ?? [];
-    list.push(route);
-    routesByAssociate.set(id, list);
+/** Map one dated seed. The live Oct 19 board is this function applied to that file. */
+export function mapDeliverySeed(file: DeliverySeed): DeliveryDay {
+  const transporterByName = new Map<string, string>();
+  for (const row of file.exceptionPackages.map(readException)) {
+    if (row.transporterName && row.transporterId) {
+      transporterByName.set(row.transporterName, row.transporterId);
+    }
   }
-}
 
-const names = new Set<string>();
-for (const row of seed.routes as SeedRoute[]) {
-  for (const name of row.associates) names.add(name);
-}
+  const fileExtras = file as DeliverySeed & SeedExtras;
+  const fileRescueActions = readCount(
+    fileExtras.exceptions?.rescueActions ?? fileExtras.totals.rescueActions
+  );
 
-export const consoleDrivers: Driver[] = [...names]
-  .sort((a, b) => a.localeCompare(b))
-  .map((name) => {
-    const id = associateId(name);
-    const assigned = routesByAssociate.get(id) ?? [];
-    const hasLive = assigned.some((r) => r.status === "in_progress");
-    const onlyOpen =
-      assigned.length > 0 &&
-      assigned.every((r) => r.status === "no_progress" || r.status === "incomplete");
+  const dayRoutes: Route[] = file.routes.map((row) => {
+    const associateIds = row.associates.map(associateId);
+    const receivedRescue = associateIds.length > 1;
+    const rescueDriverIds = receivedRescue ? associateIds.slice(1) : [];
     return {
-      id,
-      name,
-      role: "DA" as const,
-      status: hasLive ? "on_route" : onlyOpen ? "available" : "off",
-      todayPackages: assigned.reduce((sum, r) => sum + r.packagesDelivered, 0),
-      todayStops: assigned.reduce((sum, r) => sum + r.completedStops, 0),
-      incidentCount30d: 0,
-      routeId: assigned[0]?.id,
-      routeIds: assigned.map((r) => r.id),
-      transporterId: transporterByName.get(name),
-      initials: initials(name),
+      id: slugRoute(row.routeCode),
+      code: row.routeCode,
+      stationCode: file.station.code,
+      wave: null,
+      driverId: associateIds[0] ?? null,
+      associateIds,
+      receivedRescue,
+      rescueDriverIds,
+      rescueDriverId: rescueDriverIds[0],
+      vehicleId: null,
+      packageCount: row.packagesPlanned,
+      packagesDelivered: row.packagesDelivered,
+      packagesRemaining: row.packagesRemaining,
+      stopCount: row.stopsPlanned,
+      completedStops: row.stopsDone,
+      status: STATUS_MAP[row.status] ?? "not_started",
+      progressPct: row.completionPct,
+      eta: null,
+      finishTime: null,
+      startedAt: null,
+      onTimePct: readOnTimePct(row),
+      notes: routeNotes(row.notes),
+      stops: [],
     };
   });
+
+  const packagesDelivered = dayRoutes.reduce((sum, route) => sum + route.packagesDelivered, 0);
+  const packagesPlanned = dayRoutes.reduce((sum, route) => sum + route.packageCount, 0);
+  const pkg = file.totals.packageStatusCounts;
+  const board: DeliveryExecutionBoard = {
+    source: file.source,
+    serviceDate: file.serviceDate,
+    capturedAt: file.capturedAt,
+    snapshot: file.snapshot,
+    disclaimer: file.disclaimer,
+    totals: {
+      routes: file.totals.routes,
+      inProgress: file.totals.inProgress,
+      incomplete: file.totals.incomplete,
+      executionGaugesPct: file.totals.executionGaugesPct,
+      packagesDelivered,
+      packagesPlanned,
+      packageStatusCounts: {
+        remaining: pkg.remaining,
+        reattemptable: pkg.reattemptable,
+        undeliverable: pkg.undeliverable,
+        missing: pkg.missing,
+        returnedToStation: pkg.returned_to_station,
+        pickupFailed: pkg.pickup_failed,
+        pendingContainersPickup: pkg.pending_containers_pickup,
+        pendingPackagesPickup: pkg.pending_packages_pickup,
+      },
+      workHourRisk: file.totals.workHourRisk,
+      multiTransporter: file.totals.multiTransporter,
+      rescueActions: fileRescueActions,
+      unknownStops: file.totals.unknownStops,
+      onBreak: file.totals.onBreak,
+      noBreaksTaken: file.totals.noBreaksTaken,
+      inactive: file.totals.inactive,
+      onRoadPickups: file.totals.onRoadPickups,
+    },
+  };
+
+  const routeIdByCode = new Map(dayRoutes.map((r) => [r.code, r.id]));
+  const dayExceptions: PackageException[] = file.exceptionPackages.map((raw) => {
+    const row = readException(raw);
+    return {
+      id: row.scannableId,
+      scannableId: row.scannableId,
+      routeCode: row.routeCode,
+      routeId: routeIdByCode.get(row.routeCode) ?? slugRoute(row.routeCode),
+      transporterName: row.transporterName,
+      transporterId: row.transporterId,
+      address: row.address,
+      status: titleStatus(row.packageStatus),
+      reasonCode: row.reasonCode,
+      lastScan: row.lastScan ? row.lastScan.replace(" ", "T") : null,
+    };
+  });
+
+  const routesByAssociate = new Map<string, Route[]>();
+  for (const route of dayRoutes) {
+    for (const id of route.associateIds) {
+      const list = routesByAssociate.get(id) ?? [];
+      list.push(route);
+      routesByAssociate.set(id, list);
+    }
+  }
+
+  const names = new Set<string>();
+  for (const row of file.routes) {
+    for (const name of row.associates) names.add(name);
+  }
+
+  const drivers: Driver[] = [...names]
+    .sort((a, b) => a.localeCompare(b))
+    .map((name) => {
+      const id = associateId(name);
+      const assigned = routesByAssociate.get(id) ?? [];
+      const hasLive = assigned.some((r) => r.status === "in_progress");
+      const onlyOpen =
+        assigned.length > 0 &&
+        assigned.every((r) => r.status === "no_progress" || r.status === "incomplete");
+      return {
+        id,
+        name,
+        role: "DA" as const,
+        status: hasLive ? "on_route" : onlyOpen ? "available" : "off",
+        todayPackages: assigned.reduce((sum, r) => sum + r.packagesDelivered, 0),
+        todayStops: assigned.reduce((sum, r) => sum + r.completedStops, 0),
+        incidentCount30d: 0,
+        routeId: assigned[0]?.id,
+        routeIds: assigned.map((r) => r.id),
+        transporterId: transporterByName.get(name),
+        initials: initials(name),
+      };
+    });
+
+  return {
+    serviceDate: file.serviceDate,
+    board,
+    routes: dayRoutes,
+    exceptions: dayExceptions,
+    drivers,
+  };
+}
+
+export const liveDeliveryDay = mapDeliverySeed(seed as DeliverySeed);
+export const routes: Route[] = liveDeliveryDay.routes;
+export const deliveryBoard: DeliveryExecutionBoard = liveDeliveryDay.board;
+export const exceptions: PackageException[] = liveDeliveryDay.exceptions;
+export const consoleDrivers: Driver[] = liveDeliveryDay.drivers;
 
 export function exceptionsForRoute(routeId: string) {
   return exceptions.filter((row) => row.routeId === routeId);
@@ -275,26 +333,34 @@ const EXPORT_CHIPS: Array<{
 export const RESCUE_RULE =
   "Rescue: Yes means the route listed more than one associate. The first associate is primary and the others are rescuers. This follows the multi-transporter crew on the board. It is not Amazon’s rescueActions flag unless that list is in the capture.";
 
-export function rescueBoardNote() {
-  const inferred = routes.filter((route) => route.receivedRescue).length;
+export function rescueBoardNoteFor(day: DeliveryDay) {
+  const inferred = day.routes.filter((route) => route.receivedRescue).length;
   const actions =
-    deliveryBoard.totals.rescueActions == null
+    day.board.totals.rescueActions == null
       ? "This capture has no rescueActions list, so the column is not Amazon’s official rescue flag."
-      : `Console rescueActions count is ${deliveryBoard.totals.rescueActions}.`;
-  return `${RESCUE_RULE} Inferred rescues on this board: ${inferred}. Console multi-transporter total: ${deliveryBoard.totals.multiTransporter}. ${actions}`;
+      : `Console rescueActions count is ${day.board.totals.rescueActions}.`;
+  return `${RESCUE_RULE} Inferred rescues on this board: ${inferred}. Console multi-transporter total: ${day.board.totals.multiTransporter}. ${actions}`;
+}
+
+export function rescueBoardNote() {
+  return rescueBoardNoteFor(liveDeliveryDay);
 }
 
 /** Console board chips vs the Packages CSV. Only the statuses that disagree are called out. */
-export function exceptionExportNote() {
+export function exceptionExportNoteFor(day: DeliveryDay) {
   const csv = new Map<PackageExceptionStatus, number>();
-  for (const row of exceptions) csv.set(row.status, (csv.get(row.status) ?? 0) + 1);
-  const chips = deliveryBoard.totals.packageStatusCounts;
+  for (const row of day.exceptions) csv.set(row.status, (csv.get(row.status) ?? 0) + 1);
+  const chips = day.board.totals.packageStatusCounts;
   const gaps = EXPORT_CHIPS.filter((item) => (csv.get(item.status) ?? 0) !== chips[item.chip]);
   if (gaps.length === 0) {
     const summary = EXPORT_CHIPS.map((item) => `${chips[item.chip]} ${item.label}`).join(", ");
-    return `Table is the ${exceptions.length}-row Packages CSV. Console board chips match the export (${summary}). Remaining is a board chip and is not an export status.`;
+    return `Table is the ${day.exceptions.length}-row Packages CSV. Console board chips match the export (${summary}). Remaining is a board chip and is not an export status.`;
   }
   const csvPart = gaps.map((item) => `${csv.get(item.status) ?? 0} ${item.label}`).join(", ");
   const consolePart = gaps.map((item) => chips[item.chip]).join(" / ");
-  return `Table is the ${exceptions.length}-row Packages CSV (${csvPart}). Board chips above use Console totals (${consolePart}) and can differ from export rows.`;
+  return `Table is the ${day.exceptions.length}-row Packages CSV (${csvPart}). Board chips above use Console totals (${consolePart}) and can differ from export rows.`;
+}
+
+export function exceptionExportNote() {
+  return exceptionExportNoteFor(liveDeliveryDay);
 }
