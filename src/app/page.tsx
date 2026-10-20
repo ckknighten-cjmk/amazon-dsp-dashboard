@@ -8,10 +8,12 @@ import { useStation } from "@/components/layout/station-context";
 import { PageHeader, EmptyState } from "@/components/page-header";
 import { StationEmptyPage } from "@/components/station-empty";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { DeliveryDayPicker } from "@/components/delivery-day-picker";
 import { getDeliveryBoard, getOverview, getStation } from "@/lib/data";
+import { deliveryDayLabel, deliveryDaysInRange, detailDeliveryDay } from "@/lib/data/delivery-catalog";
 import { loadStationDataset } from "@/lib/data/station-seeds";
 import { seedCapturedLabel } from "@/lib/format";
-import { DELIVERY_COVERAGE } from "@/lib/period";
+import { DELIVERY_COVERAGE, STATION_TODAY } from "@/lib/period";
 
 export default function OverviewPage() {
   const { code } = useStation();
@@ -22,7 +24,11 @@ export default function OverviewPage() {
   if (!snapshot || !station || !board) {
     return <StationEmptyPage title="Station overview" station={code} />;
   }
-  const captured = seedCapturedLabel(board.capturedAt);
+  const days = deliveryDaysInRange(range);
+  const detail = detailDeliveryDay(range);
+  const shown = detail?.board ?? board;
+  const liveFocus = !detail || detail.serviceDate === STATION_TODAY;
+  const captured = seedCapturedLabel(shown.capturedAt);
 
   return (
     <div>
@@ -30,8 +36,8 @@ export default function OverviewPage() {
         title="Station overview"
         description={`${station.companyName} · ${station.stationCode} ${station.stationName}. ${snapshot.asOfLabel}.`}
         updatedLabel={captured}
-        seedAsOf={board.capturedAt}
-        date={board.serviceDate}
+        seedAsOf={shown.capturedAt}
+        date={shown.serviceDate}
       />
 
       {snapshot.kpis.length === 0 ? (
@@ -59,13 +65,22 @@ export default function OverviewPage() {
             </div>
           </section>
 
+          <DeliveryDayPicker days={days} selected={detail?.serviceDate ?? STATION_TODAY} />
+
           <div className="grid gap-4 lg:grid-cols-5">
             <Card className="lg:col-span-3">
               <CardHeader>
-                <CardTitle>Volume · Oct 19</CardTitle>
+                <CardTitle>
+                  {days.length <= 1 && liveFocus
+                    ? "Volume · Oct 19"
+                    : days.length <= 1
+                      ? `Volume · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`
+                      : "Volume · seeded days"}
+                </CardTitle>
                 <CardDescription>
-                  Console Delivery Execution planned vs delivered. {DELIVERY_COVERAGE.label}. Other
-                  days were not in this pull.
+                  {days.length <= 1 && liveFocus
+                    ? `Console Delivery Execution planned vs delivered. ${DELIVERY_COVERAGE.label}. Other days were not in this pull.`
+                    : "Console Delivery Execution planned vs delivered for each seeded day in this period. Days without a file are left blank."}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -74,10 +89,13 @@ export default function OverviewPage() {
             </Card>
             <Card className="lg:col-span-2">
               <CardHeader>
-                <CardTitle>Oct 19 routes</CardTitle>
+                <CardTitle>
+                  {liveFocus ? "Oct 19 routes" : `Routes · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`}
+                </CardTitle>
                 <CardDescription>
-                  Status mix from the {station.stationCode} Console board (38 routes).{" "}
-                  {DELIVERY_COVERAGE.label}.
+                  {liveFocus
+                    ? `Status mix from the ${station.stationCode} Console board (38 routes). ${DELIVERY_COVERAGE.label}.`
+                    : `Status mix from the ${station.stationCode} Console board (${detail?.board.totals.routes ?? 0} routes) on ${detail?.serviceDate}.`}
                 </CardDescription>
               </CardHeader>
               <CardContent>

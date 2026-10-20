@@ -10,9 +10,18 @@ import {
   formatDateTime,
   formatNumber,
 } from "@/lib/format";
-import type { Route } from "@/lib/types";
+import type { PackageException, Route } from "@/lib/types";
 
-export function RouteDetail({ route }: { route: Route }) {
+export function RouteDetail({
+  route,
+  exceptions: exceptionRows,
+  serviceDate = "Oct 19, 2026",
+}: {
+  route: Route;
+  /** Defaults to the live Oct 19 exception list. */
+  exceptions?: readonly PackageException[];
+  serviceDate?: string;
+}) {
   const associates = route.associateIds
     .map((id) => getDriver(id))
     .filter((d): d is NonNullable<typeof d> => Boolean(d));
@@ -20,7 +29,7 @@ export function RouteDetail({ route }: { route: Route }) {
     .map((id) => getDriver(id))
     .filter((d): d is NonNullable<typeof d> => Boolean(d));
   const remainingStops = Math.max(route.stopCount - route.completedStops, 0);
-  const exceptions = getExceptionsForRoute(route.id);
+  const exceptions = exceptionRows ?? getExceptionsForRoute(route.id);
 
   return (
     <div className="flex flex-col gap-5">
@@ -30,7 +39,7 @@ export function RouteDetail({ route }: { route: Route }) {
             {route.code}
           </h2>
           <p className="text-sm text-muted-foreground">
-            {route.stationCode} Memphis · DSP Console Delivery Execution · Oct 19, 2026
+            {route.stationCode} Memphis · DSP Console Delivery Execution · {serviceDate}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">

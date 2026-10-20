@@ -24,19 +24,25 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { DeliveryDayPicker } from "@/components/delivery-day-picker";
+import { getDeliveryBoard, getDriver } from "@/lib/data";
 import {
-  getDeliveryBoard,
-  getDriver,
-  getExceptions,
-  getExceptionsForRoute,
-  getRoutes,
-} from "@/lib/data";
-import { exceptionExportNote, rescueBoardNote } from "@/lib/data/delivery-execution";
+  deliveryDayExceptionsCsv,
+  deliveryDayRoutesCsv,
+  deliveryDaysInRange,
+  describeDeliveryDay,
+  detailDeliveryDay,
+} from "@/lib/data/delivery-catalog";
+import {
+  exceptionExportNoteFor,
+  rescueBoardNoteFor,
+  type DeliveryDay,
+} from "@/lib/data/delivery-execution";
 import { useDateRange } from "@/components/layout/date-range-context";
 import { useStation } from "@/components/layout/station-context";
 import { StationEmptyPage } from "@/components/station-empty";
 import { hasStationDataset } from "@/lib/data/station-seeds";
-import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
+import { DELIVERY_COVERAGE, STATION_TODAY } from "@/lib/period";
 import { ExportCsvButton } from "@/components/export-csv-button";
 import { exceptionsCsv, routesCsv } from "@/lib/export/datasets";
 import {
@@ -69,20 +75,26 @@ const EXCEPTION_STATUSES: Array<PackageExceptionStatus | "all"> = [
   "Pickup failed",
 ];
 
-function associateNames(route: Route) {
+function associateNames(route: Route, day: DeliveryDay, live: boolean) {
   return route.associateIds
-    .map((id) => getDriver(id)?.name)
+    .map((id) => (live ? getDriver(id)?.name : day.drivers.find((driver) => driver.id === id)?.name))
     .filter((name): name is string => Boolean(name));
 }
+
+const LIVE_DESCRIPTION =
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Oct 19, 2026, captured at 8:05 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 99%). 38 routes: 1 in progress (CX285); the other 37 are complete. CX289 is recorded complete at 121/122 stops because the board in-progress chip was 1.";
 
 export default function RoutesPage() {
   const { code } = useStation();
   const { range } = useDateRange();
   const ready = hasStationDataset(code, "routes");
-  const covered = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
-  const routes = ready ? getRoutes() : [];
-  const board = ready ? getDeliveryBoard() : null;
-  const exceptions = ready ? getExceptions() : [];
+  const days = ready ? deliveryDaysInRange(range) : [];
+  const detail = ready ? detailDeliveryDay(range) : null;
+  const covered = detail != null;
+  const liveBoard = detail?.serviceDate === STATION_TODAY;
+  const routes = detail?.routes ?? [];
+  const board = detail?.board ?? (ready ? getDeliveryBoard() : null);
+  const exceptions = detail?.exceptions ?? [];
   const [tab, setTab] = useState<"routes" | "exceptions">("routes");
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState<RouteStatus | "all">("all");
@@ -99,12 +111,13 @@ export default function RoutesPage() {
       if (rescue === "no" && route.receivedRescue) return false;
       if (!q) return true;
       const rescueText = route.receivedRescue ? "rescue yes" : "rescue no";
-      return [route.code, route.notes, rescueText, ...associateNames(route)]
+      const names = detail ? associateNames(route, detail, liveBoard) : [];
+      return [route.code, route.notes, rescueText, ...names]
         .join(" ")
         .toLowerCase()
         .includes(q);
     });
-  }, [routes, query, status, rescue]);
+  }, [routes, query, status, rescue, detail, liveBoard]);
 
   const filteredExceptions = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -121,28 +134,35 @@ export default function RoutesPage() {
   if (!ready || !board) {
     return <StationEmptyPage title="Delivery Execution" station={code} />;
   }
-  const routesExport = routesCsv(code);
-  const exceptionsExport = exceptionsCsv(code);
+  const routesExport = detail && !liveBoard ? deliveryDayRoutesCsv(detail) : routesCsv(code);
+  const exceptionsExport = detail && !liveBoard ? deliveryDayExceptionsCsv(detail) : exceptionsCsv(code);
 
   return (
     <div>
       <PageHeader
         title="Delivery Execution"
-        description="Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Oct 19, 2026, captured at 8:05 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 99%). 38 routes: 1 in progress (CX285); the other 37 are complete. CX289 is recorded complete at 121/122 stops because the board in-progress chip was 1."
+        description={detail && !liveBoard ? describeDeliveryDay(detail) : LIVE_DESCRIPTION}
         updatedLabel={seedCapturedLabel(board.capturedAt)}
         seedAsOf={board.capturedAt}
         date={board.serviceDate}
       />
 
-      {!covered ? (
+      {!covered || !detail ? (
         <EmptyState
           title="No Delivery Execution capture in this period"
           description={`${DELIVERY_COVERAGE.label}. Routes and package exceptions are not estimated for other days.`}
         />
       ) : (
         <>
-      <p className="mb-4 text-xs text-muted-foreground">{DELIVERY_COVERAGE.label}.</p>
-      <DeliveryBoardSummary board={board} />
+      <DeliveryDayPicker days={days} selected={detail.serviceDate} />
+      <p className="mb-4 text-xs text-muted-foreground">
+        {liveBoard && days.length === 1
+          ? `${DELIVERY_COVERAGE.label}.`
+          : liveBoard
+            ? `${DELIVERY_COVERAGE.label}. Other seeded days in this period are listed above.`
+            : `Showing ${detail.serviceDate}. Pick another seeded day above when this period has more than one capture.`}
+      </p>
+      <DeliveryBoardSummary board={detail.board} routes={detail.routes} />
 
       <div className="mb-4 flex flex-wrap items-center gap-2">
         <div
@@ -237,10 +257,10 @@ export default function RoutesPage() {
 
       {tab === "routes" ? (
         <p className="mb-3 text-xs leading-relaxed text-muted-foreground" data-rescued={rescuedCount}>
-          {rescueBoardNote()}
+          {rescueBoardNoteFor(detail)}
         </p>
       ) : (
-        <p className="mb-3 text-xs text-muted-foreground">{exceptionExportNote()}</p>
+        <p className="mb-3 text-xs text-muted-foreground">{exceptionExportNoteFor(detail)}</p>
       )}
 
       {tab === "routes" ? (
@@ -268,11 +288,15 @@ export default function RoutesPage() {
               </TableHeader>
               <TableBody>
                 {filtered.map((route) => {
-                  const names = associateNames(route);
+                  const names = associateNames(route, detail, liveBoard);
                   const rescuerLabels = route.rescueDriverIds
-                    .map((id) => getDriver(id)?.name)
+                    .map((id) =>
+                      liveBoard
+                        ? getDriver(id)?.name
+                        : detail.drivers.find((driver) => driver.id === id)?.name
+                    )
                     .filter((name): name is string => Boolean(name));
-                  const exCount = getExceptionsForRoute(route.id).length;
+                  const exCount = exceptions.filter((row) => row.routeId === route.id).length;
                   return (
                     <TableRow
                       key={route.id}
@@ -280,13 +304,17 @@ export default function RoutesPage() {
                       onClick={() => setSelected(route)}
                     >
                       <TableCell className="font-medium">
-                        <Link
-                          href={`/routes/${route.id}`}
-                          className="hover:underline"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {route.code}
-                        </Link>
+                        {liveBoard ? (
+                          <Link
+                            href={`/routes/${route.id}`}
+                            className="hover:underline"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {route.code}
+                          </Link>
+                        ) : (
+                          <span>{route.code}</span>
+                        )}
                         {exCount > 0 ? (
                           <p className="text-xs font-normal text-muted-foreground">
                             {exCount} exception{exCount === 1 ? "" : "s"}
@@ -366,9 +394,13 @@ export default function RoutesPage() {
                 <TableRow key={row.id}>
                   <TableCell className="font-mono text-xs">{row.scannableId}</TableCell>
                   <TableCell>
-                    <Link href={`/routes/${row.routeId}`} className="font-medium hover:underline">
-                      {row.routeCode}
-                    </Link>
+                    {liveBoard ? (
+                      <Link href={`/routes/${row.routeId}`} className="font-medium hover:underline">
+                        {row.routeCode}
+                      </Link>
+                    ) : (
+                      <span className="font-medium">{row.routeCode}</span>
+                    )}
                   </TableCell>
                   <TableCell>{row.transporterName || "—"}</TableCell>
                   <TableCell className="max-w-64 truncate" title={row.address}>
@@ -399,15 +431,25 @@ export default function RoutesPage() {
           <div className="px-4 pb-6">
             {selected ? (
               <>
-                <RouteDetail route={selected} />
-                <Button
-                  variant="outline"
-                  className="mt-4"
-                  nativeButton={false}
-                  render={<Link href={`/routes/${selected.id}`} />}
-                >
-                  Open full page
-                </Button>
+                <RouteDetail
+                  route={selected}
+                  exceptions={
+                    liveBoard
+                      ? undefined
+                      : exceptions.filter((row) => row.routeId === selected.id)
+                  }
+                  serviceDate={liveBoard ? undefined : detail.serviceDate}
+                />
+                {liveBoard ? (
+                  <Button
+                    variant="outline"
+                    className="mt-4"
+                    nativeButton={false}
+                    render={<Link href={`/routes/${selected.id}`} />}
+                  >
+                    Open full page
+                  </Button>
+                ) : null}
               </>
             ) : null}
           </div>

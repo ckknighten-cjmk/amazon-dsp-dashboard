@@ -1,13 +1,20 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { getRoutes } from "@/lib/data";
 import { formatConsoleCapture, formatNumber } from "@/lib/format";
-import type { DeliveryExecutionBoard } from "@/lib/types";
+import type { DeliveryExecutionBoard, Route } from "@/lib/types";
 
-export function DeliveryBoardSummary({ board }: { board: DeliveryExecutionBoard }) {
+export function DeliveryBoardSummary({
+  board,
+  routes: routeRows,
+}: {
+  board: DeliveryExecutionBoard;
+  /** Defaults to the live Oct 19 board. Pass a historical day's routes when that day is open. */
+  routes?: readonly Route[];
+}) {
   const t = board.totals;
   const pkg = t.packageStatusCounts;
   const pickup = t.onRoadPickups;
-  const routes = getRoutes();
+  const routes = routeRows ?? getRoutes();
   const complete = routes.filter((r) => r.status === "completed").length;
 
   return (

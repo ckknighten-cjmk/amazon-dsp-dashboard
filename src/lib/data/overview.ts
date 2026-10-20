@@ -1,8 +1,10 @@
 import type { Alert, DateRange, Kpi, OverviewSnapshot, Route, RouteStatus } from "@/lib/types";
 import { deliveryBoard, routes } from "@/lib/data/delivery-execution";
 import { consoleDrivers } from "@/lib/data/delivery-execution";
+import type { DeliveryDay } from "@/lib/data/delivery-execution";
+import { deliveryDayLabel, deliveryDaysInRange } from "@/lib/data/delivery-catalog";
 import { formatConsoleCapture, formatConsoleDay } from "@/lib/format";
-import { DELIVERY_COVERAGE, rangesOverlap } from "@/lib/period";
+import { DELIVERY_COVERAGE, STATION_TODAY } from "@/lib/period";
 
 const t = deliveryBoard.totals;
 const deliveredToday = t.packagesDelivered;
@@ -11,7 +13,7 @@ const completionToday = t.executionGaugesPct.packages;
 const activeRoutes = t.inProgress;
 const driversOnShift = consoleDrivers.filter((d) => d.status === "on_route").length;
 
-function statusCounts(): { status: RouteStatus; count: number }[] {
+function statusCounts(source: readonly Route[] = routes): { status: RouteStatus; count: number }[] {
   const counts: Record<RouteStatus, number> = {
     not_started: 0,
     no_progress: 0,
@@ -20,7 +22,7 @@ function statusCounts(): { status: RouteStatus; count: number }[] {
     completed: 0,
     rescued: 0,
   };
-  for (const route of routes) counts[route.status] += 1;
+  for (const route of source) counts[route.status] += 1;
   return (Object.keys(counts) as RouteStatus[]).map((status) => ({
     status,
     count: counts[status],
@@ -154,9 +156,137 @@ const todayKpis: Kpi[] = [
   },
 ];
 
+function kpisFor(day: DeliveryDay): Kpi[] {
+  const totals = day.board.totals;
+  const captured = formatConsoleCapture(day.board.capturedAt);
+  const gauge = totals.executionGaugesPct.packages;
+  const onRoad = day.drivers.filter((driver) => driver.status === "on_route").length;
+  return [
+    {
+      id: "pkg",
+      label: "Packages delivered",
+      value: totals.packagesDelivered,
+      unit: "number",
+      delta: null,
+      sparkline: [],
+      hint:
+        gauge == null
+          ? `Sum of Console route rows · ${totals.packagesPlanned.toLocaleString()} planned · ${captured}. The board did not publish a package gauge. No prior-day delta.`
+          : `Sum of Console route rows · ${totals.packagesPlanned.toLocaleString()} planned · ${captured}. Board package gauge is ${gauge}%. No prior-day delta.`,
+    },
+    {
+      id: "dcr",
+      label: "Package completion",
+      value: gauge,
+      unit: "percent",
+      delta: null,
+      sparkline: [],
+      hint:
+        gauge == null
+          ? "DSP Console did not expose an execution gauge for packages in this capture."
+          : "DSP Console execution gauge (packages).",
+    },
+    {
+      id: "remaining",
+      label: "Remaining pkgs",
+      value: totals.packageStatusCounts.remaining,
+      unit: "number",
+      delta: null,
+      sparkline: [],
+      hint: "Still out on the board at capture.",
+    },
+    {
+      id: "reattempt",
+      label: "Reattemptable",
+      value: totals.packageStatusCounts.reattemptable,
+      unit: "number",
+      delta: null,
+      sparkline: [],
+      hint: "Console board chip. CSV export row count can differ.",
+    },
+    {
+      id: "undeliverable",
+      label: "Undeliverable",
+      value: totals.packageStatusCounts.undeliverable,
+      unit: "number",
+      delta: null,
+      sparkline: [],
+      hint: "Console board chip. CSV export row count can differ.",
+    },
+    {
+      id: "active",
+      label: "In progress",
+      value: totals.inProgress,
+      unit: "number",
+      delta: null,
+      sparkline: [],
+      hint: `Routes still in progress at ${captured}.`,
+    },
+    {
+      id: "shift",
+      label: "DAs still on road",
+      value: onRoad,
+      unit: "number",
+      delta: null,
+      sparkline: [],
+      hint: "Associates on in-progress routes.",
+    },
+  ];
+}
+
+function alertsFor(day: DeliveryDay): Alert[] {
+  const names = (route: Route) =>
+    route.associateIds
+      .map((id) => day.drivers.find((driver) => driver.id === id)?.name)
+      .filter((name): name is string => Boolean(name))
+      .join("/");
+  const open = day.routes.filter((route) => route.status === "in_progress");
+  const incomplete = day.routes.filter((route) => route.status === "incomplete");
+  const complete = day.routes.filter((route) => route.status === "completed").length;
+  const captured = formatConsoleCapture(day.board.capturedAt);
+  const chips = day.board.totals.packageStatusCounts;
+  return [
+    alerts[0]!,
+    {
+      id: "al-inprogress",
+      severity: open.length > 0 ? "warning" : "info",
+      title: open.length > 0 ? `${open.length} routes still in progress` : "End of day · 0 routes in progress",
+      detail:
+        open.length > 0
+          ? `${open.map((route) => `${route.code} (${names(route)})`).join(" and ")} open at the ${captured} Console capture.`
+          : `${complete} routes complete. Incomplete: ${
+              incomplete.map((route) => `${route.code} (${names(route) || "unassigned"})`).join(", ") || "none"
+            }.`,
+      href: "/routes",
+    },
+    {
+      id: "al-whr",
+      severity: "warning",
+      title: `${day.board.totals.workHourRisk} work-hour risk`,
+      detail: `${day.board.totals.multiTransporter} multi-transporter routes, ${day.board.totals.onBreak} on break, ${day.board.totals.inactive} inactive. Vehicle and on-time % were not on the board.`,
+      href: "/routes",
+    },
+    {
+      id: "al-exceptions",
+      severity: "info",
+      title: `${chips.reattemptable} reattemptable · ${chips.undeliverable} undeliverable`,
+      detail: `${chips.remaining} remaining, ${chips.missing} missing, ${chips.returnedToStation} RTS, ${chips.pickupFailed} pickup failed.`,
+      href: "/routes",
+    },
+  ];
+}
+
+const liveOverview = {
+  asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
+  kpis: todayKpis,
+  packagesByDay: [{ label: "Mon 19", delivered: deliveredToday, assigned: assignedToday }],
+  routeStatusCounts: statusCounts(),
+  alerts,
+};
+
 export function getOverview(range: DateRange): OverviewSnapshot {
-  const covered = rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, range);
-  if (!covered) {
+  const days = deliveryDaysInRange(range);
+  if (days.length === 0) {
     return {
       range,
       asOfLabel: `No Delivery Execution capture in this period. ${DELIVERY_COVERAGE.label}.`,
@@ -166,12 +296,37 @@ export function getOverview(range: DateRange): OverviewSnapshot {
       alerts: [],
     };
   }
+  const includesLive = days.some((day) => day.serviceDate === STATION_TODAY);
+  if (includesLive && days.length === 1) {
+    return { range, ...liveOverview };
+  }
+  if (includesLive) {
+    const labels = days.map((day) => deliveryDayLabel(day.serviceDate)).join(", ");
+    return {
+      range,
+      asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. Seeded days in this period: ${labels}. ${DELIVERY_COVERAGE.label}.`,
+      kpis: todayKpis,
+      packagesByDay: days.map((day) => ({
+        label: deliveryDayLabel(day.serviceDate),
+        delivered: day.board.totals.packagesDelivered,
+        assigned: day.board.totals.packagesPlanned,
+      })),
+      routeStatusCounts: statusCounts(),
+      alerts,
+    };
+  }
+  const detail = days[days.length - 1]!;
+  const labels = days.map((day) => deliveryDayLabel(day.serviceDate)).join(", ");
   return {
     range,
-    asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
-    kpis: todayKpis,
-    packagesByDay: [{ label: "Mon 19", delivered: deliveredToday, assigned: assignedToday }],
-    routeStatusCounts: statusCounts(),
-    alerts,
+    asOfLabel: `Delivery Execution · ${labels}. Showing ${deliveryDayLabel(detail.serviceDate)} (${detail.serviceDate}), captured ${formatConsoleCapture(detail.board.capturedAt)}.`,
+    kpis: kpisFor(detail),
+    packagesByDay: days.map((day) => ({
+      label: deliveryDayLabel(day.serviceDate),
+      delivered: day.board.totals.packagesDelivered,
+      assigned: day.board.totals.packagesPlanned,
+    })),
+    routeStatusCounts: statusCounts(detail.routes),
+    alerts: alertsFor(detail),
   };
 }
