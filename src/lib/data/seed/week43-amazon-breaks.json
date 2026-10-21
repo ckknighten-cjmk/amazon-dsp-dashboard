@@ -1,0 +1,420 @@
+{
+  "source": "Amazon DSP Console Compliance Dashboard \u2192 Breaks, Week 43 (Oct 18\u2013Oct 24)",
+  "capturedRowsOnly": false,
+  "summary": {
+    "dasWithViolations": 20,
+    "dasWithViolationsYesterday": 11,
+    "missingBreaks": 9,
+    "delayedBreaks": 3,
+    "shorterBreakThanRequired": 2,
+    "packageDeliveredDuringBreak": 6,
+    "missingPunches": 36,
+    "breaksBoardAssociates": 83
+  },
+  "workHours": {
+    "source": "Amazon DSP Console Compliance Dashboard \u2192 Work hour",
+    "dasNearingViolations": 3,
+    "worked50to60HoursPast7Days": 1,
+    "worked5to6ConsecutiveDays": 2,
+    "associateNamed": false,
+    "lastRefreshedDate": "2026-10-21"
+  },
+  "rows": [
+    {
+      "associateName": "Martavious Jones",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Keon Kentrell Gross",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Keon Kentrell Gross",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Jazmonjr Worles",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Jazmonjr Worles",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Jazmonjr Worles",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Gabrielle Tracy Pirtle",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Gabrielle Tracy Pirtle",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Daniel Aponte espinoza",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Martavious Deshaun Malone",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Martavious Deshaun Malone",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "DeAndre Craig Adams",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Gregory Deon Lowery",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Nolan Jerard Goliday",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Nolan Jerard Goliday",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Cole Regan Perkins",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Justin Amir Scott",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Vickie Elaine Stevens",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Vickie Elaine Stevens",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Demarcus Faulkner",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Colter Lane Stupp",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Colter Lane Stupp",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Colter Lane Stupp",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Fredrick Montavious Rayford",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Lorenzo Kaleb Miller",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Zora Ann Bobo",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Zora Ann Bobo",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Jeromy Darius Mitchell",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Jeromy Darius Mitchell",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Denzel Marcus Hall",
+      "date": "2026-10-19",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Denzel Marcus Hall",
+      "date": "2026-10-20",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Candido Antoinio Fulcher",
+      "date": "2026-10-18",
+      "status": "non_compliant"
+    },
+    {
+      "associateName": "Larry Durnell Shipp",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Dibrell Antwoine Armstrong",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Marcelous Kyles",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Sylvannia Deleon Adams",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Sylvannia Deleon Adams",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Guy Ray JR Harris",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Draem Thomarcus Hines",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Draem Thomarcus Hines",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Stevon Kentrel Kyles",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Stevon Kentrel Kyles",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Mauricio Ramon jr Hearns",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Xavion Frazier",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Jordan Hutchinson",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Larrico Kihyoshi Pickens",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Larrico Kihyoshi Pickens",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Larrico Kihyoshi Pickens",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Shameka Nicole Williams",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Makayla Sharmaine Cooper",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Kayla Thomas",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Kayla Thomas",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Kayla Thomas",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Melvin Lee Johnson",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Shaquille Mercedes Tate",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Lyric malasha Cole",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Shakira Kenyato Singleton",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Michael Neal",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Michael Neal",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Daurieal Quadeem Hervey",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Khalid Darian Jones",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Darrell Eugene jr Woods",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Mercedes Dominique Cherry",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Dorian cLYDE Tyler",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Dorian cLYDE Tyler",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Ronesha Gray",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Jakira Janae Cathey",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Jamaica Tiwaun Jackson",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "briana Maeleah Mosley",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "briana Maeleah Mosley",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Marquize deshun Wallace",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Kylan Laron Knight",
+      "date": "2026-10-18",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Kylan Laron Knight",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Brandon Michael Clark",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Brandon Michael Clark",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "John Madison Byrd",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Aaron Lorenzo Armstrong",
+      "date": "2026-10-19",
+      "status": "missing_punch"
+    },
+    {
+      "associateName": "Aaron Lorenzo Armstrong",
+      "date": "2026-10-20",
+      "status": "missing_punch"
+    }
+  ],
+  "limits": [
+    "Structured Amazon meal start and end times were not in the Week 43 Compliance Breaks capture. This page does not invent them.",
+    "The Breaks board has 83 DA rows for Oct 18\u2013Oct 24. Only Oct 18\u2013Oct 20 have daily status values. Compliant days and dashes are not meal-exception rows. Non-compliant and Missing Punch days are the rows scored against ADP.",
+    "Breaks chips: 20 DAs with violations, yesterday 11, missing breaks 9, delayed breaks 3, shorter than required 2, package delivered outside work hours 6, missing punches 36/83 DAs.",
+    "Work hour chips, last refreshed 2026-10-21: 3 DAs with violations, 3 exceeded the daily 12-hour limit, 0 exceeded the weekly 60-hour limit, 0 under 10 rest hours between shifts, 0 exceeded 6 consecutive days, 104 DAs with incomplete data, 12 missing punches, 92 IDs not linked. Those associates were not named on the capture."
+  ]
+}

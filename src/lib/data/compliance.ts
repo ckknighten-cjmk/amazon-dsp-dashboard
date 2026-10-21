@@ -6,12 +6,15 @@
 import adpWeek38 from "@/lib/data/seed/adp-timecards-week38.json";
 import adpWeek39 from "@/lib/data/seed/adp-timecards-week39.json";
 import adpWeek41 from "@/lib/data/seed/adp-timecards-week41.json";
+import adpWeek43 from "@/lib/data/seed/adp-timecards-week43.json";
 import breaksWeek38 from "@/lib/data/seed/week38-amazon-breaks.json";
 import breaksWeek39 from "@/lib/data/seed/week39-amazon-breaks.json";
 import breaksWeek41 from "@/lib/data/seed/week41-amazon-breaks.json";
+import breaksWeek43 from "@/lib/data/seed/week43-amazon-breaks.json";
 import scheduleWeek38 from "@/lib/data/seed/week38-amazon-schedule.json";
 import scheduleWeek39 from "@/lib/data/seed/week39-amazon-schedule.json";
 import scheduleWeek41 from "@/lib/data/seed/week41-amazon-schedule.json";
+import scheduleWeek43 from "@/lib/data/seed/week43-amazon-schedule.json";
 import { dateLabel, evaluateTimecards } from "@/lib/compliance/engine";
 import type {
   AdpPunchRow,
@@ -23,7 +26,7 @@ import type {
   WorkHoursSummary,
 } from "@/lib/compliance/types";
 
-export const COMPLIANCE_WEEKS = [38, 39, 41] as const;
+export const COMPLIANCE_WEEKS = [38, 39, 41, 43] as const;
 export type ComplianceWeek = (typeof COMPLIANCE_WEEKS)[number];
 
 const SCHEDULE_TEMPLATE_NOTE =
@@ -128,6 +131,13 @@ const WEEK_COPY: Record<ComplianceWeek, WeekCopy> = {
     adpPreface: [],
     outsideCoverageNote: null,
   },
+  43: {
+    sourceNote:
+      "Punches are the read-only Group Timecard for Sun–Wed, bucketed by the displayed Date column. Oct 21 is on the grid and has no punches yet. Oct 22–Oct 24 were not on the grid. No individual Timecard Detail views were captured.",
+    coverageDetail: "Group Timecard · Sun–Wed",
+    adpPreface: [],
+    outsideCoverageNote: null,
+  },
 };
 
 const SEEDS: Record<ComplianceWeek, { adp: AdpSeed; breaks: BreaksSeed; schedule: ScheduleSeed }> = {
@@ -145,6 +155,11 @@ const SEEDS: Record<ComplianceWeek, { adp: AdpSeed; breaks: BreaksSeed; schedule
     adp: adpWeek41 as AdpSeed,
     breaks: breaksWeek41 as BreaksSeed,
     schedule: scheduleWeek41 as ScheduleSeed,
+  },
+  43: {
+    adp: adpWeek43 as AdpSeed,
+    breaks: breaksWeek43 as BreaksSeed,
+    schedule: scheduleWeek43 as ScheduleSeed,
   },
 };
 
@@ -328,10 +343,11 @@ export function parseComplianceWeek(value: string | string[] | undefined): Compl
   const raw = Array.isArray(value) ? value[0] : value;
   if (raw === "38") return 38;
   if (raw === "39") return 39;
-  return 41;
+  if (raw === "41") return 41;
+  return 43;
 }
 
-export function getComplianceReport(week: ComplianceWeek = 41) {
+export function getComplianceReport(week: ComplianceWeek = 43) {
   const existing = cached.get(week);
   if (existing) return existing;
   const report = buildReport(week);

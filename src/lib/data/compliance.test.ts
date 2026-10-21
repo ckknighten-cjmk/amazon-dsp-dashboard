@@ -2,9 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { getComplianceReport, parseComplianceWeek } from "./compliance";
 import adpWeek41 from "./seed/adp-timecards-week41.json";
+import adpWeek43 from "./seed/adp-timecards-week43.json";
 import scheduleWeek38 from "./seed/week38-amazon-schedule.json";
 import scheduleWeek39 from "./seed/week39-amazon-schedule.json";
 import scheduleWeek41 from "./seed/week41-amazon-schedule.json";
+import scheduleWeek43 from "./seed/week43-amazon-schedule.json";
 
 test("Week 39 seed flags the full Group Timecard and does not invent meal clocks", () => {
   const report = getComplianceReport(39);
@@ -89,15 +91,13 @@ test("Week 39 seed flags the full Group Timecard and does not invent meal clocks
   assert.equal(report.workHoursSummary.dasNearingViolations, 1);
 });
 
-test("Week 41 seed is the default and flags rostered blocks against the full Group Timecard", () => {
-  const report = getComplianceReport();
+test("Week 41 seed flags rostered blocks against the full Group Timecard", () => {
+  const report = getComplianceReport(41);
   assert.equal(report.week, 41);
-  assert.equal(parseComplianceWeek(undefined), 41);
   assert.equal(parseComplianceWeek("41"), 41);
   assert.equal(parseComplianceWeek(["41"]), 41);
   assert.equal(parseComplianceWeek("38"), 38);
   assert.equal(parseComplianceWeek("39"), 39);
-  assert.equal(parseComplianceWeek("40"), 41);
 
   assert.equal(report.weekLabel, "Week 41, Oct 4–Oct 10, 2026");
   assert.equal(report.coverageLabel, "Oct 4–Oct 10");
@@ -209,12 +209,148 @@ test("Week 41 seed is the default and flags rostered blocks against the full Gro
   assert.equal(report.breaksSummary.dasWithViolationsYesterday, null);
 });
 
+test("Week 43 seed is the default and leaves future days outside the Group Timecard", () => {
+  const report = getComplianceReport();
+  assert.equal(report.week, 43);
+  assert.equal(parseComplianceWeek(undefined), 43);
+  assert.equal(parseComplianceWeek("43"), 43);
+  assert.equal(parseComplianceWeek(["43"]), 43);
+  assert.equal(parseComplianceWeek("41"), 41);
+  assert.equal(parseComplianceWeek("38"), 38);
+  assert.equal(parseComplianceWeek("39"), 39);
+  assert.equal(parseComplianceWeek("40"), 43);
+  assert.equal(parseComplianceWeek("42"), 43);
+
+  assert.equal(report.weekLabel, "Week 43, Oct 18–Oct 24, 2026");
+  assert.equal(report.coverageLabel, "Oct 18–Oct 21");
+  assert.equal(report.coverageDetail, "Group Timecard · Sun–Wed");
+  assert.equal(report.company, "CJMK Inc.");
+  assert.equal(report.station, "DNA4");
+  assert.equal(report.exportedAt, "10/21/26, 6:16:20 AM");
+  assert.deepEqual(report.weekDates, [
+    "2026-10-18",
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+    "2026-10-22",
+    "2026-10-23",
+    "2026-10-24",
+  ]);
+  assert.deepEqual(report.coverageDates, [
+    "2026-10-18",
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+  ]);
+  assert.deepEqual(Object.keys(adpWeek43.groupTimecard).sort(), [
+    "2026-10-18",
+    "2026-10-19",
+    "2026-10-20",
+    "2026-10-21",
+  ]);
+  assert.deepEqual(report.counts, {
+    missingPunchDays: 67,
+    missingPunchAssociates: 51,
+    over12Days: 2,
+    over60Associates: 0,
+    mealMismatches: 0,
+    mealRowsJoined: 78,
+  });
+  assert.equal(
+    Object.values(adpWeek43.groupTimecard).reduce((sum, rows) => sum + rows.length, 0),
+    591
+  );
+  assert.ok(
+    Object.values(adpWeek43.groupTimecard).every((rows) => rows.every((row) => row.outType === ""))
+  );
+  assert.equal(scheduleWeek43.associates.length, 101);
+  assert.equal(scheduleWeek43.serviceDates.start, "2026-10-18");
+  assert.equal(scheduleWeek43.serviceDates.end, "2026-10-24");
+  assert.deepEqual(scheduleWeek43.rosteredTotals, {
+    "2026-10-18": 36,
+    "2026-10-19": 42,
+    "2026-10-20": 42,
+    "2026-10-21": 37,
+    "2026-10-22": 0,
+    "2026-10-23": 0,
+    "2026-10-24": 0,
+  });
+  assert.ok(report.missingPunches.every((row) => report.coverageDates.includes(row.date)));
+  assert.ok(report.missingPunches.every((row) => row.amazonTimes.startsWith("Block:")));
+  assert.equal(report.missingPunches.filter((row) => row.date >= "2026-10-22").length, 0);
+  const oct21 = report.missingPunches.filter((row) => row.date === "2026-10-21");
+  assert.equal(oct21.length, 37);
+  assert.ok(oct21.every((row) => row.adpTimes === "No ADP punch"));
+  assert.ok(
+    report.missingPunches.some(
+      (row) =>
+        row.associate === "Michael Neal" &&
+        row.date === "2026-10-18" &&
+        row.adpTimes === "No ADP punch"
+    )
+  );
+  const amy = scheduleWeek43.associates.find((associate) => associate.transporterId === "A18P3MJLHQG320");
+  const amySunday = amy?.days.find((day) => day.date === "2026-10-18");
+  assert.equal(amySunday?.workBlock, null);
+  assert.ok(amySunday?.shift);
+  assert.ok(
+    adpWeek43.groupTimecard["2026-10-18"].some((row) => row.name === "RHINEHART, AMY" && row.timeIn === "")
+  );
+  assert.equal(
+    report.missingPunches.some((row) => row.associate === "Amy Ann Rhinehart" && row.date === "2026-10-18"),
+    false
+  );
+  assert.deepEqual(
+    report.over12.map((row) => `${row.date} ${row.adpName} ${row.hoursLabel}`),
+    ["2026-10-20 ESPINOZA, DANIEL 13.67 ADP", "2026-10-20 Ruffin, Arielle 12.08 ADP"]
+  );
+  assert.equal(report.over60.length, 0);
+  assert.equal(report.over60Peak?.adpName, "STUPP, COLTER");
+  assert.equal(report.over60Peak?.hoursLabel, "26.99");
+  assert.match(report.over60Windows[0]?.coverageLabel ?? "", /^1 of 7 days captured/);
+  assert.match(report.over60Windows.at(-1)?.coverageLabel ?? "", /^4 of 7 days captured/);
+  assert.match(report.scheduleTemplateNote, /Coming later/);
+  assert.match(report.notes.join("\n"), /does not load or push|Coming later|schedule template/i);
+  assert.match(report.notes.join("\n"), /10\/22-10\/24 are future and skipped/);
+  assert.match(
+    report.notes.join("\n"),
+    /Rostered work-block totals Sun–Sat from the schedule workbook: 36, 42, 42, 37, 0, 0, 0/
+  );
+  assert.doesNotMatch(report.notes.join("\n"), /ORA-20005/);
+  assert.equal(report.mealRows.filter((row) => row.mismatch).length, 0);
+  assert.equal(report.mealRows.some((row) => row.adpMeal === "Meal Punch"), false);
+  assert.ok(
+    report.mealRows.some(
+      (row) =>
+        row.associate === "Jazmonjr Worles" &&
+        row.date === "2026-10-18" &&
+        row.amazonStatus === "Non-compliant" &&
+        row.mismatch === false
+    )
+  );
+  for (const row of report.mealRows) {
+    assert.match(row.amazonTimes, /^Not in capture/);
+    assert.equal(row.amazonStatus === "Non-compliant" || row.amazonStatus === "Missing Punch", true);
+  }
+  assert.ok(report.unmatchedAmazon.some((row) => row.name === "Alexis Marrie Hutchison"));
+  assert.equal(report.workHoursSummary.dasNearingViolations, 3);
+  assert.equal(report.workHoursSummary.worked50to60HoursPast7Days, 1);
+  assert.equal(report.workHoursSummary.worked5to6ConsecutiveDays, 2);
+  assert.equal(report.workHoursSummary.associateNamed, false);
+  assert.equal(report.workHoursSummary.lastRefreshedDate, "2026-10-21");
+  assert.equal(report.breaksSummary.dasWithViolations, 20);
+  assert.equal(report.breaksSummary.dasWithViolationsYesterday, 11);
+  assert.equal(report.breaksSummary.missingPunches, 36);
+  assert.equal(report.breaksSummary.breaksBoardAssociates, 83);
+});
+
 test("Week 38 seed uses the full Group Timecard and does not invent meals or work-hour counts", () => {
   const report = getComplianceReport(38);
   assert.equal(report.week, 38);
   assert.equal(parseComplianceWeek("38"), 38);
   assert.equal(parseComplianceWeek("39"), 39);
-  assert.equal(parseComplianceWeek("40"), 41);
+  assert.equal(parseComplianceWeek("40"), 43);
+  assert.equal(parseComplianceWeek("43"), 43);
 
   assert.equal(report.weekLabel, "Week 38, Sep 13–Sep 19, 2026");
   assert.equal(report.coverageLabel, "Sep 13–Sep 19");
