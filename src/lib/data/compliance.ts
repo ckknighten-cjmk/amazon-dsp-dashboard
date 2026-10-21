@@ -6,14 +6,17 @@
 import adpWeek38 from "@/lib/data/seed/adp-timecards-week38.json";
 import adpWeek39 from "@/lib/data/seed/adp-timecards-week39.json";
 import adpWeek41 from "@/lib/data/seed/adp-timecards-week41.json";
+import adpWeek42 from "@/lib/data/seed/adp-timecards-week42.json";
 import adpWeek43 from "@/lib/data/seed/adp-timecards-week43.json";
 import breaksWeek38 from "@/lib/data/seed/week38-amazon-breaks.json";
 import breaksWeek39 from "@/lib/data/seed/week39-amazon-breaks.json";
 import breaksWeek41 from "@/lib/data/seed/week41-amazon-breaks.json";
+import breaksWeek42 from "@/lib/data/seed/week42-amazon-breaks.json";
 import breaksWeek43 from "@/lib/data/seed/week43-amazon-breaks.json";
 import scheduleWeek38 from "@/lib/data/seed/week38-amazon-schedule.json";
 import scheduleWeek39 from "@/lib/data/seed/week39-amazon-schedule.json";
 import scheduleWeek41 from "@/lib/data/seed/week41-amazon-schedule.json";
+import scheduleWeek42 from "@/lib/data/seed/week42-amazon-schedule.json";
 import scheduleWeek43 from "@/lib/data/seed/week43-amazon-schedule.json";
 import { dateLabel, evaluateTimecards } from "@/lib/compliance/engine";
 import type {
@@ -26,7 +29,7 @@ import type {
   WorkHoursSummary,
 } from "@/lib/compliance/types";
 
-export const COMPLIANCE_WEEKS = [38, 39, 41, 43] as const;
+export const COMPLIANCE_WEEKS = [38, 39, 41, 42, 43] as const;
 export type ComplianceWeek = (typeof COMPLIANCE_WEEKS)[number];
 
 const SCHEDULE_TEMPLATE_NOTE =
@@ -131,6 +134,13 @@ const WEEK_COPY: Record<ComplianceWeek, WeekCopy> = {
     adpPreface: [],
     outsideCoverageNote: null,
   },
+  42: {
+    sourceNote:
+      "Punches are the read-only Group Timecard for Sun–Sat, bucketed by the displayed Date column. No individual Timecard Detail views were captured. The Work hour table captured pages 1–4 only (77 DAs). Pages 5–6 errored on Amazon's side and were not filled in.",
+    coverageDetail: "Group Timecard · Sun–Sat",
+    adpPreface: [],
+    outsideCoverageNote: null,
+  },
   43: {
     sourceNote:
       "Punches are the read-only Group Timecard for Sun–Wed, bucketed by the displayed Date column. Oct 21 is on the grid and has no punches yet. Oct 22–Oct 24 were not on the grid. No individual Timecard Detail views were captured.",
@@ -155,6 +165,11 @@ const SEEDS: Record<ComplianceWeek, { adp: AdpSeed; breaks: BreaksSeed; schedule
     adp: adpWeek41 as AdpSeed,
     breaks: breaksWeek41 as BreaksSeed,
     schedule: scheduleWeek41 as ScheduleSeed,
+  },
+  42: {
+    adp: adpWeek42 as AdpSeed,
+    breaks: breaksWeek42 as BreaksSeed,
+    schedule: scheduleWeek42 as ScheduleSeed,
   },
   43: {
     adp: adpWeek43 as AdpSeed,
@@ -344,6 +359,7 @@ export function parseComplianceWeek(value: string | string[] | undefined): Compl
   if (raw === "38") return 38;
   if (raw === "39") return 39;
   if (raw === "41") return 41;
+  if (raw === "42") return 42;
   return 43;
 }
 

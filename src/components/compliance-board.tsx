@@ -35,6 +35,7 @@ const WEEKS = [
   { week: 38, href: "/compliance?week=38", label: "Week 38" },
   { week: 39, href: "/compliance?week=39", label: "Week 39" },
   { week: 41, href: "/compliance?week=41", label: "Week 41" },
+  { week: 42, href: "/compliance?week=42", label: "Week 42" },
   { week: 43, href: "/compliance", label: "Week 43" },
 ] as const;
 

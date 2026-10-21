@@ -68,6 +68,11 @@ export const COMPLIANCE_COVERAGE = {
     end: "2026-10-10",
     label: "Week 41, Oct 4–Oct 10, 2026",
   },
+  42: {
+    start: "2026-10-11",
+    end: "2026-10-17",
+    label: "Week 42, Oct 11–Oct 17, 2026",
+  },
   43: {
     start: "2026-10-18",
     end: "2026-10-24",
