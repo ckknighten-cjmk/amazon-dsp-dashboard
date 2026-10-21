@@ -219,6 +219,11 @@ test("other dataset exports stay on seeded values", () => {
   assert.equal(complianceViewCsv(week41, "missing").filename, "compliance-missing-punches-dna4-week-41.csv");
   assert.equal(complianceCombinedCsv(week41).filename, "compliance-dna4-week-41.csv");
   assert.match(complianceCombinedCsv(week41).csv, /Meal rows/);
+  const week43 = getComplianceReport();
+  assert.equal(week43.week, 43);
+  assert.equal(complianceViewCsv(week43, "missing").filename, "compliance-missing-punches-dna4-week-43.csv");
+  assert.equal(complianceCombinedCsv(week43).filename, "compliance-dna4-week-43.csv");
+  assert.match(complianceCombinedCsv(week43).csv, /Meal rows/);
 });
 
 test("Oct 14 refresh-final seed replaces the evening-wrap counts", () => {

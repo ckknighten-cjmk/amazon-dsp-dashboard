@@ -10,7 +10,7 @@
  * Week 37 variable section totals are the Sep 23 variable invoice. Week 38's
  * variable invoice was not listed. Work Summary weeks 37–39 reconcile against
  * that invoice when it is listed. Compliance compares ADP Group Timecards to the
- * Amazon schedule workbooks for Weeks 38, 39, and 41. Week 41 is the default.
+ * Amazon schedule workbooks for Weeks 38, 39, 41, and 43. Week 43 is the default.
  * Fleet is the DNA4 My
  * vehicles capture. Incidents remain mock fixtures.
  */

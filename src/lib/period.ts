@@ -68,6 +68,11 @@ export const COMPLIANCE_COVERAGE = {
     end: "2026-10-10",
     label: "Week 41, Oct 4–Oct 10, 2026",
   },
+  43: {
+    start: "2026-10-18",
+    end: "2026-10-24",
+    label: "Week 43, Oct 18–Oct 24, 2026",
+  },
 } as const;
 
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
