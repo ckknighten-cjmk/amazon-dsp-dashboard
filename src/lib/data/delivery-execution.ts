@@ -1,13 +1,14 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-10-20, ~8:05 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-10-21, ~8:08 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-10-20.csv`, 129 rows). This capture stores those rows
+ * `packages-exceptions-2026-10-21.csv`, 107 rows). This capture stores those rows
  * with the CSV column names; earlier seeds used camelCase. Vehicle and on-time %
  * stay null. Execution gauges in this capture are 99/99/99/99 (locations, stops,
  * packages, attempt success). Status is in progress per the board: 2 in progress
- * (CX284, CX285) and 39 complete. CX286 stays complete at 161/162 stops because the
- * board in-progress chip was 2.
+ * (CX287, CX267) and 36 complete. CX255 stays complete at 192/193 stops because the
+ * board in-progress chip was 2. Ahead, at risk, and behind are the board chips
+ * (1 / 1 / 0), not a recount of the route-row badges.
  */
 import type {
   DeliveryExecutionBoard,
@@ -17,7 +18,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-10-20.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-10-21.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];
@@ -156,7 +157,7 @@ export type DeliverySeed = {
   exceptionPackages: SeedException[];
 };
 
-/** Map one dated seed. The live Oct 20 board is this function applied to that file. */
+/** Map one dated seed. The live Oct 21 board is this function applied to that file. */
 export function mapDeliverySeed(file: DeliverySeed): DeliveryDay {
   const transporterByName = new Map<string, string>();
   for (const row of file.exceptionPackages.map(readException)) {
@@ -327,7 +328,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Oct 20 publishes rescueActions as 0, so this column is still not
+ * Oct 21 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =
