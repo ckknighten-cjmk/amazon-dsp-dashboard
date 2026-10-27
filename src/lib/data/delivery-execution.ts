@@ -1,14 +1,14 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-10-22, ~8:13 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-10-26, ~8:05 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-10-22.csv`, 129 rows). This capture stores those rows
+ * `packages-exceptions-2026-10-26.csv`, 205 rows). This capture stores those rows
  * with the CSV column names; earlier seeds used camelCase. Vehicle and on-time %
- * stay null. Execution gauges in this capture are 99/99/99/99 (locations, stops,
- * packages, attempt success). Status is in progress per the board: 2 in progress
- * (CX289, CX298) and 35 complete. CX289's route row says 14 behind; the board
- * behind chip stays 0. Ahead, at risk, and behind are the board chips
- * (0 / 1 / 0), not a recount of the route-row badges.
+ * stay null. Execution gauges in this capture are 99/99/99/100 (locations, stops,
+ * packages, attempt success). Status is in progress per the board: 3 in progress
+ * (CX270, CX276, CX278) and 33 complete. CX276's route row says 7 ahead and
+ * CX278's says 25 ahead; the board ahead chip is 2. Ahead, at risk, and behind
+ * are the board chips (2 / 0 / 0), not a recount of the route-row badges.
  */
 import type {
   DeliveryExecutionBoard,
@@ -18,7 +18,7 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-10-22.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-10-26.json";
 
 type SeedRoute = (typeof seed)["routes"][number];
 type SeedException = (typeof seed)["exceptionPackages"][number];
@@ -157,7 +157,7 @@ export type DeliverySeed = {
   exceptionPackages: SeedException[];
 };
 
-/** Map one dated seed. The live Oct 22 board is this function applied to that file. */
+/** Map one dated seed. The live Oct 26 board is this function applied to that file. */
 export function mapDeliverySeed(file: DeliverySeed): DeliveryDay {
   const transporterByName = new Map<string, string>();
   for (const row of file.exceptionPackages.map(readException)) {
@@ -328,7 +328,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Oct 22 publishes rescueActions as 0, so this column is still not
+ * Oct 26 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =
