@@ -72,7 +72,7 @@ test("WTN2 has no seed and DNA4 values stay on DNA4", () => {
 
   const routes = loadStationDataset("DNA4", "routes", () => getRoutes());
   assert.ok(routes);
-  assert.equal(routes.length, 37);
+  assert.equal(routes.length, 36);
   assert.equal(getScorecard(38).overallScore, 84);
   assert.equal(stationSettings("DNA4"), dna4Station);
   assert.equal(dna4Station.stationCode, "DNA4");

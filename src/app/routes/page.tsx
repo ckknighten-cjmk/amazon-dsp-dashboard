@@ -82,7 +82,7 @@ function associateNames(route: Route, day: DeliveryDay, live: boolean) {
 }
 
 const LIVE_DESCRIPTION =
-  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Oct 22, 2026, captured at 8:13 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 99%). 37 routes: 2 in progress (CX289, CX298); the other 35 are complete. CX289 is in progress at 191/200 stops and the route row says 14 behind; the board behind chip is 0.";
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Oct 26, 2026, captured at 8:05 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 100%). 36 routes: 3 in progress (CX270, CX276, CX278); the other 33 are complete. CX276 is in progress at 173/181 stops and 7 ahead; CX278 is in progress at 128/129 stops and 25 ahead. The board ahead chip is 2.";
 
 export default function RoutesPage() {
   const { code } = useStation();
