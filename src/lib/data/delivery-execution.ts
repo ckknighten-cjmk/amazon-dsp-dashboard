@@ -1,15 +1,15 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-10-28, ~8:07 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-10-30, ~8:02 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-10-28.csv`, 149 rows). This capture stores those rows
+ * `packages-exceptions-2026-10-30.csv`, 161 rows). This capture stores those rows
  * with the CSV column names; earlier seeds used camelCase. Vehicle and on-time %
- * stay null. Execution gauges in this capture are 99/99/99/100 (locations, stops,
- * packages, attempt success). Status is in progress per the board: 2 in progress
- * (CX326, CX302) and 42 complete. CX326's route row says 20 behind. CX302's route
- * row has no note; the disclaimer says 7m left on shift. CX135 is complete at
- * 196/197 and CX301 is complete at 179/180. Ahead, at risk, and behind are the
- * board chips (0 / 0 / 1), not a recount of the route-row badges.
+ * stay null. Execution gauges in this capture are 99/99/99/99 (locations, stops,
+ * packages, attempt success). Status is in progress per the board: 4 in progress
+ * (CX285, CX271, CX276, CX257) and 35 complete. CX285's route row is marked 9 behind.
+ * The board behind chip is 0. incomplete was null on the capture and stays null.
+ * Ahead, at risk, and behind are the board chips (3 / 1 / 0), not a recount of
+ * the route-row badges.
  */
 import type {
   DeliveryExecutionBoard,
@@ -19,9 +19,13 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-10-28.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-10-30.json";
 
-type SeedRoute = (typeof seed)["routes"][number];
+type SeedRouteJson = (typeof seed)["routes"][number];
+/** Oct 30 notes are empty lists. Earlier seeds store pace text in the same field. */
+type SeedRoute = Omit<SeedRouteJson, "notes"> & {
+  notes: string[] | string | null;
+};
 type SeedException = (typeof seed)["exceptionPackages"][number];
 
 const STATUS_MAP: Record<string, RouteStatus> = {
@@ -29,6 +33,9 @@ const STATUS_MAP: Record<string, RouteStatus> = {
   in_progress: "in_progress",
   no_progress: "no_progress",
   incomplete: "incomplete",
+  // Oct 29 lists AX93, AX96, and AX97 as not_departed. The route status set has
+  // no separate value, so those rows stay Not started. The seed keeps not_departed.
+  not_departed: "not_started",
 };
 
 function slugName(name: string) {
@@ -132,7 +139,7 @@ export type DeliverySeed = {
   totals: {
     routes: number;
     inProgress: number;
-    incomplete: number;
+    incomplete: number | null;
     executionGaugesPct: DeliveryExecutionBoard["totals"]["executionGaugesPct"];
     packageStatusCounts: {
       remaining: number;
@@ -158,7 +165,7 @@ export type DeliverySeed = {
   exceptionPackages: SeedException[];
 };
 
-/** Map one dated seed. The live Oct 28 board is this function applied to that file. */
+/** Map one dated seed. The live Oct 30 board is this function applied to that file. */
 export function mapDeliverySeed(file: DeliverySeed): DeliveryDay {
   const transporterByName = new Map<string, string>();
   for (const row of file.exceptionPackages.map(readException)) {
@@ -329,7 +336,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Oct 28 publishes rescueActions as 0, so this column is still not
+ * Oct 30 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =

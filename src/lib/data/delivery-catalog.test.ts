@@ -20,12 +20,13 @@ const ADDED = [
 ] as const;
 
 describe("delivery seed catalog", () => {
-  it("keeps Oct 28 as today and lists every seeded day", () => {
-    assert.equal(STATION_TODAY, "2026-10-28");
-    assert.equal(deliveryBoard.serviceDate, "2026-10-28");
-    assert.equal(deliveryBoard.totals.routes, 44);
-    assert.equal(routes.length, 44);
-    assert.equal(DELIVERY_SEED_DATES.length, 26);
+  it("keeps Oct 30 as today and lists every seeded day", () => {
+    assert.equal(STATION_TODAY, "2026-10-30");
+    assert.equal(deliveryBoard.serviceDate, "2026-10-30");
+    assert.equal(deliveryBoard.totals.routes, 39);
+    assert.equal(deliveryBoard.totals.incomplete, null);
+    assert.equal(routes.length, 39);
+    assert.equal(DELIVERY_SEED_DATES.length, 28);
     assert.deepEqual(DELIVERY_SEED_DATES, [
       "2026-09-21",
       "2026-09-23",
@@ -53,25 +54,27 @@ describe("delivery seed catalog", () => {
       "2026-10-26",
       "2026-10-27",
       "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
     ]);
   });
 
   it("shows the live board for today and every seeded day in this week", () => {
     const today = getOverview({ kind: "today" });
-    assert.equal(today.kpis[0]?.value, 13726);
+    assert.equal(today.kpis[0]?.value, 11246);
     assert.deepEqual(
       today.packagesByDay.map((day) => day.label),
-      ["Wed 28"]
+      ["Fri 30"]
     );
-    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-10-28");
+    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-10-30");
 
     const week = getOverview({ kind: "week" });
-    assert.equal(week.kpis[0]?.value, 13726);
+    assert.equal(week.kpis[0]?.value, 11246);
     assert.deepEqual(
       week.packagesByDay.map((day) => day.label),
-      ["Oct 22", "Oct 26", "Oct 27", "Oct 28"]
+      ["Oct 26", "Oct 27", "Oct 28", "Oct 29", "Oct 30"]
     );
-    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-10-28");
+    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-10-30");
     assert.equal(deliveryDaysInRange({ kind: "custom", start: "2026-10-17", end: "2026-10-18" }).length, 0);
   });
 
@@ -101,5 +104,27 @@ describe("delivery seed catalog", () => {
       ADDED.map((day) => day.date)
     );
     assert.equal(detailDeliveryDay({ kind: "custom", start: "2026-09-29", end: "2026-10-12" })?.serviceDate, "2026-10-12");
+  });
+
+  it("opens the Oct 29 backfill without treating it as today", () => {
+    const day = detailDeliveryDay({ kind: "custom", start: "2026-10-29", end: "2026-10-29" });
+    assert.ok(day);
+    assert.equal(day.serviceDate, "2026-10-29");
+    assert.equal(day.board.totals.routes, 40);
+    assert.equal(day.board.totals.inProgress, 2);
+    assert.equal(day.board.totals.incomplete, 0);
+    assert.equal(day.board.totals.packagesDelivered, 11025);
+    assert.equal(day.board.totals.packagesPlanned, 11312);
+    assert.equal(day.exceptions.length, 116);
+    assert.deepEqual(
+      day.routes.filter((route) => route.status === "in_progress").map((route) => route.code),
+      ["CX273", "CX291"]
+    );
+    assert.deepEqual(
+      day.routes.filter((route) => route.status === "not_started").map((route) => route.code),
+      ["AX93", "AX96", "AX97"]
+    );
+    const csv = readFileSync("src/lib/data/seed/packages-exceptions-2026-10-29.csv", "utf8").trim();
+    assert.equal(csv.split(/\n/).length - 1, 116);
   });
 });
