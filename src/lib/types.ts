@@ -1,7 +1,7 @@
 /** Domain models for DSP last-mile operations. Swap mock data, keep these types. */
 
 /**
- * Station period. Today and this week follow the frozen Oct 28, 2026 clock.
+ * Station period. Today and this week follow the frozen Oct 30, 2026 clock.
  * Custom is an inclusive start/end pair of ISO dates (YYYY-MM-DD).
  */
 export type DateRange =
@@ -98,7 +98,7 @@ export interface Driver {
   routeIds: string[];
   transporterId?: string;
   initials: string;
-  /** Present on the full roster. Omitted on the Oct 28 board-only associate list. */
+  /** Present on the full roster. Omitted on the Oct 30 board-only associate list. */
   rosterSource?: RosterSource;
   /** Amazon schedule weeks that included this transporter ID. */
   scheduleWeeks?: number[];
@@ -212,7 +212,7 @@ export interface DeliveryExecutionBoard {
   totals: {
     routes: number;
     inProgress: number;
-    incomplete: number;
+    incomplete: number | null;
     executionGaugesPct: {
       locations: number | null;
       stops: number | null;

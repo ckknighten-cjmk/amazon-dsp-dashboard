@@ -8,7 +8,7 @@ export function DeliveryBoardSummary({
   routes: routeRows,
 }: {
   board: DeliveryExecutionBoard;
-  /** Defaults to the live Oct 28 board. Pass a historical day's routes when that day is open. */
+  /** Defaults to the live Oct 30 board. Pass a historical day's routes when that day is open. */
   routes?: readonly Route[];
 }) {
   const t = board.totals;
@@ -34,7 +34,7 @@ export function DeliveryBoardSummary({
             <Stat value={formatNumber(t.routes)} label="Total" />
             <Stat value={formatNumber(t.inProgress)} label="In progress" />
             <Stat value={formatNumber(complete)} label="Complete" />
-            <Stat value={formatNumber(t.incomplete)} label="Incomplete" />
+            <Stat value={t.incomplete == null ? "—" : formatNumber(t.incomplete)} label="Incomplete" />
           </CardContent>
         </Card>
 

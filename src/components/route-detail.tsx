@@ -15,10 +15,10 @@ import type { PackageException, Route } from "@/lib/types";
 export function RouteDetail({
   route,
   exceptions: exceptionRows,
-  serviceDate = "Oct 28, 2026",
+  serviceDate = "Oct 30, 2026",
 }: {
   route: Route;
-  /** Defaults to the live Oct 28 exception list. */
+  /** Defaults to the live Oct 30 exception list. */
   exceptions?: readonly PackageException[];
   serviceDate?: string;
 }) {
@@ -105,7 +105,7 @@ export function RouteDetail({
         {exceptions.length === 0 ? (
           <EmptyState
             title="No exception packages"
-            description="This route had no rows in the Oct 28 exception Packages CSV."
+            description="This route had no rows in the Oct 30 exception Packages CSV."
             className="py-8"
           />
         ) : (
