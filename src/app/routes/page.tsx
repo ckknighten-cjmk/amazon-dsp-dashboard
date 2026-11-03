@@ -82,7 +82,7 @@ function associateNames(route: Route, day: DeliveryDay, live: boolean) {
 }
 
 const LIVE_DESCRIPTION =
-  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Oct 30, 2026, captured at 8:02 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 99%). 39 routes: 4 in progress (CX285, CX271, CX276, CX257); the other 35 are complete. CX285 is in progress at 93/102 stops and the route row is marked 9 behind; the board behind chip is 0. CX271 is in progress at 189/196 stops (3 ahead), CX276 at 192/199 (5 ahead), and CX257 at 193/197 (32 ahead). Incomplete was null on the capture. The board ahead, at risk, and behind chips are 3, 1, and 0.";
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 2, 2026, captured at 8:08 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 99%). 39 routes: 2 in progress (CX316, CX285); the other 37 are complete. CX316 is in progress at 86/87 stops and the route row is marked 1 ahead. CX285 is in progress at 201/202 stops and the route row is marked 10 ahead. The board ahead chip is 2. Incomplete was null on the capture. The board ahead, at risk, and behind chips are 2, 0, and 0. CX313 is complete and its note says LaKendra Shaw shown as Not departed.";
 
 export default function RoutesPage() {
   const { code } = useStation();

@@ -20,13 +20,13 @@ const ADDED = [
 ] as const;
 
 describe("delivery seed catalog", () => {
-  it("keeps Oct 30 as today and lists every seeded day", () => {
-    assert.equal(STATION_TODAY, "2026-10-30");
-    assert.equal(deliveryBoard.serviceDate, "2026-10-30");
+  it("keeps Nov 2 as today and lists every seeded day", () => {
+    assert.equal(STATION_TODAY, "2026-11-02");
+    assert.equal(deliveryBoard.serviceDate, "2026-11-02");
     assert.equal(deliveryBoard.totals.routes, 39);
     assert.equal(deliveryBoard.totals.incomplete, null);
     assert.equal(routes.length, 39);
-    assert.equal(DELIVERY_SEED_DATES.length, 28);
+    assert.equal(DELIVERY_SEED_DATES.length, 29);
     assert.deepEqual(DELIVERY_SEED_DATES, [
       "2026-09-21",
       "2026-09-23",
@@ -56,25 +56,26 @@ describe("delivery seed catalog", () => {
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
+      "2026-11-02",
     ]);
   });
 
   it("shows the live board for today and every seeded day in this week", () => {
     const today = getOverview({ kind: "today" });
-    assert.equal(today.kpis[0]?.value, 11246);
+    assert.equal(today.kpis[0]?.value, 10052);
     assert.deepEqual(
       today.packagesByDay.map((day) => day.label),
-      ["Fri 30"]
+      ["Mon 2"]
     );
-    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-10-30");
+    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-11-02");
 
     const week = getOverview({ kind: "week" });
-    assert.equal(week.kpis[0]?.value, 11246);
+    assert.equal(week.kpis[0]?.value, 10052);
     assert.deepEqual(
       week.packagesByDay.map((day) => day.label),
-      ["Oct 26", "Oct 27", "Oct 28", "Oct 29", "Oct 30"]
+      ["Oct 27", "Oct 28", "Oct 29", "Oct 30", "Nov 2"]
     );
-    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-10-30");
+    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-11-02");
     assert.equal(deliveryDaysInRange({ kind: "custom", start: "2026-10-17", end: "2026-10-18" }).length, 0);
   });
 
