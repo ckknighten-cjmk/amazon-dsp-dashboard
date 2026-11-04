@@ -279,7 +279,7 @@ function alertsFor(day: DeliveryDay): Alert[] {
 const liveOverview = {
   asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
   kpis: todayKpis,
-  packagesByDay: [{ label: "Mon 2", delivered: deliveredToday, assigned: assignedToday }],
+  packagesByDay: [{ label: "Tue 3", delivered: deliveredToday, assigned: assignedToday }],
   routeStatusCounts: statusCounts(),
   alerts,
 };

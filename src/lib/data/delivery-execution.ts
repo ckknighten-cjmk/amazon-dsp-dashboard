@@ -1,16 +1,20 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-11-02, ~8:08 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-11-03, ~8:12 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-11-02.csv`, 249 rows). This capture stores those rows
+ * `packages-exceptions-2026-11-03.csv`, 141 rows). This capture stores those rows
  * with the CSV column names; earlier seeds used camelCase. Vehicle and on-time %
- * stay null. Execution gauges in this capture are 99/99/99/99 (locations, stops,
- * packages, attempt success). Status is in progress per the board: 2 in progress
- * (CX316, CX285) and 37 complete. CX316's route row is marked 1 ahead and CX285's
- * route row is marked 10 ahead. The board ahead chip is 2. incomplete was null on
- * the capture and stays null. Ahead, at risk, and behind are the board chips
- * (2 / 0 / 0), not a recount of the route-row badges. CX313 is complete and its
- * note says LaKendra Shaw shown as Not departed.
+ * stay null. Execution gauges in this capture are 98/98/98/99 (locations, stops,
+ * packages, attempt success). Status is in progress per the board: 8 in progress
+ * (CX321, CX290, CX301, CX311, CX312, CX316, CX310, CX317) and 30 complete.
+ * CX321's route row is marked 42 behind. Seven route rows are marked ahead
+ * (CX290 1, CX301 9, CX311 8, CX312 10, CX316 6, CX310 10, CX317 5). The board
+ * ahead chip is 7 and the behind chip is 1. incomplete was null on the capture
+ * and stays null. CX327 and CX288 still had packages remaining with no badge;
+ * those rows are stored as incomplete (the capture text was "incomplete (no badge)").
+ * Ahead, at risk, and behind are the board chips (7 / 0 / 1), not a sum of the
+ * route-row badge amounts. Per-route packages remaining sums to 212. The board
+ * remaining chip is 213.
  */
 import type {
   DeliveryExecutionBoard,
@@ -20,10 +24,10 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-11-02.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-11-03.json";
 
 type SeedRouteJson = (typeof seed)["routes"][number];
-/** Nov 2 notes are lists. Earlier seeds store pace text in the same field. */
+/** Nov 3 notes are lists. Earlier seeds store pace text in the same field. */
 type SeedRoute = Omit<SeedRouteJson, "notes"> & {
   notes: string[] | string | null;
 };
@@ -32,8 +36,13 @@ type SeedException = (typeof seed)["exceptionPackages"][number];
 const STATUS_MAP: Record<string, RouteStatus> = {
   complete: "completed",
   in_progress: "in_progress",
+  // Nov 3 capture text before it is stored as in_progress.
+  "in progress": "in_progress",
   no_progress: "no_progress",
   incomplete: "incomplete",
+  // CX327 and CX288 had packages left and no badge. The incomplete chip was null.
+  // The route status set has no separate value, so those rows stay Incomplete.
+  "incomplete (no badge)": "incomplete",
   // Oct 29 lists AX93, AX96, and AX97 as not_departed. The route status set has
   // no separate value, so those rows stay Not started. The seed keeps not_departed.
   not_departed: "not_started",
@@ -166,7 +175,7 @@ export type DeliverySeed = {
   exceptionPackages: SeedException[];
 };
 
-/** Map one dated seed. The live Nov 2 board is this function applied to that file. */
+/** Map one dated seed. The live Nov 3 board is this function applied to that file. */
 export function mapDeliverySeed(file: DeliverySeed): DeliveryDay {
   const transporterByName = new Map<string, string>();
   for (const row of file.exceptionPackages.map(readException)) {
@@ -337,7 +346,7 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Nov 2 publishes rescueActions as 0, so this column is still not
+ * Nov 3 publishes rescueActions as 0, so this column is still not
  * Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =
