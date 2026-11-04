@@ -35,11 +35,11 @@ describe("period bounds", () => {
       end: STATION_TODAY,
     });
     assert.deepEqual(boundsOf({ kind: "week" }), {
-      start: "2026-10-27",
-      end: "2026-11-02",
+      start: "2026-10-28",
+      end: "2026-11-03",
     });
-    assert.equal(formatRangeLabel({ kind: "today" }), "Today · Mon Nov 2");
-    assert.equal(formatRangeLabel({ kind: "week" }), "This week · Oct 27–Nov 2");
+    assert.equal(formatRangeLabel({ kind: "today" }), "Today · Tue Nov 3");
+    assert.equal(formatRangeLabel({ kind: "week" }), "This week · Oct 28–Nov 3");
   });
 
   it("orders a custom range and rejects dates that are not real", () => {
@@ -82,7 +82,7 @@ describe("period bounds", () => {
 });
 
 describe("seed coverage", () => {
-  it("keeps the Oct 18 DVIC coverage off the Nov 2 delivery clock", () => {
+  it("keeps the Oct 18 DVIC coverage off the Nov 3 delivery clock", () => {
     assert.equal(DVIC_COVERAGE.start, "2026-10-18");
     assert.equal(DVIC_COVERAGE.end, "2026-10-18");
     assert.match(DVIC_COVERAGE.label, /Oct 18/);
@@ -93,7 +93,7 @@ describe("seed coverage", () => {
     );
   });
 
-  it("shows delivery metrics only when the range includes Nov 2", () => {
+  it("shows delivery metrics only when the range includes Nov 3", () => {
     assert.equal(dateInRange(DELIVERY_COVERAGE.start, { kind: "today" }), true);
     assert.equal(rangesOverlap(DELIVERY_COVERAGE.start, DELIVERY_COVERAGE.end, { kind: "week" }), true);
     assert.equal(
@@ -149,7 +149,7 @@ describe("seed coverage", () => {
       workSummaryWeekForRange({ kind: "custom", start: "2026-09-06", end: "2026-09-12" }),
       37
     );
-    // Nov 2 station week is Oct 27–Nov 2, which does not overlap Weeks 37–39.
+    // Nov 3 station week is Oct 28–Nov 3, which does not overlap Weeks 37–39.
     assert.equal(workSummaryWeekForRange({ kind: "week" }), null);
     assert.equal(workSummaryWeekForRange({ kind: "today" }), null);
 
@@ -169,8 +169,8 @@ describe("seed coverage", () => {
       assert.equal(dates[dates.length - 1], COMPLIANCE_COVERAGE[week].end);
     }
 
-    assert.deepEqual(datesInRange(["2026-11-01", "2026-11-02"], { kind: "today" }), [
-      "2026-11-02",
+    assert.deepEqual(datesInRange(["2026-11-02", "2026-11-03"], { kind: "today" }), [
+      "2026-11-03",
     ]);
   });
 
@@ -225,7 +225,7 @@ describe("seed coverage", () => {
         return window ? rangesOverlap(window.start, window.end, { kind: "today" }) : false;
       })
       .map((invoice) => invoice.id);
-    // Nov 2 is after every seeded invoice window, including the Sep 1–30 spans.
+    // Nov 3 is after every seeded invoice window, including the Sep 1–30 spans.
     assert.deepEqual(todayIds, []);
   });
 });
