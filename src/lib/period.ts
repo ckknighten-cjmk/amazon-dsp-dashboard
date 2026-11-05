@@ -3,20 +3,20 @@ import type { DateRange } from "@/lib/types";
 
 export const PERIOD_STORAGE_KEY = "cjmk-ops-period";
 
-/** Station clock date. Matches MOCK_NOW (2026-11-03). */
-export const STATION_TODAY = "2026-11-03";
+/** Station clock date. Matches MOCK_NOW (2026-11-04). */
+export const STATION_TODAY = "2026-11-04";
 
 /** Seven days ending on the station clock, inclusive. */
-export const STATION_WEEK_START = "2026-10-28";
-export const STATION_WEEK_END = "2026-11-03";
+export const STATION_WEEK_START = "2026-10-29";
+export const STATION_WEEK_END = "2026-11-04";
 
 export const TODAY_RANGE: DateRange = { kind: "today" };
 export const WEEK_RANGE: DateRange = { kind: "week" };
 
 export const DELIVERY_COVERAGE = {
-  start: "2026-11-03",
-  end: "2026-11-03",
-  label: "Seeded data: Nov 3 only",
+  start: "2026-11-04",
+  end: "2026-11-04",
+  label: "Seeded data: Nov 4 only",
 } as const;
 
 export { SCORECARD_COVERAGE } from "@/lib/data/scorecard";
