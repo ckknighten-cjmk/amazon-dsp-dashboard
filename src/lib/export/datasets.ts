@@ -20,7 +20,7 @@ import type { StationCode } from "@/lib/stations";
 import { damageSummary } from "@/lib/dvic/compare";
 
 const ROSTER_STAMP = "weeks-38-39";
-const SERVICE_DAY = "2026-11-04";
+const SERVICE_DAY = "2026-11-06";
 const PAYMENTS_STAMP = "2026-09-21";
 
 export interface CsvFile {
@@ -55,7 +55,7 @@ export function associatesCsv(station: StationCode = "DNA4"): CsvFile {
     "Today packages",
     "Today stops",
     "Routes",
-    "On Nov 4 board",
+    "On Nov 6 board",
   ];
   const rows = drivers.map((driver) => [
     driver.name,
