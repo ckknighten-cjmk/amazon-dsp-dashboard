@@ -4,16 +4,21 @@ import path from "node:path";
 import test from "node:test";
 import type { ReactNode } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
+import SmsConsentPage from "../app/sms/consent/page";
 import SmsPolicyLayout from "../app/sms/layout";
 import PrivacyPolicyPage from "../app/sms/privacy/page";
 import SmsTermsPage from "../app/sms/terms/page";
 import {
+  SMS_CONSENT_FREQUENCY,
+  SMS_CONSENT_PATH,
   SMS_POLICY_EFFECTIVE_DATE,
   SMS_POLICY_EFFECTIVE_DATE_ISO,
   SMS_PRIVACY_PATH,
+  SMS_PRIVACY_URL,
   SMS_PROGRAM_FREQUENCY,
   SMS_SUPPORT_EMAIL,
   SMS_TERMS_PATH,
+  SMS_TERMS_URL,
   policyHrefs,
   policyPlainText,
   privacyPolicy,
@@ -107,9 +112,13 @@ test("privacy and terms keep consent limits, carrier liability, and cross-links"
   assert.match(terms, /Message delivery is not guaranteed/);
 
   assert.deepEqual(policyHrefs(privacyPolicy), [SMS_TERMS_PATH]);
-  assert.deepEqual(policyHrefs(termsPolicy), [SMS_PRIVACY_PATH]);
+  assert.deepEqual(policyHrefs(termsPolicy), [SMS_CONSENT_PATH, SMS_PRIVACY_PATH]);
   assert.equal(SMS_PRIVACY_PATH, "/sms/privacy");
   assert.equal(SMS_TERMS_PATH, "/sms/terms");
+  assert.equal(SMS_CONSENT_PATH, "/sms/consent");
+  assert.match(terms, /Blank SMS consent form/);
+  assert.match(terms, /not a record that any employee has signed it/);
+  assert.equal(SMS_PROGRAM_FREQUENCY.includes("4–5"), false);
 });
 
 test("rendered policy pages are public documents without forms or dashboard data", () => {
@@ -137,6 +146,36 @@ test("rendered policy pages are public documents without forms or dashboard data
 
   assert.match(privacyHtml, /<h1[^>]*>Privacy Policy<\/h1>/);
   assert.match(termsHtml, /<h1[^>]*>SMS Terms &amp; Conditions<\/h1>/);
+  assert.match(termsHtml, /href="\/sms\/consent"/);
+  assert.equal(privacyHtml.includes('href="/sms/consent"'), false);
+});
+
+test("blank consent page is an empty paper form with no submission controls", () => {
+  const html = pageHtml(SmsConsentPage);
+  const decoded = html.replace(/&#x27;/g, "'").replace(/&amp;/g, "&");
+  assert.match(html, /<h1[^>]*>Employee SMS Opt-In &amp; Written Consent<\/h1>/);
+  assert.ok(decoded.includes(SMS_CONSENT_FREQUENCY));
+  assert.match(decoded, /typically 4–5 messages a month/);
+  assert.match(decoded, /each Friday for the previous week's/);
+  assert.match(html, /aria-label="Unchecked"/);
+  assert.match(html, /intentionally unchecked/);
+  assert.match(html, /Employee printed name \(blank\)/);
+  assert.match(html, /Mobile telephone number \(blank\)/);
+  assert.match(html, /Employee signature \(blank\)/);
+  assert.match(html, /Date \(blank\)/);
+  assert.match(html, new RegExp(`href="${SMS_PRIVACY_URL}"`));
+  assert.match(html, new RegExp(`href="${SMS_TERMS_URL}"`));
+  assert.match(html, /mailto:hrcjmk@gmail.com/);
+  assert.match(html, /does not prove that any employee has consented/);
+  assert.match(html, /earlier form does not by itself cover/);
+  assert.match(html, /does not accept or store the form/);
+  assert.equal(html.includes("<form"), false);
+  assert.equal(html.includes("<input"), false);
+  assert.equal(html.includes("<textarea"), false);
+  assert.equal(html.includes("<button"), false);
+  for (const phrase of ["DRAFT", "FOR REVIEW", "To be added", "Pending approval", "all drivers", ...SENSITIVE]) {
+    assert.equal(html.includes(phrase), false, phrase);
+  }
 });
 
 test("policy route modules do not import dashboard datasets or the ops shell", () => {
@@ -146,6 +185,8 @@ test("policy route modules do not import dashboard datasets or the ops shell", (
     "src/app/sms/policy-document.tsx",
     "src/app/sms/privacy/page.tsx",
     "src/app/sms/terms/page.tsx",
+    "src/app/sms/consent/page.tsx",
+    "src/app/sms/consent-form.tsx",
     "src/lib/sms-policy.ts",
   ];
   const seen = new Set<string>();
@@ -186,6 +227,7 @@ test("policy route modules do not import dashboard datasets or the ops shell", (
     "src/app/sms/policy-document.tsx",
     "src/app/sms/privacy/page.tsx",
     "src/app/sms/terms/page.tsx",
+    "src/app/sms/consent-form.tsx",
   ];
   for (const relativeFile of cadenceSources) {
     const source = readFileSync(path.join(ROOT, relativeFile), "utf8");

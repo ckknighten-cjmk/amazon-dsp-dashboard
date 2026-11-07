@@ -141,6 +141,23 @@
   }
 }
 
+.sms-policy .consent-box {
+  display: inline-block;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-right: 0.5rem;
+  border: 2px solid #111;
+  vertical-align: -0.15rem;
+  background: #fff;
+}
+
+.sms-policy .consent-line {
+  display: block;
+  height: 1.75rem;
+  margin-top: 0.25rem;
+  border-bottom: 1px solid #111;
+}
+
 @media print {
   .sms-policy {
     background: #fff !important;
@@ -156,6 +173,10 @@
   .sms-policy p {
     orphans: 3;
     widows: 3;
+  }
+  .sms-policy .consent-box,
+  .sms-policy .consent-line {
+    border-color: #111 !important;
   }
   .sms-policy a[href^="/"]::after,
   .sms-policy a[href^="http"]::after {
