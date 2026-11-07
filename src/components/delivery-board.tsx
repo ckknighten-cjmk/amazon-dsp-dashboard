@@ -8,7 +8,7 @@ export function DeliveryBoardSummary({
   routes: routeRows,
 }: {
   board: DeliveryExecutionBoard;
-  /** Defaults to the live Nov 4 board. Pass a historical day's routes when that day is open. */
+  /** Defaults to the live Nov 6 board. Pass a historical day's routes when that day is open. */
   routes?: readonly Route[];
 }) {
   const t = board.totals;
