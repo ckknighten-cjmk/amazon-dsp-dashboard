@@ -12,6 +12,19 @@
 
 export const SMS_PRIVACY_PATH = "/sms/privacy";
 export const SMS_TERMS_PATH = "/sms/terms";
+export const SMS_CONSENT_PATH = "/sms/consent";
+
+/** Live policy URLs for the blank consent form. Reviewers see these even on a preview host. */
+export const SMS_PRIVACY_URL = "https://amazon-dsp-dashboard.vercel.app/sms/privacy";
+export const SMS_TERMS_URL = "https://amazon-dsp-dashboard.vercel.app/sms/terms";
+
+/**
+ * Frequency disclosure printed on the blank consent form only.
+ * The public privacy policy and SMS terms keep SMS_PROGRAM_FREQUENCY.
+ * Weekly Friday notices are typically 4–5 messages in a month.
+ */
+export const SMS_CONSENT_FREQUENCY =
+  "CJMK Inc. sends one scorecard notification each Friday for the previous week's individual driver performance scorecard, typically 4–5 messages a month. The Friday notice is sent by SMS/MMS and may include an image of that employee's own scorecard. Message and data rates may apply. Reply STOP to unsubscribe or HELP for assistance. This program does not send daily safety messages, marketing or promotional messages, or any other automatic messages, aside from a one-time confirmation if you reply STOP.";
 
 export const SMS_SUPPORT_EMAIL = "hrcjmk@gmail.com";
 
@@ -162,6 +175,13 @@ export const termsPolicy: PolicyDocumentModel = {
           text(
             "Employees enroll by completing and signing a separate SMS consent form during onboarding or another documented enrollment process.",
           ),
+        ],
+        [
+          text(
+            "A blank copy of that form, with the opt-in box unchecked and the name, mobile number, signature, and date lines empty, is published at ",
+          ),
+          link(SMS_CONSENT_PATH, "Blank SMS consent form"),
+          text(". Publishing the blank form is not a record that any employee has signed it."),
         ],
         [text(SMS_PROGRAM_FREQUENCY)],
         [
