@@ -12,7 +12,7 @@ import {
   type DeliverySeed,
 } from "../data/delivery-execution";
 import october14 from "../data/seed/delivery-execution-2026-10-14.json";
-import seed from "../data/seed/delivery-execution-2026-11-06.json";
+import seed from "../data/seed/delivery-execution-2026-11-09.json";
 import { getDrivers } from "../data";
 import { complianceCombinedCsv, complianceViewCsv } from "./compliance-csv";
 import { csvCell, csvLines, toCsv } from "./csv";
@@ -43,139 +43,157 @@ test("associates export is the full roster", () => {
 
 test("routes export marks multi-associate routes as rescued without replacing Console status", () => {
   const rescued = routes.filter((route) => route.receivedRescue);
-  assert.equal(deliveryBoard.serviceDate, "2026-11-06");
-  assert.equal(seed.capturedAt, "2026-11-06T20:11:33-06:00");
-  assert.equal(routes.length, 43);
+  assert.equal(deliveryBoard.serviceDate, "2026-11-09");
+  assert.equal(seed.capturedAt, "2026-11-09T20:02:00-06:00");
+  assert.equal(seed.captureWindow, "approximately 8:00-8:05 PM CST");
+  assert.equal(routes.length, 41);
   assert.equal(deliveryBoard.totals.inProgress, 1);
-  assert.equal(deliveryBoard.totals.incomplete, 2);
+  assert.equal(deliveryBoard.totals.incomplete, 4);
   assert.equal(routes.filter((route) => route.status === "in_progress").length, 1);
-  assert.equal(routes.filter((route) => route.status === "completed").length, 40);
-  assert.equal(routes.filter((route) => route.status === "incomplete").length, 2);
+  assert.equal(routes.filter((route) => route.status === "completed").length, 36);
+  assert.equal(routes.filter((route) => route.status === "incomplete").length, 4);
   assert.equal(deliveryBoard.totals.executionGaugesPct.locations, 99);
   assert.equal(deliveryBoard.totals.executionGaugesPct.stops, 99);
   assert.equal(deliveryBoard.totals.executionGaugesPct.packages, 99);
-  assert.equal(deliveryBoard.totals.executionGaugesPct.attemptSuccess, 100);
-  assert.equal(deliveryBoard.totals.packagesDelivered, 11039);
-  assert.equal(deliveryBoard.totals.packagesPlanned, 11042);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.remaining, 3);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.reattemptable, 0);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.undeliverable, 10);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.missing, 17);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.returnedToStation, 36);
-  assert.equal(deliveryBoard.totals.packageStatusCounts.pickupFailed, 95);
+  assert.equal(deliveryBoard.totals.executionGaugesPct.attemptSuccess, 99);
+  assert.equal(deliveryBoard.totals.packagesDelivered, 11253);
+  assert.equal(deliveryBoard.totals.packagesPlanned, 11260);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.remaining, 7);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.reattemptable, 12);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.undeliverable, 2);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.missing, 25);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.returnedToStation, 31);
+  assert.equal(deliveryBoard.totals.packageStatusCounts.pickupFailed, 151);
   assert.equal(
     routes.reduce((sum, route) => sum + route.packagesRemaining, 0),
-    3
+    7
   );
   assert.deepEqual(
     routes.filter((route) => route.packagesRemaining > 0).map((route) => [route.code, route.packagesRemaining]),
     [
-      ["CX311", 1],
       ["CX310", 1],
+      ["CX305", 2],
+      ["CX316", 2],
+      ["CX309", 1],
       ["CX330", 1],
     ]
   );
   assert.equal(deliveryBoard.totals.workHourRisk, 0);
   assert.equal(deliveryBoard.totals.onBreak, 0);
-  assert.equal(deliveryBoard.totals.noBreaksTaken, 2);
+  assert.equal(deliveryBoard.totals.noBreaksTaken, 0);
   assert.equal(deliveryBoard.totals.inactive, 0);
-  assert.equal(deliveryBoard.totals.unknownStops, 29);
-  assert.equal(deliveryBoard.totals.onRoadPickups.total, 6);
+  assert.equal(deliveryBoard.totals.unknownStops, 33);
+  assert.equal(deliveryBoard.totals.onRoadPickups.total, 3);
   assert.equal(deliveryBoard.totals.onRoadPickups.remaining, 0);
-  assert.equal(deliveryBoard.totals.onRoadPickups.complete, 6);
-  assert.equal(seed.totals.ahead, 1);
-  assert.equal(seed.totals.atRisk, 0);
+  assert.equal(deliveryBoard.totals.onRoadPickups.complete, 3);
+  assert.equal(seed.totals.ahead, 0);
+  assert.equal(seed.totals.atRisk, 1);
   assert.equal(seed.totals.behind, 0);
-  assert.equal(seed.totals.incomplete, 2);
+  assert.equal(seed.totals.incomplete, 4);
   assert.equal(seed.totals.weatherDelay, 0);
   assert.equal(seed.totals.swaEligible, 0);
   assert.equal(seed.totals.swaInjected, 0);
   assert.equal(seed.totals.paused, 0);
-  assert.equal(seed.exceptionRowCount, 158);
+  assert.equal(seed.exceptionRowCount, 221);
   assert.equal(seed.totals.multiTransporter, 16);
   assert.match(deliveryBoard.disclaimer, /Console chips are the source of truth for board totals/);
   assert.deepEqual(
     routes.filter((route) => route.status === "in_progress").map((route) => route.code),
-    ["CX311"]
+    ["CX310"]
   );
   assert.deepEqual(
     routes.filter((route) => route.status === "incomplete").map((route) => route.code),
-    ["CX310", "CX330"]
+    ["CX305", "CX316", "CX309", "CX330"]
   );
   assert.equal(rescued.length, 16);
   assert.equal(rescued.length, deliveryBoard.totals.multiTransporter);
-  assert.equal(deliveryBoard.totals.rescueActions, 0);
+  assert.equal(deliveryBoard.totals.rescueActions, null);
   assert.ok(rescued.every((route) => route.rescueDriverIds.length >= 1));
   assert.ok(rescued.every((route) => route.rescueDriverId === route.rescueDriverIds[0]));
   assert.ok(rescued.every((route) => route.status !== "rescued"));
 
-  const cx311 = routes.find((route) => route.code === "CX311");
-  assert.ok(cx311);
-  assert.equal(cx311.receivedRescue, true);
-  assert.equal(cx311.status, "in_progress");
-  assert.equal(cx311.driverId, associateId("Cameyon Smith"));
-  assert.deepEqual(cx311.rescueDriverIds, [associateId("Donovan Doss")]);
-  assert.equal(cx311.completedStops, 195);
-  assert.equal(cx311.stopCount, 196);
-  assert.equal(cx311.packagesDelivered, 294);
-  assert.equal(cx311.packageCount, 295);
-  assert.equal(cx311.packagesRemaining, 1);
-  assert.equal(
-    cx311.notes,
-    "Identified by the Routes / In progress filter (routeStatus=DEPARTED)."
-  );
-  const cx311Seed = seed.routes.find((route) => route.routeCode === "CX311");
-  assert.ok(cx311Seed);
-  assert.equal(cx311Seed.status, "in progress");
-  assert.deepEqual(cx311Seed.exceptionBadges, ["8 ahead"]);
-  assert.deepEqual(cx311Seed.notes, [
-    "Identified by the Routes / In progress filter (routeStatus=DEPARTED).",
-  ]);
-
   const cx310 = routes.find((route) => route.code === "CX310");
   assert.ok(cx310);
   assert.equal(cx310.receivedRescue, false);
-  assert.equal(cx310.status, "incomplete");
-  assert.equal(cx310.driverId, associateId("Shachaniah Israel"));
-  assert.equal(cx310.completedStops, 179);
-  assert.equal(cx310.stopCount, 180);
-  assert.equal(cx310.packagesDelivered, 267);
-  assert.equal(cx310.packageCount, 268);
+  assert.equal(cx310.status, "in_progress");
+  assert.equal(cx310.driverId, associateId("Michael Neal"));
+  assert.deepEqual(cx310.rescueDriverIds, []);
+  assert.equal(cx310.completedStops, 120);
+  assert.equal(cx310.stopCount, 121);
+  assert.equal(cx310.packagesDelivered, 188);
+  assert.equal(cx310.packageCount, 189);
   assert.equal(cx310.packagesRemaining, 1);
   assert.equal(
     cx310.notes,
-    "Stop and/or delivery counts did not match planned; no exception badge was visible."
+    "Identified by the Routes / In progress filter (routeStatus=DEPARTED).; UI progress state AT_RISK. Departed 10:50am. Route duration 6h 12m."
   );
   const cx310Seed = seed.routes.find((route) => route.routeCode === "CX310");
   assert.ok(cx310Seed);
-  assert.equal(cx310Seed.status, "incomplete");
-  assert.deepEqual(cx310Seed.exceptionBadges, []);
+  assert.equal(cx310Seed.status, "in progress");
+  assert.deepEqual(cx310Seed.exceptionBadges, ["1 behind"]);
+  assert.equal(cx310Seed.riskLevel, "behind");
+  assert.deepEqual(cx310Seed.notes, [
+    "Identified by the Routes / In progress filter (routeStatus=DEPARTED).",
+    "UI progress state AT_RISK. Departed 10:50am. Route duration 6h 12m.",
+  ]);
 
+  const cx305 = routes.find((route) => route.code === "CX305");
+  assert.ok(cx305);
+  assert.equal(cx305.receivedRescue, true);
+  assert.equal(cx305.status, "incomplete");
+  assert.equal(cx305.driverId, associateId("Marquize Wallace"));
+  assert.deepEqual(cx305.rescueDriverIds, [
+    associateId("Shakira Singleton"),
+    associateId("Daniel Aponte espinoza"),
+  ]);
+  assert.equal(cx305.completedStops, 137);
+  assert.equal(cx305.stopCount, 137);
+  assert.equal(cx305.packagesDelivered, 194);
+  assert.equal(cx305.packageCount, 196);
+  assert.equal(cx305.packagesRemaining, 2);
+  assert.equal(
+    cx305.notes,
+    "Stop and/or delivery counts did not match planned; no exception badge was visible.; UI progress bar labeled COMPLETE."
+  );
+  const cx305Seed = seed.routes.find((route) => route.routeCode === "CX305");
+  assert.ok(cx305Seed);
+  assert.equal(cx305Seed.status, "incomplete");
+  assert.deepEqual(cx305Seed.exceptionBadges, []);
+
+  const cx316 = routes.find((route) => route.code === "CX316");
+  assert.ok(cx316);
+  assert.equal(cx316.status, "incomplete");
+  assert.equal(cx316.completedStops, 114);
+  assert.equal(cx316.stopCount, 116);
+  assert.equal(cx316.packagesDelivered, 266);
+  assert.equal(cx316.packageCount, 268);
+  const cx309 = routes.find((route) => route.code === "CX309");
+  assert.ok(cx309);
+  assert.equal(cx309.status, "incomplete");
+  assert.equal(cx309.packagesDelivered, 315);
+  assert.equal(cx309.packageCount, 316);
   const cx330 = routes.find((route) => route.code === "CX330");
   assert.ok(cx330);
   assert.equal(cx330.receivedRescue, true);
   assert.equal(cx330.status, "incomplete");
-  assert.equal(cx330.driverId, associateId("Daurieal Hervey"));
-  assert.deepEqual(cx330.rescueDriverIds, [associateId("curtis caples"), associateId("Stevon Kyles")]);
-  assert.equal(cx330.completedStops, 202);
-  assert.equal(cx330.stopCount, 202);
-  assert.equal(cx330.packagesDelivered, 311);
-  assert.equal(cx330.packageCount, 312);
+  assert.equal(cx330.driverId, associateId("Ladarias Clifton"));
+  assert.deepEqual(cx330.rescueDriverIds, [associateId("Shakira Singleton")]);
+  assert.equal(cx330.completedStops, 167);
+  assert.equal(cx330.stopCount, 167);
+  assert.equal(cx330.packagesDelivered, 276);
+  assert.equal(cx330.packageCount, 277);
   assert.equal(cx330.packagesRemaining, 1);
-  assert.equal(
-    cx330.notes,
-    "Stop and/or delivery counts did not match planned; no exception badge was visible."
-  );
   const cx330Seed = seed.routes.find((route) => route.routeCode === "CX330");
   assert.ok(cx330Seed);
   assert.equal(cx330Seed.status, "incomplete");
   assert.deepEqual(cx330Seed.exceptionBadges, []);
   assert.deepEqual(cx330Seed.notes, [
     "Stop and/or delivery counts did not match planned; no exception badge was visible.",
+    "UI progress bar labeled COMPLETE.",
   ]);
 
   const file = routesCsv();
-  assert.equal(file.filename, "routes-dna4-2026-11-06.csv");
+  assert.equal(file.filename, "routes-dna4-2026-11-09.csv");
   const lines = csvLines(file.csv);
   assert.match(lines[0], /^Station,/);
   const header = lines[0].split(",");
@@ -205,46 +223,47 @@ test("other dataset exports stay on seeded values", () => {
   assert.doesNotMatch(fleet.csv, /EDV-4401|TN 441-CJM|Mock yard roster/);
 
   const exceptionFile = exceptionsCsv();
-  assert.equal(exceptionFile.filename, "package-exceptions-dna4-2026-11-06.csv");
-  assert.equal(csvLines(exceptionFile.csv).length - 1, 158);
-  assert.equal(exceptions.length, 158);
-  assert.equal(exceptions.filter((row) => row.status === "Reattemptable").length, 0);
-  assert.equal(exceptions.filter((row) => row.status === "Undeliverable").length, 10);
-  assert.equal(exceptions.filter((row) => row.status === "Missing").length, 17);
-  assert.equal(exceptions.filter((row) => row.status === "Returned to station").length, 36);
-  assert.equal(exceptions.filter((row) => row.status === "Pickup failed").length, 95);
+  assert.equal(exceptionFile.filename, "package-exceptions-dna4-2026-11-09.csv");
+  assert.equal(csvLines(exceptionFile.csv).length - 1, 221);
+  assert.equal(exceptions.length, 221);
+  assert.equal(exceptions.filter((row) => row.status === "Reattemptable").length, 12);
+  assert.equal(exceptions.filter((row) => row.status === "Undeliverable").length, 2);
+  assert.equal(exceptions.filter((row) => row.status === "Missing").length, 25);
+  assert.equal(exceptions.filter((row) => row.status === "Returned to station").length, 31);
+  assert.equal(exceptions.filter((row) => row.status === "Pickup failed").length, 151);
 
-  const sourceCsv = readFileSync("src/lib/data/seed/packages-exceptions-2026-11-06.csv", "utf8");
+  const sourceCsv = readFileSync("src/lib/data/seed/packages-exceptions-2026-11-09.csv", "utf8");
   const sourceLines = csvLines(sourceCsv);
   assert.match(sourceLines[0], /^Scannable Id,/);
-  assert.equal(sourceLines.length - 1, 158);
+  assert.equal(sourceLines.length - 1, 221);
   assert.deepEqual(
     sourceLines.slice(1).map((line) => line.split(",")[0]),
     seed.exceptionPackages.map((row) => row["Scannable Id"])
   );
 
   const summary = {
-    csv: "/workspace/dsp-live/packages-exceptions-2026-11-06.csv",
-    rows: 158,
+    csv: "/workspace/dsp-live/packages-exceptions-2026-11-09.csv",
+    rows: 221,
     byStatus: {
-      Undeliverable: 10,
-      Missing: 17,
-      "Returned to station": 36,
-      "Pickup failed": 95,
+      Reattemptable: 12,
+      Undeliverable: 2,
+      Missing: 25,
+      "Returned to station": 31,
+      "Pickup failed": 151,
     },
   };
   assert.equal(exceptionPackageRows(summary).length, 0);
-  assert.equal(exceptionPackageRows(seed.exceptionPackages).length, 158);
+  assert.equal(exceptionPackageRows(seed.exceptionPackages).length, 221);
   const summarized = mapDeliverySeed({
     ...seed,
-    exceptionRowCount: 158,
+    exceptionRowCount: 221,
     exceptionPackages: summary,
   } as DeliverySeed);
-  assert.equal(summarized.routes.length, 43);
+  assert.equal(summarized.routes.length, 41);
   assert.equal(summarized.exceptions.length, 0);
-  assert.equal(summarized.board.totals.routes, 43);
-  assert.equal(summarized.board.totals.packageStatusCounts.pickupFailed, 95);
-  assert.equal(summarized.board.totals.packageStatusCounts.remaining, 3);
+  assert.equal(summarized.board.totals.routes, 41);
+  assert.equal(summarized.board.totals.packageStatusCounts.pickupFailed, 151);
+  assert.equal(summarized.board.totals.packageStatusCounts.remaining, 7);
 
   const scorecard = scorecardCsv(38);
   assert.equal(scorecard.filename, "scorecard-dna4-week-38.csv");

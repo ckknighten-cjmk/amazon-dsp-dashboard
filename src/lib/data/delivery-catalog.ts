@@ -1,6 +1,6 @@
 /**
  * Every dated DNA4 Delivery Execution seed, oldest first.
- * The live board is the Nov 6 capture from `delivery-execution.ts`.
+ * The live board is the Nov 9 capture from `delivery-execution.ts`.
  * A newer evening wrap replaces that import and moves the previous live
  * file into this list. Backfilling an older day only adds an import here.
  * Today moves only when the live capture moves.
@@ -47,6 +47,7 @@ import oct30 from "@/lib/data/seed/delivery-execution-2026-10-30.json";
 import nov02 from "@/lib/data/seed/delivery-execution-2026-11-02.json";
 import nov03 from "@/lib/data/seed/delivery-execution-2026-11-03.json";
 import nov04 from "@/lib/data/seed/delivery-execution-2026-11-04.json";
+import nov06 from "@/lib/data/seed/delivery-execution-2026-11-06.json";
 
 const HISTORY = [
   sep21,
@@ -80,9 +81,10 @@ const HISTORY = [
   nov02,
   nov03,
   nov04,
+  nov06,
 ].map((file) => mapDeliverySeed(file as DeliverySeed));
 
-/** Live Nov 6 object, plus every earlier file. Sorted by service date. */
+/** Live Nov 9 object, plus every earlier file. Sorted by service date. */
 export const DELIVERY_DAYS: readonly DeliveryDay[] = [...HISTORY, liveDeliveryDay].sort((a, b) =>
   a.serviceDate.localeCompare(b.serviceDate)
 );
@@ -95,7 +97,7 @@ export function deliveryDaysInRange(range: DateRange): DeliveryDay[] {
 
 /**
  * Board to show for a period.
- * A range that includes the station clock uses the live Nov 6 capture.
+ * A range that includes the station clock uses the live Nov 9 capture.
  * Any other range uses the latest seeded day inside it.
  */
 export function detailDeliveryDay(range: DateRange): DeliveryDay | null {
