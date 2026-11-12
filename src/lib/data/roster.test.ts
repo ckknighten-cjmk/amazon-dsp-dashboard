@@ -19,7 +19,7 @@ test("ADP display names turn LAST, FIRST into First Last", () => {
   assert.equal(adpDisplayName("Lexie"), "Lexie");
 });
 
-test("active roster is the schedule union, not the Nov 10 board", () => {
+test("active roster is the schedule union, not the Nov 11 board", () => {
   const drivers = getDrivers();
   const scheduled = drivers.filter((driver) => driver.rosterSource === "amazon-schedule");
   const adpOnly = drivers.filter((driver) => driver.rosterSource === "adp-only");
@@ -28,7 +28,7 @@ test("active roster is the schedule union, not the Nov 10 board", () => {
   assert.ok(drivers.length > 40);
   assert.equal(scheduled.length, 96);
   assert.equal(onBoard.length, consoleDrivers.length);
-  assert.equal(consoleDrivers.length, 46);
+  assert.equal(consoleDrivers.length, 45);
   assert.ok(adpOnly.length > 0);
   assert.ok(adpOnly.every((driver) => !driver.transporterId));
   assert.equal(new Set(drivers.map((driver) => driver.id)).size, drivers.length);
@@ -45,7 +45,8 @@ test("active roster is the schedule union, not the Nov 10 board", () => {
 
   const aaron = getDrivers().find((driver) => driver.transporterId === "AD3O3G0B92UUS");
   assert.equal(aaron?.name, "Aaron Calvin Davis");
-  assert.deepEqual(aaron?.routeIds, []);
+  // Nov 11 board name Aaron Davis is CX302. The shorter name joins this schedule row.
+  assert.deepEqual(aaron?.routeIds, ["rt-cx302"]);
 
   const cameyon = getDriver(associateId("Cameyon Smith"));
   assert.equal(cameyon?.name, "Cameyon Smith");
