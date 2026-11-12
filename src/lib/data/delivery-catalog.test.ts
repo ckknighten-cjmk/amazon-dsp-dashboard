@@ -20,13 +20,13 @@ const ADDED = [
 ] as const;
 
 describe("delivery seed catalog", () => {
-  it("keeps Nov 10 as today and lists every seeded day", () => {
-    assert.equal(STATION_TODAY, "2026-11-10");
-    assert.equal(deliveryBoard.serviceDate, "2026-11-10");
-    assert.equal(deliveryBoard.totals.routes, 45);
-    assert.equal(deliveryBoard.totals.incomplete, 1);
-    assert.equal(routes.length, 45);
-    assert.equal(DELIVERY_SEED_DATES.length, 34);
+  it("keeps Nov 11 as today and lists every seeded day", () => {
+    assert.equal(STATION_TODAY, "2026-11-11");
+    assert.equal(deliveryBoard.serviceDate, "2026-11-11");
+    assert.equal(deliveryBoard.totals.routes, 47);
+    assert.equal(deliveryBoard.totals.incomplete, 16);
+    assert.equal(routes.length, 47);
+    assert.equal(DELIVERY_SEED_DATES.length, 35);
     assert.deepEqual(DELIVERY_SEED_DATES, [
       "2026-09-21",
       "2026-09-23",
@@ -62,25 +62,26 @@ describe("delivery seed catalog", () => {
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
+      "2026-11-11",
     ]);
   });
 
   it("shows the live board for today and every seeded day in this week", () => {
     const today = getOverview({ kind: "today" });
-    assert.equal(today.kpis[0]?.value, 11139);
+    assert.equal(today.kpis[0]?.value, 10986);
     assert.deepEqual(
       today.packagesByDay.map((day) => day.label),
-      ["Tue 10"]
+      ["Wed 11"]
     );
-    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-11-10");
+    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-11-11");
 
     const week = getOverview({ kind: "week" });
-    assert.equal(week.kpis[0]?.value, 11139);
+    assert.equal(week.kpis[0]?.value, 10986);
     assert.deepEqual(
       week.packagesByDay.map((day) => day.label),
-      ["Nov 4", "Nov 6", "Nov 9", "Nov 10"]
+      ["Nov 6", "Nov 9", "Nov 10", "Nov 11"]
     );
-    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-11-10");
+    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-11-11");
     assert.equal(deliveryDaysInRange({ kind: "custom", start: "2026-10-17", end: "2026-10-18" }).length, 0);
   });
 
