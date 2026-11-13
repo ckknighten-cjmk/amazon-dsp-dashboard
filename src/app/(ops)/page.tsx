@@ -72,7 +72,7 @@ export default function OverviewPage() {
               <CardHeader>
                 <CardTitle>
                   {days.length <= 1 && liveFocus
-                    ? "Volume · Nov 11"
+                    ? "Volume · Nov 12"
                     : days.length <= 1
                       ? `Volume · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`
                       : "Volume · seeded days"}
@@ -90,11 +90,11 @@ export default function OverviewPage() {
             <Card className="lg:col-span-2">
               <CardHeader>
                 <CardTitle>
-                  {liveFocus ? "Nov 11 routes" : `Routes · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`}
+                  {liveFocus ? "Nov 12 routes" : `Routes · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`}
                 </CardTitle>
                 <CardDescription>
                   {liveFocus
-                    ? `Status mix from the ${station.stationCode} Console board (47 routes). ${DELIVERY_COVERAGE.label}.`
+                    ? `Status mix from the ${station.stationCode} Console board (46 routes). ${DELIVERY_COVERAGE.label}.`
                     : `Status mix from the ${station.stationCode} Console board (${detail?.board.totals.routes ?? 0} routes) on ${detail?.serviceDate}.`}
                 </CardDescription>
               </CardHeader>
