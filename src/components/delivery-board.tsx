@@ -8,14 +8,16 @@ export function DeliveryBoardSummary({
   routes: routeRows,
 }: {
   board: DeliveryExecutionBoard;
-  /** Defaults to the live Nov 12 board. Pass a historical day's routes when that day is open. */
+  /** Defaults to the live Nov 13 board. Pass a historical day's routes when that day is open. */
   routes?: readonly Route[];
 }) {
   const t = board.totals;
   const pkg = t.packageStatusCounts;
   const pickup = t.onRoadPickups;
   const routes = routeRows ?? getRoutes();
-  const complete = routes.filter((r) => r.status === "completed").length;
+  const rowComplete = routes.filter((r) => r.status === "completed").length;
+  const complete =
+    routes.length === t.routes || t.complete == null ? rowComplete : t.complete;
 
   return (
     <div className="mb-5 space-y-3">
@@ -71,6 +73,9 @@ export function DeliveryBoardSummary({
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap justify-around gap-3 py-1">
+            {t.executionGaugesPct.execution != null ? (
+              <Gauge label="Execution" value={t.executionGaugesPct.execution} />
+            ) : null}
             <Gauge label="Locations" value={t.executionGaugesPct.locations} />
             <Gauge label="Stops" value={t.executionGaugesPct.stops} />
             <Gauge label="Packages" value={t.executionGaugesPct.packages} />
@@ -108,10 +113,15 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function Chip({ value, label }: { value: number; label: string }) {
+function Chip({ value, label }: { value: number | null; label: string }) {
   return (
     <div className="rounded-lg border bg-muted/30 px-2 py-1.5">
-      <p className="font-heading text-lg font-semibold tabular-nums">{formatNumber(value)}</p>
+      <p
+        className="font-heading text-lg font-semibold tabular-nums"
+        aria-label={value == null ? `${label} not in this capture` : undefined}
+      >
+        {value == null ? "—" : formatNumber(value)}
+      </p>
       <p className="text-[10px] leading-tight text-muted-foreground">{label}</p>
     </div>
   );

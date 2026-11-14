@@ -56,7 +56,7 @@ export default function DriversPage() {
     <div>
       <PageHeader
         title="Associates"
-        description="Full roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID, plus ADP-only timecard names. Today’s packages and routes come from the Nov 12 Delivery Execution board when the name matches. Phone and email come from the ADP Employee Census when the name matches. The list opens on Active, including associates the census did not list. Terminated and deceased stay on the employment filter. Tenure and scorecard contribution were not in these exports."
+        description="Full roster: Amazon schedule associates from Weeks 38 and 39, unioned by transporter ID, plus ADP-only timecard names. Today’s packages and routes come from the Nov 13 Delivery Execution board when the name matches. Phone and email come from the ADP Employee Census when the name matches. The list opens on Active, including associates the census did not list. Terminated and deceased stay on the employment filter. Tenure and scorecard contribution were not in these exports."
         actions={<ExportCsvButton filename={rosterExport.filename} csv={rosterExport.csv} label="Export roster" />}
         updatedLabel={seedCapturedLabel(seedAsOf)}
         seedAsOf={seedAsOf}
@@ -109,7 +109,7 @@ export default function DriversPage() {
           <option value="all">All sources</option>
           <option value="amazon-schedule">Amazon schedule</option>
           <option value="adp-only">ADP only</option>
-          <option value="delivery-board">Nov 12 board only</option>
+          <option value="delivery-board">Nov 13 board only</option>
         </select>
         <select
           className="h-8 rounded-lg border border-input bg-transparent px-2 text-sm dark:bg-input/30"
@@ -152,7 +152,7 @@ export default function DriversPage() {
                 <TableHead>Role</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead>Tenure</TableHead>
-                <TableHead className="text-right">Nov 12 pkgs</TableHead>
+                <TableHead className="text-right">Nov 13 pkgs</TableHead>
                 <TableHead className="text-right">Scorecard</TableHead>
                 <TableHead>Routes</TableHead>
               </TableRow>

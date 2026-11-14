@@ -1,7 +1,7 @@
 /** Domain models for DSP last-mile operations. Swap mock data, keep these types. */
 
 /**
- * Station period. Today and this week follow the frozen Nov 12, 2026 clock.
+ * Station period. Today and this week follow the frozen Nov 13, 2026 clock.
  * Custom is an inclusive start/end pair of ISO dates (YYYY-MM-DD).
  */
 export type DateRange =
@@ -98,7 +98,7 @@ export interface Driver {
   routeIds: string[];
   transporterId?: string;
   initials: string;
-  /** Present on the full roster. Omitted on the Nov 12 board-only associate list. */
+  /** Present on the full roster. Omitted on the Nov 13 board-only associate list. */
   rosterSource?: RosterSource;
   /** Amazon schedule weeks that included this transporter ID. */
   scheduleWeeks?: number[];
@@ -214,14 +214,21 @@ export interface DeliveryExecutionBoard {
     inProgress: number;
     incomplete: number | null;
     executionGaugesPct: {
+      /** Present when the capture named an execution gauge separately from attempt success. */
+      execution?: number | null;
       locations: number | null;
       stops: number | null;
       packages: number | null;
       attemptSuccess: number | null;
     };
-    /** Sum of Console route rows. The board did not publish a separate delivered total. */
+    /**
+     * Sum of Console route rows when those cards were captured.
+     * A capture that published the sum without the cards stores that sum here.
+     */
     packagesDelivered: number;
     packagesPlanned: number;
+    /** Complete chip. Null when the capture did not list it. */
+    complete: number | null;
     packageStatusCounts: {
       remaining: number;
       reattemptable: number;
@@ -232,14 +239,14 @@ export interface DeliveryExecutionBoard {
       pendingContainersPickup: number;
       pendingPackagesPickup: number;
     };
-    workHourRisk: number;
-    multiTransporter: number;
+    workHourRisk: number | null;
+    multiTransporter: number | null;
     /** Console rescueActions count when the capture included it. Null when absent. */
     rescueActions: number | null;
-    unknownStops: number;
-    onBreak: number;
-    noBreaksTaken: number;
-    inactive: number;
+    unknownStops: number | null;
+    onBreak: number | null;
+    noBreaksTaken: number | null;
+    inactive: number | null;
     onRoadPickups: {
       total: number;
       remaining: number;
