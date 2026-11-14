@@ -13,7 +13,19 @@ const completionToday = t.executionGaugesPct.packages;
 const activeRoutes = t.inProgress;
 const driversOnShift = consoleDrivers.filter((d) => d.status === "on_route").length;
 
-function statusCounts(source: readonly Route[] = routes): { status: RouteStatus; count: number }[] {
+function countLabel(value: number | null, label: string) {
+  return value == null ? `${label} not published` : `${value} ${label}`;
+}
+
+function statusCounts(
+  source: readonly Route[] = routes,
+  totals: {
+    routes: number;
+    inProgress: number;
+    incomplete: number | null;
+    complete: number | null;
+  } = t
+): { status: RouteStatus; count: number }[] {
   const counts: Record<RouteStatus, number> = {
     not_started: 0,
     no_progress: 0,
@@ -23,6 +35,11 @@ function statusCounts(source: readonly Route[] = routes): { status: RouteStatus;
     rescued: 0,
   };
   for (const route of source) counts[route.status] += 1;
+  if (source.length !== totals.routes && totals.complete != null) {
+    counts.completed = totals.complete;
+    counts.in_progress = totals.inProgress;
+    if (totals.incomplete != null) counts.incomplete = totals.incomplete;
+  }
   return (Object.keys(counts) as RouteStatus[]).map((status) => ({
     status,
     count: counts[status],
@@ -43,7 +60,10 @@ const packageGaugeHint =
     : `Sum of Console route rows · ${assignedToday.toLocaleString()} planned · ${captureLabel}. Board package gauge is ${completionToday}%. No prior-day delta.`;
 const inProgressRoutes = routes.filter((route) => route.status === "in_progress");
 const incompleteRoutes = routes.filter((route) => route.status === "incomplete");
-const completedCount = routes.filter((route) => route.status === "completed").length;
+const completedCount =
+  routes.length === t.routes || t.complete == null
+    ? routes.filter((route) => route.status === "completed").length
+    : t.complete;
 
 export const alerts: Alert[] = [
   {
@@ -73,9 +93,9 @@ export const alerts: Alert[] = [
   },
   {
     id: "al-whr",
-    severity: "warning",
-    title: `${t.workHourRisk} work-hour risk`,
-    detail: `${t.multiTransporter} multi-transporter routes, ${t.onBreak} on break, ${t.inactive} inactive. Vehicle and on-time % were not on the board.`,
+    severity: t.workHourRisk == null ? "info" : "warning",
+    title: t.workHourRisk == null ? "Work-hour risk not on this capture" : `${t.workHourRisk} work-hour risk`,
+    detail: `${countLabel(t.multiTransporter, "multi-transporter routes")}, ${countLabel(t.onBreak, "on break")}, ${countLabel(t.inactive, "inactive")}. Vehicle and on-time % were not on the board.`,
     href: "/routes",
   },
   {
@@ -242,9 +262,14 @@ function alertsFor(day: DeliveryDay): Alert[] {
       .join("/");
   const open = day.routes.filter((route) => route.status === "in_progress");
   const incomplete = day.routes.filter((route) => route.status === "incomplete");
-  const complete = day.routes.filter((route) => route.status === "completed").length;
+  const rowComplete = day.routes.filter((route) => route.status === "completed").length;
+  const complete =
+    day.routes.length === day.board.totals.routes || day.board.totals.complete == null
+      ? rowComplete
+      : day.board.totals.complete;
   const captured = formatConsoleCapture(day.board.capturedAt);
   const chips = day.board.totals.packageStatusCounts;
+  const risk = day.board.totals.workHourRisk;
   return [
     alerts[0]!,
     {
@@ -261,9 +286,9 @@ function alertsFor(day: DeliveryDay): Alert[] {
     },
     {
       id: "al-whr",
-      severity: "warning",
-      title: `${day.board.totals.workHourRisk} work-hour risk`,
-      detail: `${day.board.totals.multiTransporter} multi-transporter routes, ${day.board.totals.onBreak} on break, ${day.board.totals.inactive} inactive. Vehicle and on-time % were not on the board.`,
+      severity: risk == null ? "info" : "warning",
+      title: risk == null ? "Work-hour risk not on this capture" : `${risk} work-hour risk`,
+      detail: `${countLabel(day.board.totals.multiTransporter, "multi-transporter routes")}, ${countLabel(day.board.totals.onBreak, "on break")}, ${countLabel(day.board.totals.inactive, "inactive")}. Vehicle and on-time % were not on the board.`,
       href: "/routes",
     },
     {
@@ -279,7 +304,7 @@ function alertsFor(day: DeliveryDay): Alert[] {
 const liveOverview = {
   asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
   kpis: todayKpis,
-  packagesByDay: [{ label: "Thu 12", delivered: deliveredToday, assigned: assignedToday }],
+  packagesByDay: [{ label: "Fri 13", delivered: deliveredToday, assigned: assignedToday }],
   routeStatusCounts: statusCounts(),
   alerts,
 };
@@ -326,7 +351,7 @@ export function getOverview(range: DateRange): OverviewSnapshot {
       delivered: day.board.totals.packagesDelivered,
       assigned: day.board.totals.packagesPlanned,
     })),
-    routeStatusCounts: statusCounts(detail.routes),
+    routeStatusCounts: statusCounts(detail.routes, detail.board.totals),
     alerts: alertsFor(detail),
   };
 }

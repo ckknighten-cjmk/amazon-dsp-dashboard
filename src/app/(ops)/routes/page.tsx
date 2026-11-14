@@ -82,7 +82,7 @@ function associateNames(route: Route, day: DeliveryDay, live: boolean) {
 }
 
 const LIVE_DESCRIPTION =
-  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 12, 2026, captured at about 8:07 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 100%, stops 99%, packages 99%, attempt success 100%). 46 routes: 0 in progress; 45 complete. Incomplete is 1. CX367 (Caleb Spann, 81/82 stops, 227/245 deliveries, 18 packages remaining) had no badge and is stored as incomplete. It was not on the In progress chip. The board ahead, at risk, and behind chips are 0, 0, and 0. Per-route packages remaining sums to 18. The board remaining chip is 18. rescueActions is 0. No breaks taken is 1. Inactive is 1.";
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 13, 2026, captured at 8:08 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. The capture named gauges execution 100%, locations 99%, stops 99%, and packages 100%. Attempt success was not named. 44 routes: 0 in progress; 43 complete. Incomplete is 1. The route card list was not in this capture. Only CX358 (Caleb Spann, 84/85 stops, 192/194 deliveries, 2 packages remaining) is stored, as incomplete. It was not on the In progress chip. The other 43 routes are not invented. The published sum of route cards is 10,678 of 10,680 packages. The board remaining chip is 2. atRisk is 0. Ahead, behind, rescueActions, work-hour risk, multi-transporter, breaks, and inactive were not listed.";
 
 export default function RoutesPage() {
   const { code } = useStation();
@@ -177,7 +177,7 @@ export default function RoutesPage() {
             className={tabButton(tab === "routes")}
             onClick={() => setTab("routes")}
           >
-            Routes · {routes.length}
+            Routes · {routes.length === board.totals.routes ? routes.length : `${routes.length} named`}
           </button>
           <button
             type="button"
