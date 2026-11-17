@@ -1,25 +1,26 @@
 /**
- * Maps the DSP Console Delivery Execution evening wrap (2026-11-13, 8:08 p.m. CT)
+ * Maps the DSP Console Delivery Execution evening wrap (2026-11-16, 8:30 p.m. CT)
  * into domain models. Board chips come from seed totals. Exception rows are the
  * Packages CSV embedded as `exceptionPackages` (same file as
- * `packages-exceptions-2026-11-13.csv`, 201 rows). This capture stores those rows
+ * `packages-exceptions-2026-11-16.csv`, 344 rows). This capture stores those rows
  * with the CSV column names; earlier seeds used camelCase. The Nov 4 evening-wrap
  * scrape also carried `exceptionRowCount` and an `exceptionPackages` summary
  * (`csv`, `rows`, `byStatus`) instead of the row list. A summary is not iterated
- * as rows. The committed Nov 13 seed embeds the 201 CSV rows and keeps
+ * as rows. The committed Nov 16 seed embeds the 344 CSV rows and keeps
  * `exceptionRowCount`. Vehicle and on-time % stay null. The capture named gauges
- * execution 100, locations 99, stop 99, and package 100. Those are stored as
- * execution, locations, stops, and packages. Attempt success was not named and
- * is null. Routes are 44, in progress 0, complete 43, incomplete 1. The route
- * card list was not in this capture. Only CX358 (Caleb Spann, 84/85 stops,
- * 192/194 deliveries) is stored. The other 43 routes are not invented.
- * packagesDelivered 10678 and packagesPlanned 10680 are the published sum of
- * route cards, not the sum of the one stored card. The board remaining chip is
- * 2. atRisk was listed as 0. Ahead, behind, work-hour risk, rescueActions,
- * multi-transporter, unknown stops, breaks, inactive, and the other unpublished
- * chips are null. Pending container and package pickup were listed as 0.
- * On-road pickups are 4 (0 remaining, 4 complete). capturedAt is
- * 2026-11-13T20:08-06:00.
+ * execution 97, locations 99, stop 99, package 97, and attempt success 100.
+ * Those are stored as execution, locations, stops, packages, and attempt success.
+ * Routes are 48, in progress 1, complete 44, incomplete 3. All 48 route cards
+ * are stored. CX308 is the in-progress route. CX296, CX310, and TX81 are
+ * incomplete. Statuses other than the In progress filter were assigned by stops
+ * done/planned. Route-row packages are 10919 of 11190. Per-route packages
+ * remaining (planned minus delivered) sums to 271. The board remaining chip is
+ * 11. ahead, atRisk, and behind are the board chips (0 / 1 / 0). workHourRisk
+ * is 0. rescueActions is 0. multiTransporter is 13. unknownStops is 35.
+ * Pending container and package pickup were listed as 0. On break is 0, no
+ * breaks taken is 5, and inactive is 1. Late departing, not departed, weather,
+ * SWA, and paused were listed as 0. On-road pickups are 5 (1 remaining, 4
+ * complete). capturedAt is 2026-11-16T20:30-06:00.
  */
 import type {
   DeliveryExecutionBoard,
@@ -29,12 +30,12 @@ import type {
   Route,
   RouteStatus,
 } from "@/lib/types";
-import seed from "@/lib/data/seed/delivery-execution-2026-11-13.json";
+import seed from "@/lib/data/seed/delivery-execution-2026-11-16.json";
 
 type SeedRouteJson = (typeof seed)["routes"][number];
 /**
- * Nov 4, Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, and Nov 13 notes are lists. Earlier seeds store pace text in the same field.
- * Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, and Nov 13 routes include riskLevel. Earlier seeds omit it.
+ * Nov 4, Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, Nov 13, and Nov 16 notes are lists. Earlier seeds store pace text in the same field.
+ * Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, Nov 13, and Nov 16 routes include riskLevel. Earlier seeds omit it.
  */
 type SeedRoute = Omit<SeedRouteJson, "notes" | "riskLevel"> & {
   notes: string[] | string | null;
@@ -58,6 +59,7 @@ const STATUS_MAP: Record<string, RouteStatus> = {
   // Nov 11 has 16 routes with no badge, stored as incomplete. The Nov 11 incomplete chip is 16.
   // Nov 12 CX367 had no badge and is stored as incomplete. The Nov 12 incomplete chip is 1.
   // Nov 13 CX358 is the only named route and is stored as incomplete. The Nov 13 incomplete chip is 1.
+  // Nov 16 stores CX308 as in_progress. CX296, CX310, and TX81 are incomplete. The Nov 16 incomplete chip is 3.
   "incomplete (no badge)": "incomplete",
   // Oct 29 lists AX93, AX96, and AX97 as not_departed. The route status set has
   // no separate value, so those rows stay Not started. The seed keeps not_departed.
@@ -150,7 +152,7 @@ function readException(row: object) {
  * Prior seeds embed exception rows as an array. The Nov 4 scrape stored a
  * summary object (`csv`, `rows`, `byStatus`) plus `exceptionRowCount` instead
  * of that list. A summary is not a row list, so it contributes no packages.
- * The committed Nov 4, Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, and Nov 13 seeds embed the CSV rows and keep `exceptionRowCount`.
+ * The committed Nov 4, Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, Nov 13, and Nov 16 seeds embed the CSV rows and keep `exceptionRowCount`.
  */
 export function exceptionPackageRows(value: unknown): object[] {
   if (!Array.isArray(value)) return [];
@@ -209,11 +211,11 @@ export type DeliverySeed = {
   routes: SeedRoute[];
   /** Row list, or a Nov 4-style summary that is not itself rows. */
   exceptionPackages: readonly object[] | { csv?: string; rows?: number; byStatus?: Record<string, number> };
-  /** Present on the Nov 4, Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, and Nov 13 scrapes. The row count also lives on `exceptionPackagesRowCount`. */
+  /** Present on the Nov 4, Nov 6, Nov 9, Nov 10, Nov 11, Nov 12, Nov 13, and Nov 16 scrapes. The row count also lives on `exceptionPackagesRowCount`. */
   exceptionRowCount?: number;
 };
 
-/** Map one dated seed. The live Nov 13 board is this function applied to that file. */
+/** Map one dated seed. The live Nov 16 board is this function applied to that file. */
 export function mapDeliverySeed(file: DeliverySeed): DeliveryDay {
   const packageRows = exceptionPackageRows(file.exceptionPackages);
   const transporterByName = new Map<string, string>();
@@ -390,8 +392,8 @@ const EXPORT_CHIPS: Array<{
 /**
  * Multi-associate Delivery Execution routes are treated as rescued.
  * The first listed associate is primary. The rest are rescuers.
- * Nov 13 did not list rescueActions, so that count is null. Multi-associate
- * routes are still inferred, so this column is still not Amazon’s official rescue flag.
+ * Nov 16 lists rescueActions as 0. Multi-associate routes are still inferred,
+ * so this column is still not Amazon’s official rescue flag.
  */
 export const RESCUE_RULE =
   "Rescue: Yes means the route listed more than one associate. The first associate is primary and the others are rescuers. This follows the multi-transporter crew on the board. It is not Amazon’s rescueActions flag unless that list is in the capture.";

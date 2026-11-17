@@ -82,7 +82,7 @@ function associateNames(route: Route, day: DeliveryDay, live: boolean) {
 }
 
 const LIVE_DESCRIPTION =
-  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 13, 2026, captured at 8:08 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. The capture named gauges execution 100%, locations 99%, stops 99%, and packages 100%. Attempt success was not named. 44 routes: 0 in progress; 43 complete. Incomplete is 1. The route card list was not in this capture. Only CX358 (Caleb Spann, 84/85 stops, 192/194 deliveries, 2 packages remaining) is stored, as incomplete. It was not on the In progress chip. The other 43 routes are not invented. The published sum of route cards is 10,678 of 10,680 packages. The board remaining chip is 2. atRisk is 0. Ahead, behind, rescueActions, work-hour risk, multi-transporter, breaks, and inactive were not listed.";
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 16, 2026, captured at 8:30 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. The capture named gauges execution 97%, locations 99%, stops 99%, packages 97%, and attempt success 100%. 48 routes: 1 in progress (CX308); 44 complete. Incomplete is 3 (CX296, CX310, TX81). Statuses other than the In progress filter were assigned by stops done/planned. Route-row packages are 10,919 of 11,190. Route-row stops are 7,474 of 7,483. Per-route packages remaining sums to 271. The board remaining chip is 11. rescueActions is 0. Multi-transporter is 13. Work-hour risk is 0. No breaks taken is 5. Inactive is 1. Unknown stops is 35. Ahead, at risk, and behind are 0, 1, and 0.";
 
 export default function RoutesPage() {
   const { code } = useStation();
