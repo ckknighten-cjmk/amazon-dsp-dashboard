@@ -19,7 +19,7 @@ test("ADP display names turn LAST, FIRST into First Last", () => {
   assert.equal(adpDisplayName("Lexie"), "Lexie");
 });
 
-test("active roster is the schedule union, not the Nov 16 board", () => {
+test("active roster is the schedule union, not the Nov 17 board", () => {
   const drivers = getDrivers();
   const scheduled = drivers.filter((driver) => driver.rosterSource === "amazon-schedule");
   const adpOnly = drivers.filter((driver) => driver.rosterSource === "adp-only");
@@ -28,7 +28,7 @@ test("active roster is the schedule union, not the Nov 16 board", () => {
   assert.ok(drivers.length > 40);
   assert.equal(scheduled.length, 96);
   assert.equal(onBoard.length, consoleDrivers.length);
-  assert.equal(consoleDrivers.length, 52);
+  assert.equal(consoleDrivers.length, 0);
   assert.ok(adpOnly.length > 0);
   assert.ok(adpOnly.every((driver) => !driver.transporterId));
   assert.equal(new Set(drivers.map((driver) => driver.id)).size, drivers.length);
@@ -41,17 +41,17 @@ test("active roster is the schedule union, not the Nov 16 board", () => {
 
   const cole = getDrivers().find((driver) => driver.transporterId === "A2FLK6PKFVYES1");
   assert.equal(cole?.name, "Cole Regan Perkins");
-  // Nov 16 lists Cole Perkins on CX285. The schedule name joins on first and last.
-  assert.deepEqual(cole?.routeIds, ["rt-cx285"]);
+  // Nov 17 did not name route associates, so the schedule roster has no live route ids.
+  assert.deepEqual(cole?.routeIds, []);
 
   const aaron = getDrivers().find((driver) => driver.transporterId === "AD3O3G0B92UUS");
   assert.equal(aaron?.name, "Aaron Calvin Davis");
-  // Nov 16 lists Aaron Hines and Aaron Armstrong. Aaron Davis is a different person.
+  // Nov 17 named no associates. Aaron Davis stays off the live board.
   assert.deepEqual(aaron?.routeIds, []);
 
   const cameyon = getDriver(associateId("Cameyon Smith"));
   assert.equal(cameyon?.name, "Cameyon Smith");
-  assert.deepEqual(cameyon?.routeIds, ["rt-cx283"]);
+  assert.deepEqual(cameyon?.routeIds, []);
 
   for (const boardDriver of consoleDrivers) {
     const driver = getDriver(boardDriver.id);
