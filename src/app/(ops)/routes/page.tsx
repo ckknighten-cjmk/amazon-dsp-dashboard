@@ -82,7 +82,7 @@ function associateNames(route: Route, day: DeliveryDay, live: boolean) {
 }
 
 const LIVE_DESCRIPTION =
-  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 6, 2026, captured at 8:11 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Execution gauges are the board graphics (locations 99%, stops 99%, packages 99%, attempt success 100%). 43 routes: 1 in progress (CX311); 40 complete. CX311 is in progress at 195/196 stops (Cameyon Smith and Donovan Doss, 294/295 packages) and the route row is marked 8 ahead. The board ahead chip is 1. The at-risk chip is 0 and the behind chip is 0. Incomplete is 2. CX310 (Shachaniah Israel, 179/180 stops, 267/268 deliveries, 1 package remaining) and CX330 (Daurieal Hervey, curtis caples, and Stevon Kyles, 202/202 stops, 311/312 deliveries, 1 package remaining) had no badge and are stored as incomplete. The board ahead, at risk, and behind chips are 1, 0, and 0. Per-route packages remaining sums to 3. The board remaining chip is 3.";
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 18, 2026, captured at 8:30 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Gauges are execution 99%, locations 99%, stops 99%, packages 99%, and attempt success 99%. 49 routes: 7 in progress (TX75, CX295, TX74, TX76, AV17, CX286, TX69); 42 complete. Incomplete is 0. All 49 route cards are stored, including pseudo-route RDM__h9ZQ0bCCOFo= (Shanteria Smith, 1/1 stop). CX279, CX291, CX301, and TX70 were short of planned stops and stay complete. Deliveries are 11,354 of 11,455. Stops are 7,860 of 7,877. Per-route packages remaining sums to 101. The board remaining chip is 28. rescueActions is 0. The multi-transporter chip is 15, and 15 cards list more than one associate. Work-hour risk is 0. Unknown stops is 33. Ahead 1, at risk 3, behind 0. On-road pickups are 6 of 6. Pickup failed is 73 on the board and 72 in the 183-row Packages CSV.";
 
 export default function RoutesPage() {
   const { code } = useStation();
@@ -177,7 +177,7 @@ export default function RoutesPage() {
             className={tabButton(tab === "routes")}
             onClick={() => setTab("routes")}
           >
-            Routes · {routes.length}
+            Routes · {routes.length === board.totals.routes ? routes.length : `${routes.length} named`}
           </button>
           <button
             type="button"

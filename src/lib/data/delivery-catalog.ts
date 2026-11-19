@@ -1,6 +1,6 @@
 /**
  * Every dated DNA4 Delivery Execution seed, oldest first.
- * The live board is the Nov 6 capture from `delivery-execution.ts`.
+ * The live board is the Nov 18 capture from `delivery-execution.ts`.
  * A newer evening wrap replaces that import and moves the previous live
  * file into this list. Backfilling an older day only adds an import here.
  * Today moves only when the live capture moves.
@@ -47,6 +47,14 @@ import oct30 from "@/lib/data/seed/delivery-execution-2026-10-30.json";
 import nov02 from "@/lib/data/seed/delivery-execution-2026-11-02.json";
 import nov03 from "@/lib/data/seed/delivery-execution-2026-11-03.json";
 import nov04 from "@/lib/data/seed/delivery-execution-2026-11-04.json";
+import nov06 from "@/lib/data/seed/delivery-execution-2026-11-06.json";
+import nov09 from "@/lib/data/seed/delivery-execution-2026-11-09.json";
+import nov10 from "@/lib/data/seed/delivery-execution-2026-11-10.json";
+import nov11 from "@/lib/data/seed/delivery-execution-2026-11-11.json";
+import nov12 from "@/lib/data/seed/delivery-execution-2026-11-12.json";
+import nov13 from "@/lib/data/seed/delivery-execution-2026-11-13.json";
+import nov16 from "@/lib/data/seed/delivery-execution-2026-11-16.json";
+import nov17 from "@/lib/data/seed/delivery-execution-2026-11-17.json";
 
 const HISTORY = [
   sep21,
@@ -80,9 +88,17 @@ const HISTORY = [
   nov02,
   nov03,
   nov04,
+  nov06,
+  nov09,
+  nov10,
+  nov11,
+  nov12,
+  nov13,
+  nov16,
+  nov17,
 ].map((file) => mapDeliverySeed(file as DeliverySeed));
 
-/** Live Nov 6 object, plus every earlier file. Sorted by service date. */
+/** Live Nov 18 object, plus every earlier file. Sorted by service date. */
 export const DELIVERY_DAYS: readonly DeliveryDay[] = [...HISTORY, liveDeliveryDay].sort((a, b) =>
   a.serviceDate.localeCompare(b.serviceDate)
 );
@@ -95,7 +111,7 @@ export function deliveryDaysInRange(range: DateRange): DeliveryDay[] {
 
 /**
  * Board to show for a period.
- * A range that includes the station clock uses the live Nov 6 capture.
+ * A range that includes the station clock uses the live Nov 18 capture.
  * Any other range uses the latest seeded day inside it.
  */
 export function detailDeliveryDay(range: DateRange): DeliveryDay | null {
@@ -110,17 +126,28 @@ export function deliveryDayLabel(serviceDate: string) {
 
 export function describeDeliveryDay(day: DeliveryDay) {
   const gauges = day.board.totals.executionGaugesPct;
+  const execution =
+    typeof gauges.execution === "number" ? `execution ${gaugePct(gauges.execution)}, ` : "";
   const gaugeText =
     gauges.locations == null &&
     gauges.stops == null &&
     gauges.packages == null &&
-    gauges.attemptSuccess == null
+    gauges.attemptSuccess == null &&
+    gauges.execution == null
       ? "Execution gauges were not published on this capture."
-      : `Execution gauges: locations ${gaugePct(gauges.locations)}, stops ${gaugePct(gauges.stops)}, packages ${gaugePct(gauges.packages)}, attempt success ${gaugePct(gauges.attemptSuccess)}.`;
+      : `Execution gauges: ${execution}locations ${gaugePct(gauges.locations)}, stops ${gaugePct(gauges.stops)}, packages ${gaugePct(gauges.packages)}, attempt success ${gaugePct(gauges.attemptSuccess)}.`;
   const open = day.routes.filter((route) => route.status === "in_progress").map((route) => route.code);
-  const complete = day.routes.filter((route) => route.status === "completed").length;
+  const rowComplete = day.routes.filter((route) => route.status === "completed").length;
+  const complete =
+    day.routes.length === day.board.totals.routes || day.board.totals.complete == null
+      ? rowComplete
+      : day.board.totals.complete;
   const openText = open.length > 0 ? ` (${open.join(", ")})` : "";
-  return `Amazon DSP Console ${day.board.snapshot.replaceAll("-", " ")} for DNA4 Memphis / CJMK Inc., service day ${day.serviceDate}, captured at ${formatConsoleCapture(day.board.capturedAt)}. Vehicle and on-time % were not on the Console — shown as unavailable. ${gaugeText} ${day.board.totals.routes} routes: ${day.board.totals.inProgress} in progress${openText}; ${complete} complete.`;
+  const named =
+    day.routes.length === day.board.totals.routes
+      ? ""
+      : ` The capture named ${day.routes.length} route ${day.routes.length === 1 ? "card" : "cards"}.`;
+  return `Amazon DSP Console ${day.board.snapshot.replaceAll("-", " ")} for DNA4 Memphis / CJMK Inc., service day ${day.serviceDate}, captured at ${formatConsoleCapture(day.board.capturedAt)}. Vehicle and on-time % were not on the Console — shown as unavailable. ${gaugeText} ${day.board.totals.routes} routes: ${day.board.totals.inProgress} in progress${openText}; ${complete} complete.${named}`;
 }
 
 function gaugePct(value: number | null) {
