@@ -9,16 +9,17 @@ import {
   formatCompletionPct,
   formatDateTime,
   formatNumber,
+  formatOptionalNumber,
 } from "@/lib/format";
 import type { PackageException, Route } from "@/lib/types";
 
 export function RouteDetail({
   route,
   exceptions: exceptionRows,
-  serviceDate = "Nov 18, 2026",
+  serviceDate = "Nov 19, 2026",
 }: {
   route: Route;
-  /** Defaults to the live Nov 18 exception list. */
+  /** Defaults to the live Nov 19 exception list. */
   exceptions?: readonly PackageException[];
   serviceDate?: string;
 }) {
@@ -28,7 +29,14 @@ export function RouteDetail({
   const rescuers = route.rescueDriverIds
     .map((id) => getDriver(id))
     .filter((d): d is NonNullable<typeof d> => Boolean(d));
-  const remainingStops = Math.max(route.stopCount - route.completedStops, 0);
+  const remainingStops =
+    route.stopCount == null || route.completedStops == null
+      ? null
+      : Math.max(route.stopCount - route.completedStops, 0);
+  const packages =
+    route.packagesDelivered == null || route.packageCount == null
+      ? "Not captured"
+      : `${formatNumber(route.packagesDelivered)} / ${formatNumber(route.packageCount)}`;
   const exceptions = exceptionRows ?? getExceptionsForRoute(route.id);
 
   return (
@@ -71,26 +79,38 @@ export function RouteDetail({
           value={associates.map((d) => d.name).join(", ") || "Unassigned"}
         />
         <Stat label="Van" value={CONSOLE_UNAVAILABLE} />
-        <Stat
-          label="Packages"
-          value={`${formatNumber(route.packagesDelivered)} / ${formatNumber(route.packageCount)}`}
-        />
+        <Stat label="Packages" value={packages} />
         <Stat label="On-time %" value={CONSOLE_UNAVAILABLE} />
       </div>
 
       <div>
-        <div className="mb-1.5 flex items-center justify-between text-xs text-muted-foreground">
-          <span>
-            {route.completedStops} / {route.stopCount} stops · {route.packagesRemaining} pkg remaining
-          </span>
-          <span className="tabular-nums">{formatCompletionPct(route.progressPct)}</span>
-        </div>
-        <Progress value={Math.min(route.progressPct, 100)} />
-        <p className="mt-1.5 text-xs text-muted-foreground">
-          {remainingStops === 0 && route.packagesRemaining === 0
-            ? "Board shows this route complete."
-            : `${remainingStops} stop${remainingStops === 1 ? "" : "s"} still open on the board.`}
-        </p>
+        {route.progressPct == null ? (
+          <p className="text-xs text-muted-foreground">
+            {route.completedStops == null || route.stopCount == null
+              ? "Stops not captured"
+              : `${route.completedStops} / ${route.stopCount} stops`}
+            {" · "}
+            {route.packagesRemaining == null
+              ? "packages remaining not captured"
+              : `${formatOptionalNumber(route.packagesRemaining)} pkg remaining`}
+            . Completion was not captured for this route.
+          </p>
+        ) : (
+          <>
+            <div className="mb-1.5 flex items-center justify-between text-xs text-muted-foreground">
+              <span>
+                {route.completedStops} / {route.stopCount} stops · {route.packagesRemaining} pkg remaining
+              </span>
+              <span className="tabular-nums">{formatCompletionPct(route.progressPct)}</span>
+            </div>
+            <Progress value={Math.min(route.progressPct, 100)} />
+            <p className="mt-1.5 text-xs text-muted-foreground">
+              {remainingStops === 0 && route.packagesRemaining === 0
+                ? "Board shows this route complete."
+                : `${remainingStops} stop${remainingStops === 1 ? "" : "s"} still open on the board.`}
+            </p>
+          </>
+        )}
       </div>
 
       <Separator />
@@ -105,7 +125,7 @@ export function RouteDetail({
         {exceptions.length === 0 ? (
           <EmptyState
             title="No exception packages"
-            description="This route had no rows in the Nov 18 exception Packages CSV."
+            description={`This route had no rows in the ${serviceDate} exception Packages CSV.`}
             className="py-8"
           />
         ) : (

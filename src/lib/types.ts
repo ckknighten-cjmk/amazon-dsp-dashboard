@@ -1,7 +1,7 @@
 /** Domain models for DSP last-mile operations. Swap mock data, keep these types. */
 
 /**
- * Station period. Today and this week follow the frozen Nov 18, 2026 clock.
+ * Station period. Today and this week follow the frozen Nov 19, 2026 clock.
  * Custom is an inclusive start/end pair of ISO dates (YYYY-MM-DD).
  */
 export type DateRange =
@@ -98,7 +98,7 @@ export interface Driver {
   routeIds: string[];
   transporterId?: string;
   initials: string;
-  /** Present on the full roster. Omitted on the Nov 18 board-only associate list. */
+  /** Present on the full roster. Omitted on a board-only associate list. Nov 19 cards named no associates. */
   rosterSource?: RosterSource;
   /** Amazon schedule weeks that included this transporter ID. */
   scheduleWeeks?: number[];
@@ -167,13 +167,19 @@ export interface Route {
   /** First rescuer, when `receivedRescue` is true. */
   rescueDriverId?: string;
   vehicleId: string | null;
-  packageCount: number;
-  packagesDelivered: number;
-  packagesRemaining: number;
-  stopCount: number;
-  completedStops: number;
+  /** Null when the route card did not publish a package count. */
+  packageCount: number | null;
+  /** Null when the route card did not publish packages delivered. */
+  packagesDelivered: number | null;
+  /** Null when the route card did not publish packages remaining. */
+  packagesRemaining: number | null;
+  /** Null when the route card did not publish planned stops. */
+  stopCount: number | null;
+  /** Null when the route card did not publish completed stops. */
+  completedStops: number | null;
   status: RouteStatus;
-  progressPct: number;
+  /** Null when the route card did not publish a completion percent. */
+  progressPct: number | null;
   eta: string | null;
   finishTime: string | null;
   startedAt: string | null;
@@ -224,9 +230,12 @@ export interface DeliveryExecutionBoard {
     /**
      * Sum of Console route rows when those cards were captured.
      * A capture that published the sum without the cards stores that sum here.
+     * Nov 19 stores an approximate sum of 46 of 49 routes and sets `volumeLabel`.
      */
     packagesDelivered: number;
     packagesPlanned: number;
+    /** Set when the package totals are not a complete route-row sum. */
+    volumeLabel?: string;
     /** Complete chip. Null when the capture did not list it. */
     complete: number | null;
     packageStatusCounts: {

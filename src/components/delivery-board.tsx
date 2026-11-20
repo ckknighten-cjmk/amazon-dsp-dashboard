@@ -8,7 +8,7 @@ export function DeliveryBoardSummary({
   routes: routeRows,
 }: {
   board: DeliveryExecutionBoard;
-  /** Defaults to the live Nov 18 board. Pass a historical day's routes when that day is open. */
+  /** Defaults to the live Nov 19 board. Pass a historical day's routes when that day is open. */
   routes?: readonly Route[];
 }) {
   const t = board.totals;
@@ -69,7 +69,8 @@ export function DeliveryBoardSummary({
           <CardHeader>
             <CardTitle>Execution progress</CardTitle>
             <CardDescription>
-              Route-row sum {formatNumber(t.packagesDelivered)} / {formatNumber(t.packagesPlanned)} packages
+              {t.volumeLabel ?? "Route-row sum"} {formatNumber(t.packagesDelivered)} /{" "}
+              {formatNumber(t.packagesPlanned)} packages
             </CardDescription>
           </CardHeader>
           <CardContent className="flex flex-wrap justify-around gap-3 py-1">

@@ -20,13 +20,18 @@ const ADDED = [
 ] as const;
 
 describe("delivery seed catalog", () => {
-  it("keeps Nov 18 as today and lists every seeded day", () => {
-    assert.equal(STATION_TODAY, "2026-11-18");
-    assert.equal(deliveryBoard.serviceDate, "2026-11-18");
+  it("keeps Nov 19 as today and lists every seeded day", () => {
+    assert.equal(STATION_TODAY, "2026-11-19");
+    assert.equal(deliveryBoard.serviceDate, "2026-11-19");
     assert.equal(deliveryBoard.totals.routes, 49);
+    assert.equal(deliveryBoard.totals.inProgress, 6);
+    assert.equal(deliveryBoard.totals.complete, 43);
     assert.equal(deliveryBoard.totals.incomplete, 0);
-    assert.equal(routes.length, 49);
-    assert.equal(DELIVERY_SEED_DATES.length, 40);
+    assert.equal(routes.length, 6);
+    assert.equal(deliveryBoard.totals.packagesDelivered, 11435);
+    assert.equal(deliveryBoard.totals.packagesPlanned, 11596);
+    assert.equal(deliveryBoard.totals.volumeLabel, "Approximate total from 46 of 49 routes");
+    assert.equal(DELIVERY_SEED_DATES.length, 41);
     assert.deepEqual(DELIVERY_SEED_DATES, [
       "2026-09-21",
       "2026-09-23",
@@ -68,25 +73,28 @@ describe("delivery seed catalog", () => {
       "2026-11-16",
       "2026-11-17",
       "2026-11-18",
+      "2026-11-19",
     ]);
   });
 
   it("shows the live board for today and every seeded day in this week", () => {
     const today = getOverview({ kind: "today" });
-    assert.equal(today.kpis[0]?.value, 11354);
+    assert.equal(today.kpis[0]?.value, 11435);
+    assert.match(String(today.kpis[0]?.hint), /Approximate total from 46 of 49 routes/);
     assert.deepEqual(
       today.packagesByDay.map((day) => day.label),
-      ["Wed 18"]
+      ["Thu 19"]
     );
-    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-11-18");
+    assert.equal(detailDeliveryDay({ kind: "today" })?.serviceDate, "2026-11-19");
 
     const week = getOverview({ kind: "week" });
-    assert.equal(week.kpis[0]?.value, 11354);
+    assert.equal(week.kpis[0]?.value, 11435);
     assert.deepEqual(
       week.packagesByDay.map((day) => day.label),
-      ["Nov 12", "Nov 13", "Nov 16", "Nov 17", "Nov 18"]
+      ["Nov 13", "Nov 16", "Nov 17", "Nov 18", "Nov 19"]
     );
-    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-11-18");
+    assert.equal(week.packagesByDay.at(-1)?.delivered, 11435);
+    assert.equal(detailDeliveryDay({ kind: "week" })?.serviceDate, "2026-11-19");
     assert.equal(deliveryDaysInRange({ kind: "custom", start: "2026-10-17", end: "2026-10-18" }).length, 0);
   });
 

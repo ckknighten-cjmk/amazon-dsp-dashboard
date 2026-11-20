@@ -7,7 +7,7 @@ import { StationEmptyPage } from "@/components/station-empty";
 import { Button } from "@/components/ui/button";
 import { getDeliveryBoard, getDriver, getRoute } from "@/lib/data";
 import { loadStationDataset } from "@/lib/data/station-seeds";
-import { seedCapturedLabel } from "@/lib/format";
+import { formatDate, seedCapturedLabel } from "@/lib/format";
 import { currentStation } from "@/lib/station-request";
 import { hrefWithStation } from "@/lib/stations";
 
@@ -40,7 +40,7 @@ export default async function RoutePage({
     <div>
       <PageHeader
         title={`Route ${route.code}`}
-        description={`${route.stationCode} Memphis · ${names || "Unassigned"} · DSP Console Delivery Execution · Nov 18, 2026`}
+        description={`${route.stationCode} Memphis · ${names || "Unassigned"} · DSP Console Delivery Execution · ${formatDate(board.serviceDate)}`}
         actions={
           <Button variant="outline" size="sm" nativeButton={false} render={<Link href={hrefWithStation("/routes", station)} />}>
             Back to board
@@ -52,7 +52,7 @@ export default async function RoutePage({
       />
       <DeliveryPeriodNote />
       <div className="rounded-xl border bg-card p-5">
-        <RouteDetail route={route} />
+        <RouteDetail route={route} serviceDate={formatDate(board.serviceDate)} />
       </div>
     </div>
   );

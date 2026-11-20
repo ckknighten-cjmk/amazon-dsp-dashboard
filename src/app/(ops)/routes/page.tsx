@@ -82,7 +82,7 @@ function associateNames(route: Route, day: DeliveryDay, live: boolean) {
 }
 
 const LIVE_DESCRIPTION =
-  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 18, 2026, captured at 8:30 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Gauges are execution 99%, locations 99%, stops 99%, packages 99%, and attempt success 99%. 49 routes: 7 in progress (TX75, CX295, TX74, TX76, AV17, CX286, TX69); 42 complete. Incomplete is 0. All 49 route cards are stored, including pseudo-route RDM__h9ZQ0bCCOFo= (Shanteria Smith, 1/1 stop). CX279, CX291, CX301, and TX70 were short of planned stops and stay complete. Deliveries are 11,354 of 11,455. Stops are 7,860 of 7,877. Per-route packages remaining sums to 101. The board remaining chip is 28. rescueActions is 0. The multi-transporter chip is 15, and 15 cards list more than one associate. Work-hour risk is 0. Unknown stops is 33. Ahead 1, at risk 3, behind 0. On-road pickups are 6 of 6. Pickup failed is 73 on the board and 72 in the 183-row Packages CSV.";
+  "Amazon DSP Console evening wrap for DNA4 Memphis / CJMK Inc., service day Nov 19, 2026, captured at 8:25 p.m. CT. Vehicle and on-time % were not on the Console — shown as unavailable. Gauges are locations 98%, stops 99%, packages 98%, and attempt success 99%. An execution gauge was not published. 49 routes: 6 in progress (CX299, CX295, CX312, CX300, CX315, RDM__CV/xGVFFC6E=); 43 complete. Incomplete is 0. Only those 6 cards are stored. The other 43 route codes were not captured. Each card showed a fraction (167/170, 142/144, 187/189, 192/194, 185/186, 0/1). The capture did not say whether that fraction is stops or packages, so stops and packages on the rows are unset. Associates were not on the cards. Deliveries are an approximate 11,435 of 11,596 from 46 of 49 routes. The board remaining chip is 13. rescueActions was not published. The multi-transporter chip is 19 and is not inferred onto routes. Work-hour risk is 3. Unknown stops is 33. Ahead 2, at risk 2, behind 0. No breaks taken is 3. On-road pickups are 3 of 5 complete; remaining 2 is total minus complete. The Packages CSV has 217 rows and matches the export-status chips. The summary text said 216.";
 
 export default function RoutesPage() {
   const { code } = useStation();
@@ -330,13 +330,25 @@ export default function RoutesPage() {
                         ) : null}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {formatNumber(route.completedStops)}/{formatNumber(route.stopCount)}
+                        {route.completedStops == null || route.stopCount == null ? (
+                          <span title="Not on the captured route card">—</span>
+                        ) : (
+                          `${formatNumber(route.completedStops)}/${formatNumber(route.stopCount)}`
+                        )}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {formatNumber(route.packagesDelivered)}/{formatNumber(route.packageCount)}
+                        {route.packagesDelivered == null || route.packageCount == null ? (
+                          <span title="Not on the captured route card">—</span>
+                        ) : (
+                          `${formatNumber(route.packagesDelivered)}/${formatNumber(route.packageCount)}`
+                        )}
                       </TableCell>
                       <TableCell className="text-right tabular-nums">
-                        {formatNumber(route.packagesRemaining)}
+                        {route.packagesRemaining == null ? (
+                          <span title="Not on the captured route card">—</span>
+                        ) : (
+                          formatNumber(route.packagesRemaining)
+                        )}
                       </TableCell>
                       <TableCell>
                         <RouteStatusBadge status={route.status} />
@@ -350,12 +362,16 @@ export default function RoutesPage() {
                         ) : null}
                       </TableCell>
                       <TableCell>
-                        <div className="flex items-center gap-2">
-                          <Progress value={Math.min(route.progressPct, 100)} className="min-w-20 flex-1" />
-                          <span className="w-12 text-right text-xs tabular-nums">
-                            {formatCompletionPct(route.progressPct)}
-                          </span>
-                        </div>
+                        {route.progressPct == null ? (
+                          <span className="text-xs text-muted-foreground">Not captured</span>
+                        ) : (
+                          <div className="flex items-center gap-2">
+                            <Progress value={Math.min(route.progressPct, 100)} className="min-w-20 flex-1" />
+                            <span className="w-12 text-right text-xs tabular-nums">
+                              {formatCompletionPct(route.progressPct)}
+                            </span>
+                          </div>
+                        )}
                       </TableCell>
                       <TableCell className="text-xs text-muted-foreground">
                         {CONSOLE_UNAVAILABLE}

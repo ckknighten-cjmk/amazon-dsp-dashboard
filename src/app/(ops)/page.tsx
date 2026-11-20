@@ -72,15 +72,17 @@ export default function OverviewPage() {
               <CardHeader>
                 <CardTitle>
                   {days.length <= 1 && liveFocus
-                    ? "Volume · Nov 18"
+                    ? "Volume · Nov 19"
                     : days.length <= 1
                       ? `Volume · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`
                       : "Volume · seeded days"}
                 </CardTitle>
                 <CardDescription>
                   {days.length <= 1 && liveFocus
-                    ? `Console Delivery Execution planned vs delivered. ${DELIVERY_COVERAGE.label}. Other days were not in this pull.`
-                    : "Console Delivery Execution planned vs delivered for each seeded day in this period. Days without a file are left blank."}
+                    ? `Console Delivery Execution planned vs delivered. ${DELIVERY_COVERAGE.label}. Nov 19 deliveries are an approximate sum of 46 of 49 routes. Other days were not in this pull.`
+                    : liveFocus
+                      ? "Console Delivery Execution planned vs delivered for each seeded day in this period. Nov 19 deliveries are an approximate sum of 46 of 49 routes. Days without a file are left blank."
+                      : "Console Delivery Execution planned vs delivered for each seeded day in this period. Days without a file are left blank."}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -90,7 +92,7 @@ export default function OverviewPage() {
             <Card className="lg:col-span-2">
               <CardHeader>
                 <CardTitle>
-                  {liveFocus ? "Nov 18 routes" : `Routes · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`}
+                  {liveFocus ? "Nov 19 routes" : `Routes · ${deliveryDayLabel(detail?.serviceDate ?? STATION_TODAY)}`}
                 </CardTitle>
                 <CardDescription>
                   {liveFocus
