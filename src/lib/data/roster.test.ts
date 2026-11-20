@@ -19,7 +19,7 @@ test("ADP display names turn LAST, FIRST into First Last", () => {
   assert.equal(adpDisplayName("Lexie"), "Lexie");
 });
 
-test("active roster is the schedule union, not the Nov 18 board", () => {
+test("active roster is the schedule union, not the Nov 19 board", () => {
   const drivers = getDrivers();
   const scheduled = drivers.filter((driver) => driver.rosterSource === "amazon-schedule");
   const adpOnly = drivers.filter((driver) => driver.rosterSource === "adp-only");
@@ -28,7 +28,7 @@ test("active roster is the schedule union, not the Nov 18 board", () => {
   assert.ok(drivers.length > 40);
   assert.equal(scheduled.length, 96);
   assert.equal(onBoard.length, consoleDrivers.length);
-  assert.equal(consoleDrivers.length, 53);
+  assert.equal(consoleDrivers.length, 0);
   assert.ok(adpOnly.length > 0);
   assert.ok(adpOnly.every((driver) => !driver.transporterId));
   assert.equal(new Set(drivers.map((driver) => driver.id)).size, drivers.length);
@@ -41,17 +41,17 @@ test("active roster is the schedule union, not the Nov 18 board", () => {
 
   const cole = getDrivers().find((driver) => driver.transporterId === "A2FLK6PKFVYES1");
   assert.equal(cole?.name, "Cole Regan Perkins");
-  // Nov 18 does not list Cole Perkins.
+  // Nov 19 route cards did not name associates, so Cole Perkins has no route.
   assert.deepEqual(cole?.routeIds, []);
 
   const aaron = getDrivers().find((driver) => driver.transporterId === "AD3O3G0B92UUS");
   assert.equal(aaron?.name, "Aaron Calvin Davis");
-  // Nov 18 lists Aaron Davis on CX278. First and last join the schedule name.
-  assert.deepEqual(aaron?.routeIds, ["rt-cx278"]);
+  // Nov 19 cards did not name Aaron Davis. The Packages CSV is not a route crew.
+  assert.deepEqual(aaron?.routeIds, []);
 
   const cameyon = getDriver(associateId("Cameyon Smith"));
   assert.equal(cameyon?.name, "Cameyon Smith");
-  // Nov 18 does not list Cameyon Smith.
+  // Nov 19 cards did not name Cameyon Smith.
   assert.deepEqual(cameyon?.routeIds, []);
 
   for (const boardDriver of consoleDrivers) {

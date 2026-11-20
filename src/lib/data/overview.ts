@@ -54,12 +54,13 @@ function associateNames(route: Route) {
 }
 
 const captureLabel = formatConsoleCapture(deliveryBoard.capturedAt);
-const storedDelivered = routes.reduce((sum, route) => sum + route.packagesDelivered, 0);
-const storedPlanned = routes.reduce((sum, route) => sum + route.packageCount, 0);
+const storedDelivered = routes.reduce((sum, route) => sum + (route.packagesDelivered ?? 0), 0);
+const storedPlanned = routes.reduce((sum, route) => sum + (route.packageCount ?? 0), 0);
 const volumeLabel =
-  storedDelivered === deliveredToday && storedPlanned === assignedToday
+  t.volumeLabel ??
+  (storedDelivered === deliveredToday && storedPlanned === assignedToday
     ? "Sum of Console route rows"
-    : "Published delivery total";
+    : "Published delivery total");
 const packageGaugeHint =
   completionToday == null
     ? `${volumeLabel} · ${assignedToday.toLocaleString()} planned · ${captureLabel}. The board did not publish a package gauge. No prior-day delta.`
@@ -194,12 +195,13 @@ function kpisFor(day: DeliveryDay): Kpi[] {
   const captured = formatConsoleCapture(day.board.capturedAt);
   const gauge = totals.executionGaugesPct.packages;
   const onRoad = day.drivers.filter((driver) => driver.status === "on_route").length;
-  const storedDelivered = day.routes.reduce((sum, route) => sum + route.packagesDelivered, 0);
-  const storedPlanned = day.routes.reduce((sum, route) => sum + route.packageCount, 0);
+  const storedDelivered = day.routes.reduce((sum, route) => sum + (route.packagesDelivered ?? 0), 0);
+  const storedPlanned = day.routes.reduce((sum, route) => sum + (route.packageCount ?? 0), 0);
   const volumeLabel =
-    storedDelivered === totals.packagesDelivered && storedPlanned === totals.packagesPlanned
+    totals.volumeLabel ??
+    (storedDelivered === totals.packagesDelivered && storedPlanned === totals.packagesPlanned
       ? "Sum of Console route rows"
-      : "Published delivery total";
+      : "Published delivery total");
   const openUnnamed = day.routes.some(
     (route) => route.status === "in_progress" && route.associateIds.length === 0,
   );
@@ -333,7 +335,7 @@ function alertsFor(day: DeliveryDay): Alert[] {
 const liveOverview = {
   asOfLabel: `Delivery Execution · ${formatConsoleDay(deliveryBoard.capturedAt)}, ${captureLabel}. ${DELIVERY_COVERAGE.label}.`,
   kpis: todayKpis,
-  packagesByDay: [{ label: "Wed 18", delivered: deliveredToday, assigned: assignedToday }],
+  packagesByDay: [{ label: "Thu 19", delivered: deliveredToday, assigned: assignedToday }],
   routeStatusCounts: statusCounts(),
   alerts,
 };

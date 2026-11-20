@@ -15,7 +15,7 @@ import type {
 export const OPS_TIMEZONE = "America/Chicago";
 
 /** Frozen station clock so the demo stays consistent (CST wall time). */
-export const MOCK_NOW = parseISO("2026-11-18T20:30:00");
+export const MOCK_NOW = parseISO("2026-11-19T20:25:00");
 
 /** Clock label for a Console capture instant, rendered in the station timezone. */
 export function formatConsoleCapture(iso: string) {
@@ -317,6 +317,12 @@ export const scorecardTierLabel: Record<ScorecardTier, string> = {
 /** Console did not publish this field on the Delivery Execution board. */
 export const CONSOLE_UNAVAILABLE = "Not on Console";
 
-export function formatCompletionPct(value: number) {
+export function formatCompletionPct(value: number | null) {
+  if (value == null) return "—";
   return Number.isInteger(value) ? `${value}%` : `${value.toFixed(1)}%`;
+}
+
+/** Count for a route field the capture left unset. */
+export function formatOptionalNumber(value: number | null) {
+  return value == null ? "—" : formatNumber(value);
 }

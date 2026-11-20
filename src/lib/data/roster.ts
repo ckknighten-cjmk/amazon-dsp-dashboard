@@ -2,7 +2,7 @@
  * Active associate roster.
  *
  * Primary list: union of Amazon schedule associates in Weeks 38 and 39,
- * keyed by transporter ID. Nov 18 Delivery Execution routes, packages, and
+ * keyed by transporter ID. Nov 19 Delivery Execution routes, packages, and
  * status merge in when the board name matches (first + last, so a schedule
  * middle name still joins). ADP Group Timecard names that do not match a
  * schedule associate are appended and labeled ADP only. They have no
@@ -84,7 +84,7 @@ export function adpDisplayName(name: string) {
 
 export function rosterSourceLabel(driver: Pick<Driver, "rosterSource" | "scheduleWeeks">) {
   if (driver.rosterSource === "adp-only") return "ADP only";
-  if (driver.rosterSource === "delivery-board") return "Nov 18 board only";
+  if (driver.rosterSource === "delivery-board") return "Nov 19 board only";
   const weeks = driver.scheduleWeeks ?? [];
   if (weeks.length === 0) return "Amazon schedule";
   return `Schedule · ${weeks.map((week) => `W${week}`).join(", ")}`;
@@ -213,8 +213,8 @@ function toDriver(input: {
     name: input.name,
     role,
     status: input.assigned.length === 0 ? "off" : driverStatus(input.assigned),
-    todayPackages: input.assigned.reduce((sum, route) => sum + route.packagesDelivered, 0),
-    todayStops: input.assigned.reduce((sum, route) => sum + route.completedStops, 0),
+    todayPackages: input.assigned.reduce((sum, route) => sum + (route.packagesDelivered ?? 0), 0),
+    todayStops: input.assigned.reduce((sum, route) => sum + (route.completedStops ?? 0), 0),
     incidentCount30d: 0,
     routeId: input.assigned[0]?.id,
     routeIds: input.assigned.map((route) => route.id),
